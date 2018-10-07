@@ -1,0 +1,3 @@
+[submodule "External/SDL2.NETCore"]
+	path = External/SDL2.NETCore
+	url = git@github.com:project-grove/SDL2.NETCore.git
