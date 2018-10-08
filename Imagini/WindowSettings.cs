@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
 using static SDL2.SDL_video;
 
@@ -20,7 +21,7 @@ namespace Imagini
     /// <summary>
     /// Defines app window settings.
     /// </summary>
-    public class WindowSettings
+    public class WindowSettings : ICloneable
     {
         /// <summary>
         /// Width of the window in pixels.
@@ -37,6 +38,10 @@ namespace Imagini
         /// <summary>
         /// Flag indicating if the window should be visible.
         /// </summary>
+        /// <remarks>
+        /// Used only on window creation, to change window visibility after 
+        /// creation use <see cref="Window.Show" /> and <see cref="Window.Hide" />.
+        /// </remarks>
         public bool IsVisible { get; set; } = true;
         /// <summary>
         /// Flag indicating if the window should be borderless.
@@ -51,12 +56,20 @@ namespace Imagini
         /// Flag indicating if the OS should treat the window as high-DPI aware.
         /// </summary>
         /// <remarks>Should be specified at window creation, cannot be changed later.</remarks>
-        // public bool AllowHighDpi { get; set; } = false;
+        public bool AllowHighDpi { get; set; } = false;
 
         /// <summary>
         /// Specifies a display index on which the window should be positioned.
         /// </summary>
         public int DisplayIndex { get; set; } = 0;
+        /// <summary>
+        /// Specifies the window title.
+        /// </summary>
+        /// <remarks>
+        /// Used only on window creation, to change window title after 
+        /// creation use <see cref="Window.Title" />.
+        /// </remarks>
+        public string Title { get; set; } = "Imagini";
 
         /// <summary>
         /// Gets or sets the window mode.
@@ -90,7 +103,7 @@ namespace Imagini
 
         internal uint GetFlags()
         {
-            var result = 0u;
+            var result = (uint)SDL_WindowFlags.SDL_WINDOW_OPENGL;
             result |= (uint)SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayIndex);
             if (IsFullscreen) result |= (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
             if (IsVisible)
@@ -99,7 +112,7 @@ namespace Imagini
                 result |= (uint)SDL_WindowFlags.SDL_WINDOW_HIDDEN;
             if (IsBorderless) result |= (uint)SDL_WindowFlags.SDL_WINDOW_BORDERLESS;
             if (IsResizable) result |= (uint)SDL_WindowFlags.SDL_WINDOW_RESIZABLE;
-            // if (AllowHighDpi) result |= (uint)SDL_WindowFlags.SDL_WINDOW_ALLOW_HIGHDPI;
+            if (AllowHighDpi) result |= (uint)SDL_WindowFlags.SDL_WINDOW_ALLOW_HIGHDPI;
             return result;
         }
 
@@ -183,5 +196,12 @@ namespace Imagini
 
         private bool HasFlag(uint flags, SDL_WindowFlags flag) =>
             (flags & (uint)flag) == (uint)flag;
+
+        /// <summary>
+        /// Creates a shallow copy of this object.
+        /// </summary>
+        public object Clone() => this.MemberwiseClone();
+
+        static WindowSettings() => Lifecycle.TryInitialize();
     }
 }

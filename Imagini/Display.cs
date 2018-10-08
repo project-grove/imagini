@@ -140,6 +140,9 @@ namespace Imagini
         internal static int GetCurrentDisplayIndexForWindow(IntPtr window) =>
             TryGet(() => SDL_GetWindowDisplayIndex(window), "SDL_GetWindowDisplayIndex");
         
+        internal static Display GetCurrentDisplayForWindow(IntPtr window) =>
+            s_displays[GetCurrentDisplayIndexForWindow(window)];
+        
         static Display() => Lifecycle.TryInitialize();
     }
 }
