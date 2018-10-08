@@ -1,11 +1,91 @@
 using System;
 using System.Collections.Generic;
+using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
 using static SDL2.SDL_rect;
 using static SDL2.SDL_video;
 
 namespace Imagini
 {
+    /// <summary>
+    /// Defines a fullscreen display mode.
+    /// </summary>
+    public struct DisplayMode
+    {
+        internal SDL_DisplayMode _mode;
+        /// <summary>
+        /// Fullscreen width.
+        /// </summary>
+        public int Width => _mode.w;
+        /// <summary>
+        /// Fullscreen height.
+        /// </summary>
+        public int Height => _mode.h;
+        /// <summary>
+        /// Refresh rate in Hz.
+        /// </summary>
+        public int RefreshRate => _mode.refresh_rate;
+
+        internal int displayIndex;
+        internal int modeIndex;
+
+        public override string ToString() => $"{Width}x{Height} {RefreshRate}Hz";
+
+        internal static List<DisplayMode> GetAvailable(int displayIndex)
+        {
+            var result = new List<DisplayMode>();
+            var numModes = TryGet(() =>
+                SDL_GetNumDisplayModes(displayIndex),
+                "SDL_GetNumDisplayModes");
+            for (var modeIndex = 0; modeIndex < numModes; modeIndex++)
+            {
+                var modeData = new SDL_DisplayMode();
+                SDL_GetDisplayMode(displayIndex, modeIndex, ref modeData);
+                result.Add(new DisplayMode()
+                {
+                    _mode = modeData,
+                    displayIndex = displayIndex,
+                    modeIndex = modeIndex
+                });
+            }
+            return result;
+        }
+
+        internal static DisplayMode GetCurrent(int displayIndex)
+        {
+            var modeData = new SDL_DisplayMode();
+            Try(() =>
+                SDL_GetCurrentDisplayMode(displayIndex, ref modeData),
+                "SDL_GetCurrentDisplayMode");
+            var result = new DisplayMode()
+            {
+                _mode = modeData,
+                displayIndex = displayIndex,
+            };
+            result.modeIndex = DisplayMode
+                .GetAvailable(displayIndex)
+                .IndexOf(result);
+            return result;
+        }
+
+        internal static DisplayMode GetDesktop(int displayIndex)
+        {
+            var modeData = new SDL_DisplayMode();
+            Try(() =>
+                SDL_GetDesktopDisplayMode(displayIndex, ref modeData),
+                "SDL_GetDesktopDisplayMode");
+            var result = new DisplayMode()
+            {
+                _mode = modeData,
+                displayIndex = displayIndex,
+            };
+            result.modeIndex = DisplayMode
+                .GetAvailable(displayIndex)
+                .IndexOf(result);
+            return result;
+        }
+    }
+
     /// <summary>
     /// Represents a display device.
     /// </summary>
@@ -41,6 +121,7 @@ namespace Imagini
             _index = index;
             Modes = DisplayMode.GetAvailable(index);
             Name = SDL_GetDisplayName(_index);
+            if (Name == null || Name == "") Name = _index.ToString();
             var bounds = new SDL_Rect();
             Try(() => SDL_GetDisplayBounds(_index, ref bounds), "SDL_GetDisplayBounds");
             Bounds = bounds;
@@ -57,6 +138,8 @@ namespace Imagini
         }
 
         internal static int GetCurrentDisplayIndexForWindow(IntPtr window) =>
-            TryGet(() => SDL_GetWindowDisplayIndex(window), "SDL_GetWindowDisplayIndex");        
+            TryGet(() => SDL_GetWindowDisplayIndex(window), "SDL_GetWindowDisplayIndex");
+        
+        static Display() => Lifecycle.TryInitialize();
     }
 }

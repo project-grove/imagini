@@ -18,85 +18,6 @@ namespace Imagini
     }
 
     /// <summary>
-    /// Defines a fullscreen display mode.
-    /// </summary>
-    public struct DisplayMode
-    {
-        internal SDL_DisplayMode _mode;
-        /// <summary>
-        /// Fullscreen width.
-        /// </summary>
-        public int Width => _mode.w;
-        /// <summary>
-        /// Fullscreen height.
-        /// </summary>
-        public int Height => _mode.h;
-        /// <summary>
-        /// Refresh rate in Hz.
-        /// </summary>
-        public int RefreshRate => _mode.refresh_rate;
-
-        internal int displayIndex;
-        internal int modeIndex;
-
-        public override string ToString() => $"{Width}x{Height} {RefreshRate}Hz";
-
-        internal static List<DisplayMode> GetAvailable(int displayIndex)
-        {
-            var result = new List<DisplayMode>();
-            var numModes = TryGet(() =>
-                SDL_GetNumDisplayModes(displayIndex),
-                "SDL_GetNumDisplayModes");
-            for (var modeIndex = 0; modeIndex < numModes; modeIndex++)
-            {
-                var modeData = new SDL_DisplayMode();
-                SDL_GetDisplayMode(displayIndex, modeIndex, ref modeData);
-                result.Add(new DisplayMode()
-                {
-                    _mode = modeData,
-                    displayIndex = displayIndex,
-                    modeIndex = modeIndex
-                });
-            }
-            return result;
-        }
-
-        internal static DisplayMode GetCurrent(int displayIndex)
-        {
-            var modeData = new SDL_DisplayMode();
-            Try(() =>
-                SDL_GetCurrentDisplayMode(displayIndex, ref modeData),
-                "SDL_GetCurrentDisplayMode");
-            var result = new DisplayMode()
-            {
-                _mode = modeData,
-                displayIndex = displayIndex,
-            };
-            result.modeIndex = DisplayMode
-                .GetAvailable(displayIndex)
-                .IndexOf(result);
-            return result;
-        }
-
-        internal static DisplayMode GetDesktop(int displayIndex)
-        {
-            var modeData = new SDL_DisplayMode();
-            Try(() =>
-                SDL_GetDesktopDisplayMode(displayIndex, ref modeData),
-                "SDL_GetDesktopDisplayMode");
-            var result = new DisplayMode()
-            {
-                _mode = modeData,
-                displayIndex = displayIndex,
-            };
-            result.modeIndex = DisplayMode
-                .GetAvailable(displayIndex)
-                .IndexOf(result);
-            return result;
-        }
-    }
-
-    /// <summary>
     /// Defines app window settings.
     /// </summary>
     public class WindowSettings
@@ -231,7 +152,8 @@ namespace Imagini
             if (curMode == targetMode) return;
             // Set the fullscreen mode flag
             var fullscreenOpt = 0u;
-            switch(targetMode) {
+            switch (targetMode)
+            {
                 case WindowMode.BorderlessFullscreen:
                     fullscreenOpt = (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN_DESKTOP;
                     break;
@@ -239,7 +161,7 @@ namespace Imagini
                     fullscreenOpt = (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
                     break;
             }
-            Try(() => 
+            Try(() =>
                 SDL_SetWindowFullscreen(window, fullscreenOpt),
                 "SDL_SetWindowFullscreen");
             // Set the window border flag if it doesn't occupy the whole screen
