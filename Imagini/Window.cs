@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
 using static SDL2.SDL_render;
@@ -14,6 +17,21 @@ namespace Imagini
     {
         internal IntPtr Handle;
         internal IntPtr Renderer;
+        internal uint ID;
+
+        private static Dictionary<uint, Window> _windows =
+            new Dictionary<uint, Window>();
+        internal IReadOnlyDictionary<uint, Window> Windows => _windows;
+        internal static Window Current
+        {
+            get {
+                if (_windows.Count == 0) return null;
+                if (_windows.Count == 1) return _windows.Values.First();
+                return _windows.Values
+                    .Where(window => window.IsVisible && window.IsFocused)
+                    .FirstOrDefault();
+            }   
+        }
 
         /// <summary>
         /// Gets or sets the size of the window's client area. Affects only
@@ -98,8 +116,16 @@ namespace Imagini
                 SDL_CreateWindowAndRenderer(100, 100, settings.GetFlags(),
                     out Handle, out Renderer),
                 "SDL_CreateWindowAndRenderer");
+            ID = SDL_GetWindowID(Handle);
+            if (ID == 0)
+                throw new InternalException("Could not get the window ID");
             Title = settings.Title;
             Apply(settings);
+            // Generally should not happen, but it's better to check anyways
+            if (_windows.ContainsKey(ID))
+                throw new InternalException("Window with the specified ID already exists");
+            else
+                _windows.Add(ID, this);
         }
 
         /// <summary>
@@ -135,6 +161,12 @@ namespace Imagini
         }
 
         /// <summary>
+        /// Returns true if this window has input focus.
+        /// </summary>
+        public bool IsFocused => HasFlag(SDL_WindowFlags.SDL_WINDOW_INPUT_FOCUS) ||
+            HasFlag(SDL_WindowFlags.SDL_WINDOW_MOUSE_FOCUS);
+
+        /// <summary>
         /// Minimizes this window.
         /// </summary>
         public void Minimize() => SDL_MinimizeWindow(Handle);
@@ -145,7 +177,8 @@ namespace Imagini
         public bool IsMinimized
         {
             get => HasFlag(SDL_WindowFlags.SDL_WINDOW_MINIMIZED);
-            set {
+            set
+            {
                 if (value) Minimize(); else Restore();
             }
         }
@@ -161,7 +194,8 @@ namespace Imagini
         public bool IsMaximized
         {
             get => HasFlag(SDL_WindowFlags.SDL_WINDOW_MAXIMIZED);
-            set {
+            set
+            {
                 if (value) Maximize(); else Restore();
             }
         }
@@ -213,6 +247,7 @@ namespace Imagini
         {
             if (Disposed) return;
             SDL_DestroyWindow(Handle);
+            _windows.Remove(ID);
             Handle = Renderer = IntPtr.Zero;
             Disposed = true;
         }
