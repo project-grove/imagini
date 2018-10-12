@@ -24,6 +24,9 @@ namespace Imagini
             get => SDL_GetTicks();
         }
 
+        /// <summary>
+        /// Creates a new app and initializes it.
+        /// </summary>
         public App(WindowSettings windowSettings = null)
         {
             if (windowSettings == null)
@@ -31,7 +34,13 @@ namespace Imagini
             _window = new Window(windowSettings);
             _eventQueue = EventManager.CreateQueueFor(_window);
             Events = new Events();
+            Initialize();
         }
+
+        /// <summary>
+        /// Called after object constructor. Use it for the initialization logic.
+        /// </summary>
+        public abstract void Initialize();
 
         protected virtual void ProcessEvents()
         {

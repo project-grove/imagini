@@ -1,5 +1,8 @@
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using Imagini.Internal;
 using SDL2;
 using static SDL2.SDL_events;
 using static SDL2.SDL_keyboard;
@@ -70,11 +73,12 @@ namespace Imagini
         /// <summary>
         /// Creates an event args object.
         /// </summary>
-        public WindowStateChangeEventArgs(
-            Window window, WindowStateChange state, int? x = null, int? y = null)
+        /// <param name="window">Target window. If null, the currently focused one is used.</param>
+        public WindowStateChangeEventArgs(WindowStateChange state,
+            Window window = null, int? x = null, int? y = null)
             =>
             (this.Window, this.State, this.X, this.Y) =
-            (window, state, x, y);
+            (window ?? Window.Current, state, x, y);
 
         internal WindowStateChangeEventArgs(SDL_WindowEvent e)
             : base(e)
@@ -598,7 +602,7 @@ namespace Imagini
     /// <summary>
     /// Keyboard key modifiers.
     /// </summary>
-    public enum KeyModifiers
+    public enum KeyModifier
     {
         NONE = 0x0000,
         LSHIFT = 0x0001,
@@ -622,13 +626,13 @@ namespace Imagini
     {
         public Scancode Scancode;
         public Keycode Keycode;
-        public KeyModifiers Modifiers;
+        public KeyModifier Modifiers;
 
         internal KeyboardKey(SDL_KeyboardEvent e)
         {
             Scancode = (Scancode)(int)e.keysym.scancode;
             Keycode = (Keycode)(int)e.keysym.sym;
-            Modifiers = (KeyModifiers)(int)e.keysym.mod;
+            Modifiers = (KeyModifier)(int)e.keysym.mod;
         }
 
         internal SDL_Keysym AsKeysym()
@@ -655,20 +659,18 @@ namespace Imagini
         /// Returns the pressed or released key.
         /// </summary>
         public KeyboardKey Key { get; private set; }
-
         /// <summary>
         /// Defines if the key is pressed or released.
         /// </summary>
         public bool IsPressed { get; private set; }
-
         /// <summary>
         /// Defines if this is a key repeat
         /// </summary>
         public bool IsRepeat { get; private set; }
-
         /// <summary>
         /// Creates a new event args object.
         /// </summary>
+        /// <param name="window">Target window. If null, the currently focused one is used.</param>
         public KeyboardEventArgs(KeyboardKey key, bool isPressed,
             Window window = null, bool isRepeat = false)
             =>
@@ -676,10 +678,11 @@ namespace Imagini
             (window ?? Window.Current, key, isPressed, isRepeat);
 
         internal KeyboardEventArgs(SDL_KeyboardEvent e)
+            : base(e)
         {
             Window = Window.GetByID(e.windowID);
             Key = new KeyboardKey(e);
-            IsPressed = e.state == 1;
+            IsPressed = e.state > 0;
             IsRepeat = e.repeat > 0;
         }
 
@@ -692,6 +695,257 @@ namespace Imagini
                 state = IsPressed ? (byte)1 : (byte)0,
                 repeat = IsRepeat ? (byte)1 : (byte)0,
                 keysym = Key.AsKeysym()
+            };
+    }
+
+    /// <summary>
+    /// Represents a text input event.
+    /// </summary>
+    public class TextInputEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// Target window.
+        /// </summary>
+        public Window Window { get; private set; }
+        /// <summary>
+        /// Text entered by user.
+        /// </summary>
+        public string Text { get; private set; }
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        /// <param name="text">Text entered by user.</param>
+        /// <param name="window">Target window. If null, the currently focused window is used.</param>
+        public TextInputEventArgs(string text, Window window = null) =>
+            (this.Window, this.Text) = (window ?? Window.Current, text);
+
+        internal unsafe TextInputEventArgs(SDL_TextInputEvent e) : base(e) =>
+            (this.Window, this.Text) =
+            (Window.GetByID(e.windowID), Util.FromNullTerminated(e.text));
+
+        internal unsafe override SDL_Event AsEvent()
+        {
+            var bytes = Encoding.UTF8.GetBytes(Text);
+            var result = new SDL_TextInputEvent()
+            {
+                type = (uint)SDL_EventType.SDL_TEXTINPUT,
+                timestamp = (uint)Timestamp,
+                windowID = Window.ID,
+            };
+            Marshal.Copy(bytes, 0, (IntPtr)result.text, Math.Min(SDL_TEXTINPUTEVENT_TEXT_SIZE, bytes.Length));
+            return result;
+        }
+    }
+
+    /* Mouse events */
+    /// <summary>
+    /// Represents a pressed or released mouse button.
+    /// </summary>
+    public enum MouseButton : byte
+    {
+        Left = 1,
+        Middle,
+        Right,
+        X1,
+        X2
+    }
+
+    [Flags]
+    /// <summary>
+    /// Represents all pressed and released mouse buttons.
+    /// </summary>
+    public enum MouseButtons : uint
+    {
+        Left = 0x1,
+        Middle = 0x2,
+        Right = 0x4,
+        X1 = 0x8,
+        X2 = 0xF
+    }
+
+    /// <summary>
+    /// Describes mouse move event data.
+    /// </summary>
+    public class MouseMoveEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// Target window.
+        /// </summary>
+        public Window Window { get; private set; }
+        /// <summary>
+        /// Mouse button state.
+        /// </summary>
+        public MouseButtons Buttons { get; private set; }
+        /// <summary>
+        /// X coordinate, relative to window.
+        /// </summary>
+        public int X { get; private set; }
+        /// <summary>
+        /// Y coordinate, relative to window.
+        /// </summary>
+        public int Y { get; private set; }
+        /// <summary>
+        /// Relative motion in X direction.
+        /// </summary>
+        public int RelativeX { get; private set; }
+        /// <summary>
+        /// Relative motion in Y direction.
+        /// </summary>
+        public int RelativeY { get; private set; }
+
+        /// <summary>
+        /// Creates new event args object.
+        /// </summary>
+        /// <param name="x">X coordinate relative to window.</param>
+        /// <param name="y">Y coordinate relative to window.</param>
+        /// <param name="relX">Relative motion in X direction.</param>
+        /// <param name="relY">Relative motion in Y direction.</param>
+        /// <param name="buttons">Mouse button state.</param>
+        /// <param name="window">Target window. If null, the currently focused one is used.</param>
+        public MouseMoveEventArgs(int x, int y, int relX, int relY,
+            MouseButtons buttons, Window window = null)
+            =>
+            (this.X, this.Y, this.RelativeX, this.RelativeY, this.Buttons, this.Window) =
+            (x, y, relX, relY, buttons, window ?? Window.Current);
+
+        internal MouseMoveEventArgs(SDL_MouseMotionEvent e)
+            : base(e)
+        {
+            Window = Window.GetByID(e.windowID);
+            X = e.x; Y = e.y; RelativeX = e.xrel; RelativeY = e.yrel;
+            Buttons = (MouseButtons)e.state;
+        }
+
+        /// <summary>
+        /// Returns true if the specified button is pressed.
+        /// </summary>
+        public bool IsPressed(MouseButtons button) => Buttons.HasFlag(button);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_MouseMotionEvent()
+            {
+                type = (uint)SDL_EventType.SDL_MOUSEMOTION,
+                timestamp = (uint)Timestamp,
+                windowID = Window.ID,
+                which = 0,
+                state = (uint)Buttons,
+                x = X,
+                y = Y,
+                xrel = RelativeX,
+                yrel = RelativeY
+            };
+    }
+
+    /// <summary>
+    /// Describes mouse button state change event data.
+    /// </summary>
+    public class MouseButtonEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// Target window.
+        /// </summary>
+        public Window Window { get; private set; }
+        /// <summary>
+        /// The button that changed.
+        /// </summary>
+        public MouseButton Button { get; private set; }
+        /// <summary>
+        /// Indicates if the button was pressed or released.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPressed { get; private set; }
+        /// <summary>
+        /// Number of clicks.
+        /// </summary>
+        public byte Clicks { get; private set; }
+        /// <summary>
+        /// X coordinate, relative to window.
+        /// </summary>
+        public int X { get; private set; }
+        /// <summary>
+        /// Y coordinate, relative to window.
+        /// </summary>
+        public int Y { get; private set; }
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        /// <param name="button">The button that changed.</param>
+        /// <param name="x">X coordinate, relative to window.</param>
+        /// <param name="y">Y coordinate, relative to window.</param>
+        /// <param name="isPressed">Indicates if the button was pressed or released.</param>
+        /// <param name="window">Target window. If null, the currently focused one is used.</param>
+        /// <param name="clicks">Number of clicks.</param>
+        public MouseButtonEventArgs(MouseButton button, int x, int y, bool isPressed,
+            Window window = null, byte clicks = 1)
+            =>
+            (this.Window, this.X, this.Y, this.IsPressed, this.Clicks) =
+            (window ?? Window.Current, x, y, isPressed, Math.Max((byte)1, clicks));
+
+        internal MouseButtonEventArgs(SDL_MouseButtonEvent e)
+            : base(e)
+        {
+            Window = Window.GetByID(e.windowID);
+            X = e.x; Y = e.y; Clicks = Math.Max((byte)1, e.clicks);
+            IsPressed = e.state > 0;
+        }
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_MouseButtonEvent()
+            {
+                type = (uint)(IsPressed ? SDL_EventType.SDL_MOUSEBUTTONDOWN :
+                    SDL_EventType.SDL_MOUSEBUTTONUP),
+                timestamp = (uint)Timestamp,
+                windowID = Window.ID,
+                which = 0,
+                button = (byte)Button,
+                state = IsPressed ? (byte)1 : (byte)0,
+                clicks = (byte)Clicks,
+                x = X,
+                y = Y,
+            };
+    }
+
+    /// <summary>
+    /// Describes mouse wheel scroll event data.
+    /// </summary>
+    public class MouseWheelEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// Target window.
+        /// </summary>
+        public Window Window { get; private set; }
+        /// <summary>
+        /// The amount scrolled horizontally, positive to the right and negative to the left.
+        /// </summary>
+        public int X { get; private set; }
+        /// <summary>
+        /// The amount scrolled vertically, positive away from the user and negative toward the user.
+        /// </summary>
+        public int Y { get; private set; }
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        /// <param name="x">The amount scrolled horizontally, positive to the right and negative to the left.</param>
+        /// <param name="y">The amount scrolled vertically, positive away from the user and negative toward the user.</param>
+        /// <param name="window">Target window. If null, the currently focused one is used.</param>
+        public MouseWheelEventArgs(int x, int y, Window window = null) =>
+            (this.X, this.Y, this.Window) = (x, y, window);
+
+        internal MouseWheelEventArgs(SDL_MouseWheelEvent e) : base(e)
+            => (this.X, this.Y, this.Window) = (e.x, e.y, Window.GetByID(e.windowID));
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_MouseWheelEvent()
+            {
+                type = (uint)SDL_EventType.SDL_MOUSEWHEEL,
+                timestamp = (uint)Timestamp,
+                windowID = Window.ID,
+                which = 0,
+                x = X,
+                y = Y
             };
     }
 }
