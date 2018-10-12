@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
+using static SDL2.SDL_error;
 using static SDL2.SDL_render;
 using static SDL2.SDL_video;
 
@@ -118,7 +119,7 @@ namespace Imagini
                 "SDL_CreateWindowAndRenderer");
             ID = SDL_GetWindowID(Handle);
             if (ID == 0)
-                throw new InternalException("Could not get the window ID");
+                throw new InternalException($"Could not get the window ID: {SDL_GetError()}");
             Title = settings.Title;
             Apply(settings);
             // Generally should not happen, but it's better to check anyways

@@ -6,17 +6,13 @@ using Imagini.Internal;
 namespace Imagini
 {
     /// <summary>
-    /// Main class which instantiates a window and event loop.
+    /// Main class which instantiates a window and an event loop.
     /// </summary>
     public abstract class App : IDisposable
     {
-        public event EventHandler Activated;
-        public event EventHandler Deactivated;
-        public event EventHandler Disposed;
-        public event EventHandler Exiting;
-
         private Window _window;
         private EventManager.EventQueue _eventQueue;
+        public Events Events { get; private set; }
 
         public App(WindowSettings windowSettings = null)
         {
@@ -24,6 +20,13 @@ namespace Imagini
                 windowSettings = new WindowSettings();
             _window = new Window(windowSettings);
             _eventQueue = EventManager.CreateQueueFor(_window);
+            Events = new Events();
+        }
+
+        protected virtual void ProcessEvents()
+        {
+            EventManager.Poll();
+            _eventQueue.ProcessAll(Events);
         }
 
         public void Dispose()

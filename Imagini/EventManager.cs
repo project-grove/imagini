@@ -2,18 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Imagini.Internal;
+using static SDL2.SDL_error;
 using static SDL2.SDL_events;
 using static SDL2.SDL_video;
 
-namespace Imagini.Internal
+namespace Imagini
 {
-    internal static class EventManager
+    /// <summary>
+    /// Represents an event manager.
+    /// </summary>
+    public static class EventManager
     {
+        private const uint GLOBAL_QUEUE_ID = 0;
+
         static EventManager() => Lifecycle.TryInitialize();
         private static Dictionary<uint, EventQueue> _queues =
-            new Dictionary<uint, EventQueue>();
+            new Dictionary<uint, EventQueue>() {
+                { GLOBAL_QUEUE_ID, new EventQueue() }
+            };
 
-        public static EventQueue CreateQueueFor(Window window)
+        internal static EventQueue CreateQueueFor(Window window)
         {
             var id = window.ID;
             if (_queues.ContainsKey(id)) return _queues[id];
@@ -22,15 +31,23 @@ namespace Imagini.Internal
             return queue;
         }
 
-        public static void DeleteQueueFor(Window window) =>
+        internal static void DeleteQueueFor(Window window) =>
             _queues.Remove(window.ID);
+        
+        internal static EventQueue GlobalQueue => _queues[GLOBAL_QUEUE_ID];
 
-        public unsafe static void Poll()
+        /// <summary>
+        /// Gathers all available events and distributes them to the
+        /// corresponding queues.
+        /// </summary>
+        /// <param name="suppressGlobalProcessing">
+        /// If true, global event queue will not be processed after calling this method.
+        /// </param>
+        public unsafe static void Poll(bool suppressGlobalProcessing = false)
         {
-            byte* data = stackalloc byte[56];
-            var @event = *((SDL_Event*)&data);
-            while (SDL_PollEvent(ref @event) != 0)
+            while (SDL_PollEvent(out SDL_Event @event) != 0)
             {
+                byte* data = (byte*)&@event;
                 switch (@event.type)
                 {
                     // uint32 type, uint32 timestamp, uint32 windowID
@@ -44,7 +61,7 @@ namespace Imagini.Internal
                     case (uint)SDL_EventType.SDL_MOUSEBUTTONUP:
                     case (uint)SDL_EventType.SDL_MOUSEWHEEL:
                     case (uint)SDL_EventType.SDL_USEREVENT:
-                        var windowID = (uint)(data + 8);
+                        var windowID = (uint)*(data + 8);
                         PushTo(windowID, @event);
                         break;
                     case (uint)SDL_EventType.SDL_JOYAXISMOTION:
@@ -64,14 +81,25 @@ namespace Imagini.Internal
                         PushToCurrent(@event);
                         break;
                     case (uint)SDL_EventType.SDL_DROPFILE:
-                        windowID = (uint)(data + 8 + IntPtr.Size);
+                        windowID = (uint)*(data + 8 + IntPtr.Size);
                         PushTo(windowID, @event);
                         break;
                     default:
-                        PushToAll(@event);
+                        PushToGlobal(@event);
                         break;
                 }
             }
+            if (!suppressGlobalProcessing)
+                GlobalQueue.ProcessAll(Events.Global);
+        }
+
+        /// <summary>
+        /// Pushes an event onto the poll queue.
+        /// </summary>
+        public static void Push(SDL_Event e)
+        {
+            if (SDL_PushEvent(ref e) < 0)
+                throw new InternalException($"Unable to push event: {SDL_GetError()}");
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -90,30 +118,22 @@ namespace Imagini.Internal
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void PushToAll(SDL_Event @event)
-        {
-            foreach(var queue in _queues.Values)
-                queue.Enqueue(@event);
-        }
+        private static void PushToGlobal(SDL_Event @event) =>
+            _queues[GLOBAL_QUEUE_ID].Enqueue(@event);
 
         internal class EventQueue
         {
             private Queue<SDL_Event> _events = new Queue<SDL_Event>(32);
             public IReadOnlyCollection<SDL_Event> Events => _events;
 
-            internal void Enqueue(SDL_Event @event) => 
-                _events.Enqueue((SDL_Event)(object)@event);
+            internal void Enqueue(SDL_Event @event) => _events.Enqueue(@event);
 
-            public void ProcessNext()
-            {
-                var e = _events.Dequeue();
-                // TODO
-            }
+            public void ProcessNext(Events events) => events.Process(_events.Dequeue());
 
-            public void ProcessAll()
+            public void ProcessAll(Events events)
             {
                 while (_events.Count > 0)
-                    ProcessNext();
+                    ProcessNext(events);
             }
         }
     }
