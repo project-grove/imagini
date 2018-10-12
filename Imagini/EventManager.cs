@@ -48,39 +48,39 @@ namespace Imagini
             while (SDL_PollEvent(out SDL_Event @event) != 0)
             {
                 byte* data = (byte*)&@event;
-                switch (@event.type)
+                switch ((SDL_EventType)@event.type)
                 {
                     // uint32 type, uint32 timestamp, uint32 windowID
-                    case (uint)SDL_EventType.SDL_WINDOWEVENT:
-                    case (uint)SDL_EventType.SDL_KEYDOWN:
-                    case (uint)SDL_EventType.SDL_KEYUP:
-                    case (uint)SDL_EventType.SDL_TEXTEDITING:
-                    case (uint)SDL_EventType.SDL_TEXTINPUT:
-                    case (uint)SDL_EventType.SDL_MOUSEMOTION:
-                    case (uint)SDL_EventType.SDL_MOUSEBUTTONDOWN:
-                    case (uint)SDL_EventType.SDL_MOUSEBUTTONUP:
-                    case (uint)SDL_EventType.SDL_MOUSEWHEEL:
-                    case (uint)SDL_EventType.SDL_USEREVENT:
+                    case SDL_EventType.SDL_WINDOWEVENT:
+                    case SDL_EventType.SDL_KEYDOWN:
+                    case SDL_EventType.SDL_KEYUP:
+                    case SDL_EventType.SDL_TEXTEDITING:
+                    case SDL_EventType.SDL_TEXTINPUT:
+                    case SDL_EventType.SDL_MOUSEMOTION:
+                    case SDL_EventType.SDL_MOUSEBUTTONDOWN:
+                    case SDL_EventType.SDL_MOUSEBUTTONUP:
+                    case SDL_EventType.SDL_MOUSEWHEEL:
+                    case SDL_EventType.SDL_USEREVENT:
                         var windowID = (uint)*(data + 8);
                         PushTo(windowID, @event);
                         break;
-                    case (uint)SDL_EventType.SDL_JOYAXISMOTION:
-                    case (uint)SDL_EventType.SDL_JOYBALLMOTION:
-                    case (uint)SDL_EventType.SDL_JOYHATMOTION:
-                    case (uint)SDL_EventType.SDL_JOYBUTTONDOWN:
-                    case (uint)SDL_EventType.SDL_JOYBUTTONUP:
-                    case (uint)SDL_EventType.SDL_CONTROLLERAXISMOTION:
-                    case (uint)SDL_EventType.SDL_CONTROLLERBUTTONDOWN:
-                    case (uint)SDL_EventType.SDL_CONTROLLERBUTTONUP:
-                    case (uint)SDL_EventType.SDL_FINGERDOWN:
-                    case (uint)SDL_EventType.SDL_FINGERUP:
-                    case (uint)SDL_EventType.SDL_FINGERMOTION:
-                    case (uint)SDL_EventType.SDL_DOLLARGESTURE:
-                    case (uint)SDL_EventType.SDL_DOLLARRECORD:
-                    case (uint)SDL_EventType.SDL_MULTIGESTURE:
+                    case SDL_EventType.SDL_JOYAXISMOTION:
+                    case SDL_EventType.SDL_JOYBALLMOTION:
+                    case SDL_EventType.SDL_JOYHATMOTION:
+                    case SDL_EventType.SDL_JOYBUTTONDOWN:
+                    case SDL_EventType.SDL_JOYBUTTONUP:
+                    case SDL_EventType.SDL_CONTROLLERAXISMOTION:
+                    case SDL_EventType.SDL_CONTROLLERBUTTONDOWN:
+                    case SDL_EventType.SDL_CONTROLLERBUTTONUP:
+                    case SDL_EventType.SDL_FINGERDOWN:
+                    case SDL_EventType.SDL_FINGERUP:
+                    case SDL_EventType.SDL_FINGERMOTION:
+                    case SDL_EventType.SDL_DOLLARGESTURE:
+                    case SDL_EventType.SDL_DOLLARRECORD:
+                    case SDL_EventType.SDL_MULTIGESTURE:
                         PushToCurrent(@event);
                         break;
-                    case (uint)SDL_EventType.SDL_DROPFILE:
+                    case SDL_EventType.SDL_DROPFILE:
                         windowID = (uint)*(data + 8 + IntPtr.Size);
                         PushTo(windowID, @event);
                         break;
@@ -96,9 +96,10 @@ namespace Imagini
         /// <summary>
         /// Pushes an event onto the poll queue.
         /// </summary>
-        public static void Push(SDL_Event e)
+        public static void Push(CommonEventArgs e)
         {
-            if (SDL_PushEvent(ref e) < 0)
+            var _e = e.AsEvent();
+            if (SDL_PushEvent(ref _e) < 0)
                 throw new InternalException($"Unable to push event: {SDL_GetError()}");
         }
 

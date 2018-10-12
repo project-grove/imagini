@@ -1,5 +1,7 @@
 using System;
 using Imagini.Internal;
+using static SDL2.SDL_timer;
+
 /// <summary>
 /// The core namespace.
 /// </summary>
@@ -13,6 +15,14 @@ namespace Imagini
         private Window _window;
         private EventManager.EventQueue _eventQueue;
         public Events Events { get; private set; }
+
+        /// <summary>
+        /// Returns total number of milliseconds since when the library was initialized.
+        /// </summary>
+        public static long TotalTime
+        {
+            get => SDL_GetTicks();
+        }
 
         public App(WindowSettings windowSettings = null)
         {
@@ -34,5 +44,7 @@ namespace Imagini
             EventManager.DeleteQueueFor(_window);
             _window.Dispose();
         }
+
+        // TODO
     }
 }

@@ -25,13 +25,21 @@ namespace Imagini
         internal IReadOnlyDictionary<uint, Window> Windows => _windows;
         internal static Window Current
         {
-            get {
+            get
+            {
                 if (_windows.Count == 0) return null;
                 if (_windows.Count == 1) return _windows.Values.First();
                 return _windows.Values
                     .Where(window => window.IsVisible && window.IsFocused)
                     .FirstOrDefault();
-            }   
+            }
+        }
+
+        internal static Window GetByID(uint id)
+        {
+            if (_windows.ContainsKey(id))
+                return _windows[id];
+            return null;
         }
 
         /// <summary>
