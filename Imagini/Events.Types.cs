@@ -1074,7 +1074,7 @@ namespace Imagini
         public JoyHatMotionEventArgs(int joystickId, byte hat, HatPosition pos)
             : base() =>
             (this.JoystickID, this.Hat, this.Position) = (joystickId, hat, pos);
-        
+
         internal JoyHatMotionEventArgs(SDL_JoyHatEvent e) : base(e) =>
             (this.JoystickID, this.Hat, this.Position) = (e.which, e.hat, (HatPosition)e.value);
 
@@ -1113,7 +1113,7 @@ namespace Imagini
         public JoyButtonEventArgs(int joystickId, byte button, bool isPressed)
             : base() =>
             (this.JoystickID, this.Button, this.IsPressed) = (joystickId, button, isPressed);
-        
+
         internal JoyButtonEventArgs(SDL_JoyButtonEvent e) : base(e) =>
             (this.JoystickID, this.Button, this.IsPressed) =
             (e.which, e.button, e.state > 0);
@@ -1129,6 +1129,9 @@ namespace Imagini
             };
     }
 
+    /// <summary>
+    /// Describes joystick state change event data.
+    /// </summary>
     public class JoyDeviceStateEventArgs : CommonEventArgs
     {
         /// <summary>
@@ -1156,6 +1159,153 @@ namespace Imagini
                 type = (uint)(Connected ? SDL_EventType.SDL_JOYDEVICEADDED : SDL_EventType.SDL_JOYDEVICEREMOVED),
                 timestamp = (uint)Timestamp,
                 which = JoystickID,
+            };
+    }
+
+    /// <summary>
+    /// Defines controller axes.
+    /// </summary>
+    public enum ControllerAxis : byte
+    {
+        LeftX,
+        LeftY,
+        RightX,
+        RightY,
+        LeftTrigger,
+        RightTrigger
+    }
+
+    /// <summary>
+    /// Describes controller buttons.
+    /// </summary>
+    public enum ControllerButton : byte
+    {
+        A,
+        B,
+        X,
+        Y,
+        Back,
+        Guide,
+        Start,
+        LeftStick,
+        RightStick,
+        LeftShoulder,
+        RightShoulder,
+        DPadUp,
+        DPadDown,
+        DPadLeft,
+        DPadRight
+    }
+
+    /// <summary>
+    /// Describes controller axis motion event data.
+    /// </summary>
+    public class ControllerAxisEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The controller instance ID.
+        /// </summary>
+        public int ControllerID { get; private set; }
+        /// <summary>
+        /// The axis which was moved.
+        /// </summary>
+        public ControllerAxis Axis { get; private set; }
+        /// <summary>
+        /// The axis value (range: -32768 to 32767)
+        /// </summary>
+        public short Value { get; private set; }
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        public ControllerAxisEventArgs(int id, ControllerAxis axis, short value)
+            : base() =>
+            (this.ControllerID, this.Axis, this.Value) = (id, axis, value);
+        
+        internal ControllerAxisEventArgs(SDL_ControllerAxisEvent e) : base(e) =>
+            (this.ControllerID, this.Axis, this.Value) = (e.which, (ControllerAxis)e.axis, e.value);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_ControllerAxisEvent()
+            {
+                type = (uint)SDL_EventType.SDL_CONTROLLERAXISMOTION,
+                timestamp = (uint)Timestamp,
+                which = ControllerID,
+                axis = (byte)Axis,
+                value = Value 
+            };
+    }
+
+    /// <summary>
+    /// Describes controller button press/release event data.
+    /// </summary>
+    public class ControllerButtonEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The controller instance ID.
+        /// </summary>
+        public int ControllerID { get; private set; }
+        /// <summary>
+        /// The button which changed state.
+        /// </summary>
+        public ControllerButton Button { get; private set; }
+        /// <summary>
+        /// Indicates if the button was pressed or released.
+        /// </summary>
+        public bool IsPressed { get; private set; }
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        public ControllerButtonEventArgs(int id, ControllerButton button, bool pressed)
+            : base() =>
+            (this.ControllerID, this.Button, this.IsPressed) = (id, button, pressed);
+
+        internal ControllerButtonEventArgs(SDL_ControllerButtonEvent e)
+            : base(e) =>
+            (this.ControllerID, this.Button, this.IsPressed) = 
+            (e.which, (ControllerButton)e.button, e.state > 0);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_ControllerButtonEvent()
+            {
+                type = (uint)(IsPressed ? SDL_EventType.SDL_CONTROLLERBUTTONDOWN : SDL_EventType.SDL_CONTROLLERBUTTONUP),
+                timestamp = (uint)Timestamp,
+                which = ControllerID,
+                button = (byte)Button,
+                state = (byte)(IsPressed ? 1 : 0)
+            };
+    }
+
+    /// <summary>
+    /// Describes controller state change event data.
+    /// </summary>
+    public class ControllerDeviceStateEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The controller instance id.
+        /// </summary>
+        public int ControllerID { get; private set; }
+        /// <summary>
+        /// Indicates if the controller is connected or disconnected.
+        /// </summary>
+        public bool Connected { get; private set; }
+
+        /// <summary>
+        /// Creates new event args object.
+        /// </summary>
+        public ControllerDeviceStateEventArgs(int controllerId, bool connected) : base() =>
+            (this.ControllerID, this.Connected) = (controllerId, connected);
+
+        internal ControllerDeviceStateEventArgs(SDL_ControllerDeviceEvent e) : base(e) =>
+            (this.ControllerID, this.Connected) = (e.which, e.type == (uint)SDL_EventType.SDL_JOYDEVICEADDED);
+
+        internal override SDL_Event AsEvent() =>
+            new  SDL_ControllerDeviceEvent()
+            {
+                type = (uint)(Connected ? SDL_EventType.SDL_CONTROLLERDEVICEADDED : SDL_EventType.SDL_CONTROLLERDEVICEREMOVED),
+                timestamp = (uint)Timestamp,
+                which = ControllerID,
             };
     }
 }

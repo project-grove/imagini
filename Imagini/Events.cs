@@ -18,6 +18,7 @@ namespace Imagini
         public readonly KeyboardEvents Keyboard = new KeyboardEvents();
         public readonly MouseEvents Mouse = new MouseEvents();
         public readonly JoystickEvents Joystick = new JoystickEvents();
+        public readonly ControllerEvents Controller = new ControllerEvents();
 
         /// <summary>
         /// Returns the owner of this event queue, or null if this queue is global.
@@ -70,6 +71,18 @@ namespace Imagini
                 case SDL_EventType.SDL_JOYDEVICEADDED:
                 case SDL_EventType.SDL_JOYDEVICEREMOVED:
                     Joystick.Fire(*((SDL_JoyDeviceEvent*)&e));
+                    break;
+                // Controller
+                case SDL_EventType.SDL_CONTROLLERAXISMOTION:
+                    Controller.Fire(*((SDL_ControllerAxisEvent*)&e));
+                    break;
+                case SDL_EventType.SDL_CONTROLLERBUTTONDOWN:
+                case SDL_EventType.SDL_CONTROLLERBUTTONUP:
+                    Controller.Fire(*((SDL_ControllerButtonEvent*)&e));
+                    break;
+                case SDL_EventType.SDL_CONTROLLERDEVICEADDED:
+                case SDL_EventType.SDL_CONTROLLERDEVICEREMOVED:
+                    Controller.Fire(*((SDL_ControllerDeviceEvent*)&e));
                     break;
             }
         }
@@ -200,4 +213,41 @@ namespace Imagini
         }
     }
 
+    /// <summary>
+    /// Contains controller-related events.
+    /// </summary>
+    public class ControllerEvents
+    {
+        /// <summary>
+        /// Fires when a controller axis is moved.
+        /// </summary>
+        public event EventHandler<ControllerAxisEventArgs> AxisMoved;
+        /// <summary>
+        /// Fires when a controller button is pressed.
+        /// </summary>
+        public event EventHandler<ControllerButtonEventArgs> ButtonPressed;
+        /// <summary>
+        /// Fires when a controller button is released.
+        /// </summary>
+        public event EventHandler<ControllerButtonEventArgs> ButtonReleased;
+        /// <summary>
+        /// Fires when a joystick is connected or disconnected.
+        /// </summary>
+        /// <remarks>Fires only on <see cref="Events.Global" />.</remarks>
+        public event EventHandler<ControllerDeviceStateEventArgs> StateChanged;
+
+        internal void Fire(SDL_ControllerAxisEvent e) =>
+            AxisMoved?.Invoke(this, new ControllerAxisEventArgs(e));
+        
+        internal void Fire(SDL_ControllerButtonEvent e)
+        {
+            if (e.type == (uint)SDL_EventType.SDL_CONTROLLERBUTTONDOWN)
+                ButtonPressed?.Invoke(this, new ControllerButtonEventArgs(e));
+            else
+                ButtonReleased?.Invoke(this, new ControllerButtonEventArgs(e));
+        }
+
+        internal void Fire(SDL_ControllerDeviceEvent e) =>
+            StateChanged?.Invoke(this, new ControllerDeviceStateEventArgs(e));
+    }
 }
