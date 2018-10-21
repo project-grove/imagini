@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -1221,7 +1222,7 @@ namespace Imagini
         public ControllerAxisEventArgs(int id, ControllerAxis axis, short value)
             : base() =>
             (this.ControllerID, this.Axis, this.Value) = (id, axis, value);
-        
+
         internal ControllerAxisEventArgs(SDL_ControllerAxisEvent e) : base(e) =>
             (this.ControllerID, this.Axis, this.Value) = (e.which, (ControllerAxis)e.axis, e.value);
 
@@ -1232,7 +1233,7 @@ namespace Imagini
                 timestamp = (uint)Timestamp,
                 which = ControllerID,
                 axis = (byte)Axis,
-                value = Value 
+                value = Value
             };
     }
 
@@ -1263,7 +1264,7 @@ namespace Imagini
 
         internal ControllerButtonEventArgs(SDL_ControllerButtonEvent e)
             : base(e) =>
-            (this.ControllerID, this.Button, this.IsPressed) = 
+            (this.ControllerID, this.Button, this.IsPressed) =
             (e.which, (ControllerButton)e.button, e.state > 0);
 
         internal override SDL_Event AsEvent() =>
@@ -1301,11 +1302,100 @@ namespace Imagini
             (this.ControllerID, this.Connected) = (e.which, e.type == (uint)SDL_EventType.SDL_JOYDEVICEADDED);
 
         internal override SDL_Event AsEvent() =>
-            new  SDL_ControllerDeviceEvent()
+            new SDL_ControllerDeviceEvent()
             {
                 type = (uint)(Connected ? SDL_EventType.SDL_CONTROLLERDEVICEADDED : SDL_EventType.SDL_CONTROLLERDEVICEREMOVED),
                 timestamp = (uint)Timestamp,
                 which = ControllerID,
+            };
+    }
+
+    /// <summary>
+    /// Describes types of touch events.
+    /// </summary>
+    public enum TouchEventType
+    {
+        Motion,
+        FingerDown,
+        FingerUp
+    }
+
+    /// <summary>
+    /// Describes touch event data.
+    /// </summary>    
+    public class TouchFingerEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The event type.
+        /// </summary>
+        public TouchEventType Type { get; private set; }
+        /// <summary>
+        /// The touch device ID.
+        /// </summary>
+        public long DeviceID { get; private set; }
+        /// <summary>
+        /// The finger ID.
+        /// </summary>
+        public long FingerID { get; private set; }
+        /// <summary>
+        /// Normalized in the range 0...1.
+        /// </summary>
+        public float X { get; private set; }
+        /// <summary>
+        /// Normalized in the range 0...1.
+        /// </summary>
+        public float Y { get; private set; }
+        /// <summary>
+        /// Normalized in the range 0...1.
+        /// </summary>
+        public float DX { get; private set; }
+        /// <summary>
+        /// Normalized in the range 0...1.
+        /// </summary>
+        public float DY { get; private set; }
+        /// <summary>
+        /// Normalized in the range 0...1.
+        /// </summary>
+        public float Pressure { get; private set; }
+
+        private static readonly Dictionary<uint, TouchEventType> s_types =
+            new Dictionary<uint, TouchEventType>()
+            {
+                { (uint)SDL_EventType.SDL_FINGERMOTION, TouchEventType.Motion },
+                { (uint)SDL_EventType.SDL_FINGERDOWN, TouchEventType.FingerDown },
+                { (uint)SDL_EventType.SDL_FINGERUP, TouchEventType.FingerUp }
+            };
+
+        private static readonly Dictionary<TouchEventType, uint> s_reverseTypes =
+            s_types.ToDictionary(x => x.Value, x => x.Key);
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        public TouchFingerEventArgs(TouchEventType type, long deviceId, long fingerId,
+            float x, float y, float dx, float dy, float pressure) : base() =>
+            (Type, DeviceID, FingerID, X, Y, DX, DY, Pressure) =
+            (type, deviceId, fingerId, x, y, dx, dy, pressure);
+
+        internal TouchFingerEventArgs(SDL_TouchFingerEvent e) : base(e)
+        {
+            (DeviceID, FingerID, X, Y, DX, DY, Pressure) =
+            (e.touchId, e.fingerId, e.x, e.y, e.dx, e.dy, e.pressure);
+            Type = s_types[e.type];
+        }
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_TouchFingerEvent()
+            {
+                type = s_reverseTypes[Type],
+                timestamp = (uint)Timestamp,
+                touchId = DeviceID,
+                fingerId = FingerID,
+                x = X,
+                y = Y,
+                dx = DX,
+                dy = DY,
+                pressure = Pressure
             };
     }
 }

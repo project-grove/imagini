@@ -14,11 +14,30 @@ namespace Imagini
         /// </summary>
         public static Events Global => _global;
 
+        /// <summary>
+        /// Provides access to window events.
+        /// </summary>
         public readonly WindowEvents Window = new WindowEvents();
+        /// <summary>
+        /// Provides access to keyboard events.
+        /// </summary>
         public readonly KeyboardEvents Keyboard = new KeyboardEvents();
+        /// <summary>
+        /// Provides access to mouse events.
+        /// </summary>
         public readonly MouseEvents Mouse = new MouseEvents();
+        /// <summary>
+        /// Provides access to joystick events.
+        /// </summary>
         public readonly JoystickEvents Joystick = new JoystickEvents();
+        /// <summary>
+        /// Provides access to controller events.
+        /// </summary>
         public readonly ControllerEvents Controller = new ControllerEvents();
+        /// <summary>
+        /// Provides access to touch events.
+        /// </summary>
+        public readonly TouchEvents Touch = new TouchEvents();
 
         /// <summary>
         /// Returns the owner of this event queue, or null if this queue is global.
@@ -83,6 +102,13 @@ namespace Imagini
                 case SDL_EventType.SDL_CONTROLLERDEVICEADDED:
                 case SDL_EventType.SDL_CONTROLLERDEVICEREMOVED:
                     Controller.Fire(*((SDL_ControllerDeviceEvent*)&e));
+                    break;
+                // Touch
+                case SDL_EventType.SDL_FINGERMOTION:
+                case SDL_EventType.SDL_FINGERDOWN:
+                case SDL_EventType.SDL_FINGERUP:
+                    // don't touch the fire
+                    Touch.Fire(*((SDL_TouchFingerEvent*)&e));
                     break;
             }
         }
@@ -249,5 +275,35 @@ namespace Imagini
 
         internal void Fire(SDL_ControllerDeviceEvent e) =>
             StateChanged?.Invoke(this, new ControllerDeviceStateEventArgs(e));
+    }
+
+    public class TouchEvents
+    {
+        /// <summary>
+        /// Fires when a finger is moved.
+        /// </summary>
+        public event EventHandler<TouchFingerEventArgs> FingerMoved;
+        /// <summary>
+        /// Fires on finger press.
+        /// </summary>
+        public event EventHandler<TouchFingerEventArgs> FingerPressed;
+        /// <summary>
+        /// Fires on finger release.
+        /// </summary>
+        public event EventHandler<TouchFingerEventArgs> FingerReleased;
+
+        internal void Fire(SDL_TouchFingerEvent e)
+        {
+            var args = new TouchFingerEventArgs(e);
+            switch((SDL_EventType)e.type)
+            {
+                case SDL_EventType.SDL_FINGERMOTION:
+                    FingerMoved?.Invoke(this, args); break;
+                case SDL_EventType.SDL_FINGERDOWN:
+                    FingerPressed?.Invoke(this, args); break;
+                case SDL_EventType.SDL_FINGERUP:
+                    FingerReleased?.Invoke(this, args); break;
+            }
+        }
     }
 }
