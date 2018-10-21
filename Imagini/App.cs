@@ -12,7 +12,7 @@ namespace Imagini
     /// </summary>
     public abstract class App : IDisposable
     {
-        private Window _window;
+        public Window Window { get; private set; }
         private EventManager.EventQueue _eventQueue;
         public Events Events { get; private set; }
 
@@ -31,9 +31,9 @@ namespace Imagini
         {
             if (windowSettings == null)
                 windowSettings = new WindowSettings();
-            _window = new Window(windowSettings);
-            _eventQueue = EventManager.CreateQueueFor(_window);
-            Events = new Events();
+            Window = new Window(windowSettings);
+            _eventQueue = EventManager.CreateQueueFor(Window);
+            Events = new Events(this);
             Initialize();
         }
 
@@ -50,8 +50,8 @@ namespace Imagini
 
         public void Dispose()
         {
-            EventManager.DeleteQueueFor(_window);
-            _window.Dispose();
+            EventManager.DeleteQueueFor(Window);
+            Window.Dispose();
         }
 
         // TODO

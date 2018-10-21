@@ -49,20 +49,14 @@ namespace Tests
         }
 
 
-        /*
-        // TODO FIXME
         [Fact]
         public void ShouldPushGlobalEventsToGlobalQueue()
         {
-            var expectedType = (uint)SDL_EventType.SDL_CONTROLLERDEVICEADDED;
-            var @event = new SDL_ControllerDeviceEvent() {
-                type = expectedType
-            };
-
+            var @event = new JoyDeviceStateEventArgs(1337, true);
             EventManager.Push(@event);
             EventManager.Poll(suppressGlobalProcessing: true);
-            Assert.Contains(EventManager.GlobalQueue.Events, e => e.type == expectedType);
+            Assert.Contains(EventManager.GlobalQueue.Events, 
+                e => e.type == @event.AsEvent().type);
         }
-        */
     }
 }

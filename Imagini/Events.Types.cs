@@ -5,6 +5,7 @@ using System.Text;
 using Imagini.Internal;
 using SDL2;
 using static SDL2.SDL_events;
+using static SDL2.SDL_joystick;
 using static SDL2.SDL_keyboard;
 using static SDL2.SDL_keycode;
 using static SDL2.SDL_scancode;
@@ -75,7 +76,7 @@ namespace Imagini
         /// </summary>
         /// <param name="window">Target window. If null, the currently focused one is used.</param>
         public WindowStateChangeEventArgs(WindowStateChange state,
-            Window window = null, int? x = null, int? y = null)
+            Window window = null, int? x = null, int? y = null) : base()
             =>
             (this.Window, this.State, this.X, this.Y) =
             (window ?? Window.Current, state, x, y);
@@ -672,7 +673,7 @@ namespace Imagini
         /// </summary>
         /// <param name="window">Target window. If null, the currently focused one is used.</param>
         public KeyboardEventArgs(KeyboardKey key, bool isPressed,
-            Window window = null, bool isRepeat = false)
+            Window window = null, bool isRepeat = false) : base()
             =>
             (this.Window, this.Key, this.IsPressed, this.IsRepeat) =
             (window ?? Window.Current, key, isPressed, isRepeat);
@@ -717,7 +718,7 @@ namespace Imagini
         /// </summary>
         /// <param name="text">Text entered by user.</param>
         /// <param name="window">Target window. If null, the currently focused window is used.</param>
-        public TextInputEventArgs(string text, Window window = null) =>
+        public TextInputEventArgs(string text, Window window = null) : base() =>
             (this.Window, this.Text) = (window ?? Window.Current, text);
 
         internal unsafe TextInputEventArgs(SDL_TextInputEvent e) : base(e) =>
@@ -804,7 +805,7 @@ namespace Imagini
         /// <param name="buttons">Mouse button state.</param>
         /// <param name="window">Target window. If null, the currently focused one is used.</param>
         public MouseMoveEventArgs(int x, int y, int relX, int relY,
-            MouseButtons buttons, Window window = null)
+            MouseButtons buttons, Window window = null) : base()
             =>
             (this.X, this.Y, this.RelativeX, this.RelativeY, this.Buttons, this.Window) =
             (x, y, relX, relY, buttons, window ?? Window.Current);
@@ -878,7 +879,7 @@ namespace Imagini
         /// <param name="window">Target window. If null, the currently focused one is used.</param>
         /// <param name="clicks">Number of clicks.</param>
         public MouseButtonEventArgs(MouseButton button, int x, int y, bool isPressed,
-            Window window = null, byte clicks = 1)
+            Window window = null, byte clicks = 1) : base()
             =>
             (this.Window, this.X, this.Y, this.IsPressed, this.Clicks) =
             (window ?? Window.Current, x, y, isPressed, Math.Max((byte)1, clicks));
@@ -931,7 +932,7 @@ namespace Imagini
         /// <param name="x">The amount scrolled horizontally, positive to the right and negative to the left.</param>
         /// <param name="y">The amount scrolled vertically, positive away from the user and negative toward the user.</param>
         /// <param name="window">Target window. If null, the currently focused one is used.</param>
-        public MouseWheelEventArgs(int x, int y, Window window = null) =>
+        public MouseWheelEventArgs(int x, int y, Window window = null) : base() =>
             (this.X, this.Y, this.Window) = (x, y, window);
 
         internal MouseWheelEventArgs(SDL_MouseWheelEvent e) : base(e)
@@ -946,6 +947,215 @@ namespace Imagini
                 which = 0,
                 x = X,
                 y = Y
+            };
+    }
+
+    /// <summary>
+    /// Describes joystick axis motion event data.
+    /// </summary>    
+    public class JoyAxisMotionEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The joystick instance ID.
+        /// </summary>
+        public int JoystickID { get; private set; }
+        /// <summary>
+        /// Joystick axis index.
+        /// </summary>
+        public byte Axis { get; private set; }
+        /// <summary>
+        /// The axis value (range: -32768 to 32767)
+        /// </summary>
+        public short Value { get; private set; }
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        public JoyAxisMotionEventArgs(int joystickId, byte axis, short value) : base() =>
+            (this.JoystickID, this.Axis, this.Value) = (joystickId, axis, value);
+
+        internal JoyAxisMotionEventArgs(SDL_JoyAxisEvent e) : base(e) =>
+            (this.JoystickID, this.Axis, this.Value) = (e.which, e.axis, e.value);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_JoyAxisEvent()
+            {
+                type = (uint)SDL_EventType.SDL_JOYAXISMOTION,
+                timestamp = (uint)Timestamp,
+                which = JoystickID,
+                axis = Axis,
+                value = Value
+            };
+    }
+
+    /// <summary>
+    /// Describes joystick trackball motion event data.
+    /// </summary>
+    public class JoyBallMotionEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The joystick instance ID.
+        /// </summary>
+        public int JoystickID { get; private set; }
+        /// <summary>
+        /// Joystick trackball index.
+        /// </summary>
+        public byte Ball { get; private set; }
+        /// <summary>
+        /// Relative motion in X direction.
+        /// </summary>
+        public short RelativeX { get; private set; }
+        /// <summary>
+        /// Relative motion in Y direction.
+        /// </summary>
+        public short RelativeY { get; private set; }
+
+        /// <summary>
+        /// Creates new event args object.
+        /// </summary>
+        public JoyBallMotionEventArgs(int joystickId, byte ball, short relX, short relY)
+            : base() =>
+            (this.JoystickID, this.Ball, this.RelativeX, this.RelativeY) =
+            (joystickId, ball, relX, relY);
+
+        internal JoyBallMotionEventArgs(SDL_JoyBallEvent e) : base(e) =>
+            (this.JoystickID, this.Ball, this.RelativeX, this.RelativeY) =
+            (e.which, e.ball, e.xrel, e.yrel);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_JoyBallEvent()
+            {
+                type = (uint)SDL_EventType.SDL_JOYBALLMOTION,
+                timestamp = (uint)Timestamp,
+                which = JoystickID,
+                xrel = RelativeX,
+                yrel = RelativeY
+            };
+    }
+
+    [Flags]
+    /// <summary>
+    /// Describes joystick hat position.
+    /// </summary>
+    public enum HatPosition : byte
+    {
+        Centered = SDL_HAT_CENTERED,
+        Up = SDL_HAT_UP,
+        Right = SDL_HAT_RIGHT,
+        Down = SDL_HAT_DOWN,
+        Left = SDL_HAT_LEFT,
+        RightUp = Right | Up,
+        RightDown = Right | Down,
+        LeftUp = Left | Up,
+        LeftDown = Left | Down
+    }
+
+    /// <summary>
+    /// Describes joystick POV hat motion event data.
+    /// </summary>
+    public class JoyHatMotionEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The joystick instance ID.
+        /// </summary>
+        public int JoystickID { get; private set; }
+        /// <summary>
+        /// Joystick hat index.
+        /// </summary>
+        public byte Hat { get; private set; }
+        /// <summary>
+        /// Joystick hat position.
+        /// </summary>
+        public HatPosition Position { get; private set; }
+
+        /// <summary>
+        /// Creates new event args object.
+        /// </summary>
+        public JoyHatMotionEventArgs(int joystickId, byte hat, HatPosition pos)
+            : base() =>
+            (this.JoystickID, this.Hat, this.Position) = (joystickId, hat, pos);
+        
+        internal JoyHatMotionEventArgs(SDL_JoyHatEvent e) : base(e) =>
+            (this.JoystickID, this.Hat, this.Position) = (e.which, e.hat, (HatPosition)e.value);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_JoyHatEvent()
+            {
+                type = (uint)SDL_EventType.SDL_JOYHATMOTION,
+                timestamp = (uint)Timestamp,
+                which = JoystickID,
+                hat = Hat,
+                value = (byte)Position
+            };
+    }
+
+    /// <summary>
+    /// Describes joystick button press/release event data.
+    /// </summary>
+    public class JoyButtonEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The joystick instance id.
+        /// </summary>
+        public int JoystickID { get; private set; }
+        /// <summary>
+        /// Joystick button index.
+        /// </summary>
+        public byte Button { get; private set; }
+        /// <summary>
+        /// Indicates if the button was pressed or released.
+        /// </summary>
+        public bool IsPressed { get; private set; }
+
+        /// <summary>
+        /// Creates new event args object.
+        /// </summary>
+        public JoyButtonEventArgs(int joystickId, byte button, bool isPressed)
+            : base() =>
+            (this.JoystickID, this.Button, this.IsPressed) = (joystickId, button, isPressed);
+        
+        internal JoyButtonEventArgs(SDL_JoyButtonEvent e) : base(e) =>
+            (this.JoystickID, this.Button, this.IsPressed) =
+            (e.which, e.button, e.state > 0);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_JoyButtonEvent()
+            {
+                type = (uint)(IsPressed ? SDL_EventType.SDL_JOYBUTTONDOWN : SDL_EventType.SDL_JOYBUTTONUP),
+                timestamp = (uint)Timestamp,
+                which = JoystickID,
+                button = Button,
+                state = (byte)(IsPressed ? 1 : 0)
+            };
+    }
+
+    public class JoyDeviceStateEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// The joystick instance id.
+        /// </summary>
+        public int JoystickID { get; private set; }
+        /// <summary>
+        /// Indicates if the joystick is connected or disconnected.
+        /// </summary>
+        /// <returns></returns>
+        public bool Connected { get; private set; }
+
+        /// <summary>
+        /// Creates new event args object.
+        /// </summary>
+        public JoyDeviceStateEventArgs(int joystickId, bool connected) : base() =>
+            (this.JoystickID, this.Connected) = (joystickId, connected);
+
+        internal JoyDeviceStateEventArgs(SDL_JoyDeviceEvent e) : base(e) =>
+            (this.JoystickID, this.Connected) = (e.which, e.type == (uint)SDL_EventType.SDL_JOYDEVICEADDED);
+
+        internal override SDL_Event AsEvent() =>
+            new SDL_JoyDeviceEvent()
+            {
+                type = (uint)(Connected ? SDL_EventType.SDL_JOYDEVICEADDED : SDL_EventType.SDL_JOYDEVICEREMOVED),
+                timestamp = (uint)Timestamp,
+                which = JoystickID,
             };
     }
 }
