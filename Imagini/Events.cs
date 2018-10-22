@@ -19,6 +19,10 @@ namespace Imagini
         /// </summary>
         public readonly WindowEvents Window = new WindowEvents();
         /// <summary>
+        /// Provides access to IME input events.
+        /// </summary>
+        public readonly InputEvents Input = new InputEvents();
+        /// <summary>
         /// Provides access to keyboard events.
         /// </summary>
         public readonly KeyboardEvents Keyboard = new KeyboardEvents();
@@ -55,6 +59,13 @@ namespace Imagini
                 // Window
                 case SDL_EventType.SDL_WINDOWEVENT:
                     Window.Fire(*((SDL_WindowEvent*)&e));
+                    break;
+                // IME input
+                case SDL_EventType.SDL_TEXTEDITING:
+                    Input.Fire(*((SDL_TextEditingEvent*)&e));
+                    break;
+                case SDL_EventType.SDL_TEXTINPUT:
+                    Input.Fire(*((SDL_TextInputEvent*)&e));
                     break;
                 // Keyboard
                 case SDL_EventType.SDL_KEYDOWN:
@@ -125,6 +136,27 @@ namespace Imagini
             internal WindowEvents() { }
             internal void Fire(SDL_WindowEvent e) =>
                 StateChanged?.Invoke(this, new WindowStateChangeEventArgs(e));
+        }
+
+        /// <summary>
+        /// Contains input-related events.
+        /// </summary>
+        public class InputEvents
+        {
+            /// <summary>
+            /// Fires when the editing text changes.
+            /// </summary>
+            public EventHandler<TextEditingEventArgs> OnTextEdit;
+            /// <summary>
+            /// Fires when the editing text is entered.
+            /// </summary>
+            public EventHandler<TextInputEventArgs> OnTextInput;
+
+            internal void Fire(SDL_TextEditingEvent e) =>
+                OnTextEdit?.Invoke(this, new TextEditingEventArgs(e));
+
+            internal void Fire(SDL_TextInputEvent e) =>
+                OnTextInput?.Invoke(this, new TextInputEventArgs(e));
         }
 
         /// <summary>

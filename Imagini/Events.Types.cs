@@ -701,6 +701,57 @@ namespace Imagini
     }
 
     /// <summary>
+    /// Represents a text editing event.
+    /// </summary>
+    public class TextEditingEventArgs : CommonEventArgs
+    {
+        /// <summary>
+        /// Target window.
+        /// </summary>
+        public Window Window { get; private set; }
+        /// <summary>
+        /// The editing text.
+        /// </summary>
+        public string Text { get; private set; }
+        /// <summary>
+        /// The start cursor of the selected editing text.
+        /// </summary>
+        public int Start { get; private set; }
+        /// <summary>
+        /// The length of the selected editing text.
+        /// </summary>
+        public int Length { get; private set; }
+
+
+        /// <summary>
+        /// Creates a new event args object.
+        /// </summary>
+        /// <param name="window">Target window. If null, the currently focused window is used.</param>
+        public TextEditingEventArgs(string text, int start, int length, Window window = null)
+            : base() =>
+            (this.Text, this.Start, this.Length, this.Window) = (text, start, length, Window ?? Window.Current);
+        
+        internal unsafe TextEditingEventArgs(SDL_TextEditingEvent e) =>
+            (this.Text, this.Start, this.Length, this.Window) =
+            (Util.FromNullTerminated(e.text), e.start, e.length, Window.GetByID(e.windowID));
+
+        internal unsafe override SDL_Event AsEvent()
+        {
+            var bytes = Encoding.UTF8.GetBytes(Text);
+            var result = new SDL_TextEditingEvent()
+            {
+                type = (uint)SDL_EventType.SDL_TEXTEDITING,
+                timestamp = (uint)Timestamp,
+                windowID = Window.ID,
+                start = Start,
+                length = Length
+            };
+            Marshal.Copy(bytes, 0, (IntPtr)result.text, Math.Min(SDL_TEXTINPUTEVENT_TEXT_SIZE, bytes.Length));
+            return result;
+        }
+    }
+
+    /// <summary>
     /// Represents a text input event.
     /// </summary>
     public class TextInputEventArgs : CommonEventArgs
@@ -934,7 +985,7 @@ namespace Imagini
         /// <param name="y">The amount scrolled vertically, positive away from the user and negative toward the user.</param>
         /// <param name="window">Target window. If null, the currently focused one is used.</param>
         public MouseWheelEventArgs(int x, int y, Window window = null) : base() =>
-            (this.X, this.Y, this.Window) = (x, y, window);
+            (this.X, this.Y, this.Window) = (x, y, window ?? Window.Current);
 
         internal MouseWheelEventArgs(SDL_MouseWheelEvent e) : base(e)
             => (this.X, this.Y, this.Window) = (e.x, e.y, Window.GetByID(e.windowID));
@@ -1299,7 +1350,7 @@ namespace Imagini
             (this.ControllerID, this.Connected) = (controllerId, connected);
 
         internal ControllerDeviceStateEventArgs(SDL_ControllerDeviceEvent e) : base(e) =>
-            (this.ControllerID, this.Connected) = (e.which, e.type == (uint)SDL_EventType.SDL_JOYDEVICEADDED);
+            (this.ControllerID, this.Connected) = (e.which, e.type == (uint)SDL_EventType.SDL_CONTROLLERDEVICEADDED);
 
         internal override SDL_Event AsEvent() =>
             new SDL_ControllerDeviceEvent()
