@@ -22,6 +22,7 @@ namespace Tests
             Assert.Equal(expectedSize, window.SizeInPixels);
             Assert.Equal(settings.Title, window.Title);
             Assert.False(window.IsVisible);
+            window.Dispose();
         }
 
         [Fact]
@@ -41,6 +42,28 @@ namespace Tests
             window.MaximumSize = maxSize;
             Assert.Equal(minSize, window.MinimumSize);
             Assert.Equal(maxSize, window.MaximumSize);
+            window.Dispose();
+        }
+
+        [Fact]
+        public void ShouldToggleVSync()
+        {
+            var expected = false;
+            var settings = new WindowSettings()
+            {
+                IsVisible = false,
+                WindowWidth = 100,
+                WindowHeight = 50,
+                VSync = expected
+            };
+            var window = new Window(settings);
+            
+            Assert.Equal(expected, window.Settings.VSync);
+            settings.VSync = expected = true;
+            window.Apply(settings);
+            Assert.Equal(expected, window.Settings.VSync);
+
+            window.Dispose();
         }
     }
 #endif

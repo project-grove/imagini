@@ -7,7 +7,7 @@ using static SDL2.SDL_scancode;
 
 namespace Tests
 {
-    public class EventManagerTest
+    public class EventManagerTest : IDisposable
     {
         private Window window;
         private EventManager.EventQueue queue;
@@ -57,6 +57,12 @@ namespace Tests
             EventManager.Poll(suppressGlobalProcessing: true);
             Assert.Contains(EventManager.GlobalQueue.Events, 
                 e => e.type == @event.AsEvent().type);
+        }
+
+        public void Dispose()
+        {
+            EventManager.DeleteQueueFor(window);
+            window.Dispose();
         }
     }
 }

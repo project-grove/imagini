@@ -6,6 +6,7 @@ using System.Linq;
 using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
 using static SDL2.SDL_error;
+using static SDL2.SDL_hints;
 using static SDL2.SDL_render;
 using static SDL2.SDL_video;
 
@@ -14,7 +15,7 @@ namespace Imagini
     /// <summary>
     /// An app window.
     /// </summary>
-    public class Window : IDisposable
+    public sealed class Window : IDisposable
     {
         internal IntPtr Handle;
         internal IntPtr Renderer;
@@ -146,6 +147,7 @@ namespace Imagini
             Settings = settings.Clone() as WindowSettings;
             if (settings.WindowMode == WindowMode.Fullscreen)
                 settings.FullscreenDisplayMode = this.Display.CurrentMode;
+            settings.VSync = SDL_GetHint(SDL_HINT_RENDER_VSYNC) == "1";
         }
 
         /// <summary>

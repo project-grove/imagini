@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
+using static SDL2.SDL_hints;
 using static SDL2.SDL_video;
 
 namespace Imagini
@@ -26,41 +27,58 @@ namespace Imagini
         /// <summary>
         /// Width of the window in pixels.
         /// </summary>
+        /// <remarks>Default is 800.</remarks>
         public int WindowWidth { get; set; } = 800;
         /// <summary>
         /// Height of the window in pixels.
         /// </summary>
+        /// <remarks>Default is 600.</remarks>
         public int WindowHeight { get; set; } = 600;
         /// <summary>
         /// Flag indicating if the window should be fullscreen.
         /// </summary>
+        /// <remarks>Default is false.</remarks>
         public bool IsFullscreen { get; set; } = false;
+        /// <summary>
+        /// Indicates if the vertical sync should be enabled (if supported).
+        /// </summary>
+        /// <remarks>Default is true.</remarks>
+        public bool VSync { get; set; } = true;
         /// <summary>
         /// Flag indicating if the window should be visible.
         /// </summary>
         /// <remarks>
         /// Used only on window creation, to change window visibility after 
         /// creation use <see cref="Window.Show" /> and <see cref="Window.Hide" />.
+        /// Default is true.
         /// </remarks>
         public bool IsVisible { get; set; } = true;
         /// <summary>
         /// Flag indicating if the window should be borderless.
         /// </summary>
+        /// <remarks>Default is false.</remarks>
         public bool IsBorderless { get; set; } = false;
         /// <summary>
         /// Flag indicating if the window should be resizable.
         /// </summary>
-        /// <remarks>Should be specified at window creation, cannot be changed later.</remarks>
+        /// <remarks>
+        /// Should be specified at window creation, cannot be changed later.
+        /// Default is false.
+        /// </remarks>
         public bool IsResizable { get; set; } = false;
         /// <summary>
         /// Flag indicating if the OS should treat the window as high-DPI aware.
         /// </summary>
-        /// <remarks>Should be specified at window creation, cannot be changed later.</remarks>
+        /// <remarks>
+        /// Should be specified at window creation, cannot be changed later.
+        /// Default is false.
+        /// </remarks>
         public bool AllowHighDpi { get; set; } = false;
 
         /// <summary>
         /// Specifies a display index on which the window should be positioned.
         /// </summary>
+        /// <remarks>Default is 0 (primary display).</remarks>
         public int DisplayIndex { get; set; } = 0;
         /// <summary>
         /// Specifies the window title.
@@ -103,7 +121,7 @@ namespace Imagini
 
         internal uint GetFlags()
         {
-            var result = (uint)SDL_WindowFlags.SDL_WINDOW_OPENGL;
+            var result = 0u;
             result |= (uint)SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayIndex);
             if (IsFullscreen) result |= (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
             if (IsVisible)
@@ -129,6 +147,7 @@ namespace Imagini
 
             // If the WindowMode or target display have changed, do some preparation
             ChangeVideoMode(window, curMode, targetMode, curIndex, targetIndex);
+            SDL_SetHint(SDL_HINT_RENDER_VSYNC, VSync ? "1" : "0");
         }
 
         private void ChangeVideoMode(IntPtr window, WindowMode curMode, WindowMode targetMode,

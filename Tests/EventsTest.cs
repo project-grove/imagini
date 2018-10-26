@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests
 {
-    public class EventsTest
+    public class EventsTest : IDisposable
     {
         readonly Window window;
         readonly EventManager.EventQueue eventQueue;
@@ -80,6 +80,12 @@ namespace Tests
             actual.Should().BeEquivalentTo(expected, options => options
                 .IncludingAllRuntimeProperties()
                 .Excluding(m => m.SelectedMemberPath.EndsWith(".Timestamp")));
+        }
+
+        public void Dispose()
+        {
+            EventManager.DeleteQueueFor(window);
+            window.Dispose();
         }
     }
 }
