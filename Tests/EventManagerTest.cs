@@ -7,6 +7,7 @@ using static SDL2.SDL_scancode;
 
 namespace Tests
 {
+#if !HEADLESS
     public class EventManagerTest : IDisposable
     {
         private Window window;
@@ -65,4 +66,5 @@ namespace Tests
             window.Dispose();
         }
     }
+#endif
 }

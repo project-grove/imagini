@@ -3,6 +3,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Imagini.Drawing;
 using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
 using static SDL2.SDL_error;
@@ -15,11 +17,13 @@ namespace Imagini
     /// <summary>
     /// An app window.
     /// </summary>
-    public sealed class Window : IDisposable
+    public sealed class Window 
     {
         internal IntPtr Handle;
         internal IntPtr Renderer;
         internal uint ID;
+
+        internal Graphics Graphics { get; private set; }
 
         private static Dictionary<uint, Window> _windows =
             new Dictionary<uint, Window>();
@@ -56,11 +60,13 @@ namespace Imagini
         {
             get
             {
+                CheckIfNotDisposed();
                 SDL_GetWindowSize(Handle, out int w, out int h);
                 return new Size(w, h);
             }
             set
             {
+                CheckIfNotDisposed();
                 SDL_SetWindowSize(Handle, value.Width, value.Height);
             }
         }
@@ -73,6 +79,7 @@ namespace Imagini
         {
             get
             {
+                CheckIfNotDisposed();
                 SDL_GL_GetDrawableSize(Handle, out int w, out int h);
                 return new Size(w, h);
             }
@@ -85,11 +92,13 @@ namespace Imagini
         {
             get
             {
+                CheckIfNotDisposed();
                 SDL_GetWindowMinimumSize(Handle, out int w, out int h);
                 return new Size(w, h);
             }
             set
             {
+                CheckIfNotDisposed();
                 SDL_SetWindowMinimumSize(Handle, value.Width, value.Height);
             }
         }
@@ -101,11 +110,13 @@ namespace Imagini
         {
             get
             {
+                CheckIfNotDisposed();
                 SDL_GetWindowMaximumSize(Handle, out int w, out int h);
                 return new Size(w, h);
             }
             set
             {
+                CheckIfNotDisposed();
                 SDL_SetWindowMaximumSize(Handle, value.Width, value.Height);
             }
         }
@@ -136,6 +147,7 @@ namespace Imagini
                 throw new InternalException("Window with the specified ID already exists");
             else
                 _windows.Add(ID, this);
+            Graphics = new Graphics(this);
         }
 
         /// <summary>
@@ -143,6 +155,7 @@ namespace Imagini
         /// </summary>
         public void Apply(WindowSettings settings)
         {
+            CheckIfNotDisposed();
             settings.Apply(Handle);
             Settings = settings.Clone() as WindowSettings;
             if (settings.WindowMode == WindowMode.Fullscreen)
@@ -154,11 +167,11 @@ namespace Imagini
         /// <summary>
         /// Shows this window.
         /// </summary>
-        public void Show() => SDL_ShowWindow(Handle);
+        public void Show() => NotDisposed(() => SDL_ShowWindow(Handle));
         /// <summary>
         /// Hides this window.
         /// </summary>
-        public void Hide() => SDL_HideWindow(Handle);
+        public void Hide() => NotDisposed(() => SDL_HideWindow(Handle));
 
         /// <summary>
         /// Gets or sets the visibility of this window.
@@ -181,7 +194,7 @@ namespace Imagini
         /// <summary>
         /// Minimizes this window.
         /// </summary>
-        public void Minimize() => SDL_MinimizeWindow(Handle);
+        public void Minimize() => NotDisposed(() => SDL_MinimizeWindow(Handle));
 
         /// <summary>
         /// Gets or sets if the window should be minimized.
@@ -198,7 +211,7 @@ namespace Imagini
         /// <summary>
         /// Maximizes this window.
         /// </summary>
-        public void Maximize() => SDL_MaximizeWindow(Handle);
+        public void Maximize() => NotDisposed(() => SDL_MaximizeWindow(Handle));
 
         /// <summary>
         /// Gets or sets if the window should me maximized.
@@ -216,33 +229,35 @@ namespace Imagini
         /// Restores the window. Called when IsMinimized or IsMaximized is set
         /// to false.
         /// </summary>
-        public void Restore() => SDL_RestoreWindow(Handle);
+        public void Restore() => NotDisposed(() => SDL_RestoreWindow(Handle));
 
         /// <summary>
         /// Raises this window above other windows and sets the input focus.
         /// </summary>
-        public void Raise() => SDL_RaiseWindow(Handle);
+        public void Raise() => NotDisposed(() => SDL_RaiseWindow(Handle));
 
         /// <summary>
         /// Gets or sets the window title.
         /// </summary>
         public string Title
         {
-            get => SDL_GetWindowTitle(Handle);
-            set => SDL_SetWindowTitle(Handle, value);
+            get => NotDisposed(() => SDL_GetWindowTitle(Handle));
+            set => NotDisposed(() => SDL_SetWindowTitle(Handle, value));
         }
 
         /// <summary>
         /// Returns the display index of this window.
         /// </summary>
-        public int DisplayIndex => Display.GetCurrentDisplayIndexForWindow(Handle);
+        public int DisplayIndex => NotDisposed(() => 
+            Display.GetCurrentDisplayIndexForWindow(Handle));
         /// <summary>
         /// Returns the display of this window.
         /// </summary>
-        public Display Display => Display.GetCurrentDisplayForWindow(Handle);
+        public Display Display => NotDisposed(() => 
+            Display.GetCurrentDisplayForWindow(Handle));
 
         private bool HasFlag(SDL_WindowFlags flag) =>
-            (SDL_GetWindowFlags(Handle) & (uint)flag) == (uint)flag;
+            NotDisposed(() => (SDL_GetWindowFlags(Handle) & (uint)flag) == (uint)flag);
 
         static Window() => Lifecycle.TryInitialize();
 
@@ -250,18 +265,37 @@ namespace Imagini
         /// <summary>
         /// Returns true if this window is disposed (destroyed).
         /// </summary>
-        public bool Disposed { get; private set; }
+        public bool IsDisposed { get; private set; }
 
-        /// <summary>
-        /// Destroys and disposes the window.
-        /// </summary>
-        public void Dispose()
+        internal void Dispose()
         {
-            if (Disposed) return;
+            if (IsDisposed) return;
             SDL_DestroyWindow(Handle);
+            Graphics.Dispose();
             _windows.Remove(ID);
             Handle = Renderer = IntPtr.Zero;
-            Disposed = true;
+            IsDisposed = true;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private T NotDisposed<T>(Func<T> val)
+        {
+            CheckIfNotDisposed();
+            return val();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void NotDisposed(Action action)
+        {
+            CheckIfNotDisposed();
+            action();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void CheckIfNotDisposed()
+        {
+            if (IsDisposed)
+                throw new ObjectDisposedException("This app is disposed");
         }
     }
 }

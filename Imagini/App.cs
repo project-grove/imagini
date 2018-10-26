@@ -1,5 +1,6 @@
 using System;
 using Imagini.Internal;
+using Imagini.Drawing;
 using static SDL2.SDL_events;
 using static SDL2.SDL_mouse;
 using static SDL2.SDL_timer;
@@ -24,10 +25,15 @@ namespace Imagini
         /// </summary>
         public Window Window { get; private set; }
         /// <summary>
-        /// Provides access to the events sent to this window.
+        /// Provides access to the events sent to app's window.
         /// </summary>
         public Events Events { get; private set; }
         private EventManager.EventQueue _eventQueue;
+
+        /// <summary>
+        /// Provides access to drawing functions for the app's window.
+        /// </summary>
+        public Graphics Graphics { get; private set; }
 
         /// <summary>
         /// Returns total number of milliseconds since when the library was initialized.
@@ -79,7 +85,7 @@ namespace Imagini
             }
         }
         private TimeSpan _targetElapsedTime = TimeSpan.FromMilliseconds(16.6667);
-        private Stopwatch _frameStopwatch = new Stopwatch();
+        private Stopwatch _appStopwatch = new Stopwatch();
 
         /// <summary>
         /// Gets or sets the target time between each frame if the window is
@@ -123,7 +129,7 @@ namespace Imagini
         /// <summary>
         /// Gets or sets if the time between each frame should be fixed.
         /// </summary>
-        public bool IsFixedTimeStep { get; set; }
+        public bool IsFixedTimeStep { get; set; } = true;
         /// <summary>
         /// Indicates if the last app frame took longer than <see cref="TargetElapsedTime" />.
         /// </summary>
@@ -150,6 +156,7 @@ namespace Imagini
             _eventQueue = EventManager.CreateQueueFor(Window);
             Events = new Events(this);
             Events.Window.StateChanged += OnWindowStateChange;
+            Graphics = Window.Graphics;
         }
 
         /// <summary>
@@ -195,6 +202,7 @@ namespace Imagini
             {
                 Initialize();
                 _isInitialized = true;
+                _appStopwatch.Start();
             }
         }
 
@@ -237,6 +245,16 @@ namespace Imagini
 
         /* ---------------------------- App loop ---------------------------- */
         /// <summary>
+        /// Resets the total elapsed app time.
+        /// </summary>
+        public void ResetElapsedTime()
+        {
+            _previousTicks = 0;
+            _accumulatedTicks = 0;
+            _appStopwatch.Reset();
+            _appStopwatch.Start();
+        }
+        /// <summary>
         /// Runs the app loop.
         /// </summary>
         public void Run()
@@ -257,7 +275,7 @@ namespace Imagini
 
         RetryTick:
             // Advance the current app time
-            var currentTicks = _frameStopwatch.Elapsed.Ticks;
+            var currentTicks = _appStopwatch.Elapsed.Ticks;
             _accumulatedTicks += (currentTicks - _previousTicks);
             _previousTicks = currentTicks;
             // If the frame took less time than specified, sleep for the
