@@ -147,7 +147,8 @@ namespace Imagini
             Settings = settings.Clone() as WindowSettings;
             if (settings.WindowMode == WindowMode.Fullscreen)
                 settings.FullscreenDisplayMode = this.Display.CurrentMode;
-            settings.VSync = SDL_GetHint(SDL_HINT_RENDER_VSYNC) == "1";
+            var h = SDL_GetHint(SDL_HINT_RENDER_VSYNC);
+            Settings.VSync = SDL_GetHint(SDL_HINT_RENDER_VSYNC) == "1";
         }
 
         /// <summary>

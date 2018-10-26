@@ -147,7 +147,9 @@ namespace Imagini
 
             // If the WindowMode or target display have changed, do some preparation
             ChangeVideoMode(window, curMode, targetMode, curIndex, targetIndex);
-            SDL_SetHint(SDL_HINT_RENDER_VSYNC, VSync ? "1" : "0");
+            Check(() => SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, 
+                VSync ? "1" : "0", SDL_HintPriority.SDL_HINT_OVERRIDE),
+                "SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, OVERRIDE)");
         }
 
         private void ChangeVideoMode(IntPtr window, WindowMode curMode, WindowMode targetMode,

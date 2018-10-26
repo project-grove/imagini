@@ -10,7 +10,14 @@ namespace Imagini.Internal
             int result = func();
             if (result >= 0) return;
             throw new InternalException($"{methodName}: {SDL_GetError()}");
-        } 
+        }
+
+        public static void Check(Func<int> func, string methodName)
+        {
+            int result = func();
+            if (result == 1) return;
+            throw new InternalException($"{methodName}: {SDL_GetError()}");
+        }
 
         public static int TryGet(Func<int> func, string methodName)
         {

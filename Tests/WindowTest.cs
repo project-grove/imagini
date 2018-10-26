@@ -48,21 +48,19 @@ namespace Tests
         [Fact]
         public void ShouldToggleVSync()
         {
-            var expected = false;
             var settings = new WindowSettings()
             {
-                IsVisible = false,
-                WindowWidth = 100,
-                WindowHeight = 50,
-                VSync = expected
+                VSync = false
             };
             var window = new Window(settings);
-            
-            Assert.Equal(expected, window.Settings.VSync);
-            settings.VSync = expected = true;
-            window.Apply(settings);
-            Assert.Equal(expected, window.Settings.VSync);
+            settings.FullscreenDisplayMode = window.Display.DesktopMode;
 
+            Assert.False(window.Settings.IsFullscreen);
+            Assert.False(window.Settings.VSync);
+            settings.VSync = settings.IsFullscreen = true;
+            window.Apply(settings);
+            Assert.True(window.Settings.IsFullscreen);
+            Assert.True(window.Settings.VSync);
             window.Dispose();
         }
     }
