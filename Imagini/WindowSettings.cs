@@ -122,7 +122,7 @@ namespace Imagini
         internal uint GetFlags()
         {
             var result = 0u;
-            result |= (uint)SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayIndex);
+            // result |= SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayIndex);
             if (IsFullscreen) result |= (uint)SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
             if (IsVisible)
                 result |= (uint)SDL_WindowFlags.SDL_WINDOW_SHOWN;

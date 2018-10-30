@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Imagini.Drawing;
 using Imagini.Internal;
 using static Imagini.Internal.ErrorHandler;
@@ -19,11 +20,9 @@ namespace Imagini
     /// </summary>
     public sealed class Window 
     {
-        internal IntPtr Handle;
-        internal IntPtr Renderer;
+        public IntPtr Handle { get; private set; }
         internal uint ID;
 
-        internal Graphics Graphics { get; private set; }
 
         private static Dictionary<uint, Window> _windows =
             new Dictionary<uint, Window>();
@@ -133,10 +132,12 @@ namespace Imagini
 
         internal Window(WindowSettings settings)
         {
-            Try(() =>
-                SDL_CreateWindowAndRenderer(100, 100, settings.GetFlags(),
-                    out Handle, out Renderer),
-                "SDL_CreateWindowAndRenderer");
+            Handle = SDL_CreateWindow(settings.Title,
+                SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
+                SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
+                settings.WindowWidth, settings.WindowHeight, settings.GetFlags());
+            if (Handle == IntPtr.Zero)
+                throw new InternalException($"Could not create window: {SDL_GetError()}");
             ID = SDL_GetWindowID(Handle);
             if (ID == 0)
                 throw new InternalException($"Could not get the window ID: {SDL_GetError()}");
@@ -147,7 +148,6 @@ namespace Imagini
                 throw new InternalException("Window with the specified ID already exists");
             else
                 _windows.Add(ID, this);
-            Graphics = new Graphics(this);
         }
 
         /// <summary>
@@ -271,9 +271,8 @@ namespace Imagini
         {
             if (IsDisposed) return;
             SDL_DestroyWindow(Handle);
-            Graphics.Dispose();
             _windows.Remove(ID);
-            Handle = Renderer = IntPtr.Zero;
+            Handle = IntPtr.Zero;
             IsDisposed = true;
         }
 

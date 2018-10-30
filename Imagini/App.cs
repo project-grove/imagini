@@ -16,9 +16,45 @@ using System.Runtime.CompilerServices;
 namespace Imagini
 {
     /// <summary>
-    /// Main class which instantiates a window and an event loop.
+    /// Main class which instantiates a window, an event loop and a 
+    /// 2D accelerated renderer.
     /// </summary>
-    public abstract class App : IDisposable
+    public abstract class App : AppBase
+    {
+        /// <summary>
+        /// Provides access to drawing functions for the app's window.
+        /// </summary>
+        public Graphics Graphics { get; private set; }
+
+        /// <summary>
+        /// Creates a new app with the specified window settings.
+        /// </summary>
+        /// <remarks>
+        /// If you have your own constructor, make sure to call this
+        /// one because it initializes the window and the event queue.
+        /// </remarks>
+        public App(WindowSettings settings = null) : base(settings)
+        {
+            Graphics = new Graphics(Window);
+        }
+
+        protected override void AfterDraw(TimeSpan frameTime)
+        {
+            SDL_RenderPresent(Graphics.Handle);
+        }
+
+        protected override void OnDispose()
+        {
+            Graphics.Dispose();
+        }
+    }
+
+    /// <summary>
+    /// Base app class which instantiates a window and event loop.
+    /// Derive from this if you want to provide your own renderer for the
+    /// game loop.
+    /// </summary>
+    public abstract class AppBase : IDisposable
     {
         /// <summary>
         /// Returns the app's window.
@@ -29,11 +65,6 @@ namespace Imagini
         /// </summary>
         public Events Events { get; private set; }
         private EventManager.EventQueue _eventQueue;
-
-        /// <summary>
-        /// Provides access to drawing functions for the app's window.
-        /// </summary>
-        public Graphics Graphics { get; private set; }
 
         /// <summary>
         /// Returns total number of milliseconds since when the library was initialized.
@@ -148,7 +179,7 @@ namespace Imagini
         /// If you have your own constructor, make sure to call this
         /// one because it initializes the window and the event queue.
         /// </remarks>
-        public App(WindowSettings windowSettings = null)
+        public AppBase(WindowSettings windowSettings = null)
         {
             if (windowSettings == null)
                 windowSettings = new WindowSettings();
@@ -156,7 +187,6 @@ namespace Imagini
             _eventQueue = EventManager.CreateQueueFor(Window);
             Events = new Events(this);
             Events.Window.StateChanged += OnWindowStateChange;
-            Graphics = Window.Graphics;
         }
 
         /// <summary>
@@ -355,9 +385,13 @@ namespace Imagini
 
         private void DoDraw(TimeSpan frameTime)
         {
+            BeforeDraw(frameTime);
             Draw(frameTime);
-            SDL_RenderPresent(Window.Renderer);
+            AfterDraw(frameTime);
         }
+
+        protected virtual void BeforeDraw(TimeSpan frameTime) {}
+        protected virtual void AfterDraw(TimeSpan frameTime) {}
 
         protected virtual void Update(TimeSpan frameTime) { }
         protected virtual void Draw(TimeSpan frameTime) { }

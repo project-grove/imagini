@@ -46,10 +46,10 @@ namespace Imagini
         /// <summary>
         /// Returns the owner of this event queue, or null if this queue is global.
         /// </summary>
-        public App Owner { get; private set; }
+        public AppBase Owner { get; private set; }
 
         internal Events() { }
-        internal Events(App owner) => Owner = owner;
+        internal Events(AppBase owner) => Owner = owner;
 
         internal unsafe void Process(SDL_Event e)
         {
