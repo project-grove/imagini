@@ -33,9 +33,9 @@ namespace Imagini
         /// If you have your own constructor, make sure to call this
         /// one because it initializes the window and the event queue.
         /// </remarks>
-        public App(WindowSettings settings = null) : base(settings)
+        public App(WindowSettings settings = null, RendererInfo driver = null) : base(settings)
         {
-            Graphics = new Graphics(Window);
+            Graphics = new Graphics(Window, driver);
         }
 
         protected override void AfterDraw(TimeSpan frameTime)
@@ -390,8 +390,8 @@ namespace Imagini
             AfterDraw(frameTime);
         }
 
-        protected virtual void BeforeDraw(TimeSpan frameTime) {}
-        protected virtual void AfterDraw(TimeSpan frameTime) {}
+        protected virtual void BeforeDraw(TimeSpan frameTime) { }
+        protected virtual void AfterDraw(TimeSpan frameTime) { }
 
         protected virtual void Update(TimeSpan frameTime) { }
         protected virtual void Draw(TimeSpan frameTime) { }

@@ -1,18 +1,25 @@
 using System;
+using System.Linq;
 using Imagini.Internal;
 using static SDL2.SDL_error;
 using static SDL2.SDL_render;
 
 namespace Imagini.Drawing
 {
-    public sealed class Graphics 
+    public sealed class Graphics
     {
         internal IntPtr Handle;
-        internal Graphics(Window owner)
+        public RendererInfo Renderer { get; private set; }
+        internal Graphics(Window owner, RendererInfo rendererInfo)
         {
-            Handle = SDL_CreateRenderer(owner.Handle, -1, 0);
+            var fallbackRenderer = 
+                RendererInfo.All.FirstOrDefault(r => r.IsHardwareAccelerated) ??
+                RendererInfo.All.First();
+            
+            Renderer = rendererInfo ?? fallbackRenderer;
+            Handle = SDL_CreateRenderer(owner.Handle, Renderer.Index, 0);
             if (Handle == IntPtr.Zero)
-                throw new InternalException($"Could not initialize renderer: {SDL_GetError()}");
+                throw new ImaginiException($"Could not initialize renderer: {SDL_GetError()}");
         }
 
         /// <summary>

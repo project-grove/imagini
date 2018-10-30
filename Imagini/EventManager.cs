@@ -100,7 +100,7 @@ namespace Imagini
         {
             var _e = e.AsEvent();
             if (SDL_PushEvent(ref _e) < 0)
-                throw new InternalException($"Unable to push event: {SDL_GetError()}");
+                throw new ImaginiException($"Unable to push event: {SDL_GetError()}");
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

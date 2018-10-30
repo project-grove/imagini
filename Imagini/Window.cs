@@ -137,15 +137,15 @@ namespace Imagini
                 SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
                 settings.WindowWidth, settings.WindowHeight, settings.GetFlags());
             if (Handle == IntPtr.Zero)
-                throw new InternalException($"Could not create window: {SDL_GetError()}");
+                throw new ImaginiException($"Could not create window: {SDL_GetError()}");
             ID = SDL_GetWindowID(Handle);
             if (ID == 0)
-                throw new InternalException($"Could not get the window ID: {SDL_GetError()}");
+                throw new ImaginiException($"Could not get the window ID: {SDL_GetError()}");
             Title = settings.Title;
             Apply(settings);
             // Generally should not happen, but it's better to check anyways
             if (_windows.ContainsKey(ID))
-                throw new InternalException("Window with the specified ID already exists");
+                throw new ImaginiException("Window with the specified ID already exists");
             else
                 _windows.Add(ID, this);
         }

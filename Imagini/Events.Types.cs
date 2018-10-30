@@ -18,7 +18,7 @@ namespace Imagini
     /// </summary>
     public abstract class CommonEventArgs : EventArgs
     {
-        public long Timestamp { get; protected set; }
+        public long Timestamp { get; internal set; }
         internal CommonEventArgs() => Timestamp = App.TotalTime;
         internal unsafe CommonEventArgs(SDL_CommonEvent e) => Timestamp = e.timestamp;
         internal abstract SDL_Event AsEvent();

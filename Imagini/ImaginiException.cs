@@ -5,20 +5,20 @@ namespace Imagini
     /// <summary>
     /// Internal library exception used by Imagini.
     /// </summary>
-    public class InternalException : Exception
+    public class ImaginiException : Exception
     {
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public InternalException() : base() { }
+        public ImaginiException() : base() { }
         /// <summary>
         /// Constructor which accepts a message.
         /// </summary>
-        public InternalException(string message) : base(message) { }
+        public ImaginiException(string message) : base(message) { }
         /// <summary>
         /// Constructor which accepts a message and wraps an existing exception.
         /// </summary>
-        public InternalException(string message, Exception innerException)
+        public ImaginiException(string message, Exception innerException)
             : base(message, innerException) { }
     }
 }

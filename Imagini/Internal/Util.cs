@@ -16,5 +16,12 @@ namespace Imagini.Internal
            }
            return Encoding.UTF8.GetString(data, length);
        }
+
+       public static string FromNullTerminated(IntPtr data)
+       {
+           unsafe {
+               return FromNullTerminated((byte*)data);
+           }
+       }
     }
 }

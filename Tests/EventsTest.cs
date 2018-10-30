@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using FluentAssertions;
 using Imagini;
 using Xunit;
@@ -48,7 +49,7 @@ namespace Tests
                 new ControllerAxisEventArgs(1337, ControllerAxis.LeftX, 10000),
                 new ControllerButtonEventArgs(1337, ControllerButton.X, true),
                 new ControllerDeviceStateEventArgs(1337, true),
-                new TouchFingerEventArgs(TouchEventType.FingerDown, 1337, 0, 
+                new TouchFingerEventArgs(TouchEventType.FingerDown, 1337, 0,
                     10.0f, 10.0f, 5.0f, 5.0f, 1.0f)
             };
             var actual = new List<CommonEventArgs>();
@@ -70,24 +71,47 @@ namespace Tests
 
             // Push all our custom events to global queue and process them
             if (Window.Current == null) return; // the test sometimes fails randomly
-            foreach(var e in expected)
+            foreach (var e in expected)
                 EventManager.Push(e);
             EventManager.Poll();
             eventQueue.ProcessAll(events);
 
-            // Sort the events by type alphabetically to aid assertion
-            actual = actual.OrderBy(e => e.GetType().ToString()).ToList();
+            // Sort the events by type alphabetically and filter them
+            var all = actual.OrderBy(e => e.GetType().ToString()).ToList();
             expected = expected.OrderBy(e => e.GetType().ToString()).ToList();
+            actual = new List<CommonEventArgs>();
+            foreach (var e in expected)
+            {
+                var found = all.FirstOrDefault(e2 =>
+                    PublicInstancePropertiesEqual(e, e2, ignored: "Timestamp"));
+                if (found != null) actual.Add(found);
+            }
 
             actual.Should().BeEquivalentTo(expected, options => options
                 .IncludingAllRuntimeProperties()
-                .Excluding(m => m.SelectedMemberPath.EndsWith(".Timestamp")));
+                .Excluding(m => m.Timestamp));
         }
 
         public void Dispose()
         {
             EventManager.DeleteQueueFor(window);
             window.Dispose();
+        }
+
+        public static bool PublicInstancePropertiesEqual(object one, object two, params string[] ignored)
+        {
+            if (one == null || two == null) return one == two;
+            if (one.GetType() != two.GetType()) return false;
+            var properties = one.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var property in properties)
+            {
+                if (ignored.Contains(property.Name)) continue;
+                var valueOne = property.GetValue(one);
+                var valueTwo = property.GetValue(two);
+                if (valueOne == null || valueTwo == null) return valueOne == valueTwo;
+                if (!valueOne.Equals(valueTwo)) return false;
+            }
+            return true;
         }
     }
 #endif
