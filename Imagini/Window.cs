@@ -18,7 +18,7 @@ namespace Imagini
     /// <summary>
     /// An app window.
     /// </summary>
-    public sealed class Window 
+    public sealed class Window : Resource
     {
         public IntPtr Handle { get; private set; }
         internal uint ID;
@@ -34,7 +34,7 @@ namespace Imagini
                 if (_windows.Count == 0) return null;
                 if (_windows.Count == 1) return _windows.Values.First();
                 return _windows.Values
-                    .Where(window => window.IsVisible && window.IsFocused)
+                    .Where(window => !window.IsDisposed && window.IsVisible && window.IsFocused)
                     .FirstOrDefault();
             }
         }
@@ -130,7 +130,7 @@ namespace Imagini
         /// </summary>
         public WindowMode Mode => Settings.WindowMode;
 
-        internal Window(WindowSettings settings)
+        internal Window(WindowSettings settings) : base(nameof(Window))
         {
             Handle = SDL_CreateWindow(settings.Title,
                 SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
@@ -248,12 +248,12 @@ namespace Imagini
         /// <summary>
         /// Returns the display index of this window.
         /// </summary>
-        public int DisplayIndex => NotDisposed(() => 
+        public int DisplayIndex => NotDisposed(() =>
             Display.GetCurrentDisplayIndexForWindow(Handle));
         /// <summary>
         /// Returns the display of this window.
         /// </summary>
-        public Display Display => NotDisposed(() => 
+        public Display Display => NotDisposed(() =>
             Display.GetCurrentDisplayForWindow(Handle));
 
         private bool HasFlag(SDL_WindowFlags flag) =>
@@ -261,40 +261,12 @@ namespace Imagini
 
         static Window() => Lifecycle.TryInitialize();
 
-
-        /// <summary>
-        /// Returns true if this window is disposed (destroyed).
-        /// </summary>
-        public bool IsDisposed { get; private set; }
-
-        internal void Dispose()
+        internal override void Destroy()
         {
             if (IsDisposed) return;
             SDL_DestroyWindow(Handle);
             _windows.Remove(ID);
             Handle = IntPtr.Zero;
-            IsDisposed = true;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private T NotDisposed<T>(Func<T> val)
-        {
-            CheckIfNotDisposed();
-            return val();
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void NotDisposed(Action action)
-        {
-            CheckIfNotDisposed();
-            action();
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void CheckIfNotDisposed()
-        {
-            if (IsDisposed)
-                throw new ObjectDisposedException("This app is disposed");
         }
     }
 }

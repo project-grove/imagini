@@ -45,7 +45,7 @@ namespace Imagini
 
         protected override void OnDispose()
         {
-            Graphics.Dispose();
+            Graphics.Destroy();
         }
     }
 
@@ -416,7 +416,7 @@ namespace Imagini
             OnDispose();
             Events.Window.StateChanged -= OnWindowStateChange;
             EventManager.DeleteQueueFor(Window);
-            Window.Dispose();
+            Window.Destroy();
 
             Events = null;
             _eventQueue = null;

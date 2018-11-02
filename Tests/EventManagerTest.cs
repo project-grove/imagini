@@ -63,7 +63,7 @@ namespace Tests
         public void Dispose()
         {
             EventManager.DeleteQueueFor(window);
-            window.Dispose();
+            window.Destroy();
         }
     }
 #endif

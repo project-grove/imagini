@@ -22,7 +22,7 @@ namespace Tests
             Assert.Equal(expectedSize, window.SizeInPixels);
             Assert.Equal(settings.Title, window.Title);
             Assert.False(window.IsVisible);
-            window.Dispose();
+            window.Destroy();
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace Tests
             window.MaximumSize = maxSize;
             Assert.Equal(minSize, window.MinimumSize);
             Assert.Equal(maxSize, window.MaximumSize);
-            window.Dispose();
+            window.Destroy();
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace Tests
             window.Apply(settings);
             Assert.True(window.Settings.IsFullscreen);
             Assert.True(window.Settings.VSync);
-            window.Dispose();
+            window.Destroy();
         }
     }
 #endif

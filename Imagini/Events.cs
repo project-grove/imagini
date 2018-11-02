@@ -53,7 +53,6 @@ namespace Imagini
 
         internal unsafe void Process(SDL_Event e)
         {
-            // TODO
             switch ((SDL_EventType)e.type)
             {
                 // Window

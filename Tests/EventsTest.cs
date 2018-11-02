@@ -95,7 +95,7 @@ namespace Tests
         public void Dispose()
         {
             EventManager.DeleteQueueFor(window);
-            window.Dispose();
+            window.Destroy();
         }
 
         public static bool PublicInstancePropertiesEqual(object one, object two, params string[] ignored)
