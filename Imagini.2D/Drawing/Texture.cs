@@ -23,5 +23,7 @@ namespace Imagini.Drawing
             if (IsDisposed) return;
             SDL_DestroyTexture(Handle);
         }
+
+        static Texture() => Lifecycle.TryInitialize();
     }
 }

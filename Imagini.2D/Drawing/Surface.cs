@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
-using Imagini.Internal;
+
 using static SDL2.SDL_error;
 using static SDL2.SDL_surface;
 
@@ -46,11 +46,14 @@ namespace Imagini.Drawing
         public static Surface Create(int width, int height, int depth = 32,
             int Rmask = 0, int Gmask = 0, int Bmask = 0, int Amask = 0x000000FF)
         {
-            var handle = SDL_CreateRGBSurface(0, width, height, depth,
-                (uint)Rmask, (uint)Gmask, (uint)Bmask, (uint)Amask);
-            if (handle == IntPtr.Zero)
-                throw new ImaginiException($"Could not create surface: {SDL_GetError()}");
-            return new Surface(handle);
+            unchecked
+            {
+                var handle = SDL_CreateRGBSurface(0, width, height, depth,
+                    (uint)Rmask, (uint)Gmask, (uint)Bmask, (uint)Amask);
+                if (handle == IntPtr.Zero)
+                    throw new ImaginiException($"Could not create surface: {SDL_GetError()}");
+                return new Surface(handle);
+            }
         }
 
         /// <summary>
@@ -98,7 +101,6 @@ namespace Imagini.Drawing
             return new Surface(handle, allocated);
         }
 
-        // TODO
         internal override void Destroy()
         {
             if (IsDisposed) return;

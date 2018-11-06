@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using Imagini.Internal;
+
 using SDL2;
 using static SDL2.SDL_events;
 using static SDL2.SDL_joystick;
@@ -19,7 +19,7 @@ namespace Imagini
     public abstract class CommonEventArgs : EventArgs
     {
         public long Timestamp { get; internal set; }
-        internal CommonEventArgs() => Timestamp = App.TotalTime;
+        internal CommonEventArgs() => Timestamp = AppBase.TotalTime;
         internal unsafe CommonEventArgs(SDL_CommonEvent e) => Timestamp = e.timestamp;
         internal abstract SDL_Event AsEvent();
     }

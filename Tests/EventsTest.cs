@@ -35,7 +35,6 @@ namespace Tests
 
             var expected = new List<CommonEventArgs>()
             {
-                new WindowStateChangeEventArgs(WindowStateChange.None),
                 new KeyboardEventArgs(new KeyboardKey() { Keycode = Keycode.AC_HOME }, true),
                 new TextEditingEventArgs("平", 0, 1),
                 new TextInputEventArgs("Never gonna give you up"),
@@ -52,8 +51,9 @@ namespace Tests
                 new TouchFingerEventArgs(TouchEventType.FingerDown, 1337, 0,
                     10.0f, 10.0f, 5.0f, 5.0f, 1.0f)
             };
+            var expectedTypes = expected.Select(e => e.GetType()).Distinct();
+
             var actual = new List<CommonEventArgs>();
-            events.Window.StateChanged += (s, args) => actual.Add(args);
             events.Input.OnTextEdit += (s, args) => actual.Add(args);
             events.Input.OnTextInput += (s, args) => actual.Add(args);
             events.Keyboard.KeyPressed += (s, args) => actual.Add(args);
@@ -77,15 +77,11 @@ namespace Tests
             eventQueue.ProcessAll(events);
 
             // Sort the events by type alphabetically and filter them
-            var all = actual.OrderBy(e => e.GetType().ToString()).ToList();
-            expected = expected.OrderBy(e => e.GetType().ToString()).ToList();
-            actual = new List<CommonEventArgs>();
-            foreach (var e in expected)
-            {
-                var found = all.FirstOrDefault(e2 =>
-                    PublicInstancePropertiesEqual(e, e2, ignored: "Timestamp"));
-                if (found != null) actual.Add(found);
-            }
+            var all = actual
+                .Where(e => expectedTypes.Contains(e.GetType()))
+                .OrderBy(e => e.GetType().ToString()).ToList();
+            expected = expected
+                .OrderBy(e => e.GetType().ToString()).ToList();
 
             actual.Should().BeEquivalentTo(expected, options => options
                 .IncludingAllRuntimeProperties()

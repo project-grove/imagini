@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using static SDL2.SDL_pixels;
-using static Imagini.Internal.ErrorHandler;
+using static Imagini.ErrorHandler;
 
 namespace Imagini.Drawing
 {
@@ -25,7 +25,7 @@ namespace Imagini.Drawing
             set
             {
                 var count = value.Length;
-                if (count != _colors.Length)
+                if (_colors != null && count != _colors.Length)
                     throw new ArgumentOutOfRangeException("The number of colors should be the same");
                 var sdlColors = new SDL_Color[count];
                 for (int i = 0; i < count; i++)
@@ -84,6 +84,8 @@ namespace Imagini.Drawing
             if (IsDisposed) return;
             SDL_FreePalette(Handle);
         }
+
+        static Palette() => Lifecycle.TryInitialize();
     }
 
     internal static class ColorExtensions

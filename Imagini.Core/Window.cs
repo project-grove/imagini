@@ -5,9 +5,8 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Imagini.Drawing;
-using Imagini.Internal;
-using static Imagini.Internal.ErrorHandler;
+
+using static Imagini.ErrorHandler;
 using static SDL2.SDL_error;
 using static SDL2.SDL_hints;
 using static SDL2.SDL_render;

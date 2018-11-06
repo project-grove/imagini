@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Imagini.Internal;
-using static Imagini.Internal.ErrorHandler;
+
+using static Imagini.ErrorHandler;
 using static SDL2.SDL_hints;
 using static SDL2.SDL_video;
 

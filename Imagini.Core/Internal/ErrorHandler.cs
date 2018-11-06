@@ -1,7 +1,7 @@
 using System;
 using static SDL2.SDL_error;
 
-namespace Imagini.Internal
+namespace Imagini
 {
     internal static class ErrorHandler
     {

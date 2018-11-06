@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Imagini.Internal;
+
 using static SDL2.SDL_error;
 using static SDL2.SDL_render;
 
@@ -32,5 +32,7 @@ namespace Imagini.Drawing
             base.Destroy();
             SDL_DestroyRenderer(Handle);
         }
+
+        static Graphics() => Lifecycle.TryInitialize();
     }
 }

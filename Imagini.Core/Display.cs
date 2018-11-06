@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Imagini.Internal;
-using static Imagini.Internal.ErrorHandler;
+
+using static Imagini.ErrorHandler;
 using static SDL2.SDL_rect;
 using static SDL2.SDL_video;
 

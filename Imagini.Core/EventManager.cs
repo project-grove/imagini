@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Imagini.Internal;
+
 using static SDL2.SDL_error;
 using static SDL2.SDL_events;
 using static SDL2.SDL_video;

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Imagini.Internal;
+
 using static SDL2.SDL_error;
 using static SDL2.SDL_pixels;
 using static SDL2.SDL_render;

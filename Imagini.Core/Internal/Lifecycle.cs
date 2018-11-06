@@ -1,6 +1,6 @@
 using static SDL2.SDL;
 
-namespace Imagini.Internal
+namespace Imagini
 {
     internal static class Lifecycle 
     {

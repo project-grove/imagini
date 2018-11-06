@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Tests
 {
-    public class SampleApp : App
+    public class SampleApp : App2D
     {
         public int UpdateCalls { get; private set; }
         public int DrawCalls { get; private set; }

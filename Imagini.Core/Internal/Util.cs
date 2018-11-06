@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Imagini.Internal
+namespace Imagini
 {
     internal static class Util
     {
