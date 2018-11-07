@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imagini.2D", "Imagini.2D\Im
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imagini.Core", "Imagini.Core\Imagini.Core.csproj", "{7AA7E7B0-BCEE-4C96-98BE-8528B1954DF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTools", "BuildTools.csproj", "{5C99518B-9AA8-4746-8FBC-8B12F256B508}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,18 @@ Global
 		{7AA7E7B0-BCEE-4C96-98BE-8528B1954DF8}.Release|x64.Build.0 = Release|Any CPU
 		{7AA7E7B0-BCEE-4C96-98BE-8528B1954DF8}.Release|x86.ActiveCfg = Release|Any CPU
 		{7AA7E7B0-BCEE-4C96-98BE-8528B1954DF8}.Release|x86.Build.0 = Release|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Debug|x64.Build.0 = Debug|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Debug|x86.Build.0 = Debug|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Release|x64.ActiveCfg = Release|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Release|x64.Build.0 = Release|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Release|x86.ActiveCfg = Release|Any CPU
+		{5C99518B-9AA8-4746-8FBC-8B12F256B508}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BC52E311-F3DB-4ED5-8A79-054784E585F5} = {8381B597-183F-449E-9ABD-9D260677511E}

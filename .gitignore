@@ -291,3 +291,12 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# Coverage file
+coverage.json
+coverage.xml
+*.coverage.json
+*.coverage.xml
+
+# Cake tools
+tools/**

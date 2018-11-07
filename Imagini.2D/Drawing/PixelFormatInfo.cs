@@ -57,24 +57,31 @@ namespace Imagini.Drawing
             }
             set
             {
-                if (_palette == null)
-                    throw new ImaginiException("No palette is present");
+                if (!Format.IsIndexed())
+                    throw new ImaginiException("Only indexed formats can have palettes");
                 Try(() =>
                     SDL_SetPixelFormatPalette(Handle, value.Handle),
                     "SDL_SetPixelFormatPalette");
+                _palette = value;
             }
         }
 
+        /// <summary>
+        /// Creates a new PixelFormatInfo with the specified pixel format.
+        /// </summary>
         public PixelFormatInfo(PixelFormat format) : base(nameof(PixelFormatInfo))
         {
             Handle = SDL_AllocFormat((uint)format);
             if (Handle == IntPtr.Zero)
                 throw new ImaginiException($"Could not create a pixel format: {SDL_GetError()}");
-            FromSDL(Marshal.PtrToStructure<SDL_PixelFormat>(Handle)); 
+            FromSDL(Marshal.PtrToStructure<SDL_PixelFormat>(Handle));
         }
 
-        internal PixelFormatInfo(SDL_PixelFormat fmt) : base(nameof(PixelFormatInfo))
-            => FromSDL(fmt);
+        internal PixelFormatInfo(IntPtr handle) : base(nameof(PixelFormatInfo))
+        {
+            Handle = handle;
+            FromSDL(Marshal.PtrToStructure<SDL_PixelFormat>(Handle));
+        }
 
         private void FromSDL(SDL_PixelFormat fmt)
         {
@@ -92,6 +99,16 @@ namespace Imagini.Drawing
             }
         }
 
+        internal override void Destroy()
+        {
+            if (IsDisposed) return;
+            base.Destroy();
+            SDL_FreeFormat(Handle);
+        }
+
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
         public void Dispose() => Destroy();
 
         static PixelFormatInfo() => Lifecycle.TryInitialize();

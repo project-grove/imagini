@@ -13,6 +13,10 @@ namespace Imagini.Drawing
     /// </summary>
     public sealed class Palette : Resource, IDisposable
     {
+        /// <summary>
+        /// Defines maximum color count in a palette.
+        /// </summary>
+        public const int MaximumColors = 256;
         internal IntPtr Handle;
         private Color[] _colors;
         public Color[] Colors
@@ -25,8 +29,8 @@ namespace Imagini.Drawing
             set
             {
                 var count = value.Length;
-                if (_colors != null && count != _colors.Length)
-                    throw new ArgumentOutOfRangeException("The number of colors should be the same");
+                if (count < 1 || count > MaximumColors)
+                    throw new ArgumentOutOfRangeException("Invalid color count - maximum of 256 is supported");
                 var sdlColors = new SDL_Color[count];
                 for (int i = 0; i < count; i++)
                     sdlColors[i] = value[i].ToSDLColor();
@@ -53,7 +57,7 @@ namespace Imagini.Drawing
             {
                 unsafe
                 {
-                    var ptr = (IntPtr)(p + i);
+                    var ptr = (IntPtr)(p + i * 4);
                     var color = Marshal.PtrToStructure<SDL_Color>(ptr);
                     colors[i] = color.FromSDLColor();
                 }

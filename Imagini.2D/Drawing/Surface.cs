@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 using static SDL2.SDL_error;
 using static SDL2.SDL_surface;
+using static Imagini.ErrorHandler;
 
 namespace Imagini.Drawing
 {
@@ -16,19 +17,83 @@ namespace Imagini.Drawing
         private readonly IntPtr _pixels;
         private readonly bool _shouldFreePixels;
 
+        /// <summary>
+        /// Returns the surface's pixel format.
+        /// </summary>
+        /// <returns></returns>
+        public PixelFormatInfo PixelFormat { get; private set; }
+        /// <summary>
+        /// Returns the surface width in pixels.
+        /// </summary>
+        public int Width { get; private set; }
+        /// <summary>
+        /// Returns the surface height in pixels.
+        /// </summary>
+        public int Height { get; private set; }
+        /// <summary>
+        /// Returns the surface stride in bytes.
+        /// </summary>
+        /// <returns></returns>
+        public int Stride { get; private set; }
+
+        /// <summary>
+        /// Indicates if this surface should be locked in order to access
+        /// the pixel data.
+        /// </summary>
+        /// <returns></returns>    
+        public bool MustBeLocked { get; private set; }
+        private bool _locked = false;
+        /// <summary>
+        /// Indicates if this surface is currently locked or not.
+        /// </summary>
+        public bool Locked
+        {
+            get => _locked;
+            set
+            {
+                if (value) Lock(); else Unlock();
+            }
+        }
+
         internal Surface(IntPtr handle)
             : base(nameof(Surface))
         {
             Handle = handle;
             var data = Marshal.PtrToStructure<SDL_Surface>(handle);
-            // TODO Read data
+            PixelFormat = new PixelFormatInfo(data.format);
+            Width = data.w;
+            Height = data.h;
+            Stride = data.pitch;
+            MustBeLocked = SDL_MUSTLOCK(data);
             _pixels = data.pixels;
             _shouldFreePixels = false;
+            _locked = data.locked > 0;
         }
 
         internal Surface(IntPtr handle, IntPtr pixels)
             : this(handle) =>
             (this._pixels, this._shouldFreePixels) = (pixels, true);
+
+        /// <summary>
+        /// Locks the surface 
+        /// </summary>
+        public void Lock()
+        {
+            if (_locked) return;
+            Try(() => SDL_LockSurface(Handle),
+                "SDL_LockSurface");
+            _locked = true;
+        }
+
+        /// <summary>
+        /// Unlocks the surface.
+        /// </summary>
+        public void Unlock()
+        {
+            if (!_locked) return;
+            SDL_UnlockSurface(Handle);
+            _locked = false;
+        }
 
         /// <summary>
         /// Creates a new surface.
@@ -99,6 +164,29 @@ namespace Imagini.Drawing
             if (handle == IntPtr.Zero)
                 throw new ImaginiException($"Could not create surface: {SDL_GetError()}");
             return new Surface(handle, allocated);
+        }
+
+        /// <summary>
+        /// Copies the surface into a new one that is optimized for blitting to
+        /// a surface of the specified pixel format.
+        /// </summary>
+        public Surface OptimizeFor(PixelFormatInfo format)
+        {
+            var handle = SDL_ConvertSurface(Handle, format.Handle, 0);
+            if (handle == IntPtr.Zero)
+                throw new ImaginiException($"Could not create surface: {SDL_GetError()}");
+            return new Surface(handle);
+        }
+
+        /// <summary>
+        /// Copies the surface into a new one that has the specified pixel format.
+        /// </summary>
+        public Surface ConvertTo(PixelFormat format)
+        {
+            var handle = SDL_ConvertSurfaceFormat(Handle, (uint)format, 0);
+            if (handle == IntPtr.Zero)
+                throw new ImaginiException($"Could not create surface: {SDL_GetError()}");
+            return new Surface(handle);
         }
 
         internal override void Destroy()

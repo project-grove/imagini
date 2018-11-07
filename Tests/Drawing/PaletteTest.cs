@@ -1,5 +1,8 @@
+using System;
 using System.Drawing;
+using System.Linq;
 using FluentAssertions;
+using Imagini;
 using Imagini.Drawing;
 using Xunit;
 
@@ -12,7 +15,7 @@ namespace Tests.Drawing
         {
             var expected = new [] {
                 Color.Red,
-                Color.Green,
+                Color.Lime,
                 Color.Blue,
                 Color.Black
             };
@@ -22,5 +25,14 @@ namespace Tests.Drawing
 
             palette.Dispose();
         }        
+
+        [Fact]
+        public void ShouldThrowIfInvalidColorCount()
+        {
+            var zeroColors = new Color[] {};
+            var tooManyColors = Enumerable.Repeat(Color.Black, Palette.MaximumColors + 1);
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => new Palette(zeroColors));
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => new Palette(tooManyColors));
+        }
     }
 }
