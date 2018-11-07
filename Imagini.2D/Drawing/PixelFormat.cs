@@ -97,8 +97,8 @@ namespace Imagini.Drawing
     /// </summary>
     public enum PixelType
     {
-        Unknown = 0,
-        Index1 = (1 << 24),
+        Unknown,
+        Index1,
         Index4,
         Index8,
         Packed8,
@@ -164,7 +164,7 @@ namespace Imagini.Drawing
     public enum PixelLayout
     {
         Default = 0,
-        Packed332 = (1 << 16),
+        Packed332,
         Packed4444,
         Packed1555,
         Packed5551,
@@ -174,16 +174,16 @@ namespace Imagini.Drawing
         Packed1010102
     }
 
+    /// <summary>
+    /// Contains various extensions related to <see cref="PixelFormat" />.
+    /// </summary>
     public static class PixelFormatExtensions
     {
-        private static int GetByte(this PixelFormat format, int offset) =>
-            (int)((((uint)format) >> offset) & 0x0F);
-        
         /// <summary>
         /// Returns the pixel type of the specified format.
         /// </summary>
         public static PixelType GetPixelType(this PixelFormat format) =>
-            (PixelType)format.GetByte(24);
+           (PixelType)SDL_PIXELTYPE((uint)format); 
         
         /// <summary>
         /// Returns the component type.
@@ -211,7 +211,7 @@ namespace Imagini.Drawing
         /// Returns the pixel layout of the specified format.
         /// </summary>
         public static PixelLayout GetLayout(this PixelFormat format) =>
-            (PixelLayout)format.GetByte(16);
+            (PixelLayout)SDL_PIXELLAYOUT((uint)format);
 
         /// <summary>
         /// Returns true if the specified format is an 4CC format.
@@ -224,6 +224,18 @@ namespace Imagini.Drawing
         /// </summary>
         public static bool IsIndexed(this PixelFormat format) =>
             SDL_ISPIXELFORMAT_INDEXED((uint)format);
+        
+        /// <summary>
+        /// Returns true if the specified format is a packed format.
+        /// </summary>
+        public static bool IsPacked(this PixelFormat format) =>
+            SDL_ISPIXELFORMAT_PACKED((uint)format);
+
+        /// <summary>
+        /// Returns true if the specified format is an array format.
+        /// </summary>
+        public static bool IsArray(this PixelFormat format) =>
+            SDL_ISPIXELFORMAT_ARRAY((uint)format);
         
         /// <summary>
         /// Returns true if the specified format has alpha channel.
@@ -240,8 +252,6 @@ namespace Imagini.Drawing
         /// <summary>
         /// Returns the number of bits per pixel for the specified format.
         /// </summary>
-        /// <param name="format"></param>
-        /// <returns></returns>
         public static int GetBitsPerPixel(this PixelFormat format) =>
             SDL_BITSPERPIXEL((uint)format);
     }

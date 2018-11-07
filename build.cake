@@ -3,11 +3,6 @@ var configuration = Argument("Configuration", "Release");
 var solution = "./imagini.sln";
 var testProject = "./Tests/Tests.csproj";
 
-System.Globalization.CultureInfo ci = 
-    new System.Globalization.CultureInfo("en-US");
-System.Threading.Thread.CurrentThread.CurrentCulture = ci;
-System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
-
 Task("Restore").Does(() => {
     DotNetCoreRestore();
 });
@@ -18,7 +13,6 @@ Task("Clean").Does(() => {
 });
 
 Task("Build").Does(() => {
-    Information("Building project...");
     DotNetCoreBuild(solution, new DotNetCoreBuildSettings {
         Configuration = configuration
     });
@@ -28,7 +22,6 @@ Task("Build").Does(() => {
 });
 
 Task("Test").Does(() => {
-    Information("Testing project...");
     DotNetCoreTest(testProject, new DotNetCoreTestSettings {
         NoBuild = true,
         Configuration = configuration,
@@ -43,7 +36,8 @@ Task("ReportCoverage").Does(() => {
     var param = "\"-reports:./Tests/coverage.xml\" " +
         "\"-targetdir:./docs/coverage/\" " +
         "\"-assemblyfilters:+Imagini.*;-SDL*\" " +
-        "\"-sourcedirs:./Imagini.Core/;./Imagini.2D/\"";
+        "\"-sourcedirs:./Imagini.Core/;./Imagini.2D/\" " +
+        "\"-reporttypes:HTML;Badges\"";
     Information("Running 'reportgenerator " + param + "'");
     StartProcess("reportgenerator", new ProcessSettings {
         Arguments = param
@@ -58,7 +52,10 @@ Task("InstallTools").Does(() => {
 });
 
 Task("Default")
-    .IsDependentOn("Build");
+    .IsDependentOn("Build")
+    .IsDependentOn("Test")
+    .IsDependentOn("ReportCoverage");
+
 
 Task("Full")
     .IsDependentOn("Clean")

@@ -25,6 +25,8 @@ namespace Tests
             eventQueue = EventManager.CreateQueueFor(window);
         }
 
+
+        // TODO FIXME Random fail (duh, again...)
         [Fact]
         public void ShouldNotChangeEventData()
         {
