@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Imagini;
 using Xunit;
@@ -69,5 +70,55 @@ namespace Tests
             app.ElapsedAppTime.Should().BeCloseTo(TimeSpan.Zero, 1,
                 "the app runs as fast as it can");
         }
+
+        [Fact]
+        public void ShouldNotExitIfCancelled()
+        {
+            app.IsExited.Should().BeFalse();
+            app.IsExiting.Should().BeFalse();
+            // let's cancel our first exit request
+            EventHandler<AppExitEventArgs> cancel = (sender, e) => e.Cancel = true;
+            app.Exiting += cancel;
+            app.RequestExit();
+            app.IsExiting.Should().BeTrue();
+            app.Tick();
+            app.IsExited.Should().BeFalse();
+            app.IsExiting.Should().BeTrue();
+            app.CancelExitRequest();
+            app.IsExiting.Should().BeFalse();
+
+            // unwire the cancellation handler and try to exit again
+            app.Exiting -= cancel;
+            app.RequestExit();
+            app.Tick();
+            app.IsExited.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ShouldToggleMouseVisibility()
+        {
+            app.IsMouseVisible = false;
+            app.IsMouseVisible.Should().BeFalse();
+            app.IsMouseVisible = true;
+            app.IsMouseVisible.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ShouldReportEventsWhenStateIsModified()
+        {
+            var app = new SampleApp();
+            var expected = new List<string>() {
+                "activated",
+                "deactivated",
+                "closed",
+                "disposed"
+            };
+
+            // TODO Wire events and check if they are fired
+
+            app.Dispose();
+        }
+
+        // TODO Write more tests to ensure high coverage
     }
 }

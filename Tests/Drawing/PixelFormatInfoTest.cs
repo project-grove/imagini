@@ -1,7 +1,9 @@
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using FluentAssertions;
+using FluentAssertions.Equivalency;
 using Imagini.Drawing;
 using Xunit;
 
@@ -9,6 +11,11 @@ namespace Tests.Drawing
 {
     public class PixelFormatInfoTest
     {
+        Func<EquivalencyAssertionOptions<PixelFormatInfo>, EquivalencyAssertionOptions<PixelFormatInfo>> options =
+            o => o
+                .IncludingAllRuntimeProperties()
+                .Excluding(m => m.SelectedMemberPath.EndsWith("Identifier"));
+
         [Fact]
         public void ShouldCreateFormatsWithoutPalette()
         {
@@ -26,19 +33,14 @@ namespace Tests.Drawing
             }
 
             var sameFormat = new PixelFormatInfo(format.Handle);
-            format.Should().BeEquivalentTo(sameFormat);
-            format.Dispose(); // free it once because both point to the same ptr
+            format.Should().BeEquivalentTo(sameFormat, options);
+            format.Dispose();
         }
 
         [Fact]
         public void ShouldCreateFormatsWithPalette()
         {
-            var colors = new [] {
-                Color.Red,
-                Color.Blue,
-                Color.Lime,
-                Color.Black
-            }.Select(color => color.WithoutName());
+            var colors = Enumerable.Repeat(Color.Red.WithoutName(), 256);
             var format = new PixelFormatInfo(PixelFormat.Format_INDEX8);
             var palette = new Palette(colors);
             format.Palette = palette;
@@ -47,8 +49,9 @@ namespace Tests.Drawing
             format.Palette.Should().Be(palette);
 
             var sameFormat = new PixelFormatInfo(format.Handle);
-            format.Should().BeEquivalentTo(sameFormat);
-            format.Dispose(); // free it once because both point to the same ptr
+            format.Should().BeEquivalentTo(sameFormat, options);
+            format.Dispose();
+            // sameFormat.Palette.Dispose();
         }
     }
 

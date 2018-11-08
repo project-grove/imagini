@@ -29,13 +29,13 @@ Task("Test").Does(() => {
             .Append("/p:CollectCoverage=true")
             .Append("/p:CoverletOutputFormat=opencover")
             .Append("/p:CoverletOutput=./coverage.xml")
+            .Append("/p:Exclude=\"[SDL*]*\"")
     });
 });
 
 Task("ReportCoverage").Does(() => {
     var param = "\"-reports:./Tests/coverage.xml\" " +
         "\"-targetdir:./docs/coverage/\" " +
-        "\"-assemblyfilters:+Imagini.*;-SDL*\" " +
         "\"-sourcedirs:./Imagini.Core/;./Imagini.2D/\" " +
         "\"-reporttypes:HTML;Badges\"";
     Information("Running 'reportgenerator " + param + "'");

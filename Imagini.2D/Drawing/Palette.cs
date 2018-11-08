@@ -83,9 +83,12 @@ namespace Imagini.Drawing
         /// <summary>
         /// Disposes the object.
         /// </summary>
-        public void Dispose()
+        public void Dispose() => Destroy();
+
+        internal override void Destroy()
         {
             if (IsDisposed) return;
+            base.Destroy();
             SDL_FreePalette(Handle);
         }
 

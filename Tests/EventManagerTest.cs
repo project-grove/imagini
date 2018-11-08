@@ -47,6 +47,9 @@ namespace Tests
             EventManager.Poll();
             Assert.DoesNotContain(queue.Events, e => e.type == eventType);
             Assert.Contains(queue2.Events, e => e.type == eventType);
+
+            EventManager.DeleteQueueFor(window2);
+            window2.Destroy();
         }
 
 

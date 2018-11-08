@@ -163,7 +163,9 @@ namespace Imagini
         /* --------------------------- App events --------------------------- */
         private bool _suppressDraw = false;
         private bool _isExiting = false;
+        internal bool IsExiting => _isExiting;
         private bool _isExited = false;
+        internal bool IsExited => _isExited;
         private bool _isInitialized = false;
 
         /// <summary>
@@ -247,7 +249,6 @@ namespace Imagini
             _previousTicks = 0;
             _accumulatedTicks = 0;
             _appStopwatch.Reset();
-            _appStopwatch.Start();
         }
         /// <summary>
         /// Runs the app loop.
@@ -271,6 +272,7 @@ namespace Imagini
         RetryTick:
             // Advance the current app time
             var currentTicks = _appStopwatch.Elapsed.Ticks;
+            _appStopwatch.Start();
             _accumulatedTicks += (currentTicks - _previousTicks);
             _previousTicks = currentTicks;
             // If the frame took less time than specified, sleep for the
@@ -340,6 +342,7 @@ namespace Imagini
             }
             if (_isExited && !IsDisposed)
                 Dispose();
+            _appStopwatch.Stop();
         }
 
         private void DoUpdate(TimeSpan frameTime)

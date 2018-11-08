@@ -62,7 +62,10 @@ namespace Imagini.Drawing
                 Try(() =>
                     SDL_SetPixelFormatPalette(Handle, value.Handle),
                     "SDL_SetPixelFormatPalette");
+                if (_palette != null)
+                    Unregister(_palette);
                 _palette = value;
+                Register(_palette);
             }
         }
 

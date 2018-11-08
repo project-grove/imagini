@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Imagini
 {
     /// <summary>
     /// Internal library exception used by Imagini.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ImaginiException : Exception
     {
         /// <summary>

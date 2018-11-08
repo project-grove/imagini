@@ -25,7 +25,11 @@ namespace Imagini
 
         private static Dictionary<uint, Window> _windows =
             new Dictionary<uint, Window>();
-        internal IReadOnlyDictionary<uint, Window> Windows => _windows;
+        /// <summary>
+        /// Returns all existing app windows.
+        /// </summary>
+        public static IReadOnlyDictionary<uint, Window> Windows => _windows;
+
         internal static Window Current
         {
             get
@@ -263,6 +267,7 @@ namespace Imagini
         internal override void Destroy()
         {
             if (IsDisposed) return;
+            base.Destroy();
             SDL_DestroyWindow(Handle);
             _windows.Remove(ID);
             Handle = IntPtr.Zero;

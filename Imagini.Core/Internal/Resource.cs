@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using static Imagini.Logger;
 
 namespace Imagini
 {
@@ -12,8 +13,14 @@ namespace Imagini
         private List<Resource> _children = new List<Resource>();
         private readonly string _resourceName;
 
-        internal Resource(string resourceName) =>
+        public Guid Identifier { get; private set; }
+
+        internal Resource(string resourceName)
+        {
             _resourceName = resourceName;
+            Identifier = Guid.NewGuid();
+            Log.Debug("Created {name} with GUID {guid}", _resourceName, Identifier);
+        }
 
 
         /// <summary>
@@ -26,6 +33,7 @@ namespace Imagini
             _children.ForEach(c => c.Destroy());
             _children = null;
             IsDisposed = true;
+            Log.Debug("Destroyed {name} with GUID {guid}", _resourceName, Identifier);
         }
 
         protected void CheckIfNotDisposed()
@@ -49,5 +57,7 @@ namespace Imagini
         }
 
         internal void Register(Resource child) => _children.Add(child);
+
+        internal void Unregister(Resource child) => _children.Remove(child);
     }
 }

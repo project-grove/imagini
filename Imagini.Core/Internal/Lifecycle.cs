@@ -19,14 +19,5 @@ namespace Imagini
         {
             Display.UpdateDisplayInfo();
         }
-
-        internal static void Quit()
-        {
-            if (s_initialized)
-            {
-                SDL_Quit();
-                s_initialized = false;
-            }
-        }
     }
 }
