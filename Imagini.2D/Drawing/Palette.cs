@@ -47,7 +47,7 @@ namespace Imagini.Drawing
             }
         }
 
-        internal Palette(IntPtr handle) : base(nameof(Palette))
+        internal Palette(IntPtr handle)
         {
             Handle = handle;
             var palette = Marshal.PtrToStructure<SDL_Palette>(Handle);
@@ -69,7 +69,6 @@ namespace Imagini.Drawing
         /// Creates a new palette from the specified colors.
         /// </summary>
         public Palette(params Color[] colors)
-            : base(nameof(Palette))
         {
             Handle = SDL_AllocPalette(colors.Length);
             Colors = colors;

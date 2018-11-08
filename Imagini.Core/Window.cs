@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
+using Imagini.Core.Native;
 using static Imagini.ErrorHandler;
 using static SDL2.SDL_error;
 using static SDL2.SDL_hints;
 using static SDL2.SDL_render;
+using static SDL2.SDL_syswm;
+using static SDL2.SDL_version;
 using static SDL2.SDL_video;
 
 namespace Imagini
@@ -28,19 +31,29 @@ namespace Imagini
         /// <summary>
         /// Returns all existing app windows.
         /// </summary>
-        public static IReadOnlyDictionary<uint, Window> Windows => _windows;
+        public static IReadOnlyCollection<Window> Windows => _windows.Values;
 
         internal static Window Current
         {
             get
             {
+                if (_overridedCurrent != null && !_overridedCurrent.IsDisposed) 
+                    return _overridedCurrent;
                 if (_windows.Count == 0) return null;
-                if (_windows.Count == 1) return _windows.Values.First();
                 return _windows.Values
                     .Where(window => !window.IsDisposed && window.IsVisible && window.IsFocused)
                     .FirstOrDefault();
             }
         }
+
+        private static Window _overridedCurrent = null;
+        /// <summary>
+        /// Sets the specified window as the current one no matter
+        /// if it's focused and visible or not. If a null is passed,
+        /// then the overriding is disabled. If the specified window is
+        /// disposed, then the overriding is disabled.
+        /// </summary>
+        public static void OverrideCurrentWith(Window window) => _overridedCurrent = window;
 
         internal static Window GetByID(uint id)
         {
@@ -133,7 +146,7 @@ namespace Imagini
         /// </summary>
         public WindowMode Mode => Settings.WindowMode;
 
-        internal Window(WindowSettings settings) : base(nameof(Window))
+        internal Window(WindowSettings settings)
         {
             Handle = SDL_CreateWindow(settings.Title,
                 SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
@@ -151,6 +164,8 @@ namespace Imagini
                 throw new ImaginiException("Window with the specified ID already exists");
             else
                 _windows.Add(ID, this);
+            GetSubsystem();
+            Raise();
         }
 
         /// <summary>
@@ -192,7 +207,8 @@ namespace Imagini
         /// Returns true if this window has input focus.
         /// </summary>
         public bool IsFocused => HasFlag(SDL_WindowFlags.SDL_WINDOW_INPUT_FOCUS) ||
-            HasFlag(SDL_WindowFlags.SDL_WINDOW_MOUSE_FOCUS);
+            HasFlag(SDL_WindowFlags.SDL_WINDOW_MOUSE_FOCUS) ||
+            HasFlag(SDL_WindowFlags.SDL_WINDOW_INPUT_GRABBED);
 
         /// <summary>
         /// Minimizes this window.
@@ -237,7 +253,13 @@ namespace Imagini
         /// <summary>
         /// Raises this window above other windows and sets the input focus.
         /// </summary>
-        public void Raise() => NotDisposed(() => SDL_RaiseWindow(Handle));
+        public void Raise() => NotDisposed(() =>
+        {
+            SDL_RaiseWindow(Handle);
+            SDL_SetWindowInputFocus(Handle); // X11 only
+            // X11.TrySetUrgencyHint(this);
+            // if (IsVisible) Debug.Assert(IsFocused);
+        });
 
         /// <summary>
         /// Gets or sets the window title.
@@ -259,8 +281,10 @@ namespace Imagini
         public Display Display => NotDisposed(() =>
             Display.GetCurrentDisplayForWindow(Handle));
 
+        private uint _flags => SDL_GetWindowFlags(Handle);
+
         private bool HasFlag(SDL_WindowFlags flag) =>
-            NotDisposed(() => (SDL_GetWindowFlags(Handle) & (uint)flag) == (uint)flag);
+            NotDisposed(() => (_flags & (uint)flag) == (uint)flag);
 
         static Window() => Lifecycle.TryInitialize();
 
@@ -272,5 +296,53 @@ namespace Imagini
             _windows.Remove(ID);
             Handle = IntPtr.Zero;
         }
+
+        /// <summary>
+        /// Returns the underlying window subsystem type.
+        /// </summary>
+        public WindowSubsystem Subsystem { get; private set; }
+
+        private unsafe void GetSubsystem()
+        {
+            SDL_GetVersion(out SDL_Version version);
+            var container = Marshal.AllocHGlobal(32);
+            var p = (byte*)container;
+            *p = version.major;
+            *(p + 1) = version.minor;
+            *(p + 2) = version.patch;
+            SDL_GetWindowWMInfo(Handle, container);
+            Subsystem = WindowSubsystem.Unknown;
+            var min = Enum.GetValues(typeof(WindowSubsystem)).Cast<int>().Min();
+            var max = Enum.GetValues(typeof(WindowSubsystem)).Cast<int>().Max();
+            for (int i = 0; i < 4; i++)
+            {
+                // run through enum bytes because the num size is not fixed
+                var value = *(p + 3 + i);
+                if (value >= min && value <= max)
+                {
+                    Subsystem = (WindowSubsystem)value;
+                    break;
+                }
+            }
+            Marshal.FreeHGlobal(container);
+        }
+    }
+
+    /// <summary>
+    /// Defines the windowing system type.
+    /// </summary>
+    public enum WindowSubsystem
+    {
+        Unknown,
+        Windows,
+        X11,
+        DirectFB,
+        Cocoa,
+        UIKit,
+        Wayland,
+        Mir,
+        WinRT,
+        Android,
+        Vivante
     }
 }

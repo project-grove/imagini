@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using static SDL2.SDL_error;
 
 namespace Imagini
 {
+    [ExcludeFromCodeCoverage]
     internal static class ErrorHandler
     {
         public static void Try(Func<int> func, string methodName)

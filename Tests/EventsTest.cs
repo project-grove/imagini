@@ -9,7 +9,7 @@ using Xunit;
 namespace Tests
 {
 #if !HEADLESS
-    public class EventsTest : IDisposable
+    public class EventsTest : TestBase, IDisposable
     {
         readonly Window window;
         readonly EventManager.EventQueue eventQueue;
@@ -23,13 +23,14 @@ namespace Tests
                 WindowHeight = 100
             });
             eventQueue = EventManager.CreateQueueFor(window);
+            Window.OverrideCurrentWith(window);
         }
 
 
         [Fact]
         public void ShouldNotChangeEventData()
         {
-
+            PrintTestName();
             var expected = new List<CommonEventArgs>()
             {
                 new WindowStateChangeEventArgs(WindowStateChange.None),
@@ -85,7 +86,6 @@ namespace Tests
             events.Touch.FingerReleased += (s, args) => actual.Add(args);
             events.Touch.FingerPressed += (s, args) => actual.Add(args);
 
-            window.Raise();
             // Drop all existing events before pushing ours
             EventManager.Poll();
             eventQueue.ProcessAll(events);
@@ -118,6 +118,7 @@ namespace Tests
 
         public void Dispose()
         {
+            Window.OverrideCurrentWith(null);
             EventManager.DeleteQueueFor(window);
             window.Destroy();
         }

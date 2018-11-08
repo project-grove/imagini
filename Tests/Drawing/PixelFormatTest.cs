@@ -7,11 +7,12 @@ using Xunit;
 
 namespace Tests.Drawing
 {
-    public class PixelFormatTest
+    public class PixelFormatTest : TestBase
     {
         [Fact]
         public void ShouldCheckIfFormatIsIndexed()
         {
+            PrintTestName();
             var formats = new[] {
                 PixelFormat.Format_INDEX1LSB,
                 PixelFormat.Format_INDEX1MSB,
@@ -30,6 +31,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCheckIfFormatIsFourCC()
         {
+            PrintTestName();
             var formats = new[] {
                 PixelFormat.Format_YV12,
                 PixelFormat.Format_IYUV,
@@ -49,6 +51,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldReturnComponentType()
         {
+            PrintTestName();
             var bitmap = new[] {
                 PixelFormat.Format_INDEX1LSB,
                 PixelFormat.Format_INDEX1MSB,
@@ -96,6 +99,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldReturnPixelLayout()
         {
+            PrintTestName();
             var pairs = new Dictionary<PixelFormat, PixelLayout>()
             {
                 { PixelFormat.Format_RGB332, PixelLayout.Packed332 },

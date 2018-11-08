@@ -8,7 +8,7 @@ using static SDL2.SDL_scancode;
 namespace Tests
 {
 #if !HEADLESS
-    public class EventManagerTest : IDisposable
+    public class EventManagerTest : TestBase, IDisposable
     {
         private Window window;
         private EventManager.EventQueue queue;
@@ -30,6 +30,7 @@ namespace Tests
         [Fact]
         public void ShouldPushEvents()
         {
+            PrintTestName();
             var @event = CreateEvent(window);
             EventManager.Push(@event);
             EventManager.Poll();
@@ -39,6 +40,7 @@ namespace Tests
         [Fact]
         public void ShouldPushEventsToCorrespondingWindows()
         {
+            PrintTestName();
             var window2 = new Window(new WindowSettings());
             var queue2 = EventManager.CreateQueueFor(window2);    
             var @event = CreateEvent(window2);

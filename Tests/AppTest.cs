@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using FluentAssertions;
 using Imagini;
 using Xunit;
@@ -11,26 +12,38 @@ namespace Tests
         public int UpdateCalls { get; private set; }
         public int DrawCalls { get; private set; }
 
-        public SampleApp() : base(new WindowSettings()
+        public bool SimulateSlowRunning { get; set; }
+
+        public SampleApp(bool visible = true) : base(new WindowSettings()
         {
-            IsVisible = false,
+            IsVisible = visible,
             WindowWidth = 100,
-            WindowHeight = 50
-        }) {}
+            WindowHeight = 50,
+            IsResizable = true
+        })
+        { 
+            IsFixedTimeStep = false;
+        }
 
         protected override void Draw(TimeSpan dt) => DrawCalls++;
-        protected override void Update(TimeSpan frameTime) => UpdateCalls++;
+        protected override void Update(TimeSpan frameTime)
+        {
+            if (SimulateSlowRunning)
+                Thread.Sleep(TargetElapsedTime.Milliseconds + 4);
+            UpdateCalls++;
+        }
     }
 
-    public class AppTest : IDisposable
+    public class AppTest : TestBase, IDisposable
     {
-        private SampleApp app = new SampleApp();
+        private SampleApp app = new SampleApp(visible: false);
 
         public void Dispose() => app.Dispose();
 
         [Fact]
         public void ShouldCallUpdateAndDrawAtLeastOneTimePerTick()
         {
+            PrintTestName();
             app.UpdateCalls.Should().Be(0, "the app just started");
             app.DrawCalls.Should().Be(0, "the app just started");
             app.Tick();
@@ -41,6 +54,7 @@ namespace Tests
         [Fact]
         public void ShouldNotCallDrawIfSuppressed()
         {
+            PrintTestName();
             app.SuppressDraw();
             app.Tick();
             app.UpdateCalls.Should().Be(1, "one tick performed");
@@ -53,6 +67,8 @@ namespace Tests
         [Fact]
         public void ShouldWorkInFixedTimeStepMode()
         {
+            PrintTestName();
+            app.IsFixedTimeStep = true;
             for (int i = 1; i <= 5; i++)
             {
                 app.Tick();
@@ -64,6 +80,7 @@ namespace Tests
         [Fact]
         public void ShouldWorkInVariableTimeStepMode()
         {
+            PrintTestName();
             app.IsFixedTimeStep = false;
             for (int i = 0; i < 5; i++)
                 app.Tick();
@@ -72,8 +89,25 @@ namespace Tests
         }
 
         [Fact]
+        public void ShouldReportSlowRunning()
+        {
+            PrintTestName();
+            app.IsFixedTimeStep = true;
+            var frames = 10;
+            app.SimulateSlowRunning = true;
+            for (var i = 0; i < frames; i++)
+                app.Tick();
+            app.IsRunningSlowly.Should().BeTrue();
+            app.SimulateSlowRunning = false;
+            for (var i = 0; i < frames * 5; i++)
+                app.Tick();
+            app.IsRunningSlowly.Should().BeFalse();
+        }
+
+        [Fact]
         public void ShouldNotExitIfCancelled()
         {
+            PrintTestName();
             app.IsExited.Should().BeFalse();
             app.IsExiting.Should().BeFalse();
             // let's cancel our first exit request
@@ -97,6 +131,7 @@ namespace Tests
         [Fact]
         public void ShouldToggleMouseVisibility()
         {
+            PrintTestName();
             app.IsMouseVisible = false;
             app.IsMouseVisible.Should().BeFalse();
             app.IsMouseVisible = true;
@@ -106,19 +141,83 @@ namespace Tests
         [Fact]
         public void ShouldReportEventsWhenStateIsModified()
         {
-            var app = new SampleApp();
-            var expected = new List<string>() {
-                "activated",
+            PrintTestName();
+            var expected = new HashSet<string>() {
+                "resized",
                 "deactivated",
+                "activated",
                 "closed",
                 "disposed"
             };
+            var actual = new HashSet<string>();
+            app.Window.Show();
+            app.Window.Raise();
+            Window.OverrideCurrentWith(app.Window);
+            app.IsActive.Should().BeTrue();
+            // it gets called when the initial size of window is set too
+            app.Resized += (s, e) => actual.Add("resized");
+            app.Deactivated += (s, e) => actual.Add("deactivated");
+            app.Activated += (s, e) => actual.Add("activated");
+            app.Exiting += (s, e) => { actual.Add("closed"); e.Cancel = true; };
+            app.Disposed += (s, e) => actual.Add("disposed");
 
-            // TODO Wire events and check if they are fired
+            app.Window.Hide(); app.Tick();
+            app.Window.Raise(); app.Tick();
+            app.RequestExit(); app.Tick();
 
+            Window.OverrideCurrentWith(app.Window);
             app.Dispose();
+            actual.Should().BeEquivalentTo(expected);
         }
 
-        // TODO Write more tests to ensure high coverage
+        [Fact]
+        public void ShouldDisallowInvalidTimingValues()
+        {
+            PrintTestName();
+            // TargetElapsedTime
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.TargetElapsedTime = TimeSpan.FromMilliseconds(-1));
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.TargetElapsedTime = app.InactiveSleepTime
+                    .Add(TimeSpan.FromMilliseconds(1)));
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.TargetElapsedTime = app.MaxElapsedTime
+                    .Add(TimeSpan.FromMilliseconds(1)));
+            // InactiveSleepTime
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.InactiveSleepTime = TimeSpan.FromMilliseconds(-1));
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.InactiveSleepTime = app.TargetElapsedTime
+                    .Subtract(TimeSpan.FromMilliseconds(1)));
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.InactiveSleepTime = app.MaxElapsedTime
+                    .Add(TimeSpan.FromMilliseconds(1)));
+            // MaxElapsedTime
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.MaxElapsedTime = TimeSpan.FromMilliseconds(-1));
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.MaxElapsedTime = app.TargetElapsedTime
+                    .Subtract(TimeSpan.FromMilliseconds(1)));
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+                app.MaxElapsedTime = app.InactiveSleepTime
+                    .Subtract(TimeSpan.FromMilliseconds(1)));
+            
+            // Check valid values
+            app.MaxElapsedTime += TimeSpan.FromMilliseconds(1);
+            app.InactiveSleepTime += TimeSpan.FromMilliseconds(1);
+            app.TargetElapsedTime += TimeSpan.FromMilliseconds(1);
+        }
+
+        [Fact]
+        public void ShouldResetElapsedTimeIfRequested()
+        {
+            PrintTestName();
+            app.IsFixedTimeStep = true;
+            app.ElapsedAppTime.Should().Be(TimeSpan.Zero);
+            app.Tick();
+            app.ElapsedAppTime.Should().BeCloseTo(app.TargetElapsedTime, 1);
+            app.ResetElapsedTime();
+            app.ElapsedAppTime.Should().BeCloseTo(TimeSpan.Zero);
+        }
     }
 }

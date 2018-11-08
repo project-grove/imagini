@@ -56,7 +56,6 @@ namespace Imagini.Drawing
         }
 
         internal Surface(IntPtr handle)
-            : base(nameof(Surface))
         {
             Handle = handle;
             var data = Marshal.PtrToStructure<SDL_Surface>(handle);

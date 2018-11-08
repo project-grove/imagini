@@ -15,7 +15,7 @@ namespace Imagini.Drawing
         /// </summary>
         public Graphics Owner { get; private set; }
 
-        internal Texture(IntPtr handle, Graphics owner) : base(nameof(Texture)) =>
+        internal Texture(IntPtr handle, Graphics owner) =>
             (this.Handle, this.Owner) = (handle, owner);
 
         internal override void Destroy()

@@ -11,7 +11,6 @@ namespace Imagini.Drawing
         internal IntPtr Handle;
         public RendererInfo Renderer { get; private set; }
         internal Graphics(Window owner, RendererInfo rendererInfo)
-            : base(nameof(Graphics))
         {
             var fallbackRenderer =
                 RendererInfo.All.FirstOrDefault(r =>

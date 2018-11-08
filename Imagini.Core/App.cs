@@ -8,6 +8,7 @@ using static Imagini.ErrorHandler;
 using System.Diagnostics;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// The core namespace.
@@ -71,12 +72,12 @@ namespace Imagini
             get => _targetElapsedTime;
             set
             {
-                if (value < TimeSpan.Zero)
+                if (value > MaxElapsedTime)
+                    throw new ArgumentOutOfRangeException("Time must be less or equal to MaxElapsedTime");
+                if (value <= TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException("Time must be greater than zero");
                 if (value > InactiveSleepTime)
-                    throw new ArgumentOutOfRangeException("Time must be less than InactiveSleepTime");
-                if (value > MaxElapsedTime)
-                    throw new ArgumentOutOfRangeException("Time must be less than MaxElapsedTime");
+                    throw new ArgumentOutOfRangeException("Time must be less or equal to InactiveSleepTime");
                 _targetElapsedTime = value;
             }
         }
@@ -93,12 +94,12 @@ namespace Imagini
             get => _inactiveSleepTime;
             set
             {
-                if (value < TimeSpan.Zero)
+                if (value > MaxElapsedTime)
+                    throw new ArgumentOutOfRangeException("Time should be less or equal to MaxElapsedTime");
+                if (value <= TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException("Time must be greater than zero");
                 if (value < TargetElapsedTime)
                     throw new ArgumentOutOfRangeException("Time should be greater or equal to TargetElapsedTime");
-                if (value > MaxElapsedTime)
-                    throw new ArgumentOutOfRangeException("Time should be less than MaxElapsedTime");
                 _inactiveSleepTime = value;
             }
         }
@@ -113,12 +114,12 @@ namespace Imagini
             get => _maxElapsedTime;
             set
             {
-                if (value < TimeSpan.Zero)
+                if (value <= TimeSpan.Zero)
                     throw new ArgumentOutOfRangeException("Time must be greater than zero");
                 if (value < TargetElapsedTime)
-                    throw new ArgumentOutOfRangeException("Time must be greater than TargetElapsedTime");
+                    throw new ArgumentOutOfRangeException("Time must be greater or equal to TargetElapsedTime");
                 if (value < InactiveSleepTime)
-                    throw new ArgumentOutOfRangeException("Time must be greater than InactiveSleepTime");
+                    throw new ArgumentOutOfRangeException("Time must be greater or equal to InactiveSleepTime");
             }
         }
         private TimeSpan _maxElapsedTime = TimeSpan.FromMilliseconds(500);
@@ -185,6 +186,10 @@ namespace Imagini
         /// through <see cref="AppExitEventArgs.Cancel" />.
         /// </summary>
         public event EventHandler<AppExitEventArgs> Exiting;
+        /// <summary>
+        /// Fires when the app's window gets resized.
+        /// </summary>
+        public event EventHandler<EventArgs> Resized;
 
         private void ProcessEvents()
         {
@@ -207,11 +212,21 @@ namespace Imagini
         {
             switch (args.State)
             {
+                case WindowStateChange.Shown:
+                case WindowStateChange.Exposed:
+                case WindowStateChange.MouseEnter:
                 case WindowStateChange.FocusGained:
                     Activated?.Invoke(this, new EventArgs());
                     break;
+                case WindowStateChange.Hidden:
+                case WindowStateChange.MouseLeave:
                 case WindowStateChange.FocusLost:
                     Deactivated?.Invoke(this, new EventArgs());
+                    break;
+                case WindowStateChange.Maximized:
+                case WindowStateChange.Restored:
+                case WindowStateChange.SizeChanged:
+                    Resized?.Invoke(this, new EventArgs());
                     break;
                 case WindowStateChange.Closed:
                     RequestExit();
@@ -246,6 +261,7 @@ namespace Imagini
         /// </summary>
         public void ResetElapsedTime()
         {
+            ElapsedAppTime = TimeSpan.Zero;
             _previousTicks = 0;
             _accumulatedTicks = 0;
             _appStopwatch.Reset();
@@ -358,16 +374,21 @@ namespace Imagini
             AfterDraw(frameTime);
         }
 
+        [ExcludeFromCodeCoverage]
         protected virtual void BeforeDraw(TimeSpan frameTime) { }
+        [ExcludeFromCodeCoverage]
         protected virtual void AfterDraw(TimeSpan frameTime) { }
 
+        [ExcludeFromCodeCoverage]
         protected virtual void Update(TimeSpan frameTime) { }
+        [ExcludeFromCodeCoverage]
         protected virtual void Draw(TimeSpan frameTime) { }
 
         /* ------------------------- Disposing logic ------------------------ */
         /// <summary>
         /// Called when the app is being disposed (when exiting or by external code).
         /// </summary>
+        [ExcludeFromCodeCoverage]
         protected virtual void OnDispose() { }
 
         private bool _isDisposed;
@@ -393,6 +414,7 @@ namespace Imagini
             Disposed?.Invoke(this, new EventArgs());
         }
 
+        [ExcludeFromCodeCoverage]
         private void CheckIfNotDisposed()
         {
             if (IsDisposed)

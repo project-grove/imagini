@@ -5,11 +5,12 @@ using Xunit;
 
 namespace Tests.Drawing
 {
-    public class RendererInfoTest
+    public class RendererInfoTest : TestBase
     {
         [Fact]
         public void ShouldGetAvailableRenderers()
         {
+            PrintTestName();
             var renderers = RendererInfo.All;
 #if !HEADLESS
             Assert.NotEmpty(renderers);

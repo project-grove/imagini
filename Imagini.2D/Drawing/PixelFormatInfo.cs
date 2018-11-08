@@ -72,7 +72,7 @@ namespace Imagini.Drawing
         /// <summary>
         /// Creates a new PixelFormatInfo with the specified pixel format.
         /// </summary>
-        public PixelFormatInfo(PixelFormat format) : base(nameof(PixelFormatInfo))
+        public PixelFormatInfo(PixelFormat format)
         {
             Handle = SDL_AllocFormat((uint)format);
             if (Handle == IntPtr.Zero)
@@ -80,7 +80,7 @@ namespace Imagini.Drawing
             FromSDL(Marshal.PtrToStructure<SDL_PixelFormat>(Handle));
         }
 
-        internal PixelFormatInfo(IntPtr handle) : base(nameof(PixelFormatInfo))
+        internal PixelFormatInfo(IntPtr handle)
         {
             Handle = handle;
             FromSDL(Marshal.PtrToStructure<SDL_PixelFormat>(Handle));

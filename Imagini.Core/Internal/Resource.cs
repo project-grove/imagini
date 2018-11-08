@@ -13,13 +13,20 @@ namespace Imagini
         private List<Resource> _children = new List<Resource>();
         private readonly string _resourceName;
 
-        public Guid Identifier { get; private set; }
+        private static Dictionary<Type, int> s_count = new Dictionary<Type, int>();
+        internal int ResourceID { get; private set; }
 
-        internal Resource(string resourceName)
+        internal Resource()
         {
-            _resourceName = resourceName;
-            Identifier = Guid.NewGuid();
-            Log.Debug("Created {name} with GUID {guid}", _resourceName, Identifier);
+            var type = this.GetType();
+            _resourceName = type.Name;
+            if (!s_count.ContainsKey(type))
+            {
+                s_count.Add(type, 0);
+            }
+            ResourceID = s_count[type];
+            s_count[type]++;
+            Log.Debug("Created {name} ID {id}", _resourceName, ResourceID);
         }
 
 
@@ -33,7 +40,7 @@ namespace Imagini
             _children.ForEach(c => c.Destroy());
             _children = null;
             IsDisposed = true;
-            Log.Debug("Destroyed {name} with GUID {guid}", _resourceName, Identifier);
+            Log.Debug("Destroyed {name} ID {guid}", _resourceName, ResourceID);
         }
 
         protected void CheckIfNotDisposed()
