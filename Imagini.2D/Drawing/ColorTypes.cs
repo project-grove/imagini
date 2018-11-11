@@ -6,6 +6,7 @@ namespace Imagini.Drawing
     public interface IColor
     {
         PixelFormat Format { get; }
+        Color AsColor();
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -50,6 +51,20 @@ namespace Imagini.Drawing
                 return (int)((R << 24) | (G << 16) | (B << 8) | A);
             }
         }
+
+        /// <summary>
+        /// Converts to System.Drawing.Color.
+        /// </summary>
+        public Color AsColor() => Color.FromArgb(A, R, G, B);
+
+        /// <summary>
+        /// Converts from System.Drawing.Color.
+        /// </summary>
+        public static explicit operator ColorRGBA8888(Color clr) => new ColorRGBA8888(clr);
+        /// <summary>
+        /// Converts to System.Drawing.Color.
+        /// </summary>
+        public static explicit operator Color(ColorRGBA8888 clr) => clr.AsColor();
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -70,7 +85,7 @@ namespace Imagini.Drawing
 
         public PixelFormat Format => PixelFormat.Format_ARGB8888;
 
-        private bool Equals(ColorRGBA8888 other)
+        private bool Equals(ColorARGB8888 other)
         {
             return A == other.A && R == other.R && G == other.G && B == other.B;
         }
@@ -80,8 +95,8 @@ namespace Imagini.Drawing
         /// </summary>
         public override bool Equals(object obj)
         {
-            if (obj is ColorRGBA8888)
-                return Equals((ColorRGBA8888)obj);
+            if (obj is ColorARGB8888)
+                return Equals((ColorARGB8888)obj);
             return false;
         }
 
@@ -94,5 +109,19 @@ namespace Imagini.Drawing
                 return (int)((A << 24) | (R << 16) | (G << 8) | B);
             }
         }
+
+        /// <summary>
+        /// Converts to System.Drawing.Color.
+        /// </summary>
+        public Color AsColor() => Color.FromArgb(A, R, G, B);
+
+        /// <summary>
+        /// Converts from System.Drawing.Color.
+        /// </summary>
+        public static explicit operator ColorARGB8888(Color clr) => new ColorARGB8888(clr);
+        /// <summary>
+        /// Converts to System.Drawing.Color.
+        /// </summary>
+        public static explicit operator Color(ColorARGB8888 clr) => clr.AsColor();
     }
 }

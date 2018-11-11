@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Imagini
 {
+    [ExcludeFromCodeCoverage]
     internal static class Util
     {
         public unsafe static string FromNullTerminated(byte* data)

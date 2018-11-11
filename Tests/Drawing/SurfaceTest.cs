@@ -169,8 +169,8 @@ namespace Tests.Drawing
             // Read and convert the current pixel data
             var currentPixels = new ColorRGBA8888[width * height];
             surface.GetPixelData(ref currentPixels);
-            currentPixels.Distinct().Should().BeEquivalentTo(
-                new ColorRGBA8888(new Color())
+            currentPixels.Distinct().Select(c => c.AsColor()).Should().BeEquivalentTo(
+                new Color().WithoutName()
             );
 
             // Convert and set the pixel data
@@ -186,15 +186,15 @@ namespace Tests.Drawing
         {
             var width = 10;
             var height = 10;
-            var pixels = Enumerable.Repeat<ColorRGBA8888>(
-                new ColorRGBA8888(TestColor), width * height).ToArray();
-            var surface = Surface.Create(width, height, PixelFormat.Format_ARGB8888);
+            var pixels = Enumerable.Repeat<ColorARGB8888>(
+                new ColorARGB8888(TestColor), width * height).ToArray();
+            var surface = Surface.Create(width, height, PixelFormat.Format_RGBA8888);
 
             // Read and convert the current pixel data
-            var currentPixels = new ColorRGBA8888[width * height];
+            var currentPixels = new ColorARGB8888[width * height];
             surface.GetPixelData(ref currentPixels);
-            currentPixels.Distinct().Should().BeEquivalentTo(
-                new ColorRGBA8888(new Color())
+            currentPixels.Distinct().Select(c => c.AsColor()).Should().BeEquivalentTo(
+                new Color().WithoutName()
             );
 
             // Convert and set the pixel data
