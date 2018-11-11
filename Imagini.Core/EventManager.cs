@@ -103,6 +103,11 @@ namespace Imagini
                 throw new ImaginiException($"Unable to push event: {SDL_GetError()}");
         }
 
+        /// <summary>
+        /// Updates the event queue and internal input device state.
+        /// </summary>
+        public static void Pump() => SDL_PumpEvents();
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void PushTo(uint windowId, SDL_Event @event)
         {

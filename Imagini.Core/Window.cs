@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using Imagini.Core.Native;
 using static Imagini.ErrorHandler;
 using static SDL2.SDL_error;
 using static SDL2.SDL_hints;
@@ -216,15 +215,11 @@ namespace Imagini
         public void Minimize() => NotDisposed(() => SDL_MinimizeWindow(Handle));
 
         /// <summary>
-        /// Gets or sets if the window should be minimized.
+        /// Indicates if the window is minimized.
         /// </summary>
         public bool IsMinimized
         {
             get => HasFlag(SDL_WindowFlags.SDL_WINDOW_MINIMIZED);
-            set
-            {
-                if (value) Minimize(); else Restore();
-            }
         }
 
         /// <summary>
@@ -233,15 +228,11 @@ namespace Imagini
         public void Maximize() => NotDisposed(() => SDL_MaximizeWindow(Handle));
 
         /// <summary>
-        /// Gets or sets if the window should me maximized.
+        /// Indicates if the window is maximized.
         /// </summary>
         public bool IsMaximized
         {
             get => HasFlag(SDL_WindowFlags.SDL_WINDOW_MAXIMIZED);
-            set
-            {
-                if (value) Maximize(); else Restore();
-            }
         }
 
         /// <summary>
@@ -257,8 +248,6 @@ namespace Imagini
         {
             SDL_RaiseWindow(Handle);
             SDL_SetWindowInputFocus(Handle); // X11 only
-            // X11.TrySetUrgencyHint(this);
-            // if (IsVisible) Debug.Assert(IsFocused);
         });
 
         /// <summary>

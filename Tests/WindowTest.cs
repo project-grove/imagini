@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Threading;
 using FluentAssertions;
 using Imagini;
 using Xunit;
@@ -23,6 +24,8 @@ namespace Tests
             Assert.Equal(expectedSize, window.Size);
             Assert.Equal(expectedSize, window.SizeInPixels);
             Assert.Equal(settings.Title, window.Title);
+            Assert.Equal(WindowMode.Windowed, window.Mode);
+            Assert.Equal(0, window.DisplayIndex);
             Assert.False(window.IsVisible);
             window.Destroy();
         }
@@ -68,10 +71,10 @@ namespace Tests
         }
 
         // TODO FIXME Looks like the problem is in the event queue
-        /*
-        [Fact]
+        [Fact(Timeout = 5000)]
         public void ShouldMaximizeMinimizeAndRestoreIfResizable()
         {
+            PrintTestName();
             var size = new Size(100, 50);
             var settings = new WindowSettings()
             {
@@ -80,23 +83,30 @@ namespace Tests
                 IsResizable = true
             };
             var window = new Window(settings);
+            Window.OverrideCurrentWith(window);
             window.IsMinimized.Should().BeFalse();
             window.IsMaximized.Should().BeFalse();
             window.Maximize();
-            EventManager.Poll();
-            window.IsMinimized.Should().BeFalse();
-            window.IsMaximized.Should().BeTrue();
+            while (!window.IsMaximized)
+            {
+                EventManager.Pump(); // wait until OS sends us a signal
+                Thread.Sleep(100);
+            }
             window.Minimize();
-            EventManager.Poll();
-            window.IsMinimized.Should().BeTrue();
-            window.IsMaximized.Should().BeFalse();
+            while (!window.IsMinimized)
+            {
+                EventManager.Pump();
+                Thread.Sleep(100);
+            }
             window.Restore();
-            EventManager.Poll();
-            window.IsMinimized.Should().BeFalse();
-            window.IsMaximized.Should().BeFalse();
+            while (window.IsMinimized)
+            {
+                EventManager.Pump();
+                Thread.Sleep(100);
+            }
+            Window.OverrideCurrentWith(null);
             window.Destroy();
         }
-        */
 
         [Fact]
         public void ShouldToggleVSync()

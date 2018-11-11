@@ -90,6 +90,7 @@ namespace Tests
             EventManager.Poll();
             eventQueue.ProcessAll(events);
             // Push all our custom events to global queue and process them
+            window.Raise();
             foreach (var e in expected)
                 EventManager.Push(e);
             EventManager.Poll();

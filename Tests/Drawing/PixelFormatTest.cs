@@ -9,60 +9,15 @@ namespace Tests.Drawing
 {
     public class PixelFormatTest : TestBase
     {
-        [Fact]
-        public void ShouldCheckIfFormatIsIndexed()
-        {
-            PrintTestName();
-            var formats = new[] {
+        PixelFormat[] indexedFormats = new[] {
                 PixelFormat.Format_INDEX1LSB,
                 PixelFormat.Format_INDEX1MSB,
                 PixelFormat.Format_INDEX4LSB,
                 PixelFormat.Format_INDEX4MSB,
                 PixelFormat.Format_INDEX8
             };
-            Assert.All(formats, format =>
-            {
-                Assert.True(format.IsIndexed());
-                Assert.False(format.IsFourCC());
-                format.GetComponentType().Should().Be(PixelComponentType.Bitmap);
-            });
-        }
 
-        [Fact]
-        public void ShouldCheckIfFormatIsFourCC()
-        {
-            PrintTestName();
-            var formats = new[] {
-                PixelFormat.Format_YV12,
-                PixelFormat.Format_IYUV,
-                PixelFormat.Format_YUY2,
-                PixelFormat.Format_UYVY,
-                PixelFormat.Format_YVYU,
-            };
-            Assert.All(formats, format =>
-            {
-                Assert.True(format.IsFourCC());
-                Assert.False(format.IsIndexed());
-            });
-        }
-
-        // TODO IsPacked, IsArray
-
-        [Fact]
-        public void ShouldReturnComponentType()
-        {
-            PrintTestName();
-            var bitmap = new[] {
-                PixelFormat.Format_INDEX1LSB,
-                PixelFormat.Format_INDEX1MSB,
-                PixelFormat.Format_INDEX4LSB,
-                PixelFormat.Format_INDEX4MSB,
-                PixelFormat.Format_INDEX8
-            };
-            bitmap.Select(f => f.GetComponentType()).Distinct()
-                .Should().BeEquivalentTo(PixelComponentType.Bitmap);
-
-            var packed = new[] {
+        PixelFormat[] packedFormats = new[] {
                 PixelFormat.Format_RGB332,
                 PixelFormat.Format_RGB444,
                 PixelFormat.Format_RGB555,
@@ -85,15 +40,79 @@ namespace Tests.Drawing
                 PixelFormat.Format_BGRA8888,
                 PixelFormat.Format_ARGB2101010
             };
-            packed.Select(f => f.GetComponentType()).Distinct()
-                .Should().BeEquivalentTo(PixelComponentType.Packed);
 
-            var array = new[] {
+        PixelFormat[] arrayFormats = new[] {
                 PixelFormat.Format_RGB24,
                 PixelFormat.Format_BGR24
             };
-            array.Select(f => f.GetComponentType()).Distinct()
-                .Should().BeEquivalentTo(PixelComponentType.Array);
+
+        [Fact]
+        public void ShouldCheckIfFormatIsIndexed()
+        {
+            PrintTestName();
+            Assert.All(indexedFormats, format =>
+            {
+                format.IsIndexed().Should().BeTrue();
+                format.IsPacked().Should().BeFalse();
+                format.IsArray().Should().BeFalse();
+                format.IsFourCC().Should().BeFalse();
+            });
+        }
+
+        [Fact]
+        public void ShouldCheckIfFormatIsFourCC()
+        {
+            PrintTestName();
+            var formats = new[] {
+                PixelFormat.Format_YV12,
+                PixelFormat.Format_IYUV,
+                PixelFormat.Format_YUY2,
+                PixelFormat.Format_UYVY,
+                PixelFormat.Format_YVYU,
+            };
+            Assert.All(formats, format =>
+            {
+                format.IsFourCC().Should().BeTrue();
+                format.IsIndexed().Should().BeFalse();
+                format.IsPacked().Should().BeFalse();
+                format.IsArray().Should().BeFalse();
+            });
+        }
+
+        [Fact]
+        public void ShouldCheckIfFormatIsPacked()
+        {
+            Assert.All(packedFormats, format =>
+            {
+                format.IsPacked().Should().BeTrue();
+                format.IsIndexed().Should().BeFalse();
+                format.IsArray().Should().BeFalse();
+                format.IsFourCC().Should().BeFalse();
+            });
+        }
+
+        [Fact]
+        public void ShouldCheckIfFormatIsArray()
+        {
+            Assert.All(arrayFormats, format =>
+            {
+                format.IsArray().Should().BeTrue();
+                format.IsIndexed().Should().BeFalse();
+                format.IsPacked().Should().BeFalse();
+                format.IsFourCC().Should().BeFalse();
+            });
+        }
+
+        [Fact]
+        public void ShouldReturnComponentType()
+        {
+            PrintTestName();
+            Func<IEnumerable<PixelFormat>, IEnumerable<PixelComponentType>> ComponentTypeOf =
+                input => input.Select(f => f.GetComponentType()).Distinct();
+
+            ComponentTypeOf(indexedFormats).Should().BeEquivalentTo(PixelComponentType.Bitmap);
+            ComponentTypeOf(packedFormats).Should().BeEquivalentTo(PixelComponentType.Packed);
+            ComponentTypeOf(arrayFormats).Should().BeEquivalentTo(PixelComponentType.Array);
         }
 
         [Fact]
@@ -134,10 +153,11 @@ namespace Tests.Drawing
             var formats = Enum.GetNames(typeof(PixelFormat))
                 .Where(name => name.StartsWith("Format_"))
                 .GroupBy(name => name.Contains("A"))
-                .ToDictionary(pair => pair.Key, pair => pair.ToList());
-            
-            var hasAlpha = formats[true].Select(name => Enum.Parse<PixelFormat>(name));
-            var noAlpha = formats[false].Select(name => Enum.Parse<PixelFormat>(name));
+                .ToDictionary(pair => pair.Key, pair => pair.ToList()
+                    .Select(name => Enum.Parse<PixelFormat>(name)));
+
+            var hasAlpha = formats[true];
+            var noAlpha = formats[false];
             Assert.All(hasAlpha, format => Assert.True(format.HasAlpha()));
             Assert.All(noAlpha, format => Assert.False(format.HasAlpha()));
         }
