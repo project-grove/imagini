@@ -19,6 +19,7 @@ namespace Imagini.Drawing
     {
         internal readonly IntPtr Handle;
         private readonly IntPtr _pixels;
+        internal IntPtr PixelsHandle => _pixels;
         private readonly bool _shouldFreePixels;
 
         /// <summary>

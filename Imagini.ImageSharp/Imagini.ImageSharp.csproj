@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>       
+    <AssemblyName>Imagini.ImageSharp</AssemblyName>
+    <RootNamespace>Imagini</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -39,7 +39,7 @@ namespace Imagini
         /// </remarks>
         public App2D(WindowSettings settings = null, RendererInfo driver = null) : base(settings)
         {
-            IsHardwareAccelerated = driver.IsHardwareAccelerated;
+            IsHardwareAccelerated = driver?.IsHardwareAccelerated ?? true;
             if (IsHardwareAccelerated)
                 Graphics = new Graphics(Window, driver);
             else

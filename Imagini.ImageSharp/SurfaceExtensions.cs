@@ -39,26 +39,23 @@ namespace Imagini.ImageSharp
         {
             var mustDispose = false;
             var source = surface;
-            if (surface.PixelInfo.Format != PixelFormat.Format_RGBA8888)
+            var targetFormat = PixelFormat.Format_ABGR8888;
+            if (surface.PixelInfo.Format != targetFormat)
             {
-                source = surface.ConvertTo(PixelFormat.Format_RGBA8888);
+                source = surface.ConvertTo(targetFormat);
                 mustDispose = true;
             }
 
             var image = new Image<Rgba32>(surface.Width, surface.Height);
-            var data = new byte[surface.SizeInBytes];
-            surface.GetPixelData(ref data);
-            var srcHandle = GCHandle.Alloc(data, GCHandleType.Pinned);
             unsafe {
                 fixed(void* target = &MemoryMarshal.GetReference(image.GetPixelSpan()))
                 {
                     Buffer.MemoryCopy(
-                        (void*)srcHandle.AddrOfPinnedObject(),
+                        (void*)source.PixelsHandle,
                         target, 
                         surface.SizeInBytes, surface.SizeInBytes);
                 }
             }
-            srcHandle.Free();
             onSave(image);
 
             image.Dispose();

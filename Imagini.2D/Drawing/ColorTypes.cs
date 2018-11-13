@@ -3,6 +3,12 @@ using System.Runtime.InteropServices;
 
 namespace Imagini.Drawing
 {
+    /*
+     * Note: When implementing SDL2 pixel formats, it should be noted that the
+     * channel order is reversed, i.e. RGBA means that A comes first, then B,
+     * then G, then R.
+     */
+
     public interface IColor
     {
         PixelFormat Format { get; }
@@ -12,10 +18,10 @@ namespace Imagini.Drawing
     [StructLayout(LayoutKind.Sequential)]
     public struct ColorRGBA8888 : IColor
     {
-        public byte R { get; set; }
-        public byte G { get; set; }
-        public byte B { get; set; }
         public byte A { get; set; }
+        public byte B { get; set; }
+        public byte G { get; set; }
+        public byte R { get; set; }
 
         public PixelFormat Format => PixelFormat.Format_RGBA8888;
 
@@ -70,10 +76,10 @@ namespace Imagini.Drawing
     [StructLayout(LayoutKind.Sequential)]
     public struct ColorARGB8888 : IColor
     {
-        public byte A { get; set; }
-        public byte R { get; set; }
-        public byte G { get; set; }
         public byte B { get; set; }
+        public byte G { get; set; }
+        public byte R { get; set; }
+        public byte A { get; set; }
 
         public ColorARGB8888(Color color)
         {

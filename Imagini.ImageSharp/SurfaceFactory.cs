@@ -46,9 +46,9 @@ namespace Imagini.ImageSharp
             {
                 var pixel = pixels[i];
                 bytes[i * 4] = pixel.A;
-                bytes[i * 4 + 1] = pixel.R;
+                bytes[i * 4 + 1] = pixel.B;
                 bytes[i * 4 + 2] = pixel.G;
-                bytes[i * 4 + 3] = pixel.B;
+                bytes[i * 4 + 3] = pixel.R;
             }
             var surface = Surface.CreateFrom(bytes, 
                 cloned.Width,

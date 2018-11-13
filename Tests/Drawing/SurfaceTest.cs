@@ -273,7 +273,6 @@ namespace Tests.Drawing
                 new Rectangle(2, 1, 5, 4), 
                 new Rectangle(3, 4, 5, 3));
 
-            surface.SaveAsPng("ShouldFillSpecifiedRectangles.png");
             var actual = new ColorARGB8888[expected.Count()];
             surface.GetPixelData(ref actual);
             actual.Should().BeEquivalentTo(expected);
@@ -285,12 +284,13 @@ namespace Tests.Drawing
         public void ShouldBlitToWholeSurface()
         {
             PrintTestName();
+            var color = Color.Red;
             var source = Surface.Create(5, 5);
             var destination = Surface.Create(5, 5);
-            source.Fill(TestColor);
-            AllPixelsShouldBeEqualTo(source, TestColor);
+            source.Fill(color);
+            AllPixelsShouldBeEqualTo(source, color);
             source.BlitTo(destination);
-            AllPixelsShouldBeEqualTo(destination, TestColor);
+            AllPixelsShouldBeEqualTo(destination, color);
 
             source.Dispose();
             destination.Dispose();
@@ -300,6 +300,7 @@ namespace Tests.Drawing
         public void ShouldBlitInSpecifiedRectangles()
         {
             PrintTestName();
+            var color = Color.Red;
             var source = Surface.Create(2, 2);
             var destination = Surface.Create(10, 10);
             var expected = new[] {
@@ -313,10 +314,10 @@ namespace Tests.Drawing
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            }.Select(v => v > 0 ? TestColor : new Color())
+            }.Select(v => v > 0 ? color : new Color())
                 .Select(c => new ColorARGB8888(c));
 
-            source.Fill(TestColor, new Rectangle(0, 0, 1, 1));
+            source.Fill(color, new Rectangle(0, 0, 1, 1));
             source.BlitTo(destination, 
                 srcRect: new Rectangle(0, 0, 1, 1),
                 dstRect: new Rectangle(2, 1, 5, 4));
