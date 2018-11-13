@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using FluentAssertions;
 using Imagini;
+using Imagini.Drawing;
 using Xunit;
 
 namespace Tests
@@ -21,7 +23,7 @@ namespace Tests
             WindowHeight = 50,
             IsResizable = true
         })
-        { 
+        {
             IsFixedTimeStep = false;
         }
 
@@ -34,11 +36,43 @@ namespace Tests
         }
     }
 
-    public class AppTest : TestBase, IDisposable
+    public class AccelerationTestApp : App2D
+    {
+        public AccelerationTestApp(bool accelerated) : base(new WindowSettings()
+        {
+            IsVisible = false,
+            WindowWidth = 100,
+            WindowHeight = 50,
+        }, RendererInfo.All.First(r => r.IsHardwareAccelerated == accelerated))
+        { }
+    }
+
+    public class App2DTest : TestBase, IDisposable
     {
         private SampleApp app = new SampleApp(visible: false);
 
         public void Dispose() => app.Dispose();
+
+
+        [Fact]
+        public void ShouldSupportSoftwareAndHardwareRendering()
+        {
+            var software = new AccelerationTestApp(false);
+            var hardware = new AccelerationTestApp(true);
+
+            software.IsHardwareAccelerated.Should().BeFalse();
+            software.Graphics.Should().BeNull("it's accelerated rendering API");
+            software.Surface.Should().NotBeNull("it's software rendering surface");
+            hardware.IsHardwareAccelerated.Should().BeTrue();
+            hardware.Graphics.Should().NotBeNull("it's accelerated rendering API");
+            hardware.Surface.Should().BeNull("it's software rendering surface");
+
+            software.Tick();
+            hardware.Tick();
+
+            software.Dispose();
+            hardware.Dispose();
+        }
 
         [Fact]
         public void ShouldCallUpdateAndDrawAtLeastOneTimePerTick()
@@ -175,33 +209,33 @@ namespace Tests
         {
             PrintTestName();
             // TargetElapsedTime
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.TargetElapsedTime = TimeSpan.FromMilliseconds(-1));
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.TargetElapsedTime = app.InactiveSleepTime
                     .Add(TimeSpan.FromMilliseconds(1)));
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.TargetElapsedTime = app.MaxElapsedTime
                     .Add(TimeSpan.FromMilliseconds(1)));
             // InactiveSleepTime
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.InactiveSleepTime = TimeSpan.FromMilliseconds(-1));
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.InactiveSleepTime = app.TargetElapsedTime
                     .Subtract(TimeSpan.FromMilliseconds(1)));
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.InactiveSleepTime = app.MaxElapsedTime
                     .Add(TimeSpan.FromMilliseconds(1)));
             // MaxElapsedTime
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.MaxElapsedTime = TimeSpan.FromMilliseconds(-1));
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.MaxElapsedTime = app.TargetElapsedTime
                     .Subtract(TimeSpan.FromMilliseconds(1)));
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => 
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.MaxElapsedTime = app.InactiveSleepTime
                     .Subtract(TimeSpan.FromMilliseconds(1)));
-            
+
             // Check valid values
             app.MaxElapsedTime += TimeSpan.FromMilliseconds(1);
             app.InactiveSleepTime += TimeSpan.FromMilliseconds(1);

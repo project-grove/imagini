@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+using static SDL2.SDL_blendmode;
 using static SDL2.SDL_error;
 using static SDL2.SDL_surface;
 using static Imagini.ErrorHandler;
@@ -8,9 +9,42 @@ using System.Drawing;
 using Imagini;
 using static SDL2.SDL_rect;
 using System.Diagnostics.CodeAnalysis;
+using Imagini.Core.Internal;
 
 namespace Imagini.Drawing
 {
+    /// <summary>
+    /// Defines surface blend modes.
+    /// </summary>
+    /// <remarks>
+    /// None:
+    /// <code>
+    /// dstRGBA = srcRGBA
+    /// </code>
+    /// AlphaBlend:
+    /// <code>
+    /// dstRGB = (srcRGB * srcA) + (dstRGB * (1 - srcA))
+    /// dstA = srcA + (dstA * (1 - srcA))
+    /// </code>
+    /// Add:
+    /// <code>
+    /// dstRGB = (srcRGB * srcA) + dstRGB
+    /// dstA = dstA
+    /// </code>
+    /// Modulate:
+    /// <code>
+    /// dstRGB = srcRGB * dstRGB
+    /// dstA = dstA
+    /// </code>
+    /// </remarks>
+    public enum SurfaceBlendMode
+    {
+        None = SDL_BlendMode.SDL_BLENDMODE_NONE,
+        AlphaBlend = SDL_BlendMode.SDL_BLENDMODE_BLEND,
+        Add = SDL_BlendMode.SDL_BLENDMODE_ADD,
+        Modulate = SDL_BlendMode.SDL_BLENDMODE_MOD
+    }
+
     /// <summary>
     /// Defines a surface which stores it's pixel data in
     /// the RAM.
@@ -62,6 +96,125 @@ namespace Imagini.Drawing
         /// Indicates if this surface has RLE acceleration enabled.
         /// </summary>
         public bool RLEEnabled { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the clipping rectangle.
+        /// </summary>
+        public Rectangle? ClipRect
+        {
+            get
+            {
+                unsafe
+                {
+                    var rect = new SDL_Rect();
+                    var p = &rect;
+                    SDL_GetClipRect(Handle, &rect);
+                    if (rect.x == 0 && rect.y == 0 && rect.w == Width && rect.h == Height)
+                        return null;
+                    return rect.ToRectangle();
+                }
+            }
+            set
+            {
+                unsafe
+                {
+                    var rect = value.HasValue ? value.Value.ToSDL() :
+                        new SDL_Rect() { x = 0, y = 0, w = Width, h = Height };
+                    var p = &rect;
+                    Try(() => SDL_SetClipRect(Handle, p), "SDL_SetClipRect");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the additional color value multiplied into blit operations.
+        /// Only R, G and B channels are used.
+        /// </summary>
+        /// <remarks>
+        /// When this surface is blitted, during the blit operation each source color channel is modulated by the appropriate color value according to the following formula:
+        /// srcC = srcC * (color / 255)
+        /// </remarks>
+        public Color ColorMod
+        {
+            get
+            {
+                byte r = 0; byte g = 0; byte b = 0;
+                Try(() =>
+                    SDL_GetSurfaceColorMod(Handle, ref r, ref g, ref b),
+                    "SDL_GetSurfaceColorMod");
+                return Color.FromArgb(r, g, b);
+            }
+            set
+            {
+                Try(() =>
+                    SDL_SetSurfaceColorMod(Handle, value.R, value.G, value.B),
+                    "SDL_SetSurfaceColorMod");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets an additional alpha value used in blit operations.
+        /// </summary>
+        /// <remarks>
+        /// When this surface is blitted, during the blit operation the source alpha value is modulated by this alpha value according to the following formula:
+        /// srcA = srcA * (alpha / 255)
+        /// </remarks>
+        public byte AlphaMod
+        {
+            get
+            {
+                byte a = 0;
+                Try(() => SDL_GetSurfaceAlphaMod(Handle, ref a),
+                    "SDL_GetSurfaceAlphaMod");
+                return a;
+            }
+            set
+            {
+                Try(() => SDL_SetSurfaceAlphaMod(Handle, value),
+                    "SDL_SetSurfaceAlphaMod");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the blend mode used for blit operations.
+        /// </summary>
+        public SurfaceBlendMode BlendMode
+        {
+            get
+            {
+                var blendMode = SDL_BlendMode.SDL_BLENDMODE_NONE;
+                Try(() => SDL_GetSurfaceBlendMode(Handle, ref blendMode),
+                    "SDL_GetSurfaceBlendMode");
+                return (SurfaceBlendMode)blendMode;
+            }
+            set
+            {
+                var blendMode = (SDL_BlendMode)value;
+                Try(() => SDL_SetSurfaceBlendMode(Handle, blendMode),
+                    "SDL_SetSurfaceBlendMode");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the color key (transparent pixel).
+        /// </summary>
+        public Color? ColorKey
+        {
+            get
+            {
+                var key = 0u;
+                var result = SDL_GetColorKey(Handle, ref key);
+                if (result == 0) return ColorExtensions.FromUint(key, PixelInfo);
+                if (result == -1) return null;
+                throw new ImaginiException($"Could not obtain color key: {SDL_GetError()}");
+            }
+            set
+            {
+                var val = value?.AsUint(PixelInfo) ?? 0u;
+                Try(() => SDL_SetColorKey(Handle, value != null ? 1 : 0, val),
+                    "SDL_SetColorKey");
+            }
+        }
 
         internal Surface(IntPtr handle)
         {
@@ -291,23 +444,29 @@ namespace Imagini.Drawing
             var result = new T[Width * Height];
             var srcHandle = GCHandle.Alloc(source, GCHandleType.Pinned);
             var p = srcHandle.AddrOfPinnedObject();
-            if (PixelInfo.Format != sourceFormat)
+            try
             {
-                var p2 = Marshal.AllocHGlobal(SizeInBytes);
-                Try(() => SDL_ConvertPixels(Width, Height,
-                    (uint)sourceFormat, p, sourceStride,
-                    (uint)PixelInfo.Format, p2, Stride),
-                    "SDL_ConvertPixels");
-                p = p2;
-                shouldFree = true;
+                if (PixelInfo.Format != sourceFormat)
+                {
+                    var p2 = Marshal.AllocHGlobal(SizeInBytes);
+                    shouldFree = true;
+                    Try(() => SDL_ConvertPixels(Width, Height,
+                        (uint)sourceFormat, p, sourceStride,
+                        (uint)PixelInfo.Format, p2, Stride),
+                        "SDL_ConvertPixels");
+                    p = p2;
+                }
+                unsafe
+                {
+                    Buffer.MemoryCopy((void*)p, (void*)_pixels, SizeInBytes, SizeInBytes);
+                }
             }
-            unsafe
+            finally
             {
-                Buffer.MemoryCopy((void*)p, (void*)_pixels, SizeInBytes, SizeInBytes);
+                srcHandle.Free();
+                if (shouldFree)
+                    Marshal.FreeHGlobal(p);
             }
-            srcHandle.Free();
-            if (shouldFree)
-                Marshal.FreeHGlobal(p);
         }
 
         /// <summary>
@@ -331,13 +490,19 @@ namespace Imagini.Drawing
         {
             SDL_Rect? rect = rectangle?.ToSDL();
             var rectHandle = GCHandle.Alloc(rect, GCHandleType.Pinned);
-            unsafe
+            try
             {
-                Try(() => SDL_FillRect(Handle,
-                   (SDL_Rect*)rectHandle.AddrOfPinnedObject(), color.AsUint(PixelInfo)),
-                   "SDL_FillRect");
+                unsafe
+                {
+                    Try(() => SDL_FillRect(Handle,
+                       (SDL_Rect*)rectHandle.AddrOfPinnedObject(), color.AsUint(PixelInfo)),
+                       "SDL_FillRect");
+                }
             }
-            rectHandle.Free();
+            finally
+            {
+                rectHandle.Free();
+            }
         }
 
         /// <summary>
@@ -352,14 +517,20 @@ namespace Imagini.Drawing
             for (int i = 0; i < rects.Length; i++)
                 rects[i] = rectangles[i].ToSDL();
             var rectsHandle = GCHandle.Alloc(rects, GCHandleType.Pinned);
-            unsafe
+            try
             {
-                Try(() => SDL_FillRects(Handle,
-                    rectsHandle.AddrOfPinnedObject(),
-                    rects.Length, color.AsUint(PixelInfo)),
-                    "SDL_FillRects");
+                unsafe
+                {
+                    Try(() => SDL_FillRects(Handle,
+                        rectsHandle.AddrOfPinnedObject(),
+                        rects.Length, color.AsUint(PixelInfo)),
+                        "SDL_FillRects");
+                }
             }
-            rectsHandle.Free();
+            finally
+            {
+                rectsHandle.Free();
+            }
         }
 
         /// <summary>
@@ -374,17 +545,23 @@ namespace Imagini.Drawing
             SDL_Rect? dst = dstRect?.ToSDL();
             var srcHandle = GCHandle.Alloc(src, GCHandleType.Pinned);
             var dstHandle = GCHandle.Alloc(dst, GCHandleType.Pinned);
-            unsafe
+            try
             {
-                Try(() =>
-                    SDL_BlitScaled(Handle,
-                        (SDL_Rect*)srcHandle.AddrOfPinnedObject(),
-                        destination.Handle,
-                        (SDL_Rect*)dstHandle.AddrOfPinnedObject()),
-                    "SDL_BlitScaled");
+                unsafe
+                {
+                    Try(() =>
+                        SDL_BlitScaled(Handle,
+                            (SDL_Rect*)srcHandle.AddrOfPinnedObject(),
+                            destination.Handle,
+                            (SDL_Rect*)dstHandle.AddrOfPinnedObject()),
+                        "SDL_BlitScaled");
+                }
             }
-            srcHandle.Free();
-            dstHandle.Free();
+            finally
+            {
+                srcHandle.Free();
+                dstHandle.Free();
+            }
         }
 
         internal override void Destroy()

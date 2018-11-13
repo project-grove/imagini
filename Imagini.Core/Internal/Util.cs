@@ -36,10 +36,17 @@ namespace Imagini
             var sizeInBytes = SizeOf<T>() * count;
             var dstHandle = GCHandle.Alloc(target, GCHandleType.Pinned);
             var dst = dstHandle.AddrOfPinnedObject();
-            unsafe {
-                Buffer.MemoryCopy((void*)from, (void*)dst, sizeInBytes, sizeInBytes);
+            try
+            {
+                unsafe
+                {
+                    Buffer.MemoryCopy((void*)from, (void*)dst, sizeInBytes, sizeInBytes);
+                }
             }
-            dstHandle.Free();
+            finally
+            {
+                dstHandle.Free();
+            }
         }
 
         public static unsafe int SizeOf<T>() where T : struct
@@ -101,11 +108,21 @@ namespace Imagini
     internal static class Extensions
     {
         public static SDL_Rect ToSDL(this Rectangle src) =>
-            new SDL_Rect() {
+            new SDL_Rect()
+            {
                 x = src.X,
                 y = src.Y,
                 w = src.Width,
                 h = src.Height
+            };
+        
+        public static Rectangle ToRectangle(this SDL_Rect rect) =>
+            new Rectangle()
+            {
+                X = rect.x,
+                Y = rect.y,
+                Width = rect.w,
+                Height = rect.h
             };
     }
 }

@@ -3,7 +3,6 @@ using System.Linq;
 using FluentAssertions;
 using Imagini;
 using Imagini.Drawing;
-using Imagini.ImageSharp;
 using Xunit;
 
 namespace Tests.Drawing
@@ -246,7 +245,7 @@ namespace Tests.Drawing
             var actual = new ColorARGB8888[expected.Count()];
             surface.GetPixelData(ref actual);
             actual.Should().BeEquivalentTo(expected);
-            
+
             surface.Dispose();
         }
 
@@ -269,8 +268,8 @@ namespace Tests.Drawing
             }.Select(v => v > 0 ? TestColor : new Color())
                 .Select(c => new ColorARGB8888(c));
 
-            surface.Fill(TestColor, 
-                new Rectangle(2, 1, 5, 4), 
+            surface.Fill(TestColor,
+                new Rectangle(2, 1, 5, 4),
                 new Rectangle(3, 4, 5, 3));
 
             var actual = new ColorARGB8888[expected.Count()];
@@ -318,16 +317,74 @@ namespace Tests.Drawing
                 .Select(c => new ColorARGB8888(c));
 
             source.Fill(color, new Rectangle(0, 0, 1, 1));
-            source.BlitTo(destination, 
+            source.BlitTo(destination,
                 srcRect: new Rectangle(0, 0, 1, 1),
                 dstRect: new Rectangle(2, 1, 5, 4));
-            
+
             var actual = new ColorARGB8888[destination.PixelCount];
             destination.GetPixelData(ref actual);
             actual.Should().BeEquivalentTo(expected);
-            
+
             source.Dispose();
             destination.Dispose();
+        }
+
+        [Fact]
+        public void ShouldGetAndSetClipRectangle()
+        {
+            var surface = Surface.Create(10, 10);
+            var expected = new Rectangle(1, 2, 3, 4);
+            surface.ClipRect.Should().BeNull();
+            surface.ClipRect = expected;
+            surface.ClipRect.Should().BeEquivalentTo(expected);
+            surface.ClipRect = null;
+            surface.ClipRect.Should().BeNull();
+        }
+
+        [Fact]
+        public void ShouldGetAndSetColorMod()
+        {
+            var surface = Surface.Create(1, 1);
+            var expected = Color.CornflowerBlue.WithoutName();
+            surface.ColorMod.Should().Be(Color.White.WithoutName());
+            surface.ColorMod = expected;
+            surface.ColorMod.Should().Be(expected);
+            surface.Dispose();
+        }
+
+        [Fact]
+        public void ShouldGetAndSetAlphaMod()
+        {
+            var surface = Surface.Create(1, 1);
+            byte expected = 123;
+            surface.AlphaMod.Should().Be(byte.MaxValue);
+            surface.AlphaMod = expected;
+            surface.AlphaMod.Should().Be(expected);
+            surface.Dispose();
+        }
+
+        [Fact]
+        public void ShouldGetAndSetBlendMode()
+        {
+            var surface = Surface.Create(1, 1);
+            var expected = SurfaceBlendMode.Modulate;
+            surface.BlendMode.Should().Be(SurfaceBlendMode.AlphaBlend);
+            surface.BlendMode = expected;
+            surface.BlendMode.Should().Be(expected);
+            surface.Dispose();
+        }
+
+        [Fact]
+        public void ShouldGetAndSetColorKey()
+        {
+            var surface = Surface.Create(1, 1);
+            var expected = Color.CornflowerBlue.WithoutName();
+            surface.ColorKey.Should().BeNull();
+            surface.ColorKey = expected;
+            surface.ColorKey.Should().Be(expected);
+            surface.ColorKey = null;
+            surface.ColorKey.Should().BeNull();
+            surface.Dispose();
         }
 
         private void AllPixelsShouldBeEqualTo(Surface surface, Color color)

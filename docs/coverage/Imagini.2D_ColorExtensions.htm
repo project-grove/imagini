@@ -17,10 +17,10 @@
 <tr><th>Class:</th><td>Imagini.Drawing.ColorExtensions</td></tr>
 <tr><th>Assembly:</th><td>Imagini.2D</td></tr>
 <tr><th>File(s):</th><td><a href="#homerazervscodeprojectsprojectgroveimaginiImagini2DDrawingPalettecs" data-ng-click="navigateToHash('#homerazervscodeprojectsprojectgroveimaginiImagini2DDrawingPalettecs')">/home/razer/vscode-projects/project-grove/imagini/Imagini.2D/Drawing/Palette.cs</a></td></tr>
-<tr><th>Covered lines:</th><td>9</td></tr>
+<tr><th>Covered lines:</th><td>14</td></tr>
 <tr><th>Uncovered lines:</th><td>0</td></tr>
-<tr><th>Coverable lines:</th><td>9</td></tr>
-<tr><th>Total lines:</th><td>114</td></tr>
+<tr><th>Coverable lines:</th><td>14</td></tr>
+<tr><th>Total lines:</th><td>121</td></tr>
 <tr><th>Line coverage:</th><td>100%</td></tr>
 </tbody>
 </table>
@@ -31,6 +31,7 @@
 <tr><td title="System.Drawing.Color Imagini.Drawing.ColorExtensions::FromSDLColor(SDL2.SDL_pixels/SDL_Color)"><a href="#file0_line100" data-ng-click="navigateToHash('#file0_line100')">FromSDLColor(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
 <tr><td title="SDL2.SDL_pixels/SDL_Color Imagini.Drawing.ColorExtensions::ToSDLColor(System.Drawing.Color)"><a href="#file0_line103" data-ng-click="navigateToHash('#file0_line103')">ToSDLColor(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
 <tr><td title="System.UInt32 Imagini.Drawing.ColorExtensions::AsUint(System.Drawing.Color,Imagini.Drawing.PixelFormatInfo)"><a href="#file0_line112" data-ng-click="navigateToHash('#file0_line112')">AsUint(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
+<tr><td title="System.Drawing.Color Imagini.Drawing.ColorExtensions::FromUint(System.UInt32,Imagini.Drawing.PixelFormatInfo)"><a href="#file0_line115" data-ng-click="navigateToHash('#file0_line115')">FromUint(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
 </tbody>
 </table>
 <h1>File(s)</h1>
@@ -149,18 +150,26 @@
 <tr data-coverage="{'AllTestMethods': {'VC': '1032', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1032</td><td class="rightmargin right"><a id="file0_line109"></a><code>109</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line110"></a><code>110</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line111"></a><code>111</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;uint&nbsp;AsUint(this&nbsp;Color&nbsp;color,&nbsp;PixelFormatInfo&nbsp;format)&nbsp;=&gt;</code></td></tr>
-<tr data-coverage="{'AllTestMethods': {'VC': '6', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">6</td><td class="rightmargin right"><a id="file0_line112"></a><code>112</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SDL_MapRGBA(format.Handle,&nbsp;color.R,&nbsp;color.G,&nbsp;color.B,&nbsp;color.A);</code></td></tr>
-<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line113"></a><code>113</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
-<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line114"></a><code>114</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '7', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">7</td><td class="rightmargin right"><a id="file0_line112"></a><code>112</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SDL_MapRGBA(format.Handle,&nbsp;color.R,&nbsp;color.G,&nbsp;color.B,&nbsp;color.A);</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line113"></a><code>113</code></td><td></td><td class="lightgray"><code></code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line114"></a><code>114</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;Color&nbsp;FromUint(uint&nbsp;value,&nbsp;PixelFormatInfo&nbsp;format)</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line115"></a><code>115</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '4', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">4</td><td class="rightmargin right"><a id="file0_line116"></a><code>116</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte&nbsp;r&nbsp;=&nbsp;0;&nbsp;byte&nbsp;g&nbsp;=&nbsp;0;&nbsp;byte&nbsp;b&nbsp;=&nbsp;0;&nbsp;byte&nbsp;a&nbsp;=&nbsp;0;</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line117"></a><code>117</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SDL_GetRGBA(value,&nbsp;format.Handle,&nbsp;ref&nbsp;r,&nbsp;ref&nbsp;g,&nbsp;ref&nbsp;b,&nbsp;ref&nbsp;a);</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line118"></a><code>118</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Color.FromArgb(a,&nbsp;r,&nbsp;g,&nbsp;b);</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line119"></a><code>119</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line120"></a><code>120</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line121"></a><code>121</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
 </tbody>
 </table>
-<div class="footer">Generated by: ReportGenerator 4.0.2.0<br />13.11.18 - 19:02:39<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
+<div class="footer">Generated by: ReportGenerator 4.0.2.0<br />13.11.18 - 21:27:52<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
 <a href="#file0_line100" data-ng-click="navigateToHash('#file0_line100')" title="FromSDLColor(SDL2.SDL_pixels/SDL_Color)"><i class="icon-cube"></i>FromSDLColor(SDL2.SDL_pixels/SDL_Color)</a><br />
 <a href="#file0_line103" data-ng-click="navigateToHash('#file0_line103')" title="ToSDLColor(System.Drawing.Color)"><i class="icon-cube"></i>ToSDLColor(System.Drawing.Color)</a><br />
 <a href="#file0_line112" data-ng-click="navigateToHash('#file0_line112')" title="AsUint(System.Drawing.Color,Imagini.Drawing.PixelFormatInfo)"><i class="icon-cube"></i>AsUint(System.Drawing.Color,Imagini.Drawing.PixelFormatInfo)</a><br />
+<a href="#file0_line115" data-ng-click="navigateToHash('#file0_line115')" title="FromUint(System.UInt32,Imagini.Drawing.PixelFormatInfo)"><i class="icon-cube"></i>FromUint(System.UInt32,Imagini.Drawing.PixelFormatInfo)</a><br />
 <br/></div>
 </div></div>
 <script type="text/javascript" src="combined.js"></script>

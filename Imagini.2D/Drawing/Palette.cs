@@ -110,5 +110,12 @@ namespace Imagini.Drawing
 
         public static uint AsUint(this Color color, PixelFormatInfo format) =>
             SDL_MapRGBA(format.Handle, color.R, color.G, color.B, color.A);
+
+        public static Color FromUint(uint value, PixelFormatInfo format)
+        {
+            byte r = 0; byte g = 0; byte b = 0; byte a = 0;
+            SDL_GetRGBA(value, format.Handle, ref r, ref g, ref b, ref a);
+            return Color.FromArgb(a, r, g, b);
+        }
     }
 }

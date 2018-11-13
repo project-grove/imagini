@@ -17,9 +17,9 @@
 <tr><th>Class:</th><td>Imagini.Display</td></tr>
 <tr><th>Assembly:</th><td>Imagini.Core</td></tr>
 <tr><th>File(s):</th><td><a href="#homerazervscodeprojectsprojectgroveimaginiImaginiCoreDisplaycs" data-ng-click="navigateToHash('#homerazervscodeprojectsprojectgroveimaginiImaginiCoreDisplaycs')">/home/razer/vscode-projects/project-grove/imagini/Imagini.Core/Display.cs</a></td></tr>
-<tr><th>Covered lines:</th><td>26</td></tr>
+<tr><th>Covered lines:</th><td>28</td></tr>
 <tr><th>Uncovered lines:</th><td>0</td></tr>
-<tr><th>Coverable lines:</th><td>26</td></tr>
+<tr><th>Coverable lines:</th><td>28</td></tr>
 <tr><th>Total lines:</th><td>148</td></tr>
 <tr><th>Line coverage:</th><td>100%</td></tr>
 <tr><th>Branch coverage:</th><td>66.6%</td></tr>
@@ -31,7 +31,7 @@
 <tbody>
 <tr><td title="System.Void Imagini.Display::.cctor()"><a href="#file0_line94" data-ng-click="navigateToHash('#file0_line94')">.cctor()</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
 <tr><td title="System.Void Imagini.Display::.ctor(System.Int32)"><a href="#file0_line119" data-ng-click="navigateToHash('#file0_line119')">.ctor(...)</a></td><td>0</td><td>0</td><td>1%</td><td>5%</td></tr>
-<tr><td title="System.Void Imagini.Display::UpdateDisplayInfo()"><a href="#file0_line134" data-ng-click="navigateToHash('#file0_line134')">UpdateDisplayInfo()</a></td><td>0</td><td>0</td><td>1%</td><td>1%</td></tr>
+<tr><td title="System.Void Imagini.Display::UpdateDisplayInfo()"><a href="#file0_line133" data-ng-click="navigateToHash('#file0_line133')">UpdateDisplayInfo()</a></td><td>0</td><td>0</td><td>1%</td><td>1%</td></tr>
 <tr><td title="System.Int32 Imagini.Display::GetCurrentDisplayIndexForWindow(System.IntPtr)"><a href="#file0_line141" data-ng-click="navigateToHash('#file0_line141')">GetCurrentDisplayIndexForWindow(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
 <tr><td title="Imagini.Display Imagini.Display::GetCurrentDisplayForWindow(System.IntPtr)"><a href="#file0_line144" data-ng-click="navigateToHash('#file0_line144')">GetCurrentDisplayForWindow(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
 </tbody>
@@ -160,7 +160,7 @@
 <tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line117"></a><code>117</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internal&nbsp;SDL_Rect&nbsp;Bounds&nbsp;{&nbsp;get;&nbsp;private&nbsp;set;&nbsp;}</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line118"></a><code>118</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line119"></a><code>119</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internal&nbsp;Display(int&nbsp;index)</code></td></tr>
-<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line120"></a><code>120</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line120"></a><code>120</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line121"></a><code>121</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_index&nbsp;=&nbsp;index;</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line122"></a><code>122</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Modes&nbsp;=&nbsp;DisplayMode.GetAvailable(index);</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line123"></a><code>123</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;=&nbsp;SDL_GetDisplayName(_index);</code></td></tr>
@@ -173,7 +173,7 @@
 <tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line130"></a><code>130</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line131"></a><code>131</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line132"></a><code>132</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internal&nbsp;static&nbsp;void&nbsp;UpdateDisplayInfo()</code></td></tr>
-<tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line133"></a><code>133</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line133"></a><code>133</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line134"></a><code>134</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s_displays.Clear();</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line135"></a><code>135</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;numDisplays&nbsp;=&nbsp;TryGet(SDL_GetNumVideoDisplays,&nbsp;&quot;SDL_GetNumVideoDisplays&quot;);</code></td></tr>
 <tr title="2 of 2 branches are covered" data-coverage="{'AllTestMethods': {'VC': '6', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">6</td><td class="rightmargin right"><a id="file0_line136"></a><code>136</code></td><td class="percentagebar100"><i class="icon-fork"></i></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;displayIndex&nbsp;=&nbsp;0;&nbsp;displayIndex&nbsp;&lt;&nbsp;numDisplays;&nbsp;displayIndex++)</code></td></tr>
@@ -181,7 +181,7 @@
 <tr data-coverage="{'AllTestMethods': {'VC': '1', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">1</td><td class="rightmargin right"><a id="file0_line138"></a><code>138</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line139"></a><code>139</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line140"></a><code>140</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internal&nbsp;static&nbsp;int&nbsp;GetCurrentDisplayIndexForWindow(IntPtr&nbsp;window)&nbsp;=&gt;</code></td></tr>
-<tr data-coverage="{'AllTestMethods': {'VC': '52', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">52</td><td class="rightmargin right"><a id="file0_line141"></a><code>141</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TryGet(()&nbsp;=&gt;&nbsp;SDL_GetWindowDisplayIndex(window),&nbsp;&quot;SDL_GetWindowDisplayIndex&quot;);</code></td></tr>
+<tr data-coverage="{'AllTestMethods': {'VC': '58', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">58</td><td class="rightmargin right"><a id="file0_line141"></a><code>141</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TryGet(()&nbsp;=&gt;&nbsp;SDL_GetWindowDisplayIndex(window),&nbsp;&quot;SDL_GetWindowDisplayIndex&quot;);</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line142"></a><code>142</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line143"></a><code>143</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internal&nbsp;static&nbsp;Display&nbsp;GetCurrentDisplayForWindow(IntPtr&nbsp;window)&nbsp;=&gt;</code></td></tr>
 <tr data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line144"></a><code>144</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s_displays[GetCurrentDisplayIndexForWindow(window)];</code></td></tr>
@@ -191,7 +191,7 @@
 <tr data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line148"></a><code>148</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
 </tbody>
 </table>
-<div class="footer">Generated by: ReportGenerator 4.0.2.0<br />13.11.18 - 19:02:40<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
+<div class="footer">Generated by: ReportGenerator 4.0.2.0<br />13.11.18 - 21:27:52<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
@@ -203,7 +203,7 @@
 <a href="#file0_line116" data-ng-click="navigateToHash('#file0_line116')" title="Name()"><i class="icon-wrench"></i>Name()</a><br />
 <a href="#file0_line117" data-ng-click="navigateToHash('#file0_line117')" title="Bounds()"><i class="icon-wrench"></i>Bounds()</a><br />
 <a href="#file0_line119" data-ng-click="navigateToHash('#file0_line119')" title=".ctor(System.Int32)"><i class="icon-cube"></i>.ctor(System.Int32)</a><br />
-<a href="#file0_line134" data-ng-click="navigateToHash('#file0_line134')" title="UpdateDisplayInfo()"><i class="icon-cube"></i>UpdateDisplayInfo()</a><br />
+<a href="#file0_line133" data-ng-click="navigateToHash('#file0_line133')" title="UpdateDisplayInfo()"><i class="icon-cube"></i>UpdateDisplayInfo()</a><br />
 <a href="#file0_line141" data-ng-click="navigateToHash('#file0_line141')" title="GetCurrentDisplayIndexForWindow(System.IntPtr)"><i class="icon-cube"></i>GetCurrentDisplayIndexForWindow(System.IntPtr)</a><br />
 <a href="#file0_line144" data-ng-click="navigateToHash('#file0_line144')" title="GetCurrentDisplayForWindow(System.IntPtr)"><i class="icon-cube"></i>GetCurrentDisplayForWindow(System.IntPtr)</a><br />
 <br/></div>
