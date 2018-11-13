@@ -124,4 +124,6 @@ namespace Imagini.Drawing
         /// </summary>
         public static explicit operator Color(ColorARGB8888 clr) => clr.AsColor();
     }
+
+    // TODO: Add more color types
 }

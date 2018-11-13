@@ -70,7 +70,6 @@ namespace Tests
             window.Destroy();
         }
 
-        // TODO FIXME Looks like the problem is in the event queue
         [Fact(Timeout = 5000)]
         public void ShouldMaximizeMinimizeAndRestoreIfResizable()
         {

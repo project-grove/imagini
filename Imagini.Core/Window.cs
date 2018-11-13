@@ -191,15 +191,11 @@ namespace Imagini
         public void Hide() => NotDisposed(() => SDL_HideWindow(Handle));
 
         /// <summary>
-        /// Gets or sets the visibility of this window.
+        /// Indicates if the window is visible.
         /// </summary>
         public bool IsVisible
         {
             get => HasFlag(SDL_WindowFlags.SDL_WINDOW_SHOWN);
-            set
-            {
-                if (value) Show(); else Hide();
-            }
         }
 
         /// <summary>

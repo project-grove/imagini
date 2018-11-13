@@ -107,5 +107,8 @@ namespace Imagini.Drawing
                 g = color.G,
                 b = color.B
             };
+
+        public static uint AsUint(this Color color, PixelFormatInfo format) =>
+            SDL_MapRGBA(format.Handle, color.R, color.G, color.B, color.A);
     }
 }

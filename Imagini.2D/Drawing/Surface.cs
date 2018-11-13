@@ -4,6 +4,10 @@ using System.Runtime.InteropServices;
 using static SDL2.SDL_error;
 using static SDL2.SDL_surface;
 using static Imagini.ErrorHandler;
+using System.Drawing;
+using Imagini;
+using static SDL2.SDL_rect;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Imagini.Drawing
 {
@@ -30,6 +34,10 @@ namespace Imagini.Drawing
         /// Returns the surface height in pixels.
         /// </summary>
         public int Height { get; private set; }
+        /// <summary>
+        /// Returns the pixel count of the surface (width * height).
+        /// </summary>
+        public int PixelCount => Width * Height;
         /// <summary>
         /// Returns the surface stride (aka pitch, or length of a pixel row) in bytes.
         /// </summary>
@@ -222,6 +230,7 @@ namespace Imagini.Drawing
             return new Surface(handle);
         }
 
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Copies the surface into a new one that has the specified pixel format.
         /// </summary>
@@ -291,7 +300,8 @@ namespace Imagini.Drawing
                 p = p2;
                 shouldFree = true;
             }
-            unsafe {
+            unsafe
+            {
                 Buffer.MemoryCopy((void*)p, (void*)_pixels, SizeInBytes, SizeInBytes);
             }
             srcHandle.Free();
@@ -308,6 +318,72 @@ namespace Imagini.Drawing
             if (MustBeLocked && !Locked)
                 throw new ImaginiException("Surface must be locked before accessing");
             Marshal.Copy(source, 0, _pixels, Stride * Height);
+        }
+
+        /// <summary>
+        /// Performs a fast fill of a rectangle with the specified color. No
+        /// alpha blending is performed if alpha channel data is present.
+        /// </summary>
+        /// <param name="rectangle">Rectangle to fill, or NULL to fill entire surface</param>
+        /// <param name="color">Color to fill with</param>
+        public void Fill(Color color, Rectangle? rectangle = null)
+        {
+            SDL_Rect? rect = rectangle?.ToSDL();
+            var rectHandle = GCHandle.Alloc(rect, GCHandleType.Pinned);
+            unsafe
+            {
+                Try(() => SDL_FillRect(Handle,
+                   (SDL_Rect*)rectHandle.AddrOfPinnedObject(), color.AsUint(PixelInfo)),
+                   "SDL_FillRect");
+            }
+            rectHandle.Free();
+        }
+
+        /// <summary>
+        /// Performs a fast fill of rectangles with the specified color. No
+        /// alpha blending is performed if alpha channel data is present.
+        /// </summary>
+        /// <param name="rectangle">Rectangles to fill</param>
+        /// <param name="color">Color to fill with</param>
+        public void Fill(Color color, params Rectangle[] rectangles)
+        {
+            var rects = new SDL_Rect[rectangles.Length];
+            for (int i = 0; i < rects.Length; i++)
+                rects[i] = rectangles[i].ToSDL();
+            var rectsHandle = GCHandle.Alloc(rects, GCHandleType.Pinned);
+            unsafe
+            {
+                Try(() => SDL_FillRects(Handle,
+                    rectsHandle.AddrOfPinnedObject(),
+                    rects.Length, color.AsUint(PixelInfo)),
+                    "SDL_FillRects");
+            }
+            rectsHandle.Free();
+        }
+
+        /// <summary>
+        /// Performs a scaled surface copy to a destination surface.
+        /// </summary>
+        /// <param name="srcRect">Rectangle to be copied, or null to copy entire surface</param>
+        /// <param name="destination">Blit target</param>
+        /// <param name="dstRect">Rectangle that is copied into, or null to copy into the entire surface</param>
+        public void BlitTo(Surface destination, Rectangle? srcRect = null, Rectangle? dstRect = null)
+        {
+            SDL_Rect? src = srcRect?.ToSDL();
+            SDL_Rect? dst = dstRect?.ToSDL();
+            var srcHandle = GCHandle.Alloc(src, GCHandleType.Pinned);
+            var dstHandle = GCHandle.Alloc(dst, GCHandleType.Pinned);
+            unsafe
+            {
+                Try(() =>
+                    SDL_BlitScaled(Handle,
+                        (SDL_Rect*)srcHandle.AddrOfPinnedObject(),
+                        destination.Handle,
+                        (SDL_Rect*)dstHandle.AddrOfPinnedObject()),
+                    "SDL_BlitScaled");
+            }
+            srcHandle.Free();
+            dstHandle.Free();
         }
 
         internal override void Destroy()

@@ -271,7 +271,7 @@ namespace Imagini
         /// </summary>
         public void Run()
         {
-            while (_isExited)
+            while (!_isExited)
                 Tick();
         }
 

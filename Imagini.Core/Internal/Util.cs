@@ -1,7 +1,10 @@
 using System;
+using System.Drawing;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
+
+using static SDL2.SDL_rect;
 
 namespace Imagini
 {
@@ -92,5 +95,17 @@ namespace Imagini
                     }
             }
         }
+    }
+
+    [ExcludeFromCodeCoverage]
+    internal static class Extensions
+    {
+        public static SDL_Rect ToSDL(this Rectangle src) =>
+            new SDL_Rect() {
+                x = src.X,
+                y = src.Y,
+                w = src.Width,
+                h = src.Height
+            };
     }
 }
