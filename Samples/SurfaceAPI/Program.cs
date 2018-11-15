@@ -34,7 +34,7 @@ namespace SoftwareRendering
         {
             WindowWidth = WindowWidth,
             WindowHeight = WindowHeight
-        }, RendererInfo.All.First(p => !p.IsHardwareAccelerated))
+        }, driver: null, useSurfaceApi: true)
         { }
 
         protected override void Update(TimeSpan frameTime)

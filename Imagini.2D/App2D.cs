@@ -30,6 +30,8 @@ namespace Imagini
         /// <returns></returns>
         public bool IsHardwareAccelerated { get; private set; }
 
+        private readonly bool _useSurfaceApi = false;
+
         /// <summary>
         /// Creates a new app with the specified window settings.
         /// </summary>
@@ -37,10 +39,14 @@ namespace Imagini
         /// If you have your own constructor, make sure to call this
         /// one because it initializes the window and the event queue.
         /// </remarks>
-        public App2D(WindowSettings settings = null, RendererInfo driver = null) : base(settings)
+        /// <param name="driver">Specifies a renderer to be used. If null, first hardware-accelerated renderer is used.</param>
+        /// <param name="useSurfaceApi">If true, initializes <see cref="Surface" /> instead of <see cref="Graphics" /></param>
+        public App2D(WindowSettings settings = null, RendererInfo driver = null,
+            bool useSurfaceApi = false) : base(settings)
         {
+            _useSurfaceApi = useSurfaceApi;
             IsHardwareAccelerated = driver?.IsHardwareAccelerated ?? true;
-            if (IsHardwareAccelerated)
+            if (!useSurfaceApi)
                 Graphics = new Graphics(Window, driver);
             else
             {
@@ -53,7 +59,7 @@ namespace Imagini
 
         protected override void AfterDraw(TimeSpan frameTime)
         {
-            if (IsHardwareAccelerated)
+            if (!_useSurfaceApi)
                 SDL_RenderPresent(Graphics.Handle);
             else
                 SDL_UpdateWindowSurface(Window.Handle);
