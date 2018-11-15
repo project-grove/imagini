@@ -136,5 +136,63 @@ namespace Imagini.Drawing
         public static explicit operator Color(ColorARGB8888 clr) => clr.AsColor();
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ColorRGB888 : IColor
+    {
+        public byte B { get; set; }
+        public byte G { get; set; }
+        public byte R { get; set; }
+
+        public ColorRGB888(Color color)
+        {
+            R = color.R;
+            G = color.G;
+            B = color.B;
+        }
+
+        public PixelFormat Format => PixelFormat.Format_RGB888;
+
+        private bool Equals(ColorRGB888 other)
+        {
+            return R == other.R && G == other.G && B == other.B;
+        }
+
+        /// <summary>
+        /// Checks for object equality.
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            if (obj is ColorRGB888)
+                return Equals((ColorRGB888)obj);
+            return false;
+        }
+
+        /// <summary>
+        /// Calculates the hash code.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            unchecked {
+                return (int)((0xFF << 24) | (R << 16) | (G << 8) | B);
+            }
+        }
+
+        /// <summary>
+        /// Converts to System.Drawing.Color.
+        /// </summary>
+        public Color AsColor() => Color.FromArgb(255, R, G, B);
+
+        [ExcludeFromCodeCoverage]
+        /// <summary>
+        /// Converts from System.Drawing.Color.
+        /// </summary>
+        public static explicit operator ColorRGB888(Color clr) => new ColorRGB888(clr);
+        [ExcludeFromCodeCoverage]
+        /// <summary>
+        /// Converts to System.Drawing.Color.
+        /// </summary>
+        public static explicit operator Color(ColorRGB888 clr) => clr.AsColor();
+    }
+
     // TODO: Add more color types
 }

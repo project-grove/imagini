@@ -37,7 +37,7 @@ namespace Imagini.Drawing
     /// dstA = dstA
     /// </code>
     /// </remarks>
-    public enum SurfaceBlendMode
+    public enum BlendMode
     {
         None = SDL_BlendMode.SDL_BLENDMODE_NONE,
         AlphaBlend = SDL_BlendMode.SDL_BLENDMODE_BLEND,
@@ -178,14 +178,14 @@ namespace Imagini.Drawing
         /// <summary>
         /// Gets or sets the blend mode used for blit operations.
         /// </summary>
-        public SurfaceBlendMode BlendMode
+        public BlendMode BlendMode
         {
             get
             {
                 var blendMode = SDL_BlendMode.SDL_BLENDMODE_NONE;
                 Try(() => SDL_GetSurfaceBlendMode(Handle, ref blendMode),
                     "SDL_GetSurfaceBlendMode");
-                return (SurfaceBlendMode)blendMode;
+                return (BlendMode)blendMode;
             }
             set
             {

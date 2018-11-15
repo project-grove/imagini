@@ -50,11 +50,17 @@ namespace Imagini
                 Graphics = new Graphics(Window, driver);
             else
             {
-                var handle = SDL_GetWindowSurface(Window.Handle);
-                if (handle == IntPtr.Zero)
-                    throw new ImaginiException($"Could not obtain window surface: {SDL_GetError()}");
-                Surface = new Surface(handle);
-            } 
+                Resized += (s, e) => UpdateSurface();
+                UpdateSurface();
+            }
+        }
+
+        private void UpdateSurface()
+        {
+            var handle = SDL_GetWindowSurface(Window.Handle);
+            if (handle == IntPtr.Zero)
+                throw new ImaginiException($"Could not obtain window surface: {SDL_GetError()}");
+            Surface = new Surface(handle);
         }
 
         protected override void AfterDraw(TimeSpan frameTime)

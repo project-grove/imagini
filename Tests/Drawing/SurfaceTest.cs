@@ -367,8 +367,8 @@ namespace Tests.Drawing
         public void ShouldGetAndSetBlendMode()
         {
             var surface = Surface.Create(1, 1);
-            var expected = SurfaceBlendMode.Modulate;
-            surface.BlendMode.Should().Be(SurfaceBlendMode.AlphaBlend);
+            var expected = BlendMode.Modulate;
+            surface.BlendMode.Should().Be(BlendMode.AlphaBlend);
             surface.BlendMode = expected;
             surface.BlendMode.Should().Be(expected);
             surface.Dispose();

@@ -27,7 +27,8 @@ namespace Tests.Drawing
         private static readonly List<Type> _colorTypes = new List<Type>
         {
             typeof(ColorRGBA8888),
-            typeof(ColorARGB8888)
+            typeof(ColorARGB8888),
+            typeof(ColorRGB888)
         };
 
         public ColorDataGenerator()
