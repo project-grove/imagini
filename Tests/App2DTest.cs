@@ -16,13 +16,14 @@ namespace Tests
 
         public bool SimulateSlowRunning { get; set; }
 
-        public SampleApp(bool visible = true) : base(new WindowSettings()
+        public SampleApp(bool visible = true, bool useSurfaceApi = false) : 
+            base(new WindowSettings()
         {
             IsVisible = visible,
             WindowWidth = 100,
             WindowHeight = 50,
             IsResizable = true
-        })
+        }, useSurfaceApi: useSurfaceApi)
         {
             IsFixedTimeStep = false;
         }
@@ -61,17 +62,32 @@ namespace Tests
             var hardware = new AccelerationTestApp(true);
 
             software.IsHardwareAccelerated.Should().BeFalse();
-            software.Graphics.Should().BeNull("it's accelerated rendering API");
-            software.Surface.Should().NotBeNull("it's software rendering surface");
             hardware.IsHardwareAccelerated.Should().BeTrue();
-            hardware.Graphics.Should().NotBeNull("it's accelerated rendering API");
-            hardware.Surface.Should().BeNull("it's software rendering surface");
 
             software.Tick();
             hardware.Tick();
 
             software.Dispose();
             hardware.Dispose();
+        }
+
+        [Fact]
+        public void ShouldSupportOldSurfaceAPI()
+        {
+            var oldApi = new SampleApp(useSurfaceApi: true);
+            var newApi = new SampleApp(useSurfaceApi: false);
+
+            oldApi.Surface.Should().NotBeNull();
+            oldApi.Graphics.Should().BeNull();
+
+            newApi.Graphics.Should().NotBeNull();
+            newApi.Surface.Should().BeNull();
+
+            oldApi.Tick();
+            newApi.Tick();
+
+            oldApi.Dispose();
+            newApi.Dispose();
         }
 
         [Fact]

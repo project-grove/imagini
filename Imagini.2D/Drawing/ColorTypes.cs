@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -63,10 +64,12 @@ namespace Imagini.Drawing
         /// </summary>
         public Color AsColor() => Color.FromArgb(A, R, G, B);
 
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Converts from System.Drawing.Color.
         /// </summary>
         public static explicit operator ColorRGBA8888(Color clr) => new ColorRGBA8888(clr);
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Converts to System.Drawing.Color.
         /// </summary>
@@ -121,10 +124,12 @@ namespace Imagini.Drawing
         /// </summary>
         public Color AsColor() => Color.FromArgb(A, R, G, B);
 
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Converts from System.Drawing.Color.
         /// </summary>
         public static explicit operator ColorARGB8888(Color clr) => new ColorARGB8888(clr);
+        [ExcludeFromCodeCoverage]
         /// <summary>
         /// Converts to System.Drawing.Color.
         /// </summary>
