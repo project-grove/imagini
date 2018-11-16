@@ -11,7 +11,7 @@ namespace Tests.Drawing
     public class GraphicsTest : IDisposable
     {
         Color TestColor = Color.FromArgb(unchecked((int)0xDEADBEEF));
-        SampleApp app = new SampleApp(visible: false);
+        SampleApp app = new SampleApp(visible: true);
         Graphics graphics => app.Graphics;
 
         public void Dispose()
@@ -135,14 +135,9 @@ namespace Tests.Drawing
         }
 
         [Fact]
-        public void ShouldWriteAndReadPixels()
+        public void ShouldReadPixelsFromFramebuffer()
         {
-            var color = Color.CornflowerBlue.WithoutName();
-            var size = graphics.OutputSize;
-            var renderTarget = graphics.CreateTexture(size.Width, size.Height,
-                access: TextureAccess.Target);
-            graphics.SetRenderTarget(renderTarget);
-
+            var color = Color.CornflowerBlue;
             var readBuffer = new ColorRGB888[graphics.PixelCount];
             graphics.ReadPixels(ref readBuffer);
             readBuffer.Distinct().Should().BeEquivalentTo(new ColorRGB888());

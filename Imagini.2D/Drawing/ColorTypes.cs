@@ -142,12 +142,14 @@ namespace Imagini.Drawing
         public byte B { get; set; }
         public byte G { get; set; }
         public byte R { get; set; }
+        byte Padding;
 
         public ColorRGB888(Color color)
         {
             R = color.R;
             G = color.G;
             B = color.B;
+            Padding = 0;
         }
 
         public PixelFormat Format => PixelFormat.Format_RGB888;

@@ -120,53 +120,36 @@ namespace Imagini.Drawing
         }
 
         /// <summary>
-        /// Reads the pixel data from render target to the specified pixel data buffer.
+        /// Reads the pixel data from current render target to the specified pixel data buffer.
         /// </summary>
         /// <param name="pixelData"></param>
         /// <param name="rect">Rectangle to read data from, or null to read entire texture</param>
+        /// <remarks>This function is pretty slow and shouldn't be used often.</remarks>
         public void ReadPixels(ref ColorRGB888[] pixelData, Rectangle? rectangle = null)
         {
             if (pixelData.Length < PixelCount)
                 throw new ArgumentOutOfRangeException("Pixel array is too small");
             SDL_Rect? rect = rectangle?.ToSDL();
             var rectHandle = GCHandle.Alloc(rect, GCHandleType.Pinned);
-            var p = Marshal.AllocHGlobal(3 * PixelCount);
-            // var pixelHandle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
+            var pixelHandle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
             try
             {
                 unsafe
                 {
-                    var pitch = OutputSize.Width * 3;
+                    var pitch = OutputSize.Width * 4;
                     Try(() => SDL_RenderReadPixels(Handle,
                         rectHandle.AddrOfPinnedObject(),
                         (uint)PixelFormat.Format_RGB888,
-                        // pixelHandle.AddrOfPinnedObject(),
-                        p,
+                        pixelHandle.AddrOfPinnedObject(),
                         pitch),
                         "SDL_RenderReadPixels");
                 }
             }
             finally
             {
-                // pixelHandle.Free();
-                Marshal.FreeHGlobal(p);
+                pixelHandle.Free();
                 rectHandle.Free();
             }
-        }
-
-        /// <summary>
-        /// Calculates the buffer size needed for pixel reading operations.
-        /// </summary>
-        /// <param name="rectangle">Rectangle to read the data from, or null to read entire texture</param>
-        /// <seealso cref="ReadPixels" />
-        public int GetPixelBufferSizeInBytes(Rectangle? rectangle = null)
-        {
-            var size = OutputSize;
-            return Texture.InternalGetPixelBufferSizeInBytes(
-                size.Width,
-                size.Height,
-                PixelFormat.Format_RGB888,
-                rectangle);
         }
 
         /// <summary>
@@ -204,6 +187,35 @@ namespace Imagini.Drawing
             SetDrawingColor(color);
             Clear();
             SetDrawingColor(oldColor);
+        }
+
+        /// <summary>
+        /// Copies a portion of the texture to the current rendering target.
+        /// </summary>
+        /// <param name="texture">Texture to copy</param>
+        /// <param name="srcRect">Source rectangle (null for copying whole texture)</param>
+        /// <param name="dstRect">Destination rectangle (null to fill the entire render target)</param>
+        public void Draw(Texture texture, Rectangle? srcRect, Rectangle? dstRect)
+        {
+            var srcR = srcRect?.ToSDL();
+            var dstR = dstRect?.ToSDL();
+            var src = GCHandle.Alloc(srcR, GCHandleType.Pinned);
+            var dst = GCHandle.Alloc(dstR, GCHandleType.Pinned);
+            try
+            {
+                unsafe
+                {
+                    Try(() => SDL_RenderCopy(Handle, texture.Handle,
+                        (SDL_Rect*)src.AddrOfPinnedObject(),
+                        (SDL_Rect*)dst.AddrOfPinnedObject()),
+                        "SDL_RenderCopy");
+                }
+            }
+            finally
+            {
+                src.Free();
+                dst.Free();
+            }
         }
 
         internal override void Destroy()
