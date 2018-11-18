@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Tests.Drawing
 {
+    [DisplayTestMethodName]
     public class PixelsTest
     {
         [Fact]

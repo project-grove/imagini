@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using static SDL2.SDL_surface;
 using static Imagini.ErrorHandler;
+using System;
 
 namespace Imagini.Drawing
 {
@@ -30,16 +31,35 @@ namespace Imagini.Drawing
             var dstHandle = GCHandle.Alloc(dst, GCHandleType.Pinned);
             try
             {
-                Try(() => SDL_ConvertPixels(width, height,
-                    (uint)srcFormat, srcHandle.AddrOfPinnedObject(), srcStride,
-                    (uint)dstFormat, dstHandle.AddrOfPinnedObject(), dstStride),
-                    "SDL_ConvertPixels");
+                Convert(width, height, srcStride, dstStride,
+                    srcFormat, dstFormat,
+                    srcHandle.AddrOfPinnedObject(), dstHandle.AddrOfPinnedObject());
             }
             finally
             {
                 srcHandle.Free();
                 dstHandle.Free();
             }
+        }
+
+        /// <summary>
+        /// Copies a block of pixels of one format to another format.
+        /// </summary>
+        /// <param name="width">The width of the block to copy, in pixels</param>
+        /// <param name="height">The height of the block to copy, in pixels</param>
+        /// <param name="srcStride">The stride (pitch) of the block to copy</param>
+        /// <param name="dstStride">The stride (pitch) of the destination pixels</param>
+        /// <param name="srcFormat">Source pixel format</param>
+        /// <param name="dstFormat">Destination pixel format</param>
+        /// <param name="src">Source pixel data</param>
+        /// <param name="dst">Destination pixel data</param>
+        public static void Convert(int width, int height, int srcStride, int dstStride,
+            PixelFormat srcFormat, PixelFormat dstFormat, IntPtr src, IntPtr dst)
+        {
+            Try(() => SDL_ConvertPixels(width, height,
+                (uint)srcFormat, src, srcStride,
+                (uint)dstFormat, dst, dstStride),
+                "SDL_ConvertPixels");
         }
     }
 }

@@ -8,14 +8,15 @@ using Xunit;
 
 namespace Tests.ImageSharp
 {
-    public class SurfaceTest : TestBase
+    [DisplayTestMethodName]
+    public class SurfaceExtensionsTest 
     {
         Color TestColor = Color.FromArgb(unchecked((int)0xDEADBEEF));
 
         [Fact]
         public void ShouldSaveAndLoadAsPNG()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(10, 10);
             surface.Fill(TestColor);
             

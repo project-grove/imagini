@@ -9,7 +9,8 @@ using Xunit;
 namespace Tests
 {
 #if !HEADLESS
-    public class EventsTest : TestBase, IDisposable
+    [DisplayTestMethodName]
+    public class EventsTest : IDisposable
     {
         readonly Window window;
         readonly EventManager.EventQueue eventQueue;
@@ -30,7 +31,7 @@ namespace Tests
         [Fact]
         public void ShouldNotChangeEventData()
         {
-            PrintTestName();
+            
             var expected = new List<CommonEventArgs>()
             {
                 new WindowStateChangeEventArgs(WindowStateChange.None),

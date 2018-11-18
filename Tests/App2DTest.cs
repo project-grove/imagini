@@ -49,7 +49,8 @@ namespace Tests
         { }
     }
 
-    public class App2DTest : TestBase, IDisposable
+    [DisplayTestMethodName]
+    public class App2DTest : IDisposable
     {
         private SampleApp app = new SampleApp(visible: false);
 
@@ -59,6 +60,7 @@ namespace Tests
         [Fact]
         public void ShouldSupportSoftwareAndHardwareRendering()
         {
+            
             var software = new AccelerationTestApp(false);
             var hardware = new AccelerationTestApp(true);
 
@@ -75,6 +77,7 @@ namespace Tests
         [Fact]
         public void ShouldSupportOldSurfaceAPI()
         {
+            
             var oldApi = new SampleApp(useSurfaceApi: true);
             var newApi = new SampleApp(useSurfaceApi: false);
 
@@ -94,7 +97,7 @@ namespace Tests
         [Fact]
         public void ShouldCallUpdateAndDrawAtLeastOneTimePerTick()
         {
-            PrintTestName();
+            
             app.UpdateCalls.Should().Be(0, "the app just started");
             app.DrawCalls.Should().Be(0, "the app just started");
             app.Tick();
@@ -105,7 +108,7 @@ namespace Tests
         [Fact]
         public void ShouldNotCallDrawIfSuppressed()
         {
-            PrintTestName();
+            
             app.SuppressDraw();
             app.Tick();
             app.UpdateCalls.Should().Be(1, "one tick performed");
@@ -118,7 +121,7 @@ namespace Tests
         [Fact]
         public void ShouldWorkInFixedTimeStepMode()
         {
-            PrintTestName();
+            
             app.IsFixedTimeStep = true;
             for (int i = 1; i <= 5; i++)
             {
@@ -131,7 +134,7 @@ namespace Tests
         [Fact]
         public void ShouldWorkInVariableTimeStepMode()
         {
-            PrintTestName();
+            
             app.IsFixedTimeStep = false;
             for (int i = 0; i < 5; i++)
                 app.Tick();
@@ -142,7 +145,7 @@ namespace Tests
         [Fact]
         public void ShouldReportSlowRunning()
         {
-            PrintTestName();
+            
             app.IsFixedTimeStep = true;
             var frames = 10;
             app.SimulateSlowRunning = true;
@@ -158,7 +161,7 @@ namespace Tests
         [Fact]
         public void ShouldNotExitIfCancelled()
         {
-            PrintTestName();
+            
             app.IsExited.Should().BeFalse();
             app.IsExiting.Should().BeFalse();
             // let's cancel our first exit request
@@ -182,7 +185,7 @@ namespace Tests
         [Fact]
         public void ShouldToggleMouseVisibility()
         {
-            PrintTestName();
+            
             app.IsMouseVisible = false;
             app.IsMouseVisible.Should().BeFalse();
             app.IsMouseVisible = true;
@@ -192,7 +195,7 @@ namespace Tests
         [Fact]
         public void ShouldReportEventsWhenStateIsModified()
         {
-            PrintTestName();
+            
             var expected = new HashSet<string>() {
                 "resized",
                 "deactivated",
@@ -224,7 +227,7 @@ namespace Tests
         [Fact]
         public void ShouldDisallowInvalidTimingValues()
         {
-            PrintTestName();
+            
             // TargetElapsedTime
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.TargetElapsedTime = TimeSpan.FromMilliseconds(-1));
@@ -262,7 +265,7 @@ namespace Tests
         [Fact]
         public void ShouldResetElapsedTimeIfRequested()
         {
-            PrintTestName();
+            
             app.IsFixedTimeStep = true;
             app.ElapsedAppTime.Should().Be(TimeSpan.Zero);
             app.Tick();

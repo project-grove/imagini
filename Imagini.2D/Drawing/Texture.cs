@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using static Imagini.ErrorHandler;
 using static SDL2.SDL_blendmode;
+using static SDL2.SDL_rect;
 using static SDL2.SDL_render;
 using static SDL2.SDL_surface;
 
@@ -66,9 +67,12 @@ namespace Imagini.Drawing
         /// </summary>
         public int Height { get; private set; }
         /// <summary>
+        /// Returns the pixel count of this texture (width * height).
+        /// </summary>
+        public int PixelCount => Width * Height;
+        /// <summary>
         /// Gets the pixel format of this texture.
         /// </summary>
-        /// <returns></returns>
         public PixelFormat Format { get; private set; }
         /// <summary>
         /// Gets the <see cref="TextureAccess" /> for this texture.
@@ -192,11 +196,10 @@ namespace Imagini.Drawing
             return result;
         }
 
-        /// <summary>
+          /// <summary>
         /// Use this function to update the given texture rectangle with new
         /// pixel data.
         /// </summary>
-        /// <param name="rect">Area to update, or null to update entire texture</param>
         /// <param name="pixelData">Pixel data array</param>
         /// <remarks>
         /// The pixel data must be in the pixel format of the texture.
@@ -204,7 +207,7 @@ namespace Imagini.Drawing
         /// If the texture is intended to be updated often, it is preferred to
         /// create the texture as streaming and use the locking functions.
         /// </remarks>
-        public void SetPixels(byte[] pixelData, Rectangle? rect = null)
+        public void SetPixels(ref byte[] pixelData, Rectangle? rect = null)
         {
             if (GetPixelBufferSizeInBytes(rect) > pixelData.Length)
                 throw new ArgumentOutOfRangeException("Pixel array is too small");
@@ -213,17 +216,95 @@ namespace Imagini.Drawing
             var pixelHandle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
             try
             {
+                // TODO FIXME Copy row by row, see SetPixels<T>
                 Try(() => SDL_UpdateTexture(Handle,
                     rectHandle.AddrOfPinnedObject(),
                     pixelHandle.AddrOfPinnedObject(),
                     Width * Format.GetBytesPerPixel()),
                     "SDL_UpdateTexture");
+            } finally {
+                rectHandle.Free();
+                pixelHandle.Free();
+            }
+        }
+
+        /// <summary>
+        /// Use this function to update the given texture rectangle with new
+        /// pixel data.
+        /// </summary>
+        /// <param name="rect">Area to update, or null to update entire texture</param>
+        /// <param name="pixelData">Pixel data array</param>
+        /// <remarks>
+        /// This is a fairly slow function, intended for use with static textures that do not change often.
+        /// If the texture is intended to be updated often, it is preferred to
+        /// create the texture as streaming and use the locking functions.
+        /// </remarks>
+        public void SetPixels<T>(ref T[] pixelData, Rectangle? rect = null)
+            where T : struct, IColor
+        {
+            var srcBpp = pixelData[0].Format.GetBytesPerPixel();
+            var dstBpp = Format.GetBytesPerPixel();
+            var sizeInBytes = GetPixelBufferSizeInBytes(rect);
+            if (GetPixelBufferSize<T>(rect) > pixelData.Length)
+                throw new ArgumentOutOfRangeException("Pixel array is too small");
+            var r = rect?.ToSDL();
+            var rectHandle = GCHandle.Alloc(r, GCHandleType.Pinned);
+            var pixelHandle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
+            try
+            {
+                var width = rect?.Width ?? Width;
+                var height = rect?.Height ?? Height;
+                var tmpBuffer = pixelHandle.AddrOfPinnedObject();
+                var shouldFree = false;
+                if (pixelData[0].Format != Format)
+                {
+                    tmpBuffer = Marshal.AllocHGlobal(sizeInBytes);
+                    Pixels.Convert(width, height, width * srcBpp, width * dstBpp,
+                        pixelData[0].Format, Format,
+                        pixelHandle.AddrOfPinnedObject(), tmpBuffer);
+                    shouldFree = true;
+                }
+                // fast path for full-width update
+                if (Width == width)
+                    SetPixelsInternal(rectHandle.AddrOfPinnedObject(), tmpBuffer);
+                else
+                {
+                    // update each row part
+                    unsafe
+                    {
+                        SDL_Rect rows = r.Value;
+                        var row = stackalloc int[4];
+                        *row = rows.x;
+                        *(row + 1) = rows.y;
+                        *(row + 2) = rows.w;
+                        *(row + 3) = 1;
+                        var index = 0;
+                        for (int y = rows.y; y < rows.y + rows.h; y++)
+                        {
+                            *(row + 1) = y;
+                            SetPixelsInternal((IntPtr)row,
+                                (IntPtr)((byte*)tmpBuffer + index * rows.w * dstBpp));
+                            index++;
+                        }
+                    }
+                }
+                if (shouldFree)
+                    Marshal.FreeHGlobal(tmpBuffer);
             }
             finally
             {
-                pixelHandle.Free();
                 rectHandle.Free();
+                pixelHandle.Free();
             }
+        }
+
+        private void SetPixelsInternal(IntPtr rect, IntPtr pixels)
+        {
+            Try(() => SDL_UpdateTexture(Handle,
+                rect,
+                pixels,
+                Width * Format.GetBytesPerPixel()),
+                "SDL_UpdateTexture");
         }
 
         /// <summary>
@@ -235,18 +316,27 @@ namespace Imagini.Drawing
         public int GetPixelBufferSizeInBytes(Rectangle? rectangle = null) =>
             InternalGetPixelBufferSizeInBytes(Width, Height, Format, rectangle);
 
+        /// <summary>
+        /// Calculates the buffer size needed for pixel writing and reading
+        /// operations.
+        /// </summary>
+        /// <param name="rectangle">Rectangle to read the data from, or null to read entire texture</param>
+        /// <seealso cref="Lock" />
+        public int GetPixelBufferSize<T>(Rectangle? rectangle = null)
+            where T : struct, IColor =>
+            InternalGetPixelBufferSize(Width, Height, rectangle);
+
+        internal static int InternalGetPixelBufferSize(int width, int height, Rectangle? rectangle)
+        {
+            if (!rectangle.HasValue) return width * height;
+            return rectangle.Value.Width * rectangle.Value.Height;
+        }
+
         internal static int InternalGetPixelBufferSizeInBytes(int width, int height,
             PixelFormat format, Rectangle? rectangle)
         {
             var bpp = format.GetBytesPerPixel();
-            if (!rectangle.HasValue) return width * height * bpp;
-            var rect = rectangle.Value;
-            var length = width * rect.Height * bpp;
-            // substract pixels before top left rectangle corner
-            length -= rect.X * bpp;
-            // substract pixels after bottom right rectangle corner
-            length -= (width - rect.Width - rect.X) * bpp;
-            return length;
+            return InternalGetPixelBufferSize(width, height, rectangle) * bpp;
         }
 
         /// <summary>

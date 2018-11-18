@@ -8,12 +8,13 @@ using Xunit;
 
 namespace Tests.Drawing
 {
-    public class PaletteTest : TestBase
+    [DisplayTestMethodName]
+    public class PaletteTest 
     {
         [Fact]
         public void ShouldSetColors()
         {
-            PrintTestName();
+            
             var expected = new[] {
                 Color.Red,
                 Color.Lime,
@@ -30,7 +31,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldThrowIfInvalidColorCount()
         {
-            PrintTestName();
+            
             var zeroColors = new Color[] { };
             var tooManyColors = Enumerable.Repeat(Color.Black, Palette.MaximumColors + 1);
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() => new Palette(zeroColors));

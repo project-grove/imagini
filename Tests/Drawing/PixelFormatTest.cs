@@ -7,7 +7,8 @@ using Xunit;
 
 namespace Tests.Drawing
 {
-    public class PixelFormatTest : TestBase
+    [DisplayTestMethodName]
+    public class PixelFormatTest 
     {
         PixelFormat[] indexedFormats = new[] {
                 PixelFormat.Format_INDEX1LSB,
@@ -49,7 +50,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCheckIfFormatIsIndexed()
         {
-            PrintTestName();
+            
             Assert.All(indexedFormats, format =>
             {
                 format.IsIndexed().Should().BeTrue();
@@ -62,7 +63,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCheckIfFormatIsFourCC()
         {
-            PrintTestName();
+            
             var formats = new[] {
                 PixelFormat.Format_YV12,
                 PixelFormat.Format_IYUV,
@@ -106,7 +107,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldReturnComponentType()
         {
-            PrintTestName();
+            
             Func<IEnumerable<PixelFormat>, IEnumerable<PixelComponentType>> ComponentTypeOf =
                 input => input.Select(f => f.GetComponentType()).Distinct();
 
@@ -118,7 +119,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldReturnPixelLayout()
         {
-            PrintTestName();
+            
             var pairs = new Dictionary<PixelFormat, PixelLayout>()
             {
                 { PixelFormat.Format_RGB332, PixelLayout.Packed332 },

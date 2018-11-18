@@ -4,10 +4,12 @@ using System.Linq;
 using FluentAssertions;
 using Imagini;
 using Imagini.Drawing;
+using Imagini.ImageSharp;
 using Xunit;
 
 namespace Tests.Drawing
 {
+    [DisplayTestMethodName]
     public class GraphicsTest : IDisposable
     {
         Color TestColor = Color.FromArgb(unchecked((int)0xDEADBEEF));
@@ -22,7 +24,7 @@ namespace Tests.Drawing
         [Theory]
         [InlineData(TextureAccess.Static, PixelFormat.Format_ARGB8888)]
         [InlineData(TextureAccess.Streaming, PixelFormat.Format_RGBA8888)]
-        [InlineData(TextureAccess.Streaming, PixelFormat.Format_ABGR8888)]
+        [InlineData(TextureAccess.Target, PixelFormat.Format_ABGR8888)]
         public void ShouldCreateTexturesWithSpecifiedParameters(
             TextureAccess access,
             PixelFormat format
@@ -94,9 +96,9 @@ namespace Tests.Drawing
             var rectangle = new Rectangle(2, 1, 3, 3);
             var expectedLength = new[] {
                 0, 0, 0, 0, 0, 0,
-                0, 0, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 0,
+                0, 0, 1, 1, 1, 0,
+                0, 0, 1, 1, 1, 0,
+                0, 0, 1, 1, 1, 0,
                 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0,
             }.Count(locked => locked == 1) * bpp;
@@ -145,6 +147,55 @@ namespace Tests.Drawing
             graphics.Clear(color);
             graphics.ReadPixels(ref readBuffer);
             readBuffer.Distinct().Should().BeEquivalentTo(new ColorRGB888(color));
+        }
+
+        [Fact]
+        public void ShouldReadPixelsFromFramebufferInRectangle()
+        {
+            var color = Color.CornflowerBlue;
+            var rectangle = new Rectangle(5, 5, 10, 10);
+            var readBuffer = new ColorRGB888[graphics.GetPixelBufferSize(rectangle)];
+            graphics.ReadPixels(ref readBuffer, rectangle);
+            readBuffer.Distinct().Should().BeEquivalentTo(new ColorRGB888());
+
+            graphics.Clear(color);
+            graphics.ReadPixels(ref readBuffer, rectangle);
+            readBuffer.Distinct().Should().BeEquivalentTo(new ColorRGB888(color));
+        }
+
+        [Fact]
+        public void ShouldSetAllTexturePixels()
+        {
+            var color = Color.CornflowerBlue;
+            var size = graphics.OutputSize;
+            var texture = graphics.CreateTexture(size.Width, size.Height);
+            var pixels = Enumerable.Repeat(new ColorRGB888(color), 
+                texture.PixelCount)
+                .ToArray();
+            texture.SetPixels(ref pixels);
+            graphics.Draw(texture);
+            var actual = new ColorRGB888[texture.PixelCount];
+            graphics.ReadPixels(ref actual);
+            actual.Should().BeEquivalentTo(pixels);
+        }
+
+        [Fact]
+        public void ShouldSetTexturePixelsInRectangle()
+        {
+            var screenSize = graphics.OutputSize;
+            var portion = new Rectangle(5, 10, 15, 20);
+            var texture = graphics.CreateTexture(screenSize.Width, screenSize.Height);
+            var pixelCount = texture.GetPixelBufferSize<ColorRGB888>(portion);
+            var pixels = new ColorRGB888[pixelCount];
+            for (int i = 0; i < pixelCount; i++)
+                pixels[i] = new ColorRGB888(
+                    Color.FromArgb(i % 200 + 55, i % 200 + 55, i % 200 + 55));
+            
+            texture.SetPixels(ref pixels, portion);
+            graphics.Draw(texture);
+            var actual = new ColorRGB888[pixelCount];
+            graphics.ReadPixels(ref actual, portion);
+            actual.Should().BeEquivalentTo(pixels);
         }
     }
 }

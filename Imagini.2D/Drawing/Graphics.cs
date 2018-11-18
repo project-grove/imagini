@@ -127,16 +127,17 @@ namespace Imagini.Drawing
         /// <remarks>This function is pretty slow and shouldn't be used often.</remarks>
         public void ReadPixels(ref ColorRGB888[] pixelData, Rectangle? rectangle = null)
         {
-            if (pixelData.Length < PixelCount)
+            if (pixelData.Length < GetPixelBufferSize(rectangle))
                 throw new ArgumentOutOfRangeException("Pixel array is too small");
             SDL_Rect? rect = rectangle?.ToSDL();
             var rectHandle = GCHandle.Alloc(rect, GCHandleType.Pinned);
             var pixelHandle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
+            var width = rect?.w ?? OutputSize.Width;
             try
             {
                 unsafe
                 {
-                    var pitch = OutputSize.Width * 4;
+                    var pitch = width * 4;
                     Try(() => SDL_RenderReadPixels(Handle,
                         rectHandle.AddrOfPinnedObject(),
                         (uint)PixelFormat.Format_RGB888,
@@ -150,6 +151,17 @@ namespace Imagini.Drawing
                 pixelHandle.Free();
                 rectHandle.Free();
             }
+        }
+        /// <summary>
+        /// Calculates the buffer size needed for pixel writing and reading
+        /// operations.
+        /// </summary>
+        /// <param name="rectangle">Rectangle to read the data from, or null to read entire texture</param>
+        /// <seealso cref="Lock" />
+        public int GetPixelBufferSize(Rectangle? rectangle = null)
+        {
+            var size = OutputSize;
+            return Texture.InternalGetPixelBufferSize(size.Width, size.Height, rectangle);
         }
 
         /// <summary>
@@ -195,7 +207,8 @@ namespace Imagini.Drawing
         /// <param name="texture">Texture to copy</param>
         /// <param name="srcRect">Source rectangle (null for copying whole texture)</param>
         /// <param name="dstRect">Destination rectangle (null to fill the entire render target)</param>
-        public void Draw(Texture texture, Rectangle? srcRect, Rectangle? dstRect)
+        public void Draw(Texture texture, Rectangle? srcRect = null,
+            Rectangle? dstRect = null)
         {
             var srcR = srcRect?.ToSDL();
             var dstR = dstRect?.ToSDL();

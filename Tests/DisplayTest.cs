@@ -3,12 +3,13 @@ using Xunit;
 
 namespace Tests
 {
-    public class DisplayTest : TestBase
+    [DisplayTestMethodName]
+    public class DisplayTest 
     {
         [Fact]
         public void ShouldEnumerateDisplays()
         {
-            PrintTestName();
+            
             Assert.NotNull(Display.All);
 #if !HEADLESS
             Assert.NotEmpty(Display.All);
@@ -19,7 +20,7 @@ namespace Tests
         [Fact]
         public void ShouldEnumerateDisplayModes()
         {
-            PrintTestName();
+            
             foreach(var display in Display.All)
             {
                 Assert.NotEmpty(display.Modes);

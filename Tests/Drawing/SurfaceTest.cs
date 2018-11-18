@@ -8,14 +8,15 @@ using Xunit;
 namespace Tests.Drawing
 {
 #if !HEADLESS
-    public class SurfaceTest : TestBase
+    [DisplayTestMethodName]
+    public class SurfaceTest 
     {
         Color TestColor = Color.FromArgb(unchecked((int)0xDEADBEEF));
 
         [Fact]
         public void ShouldCreateRGBASurfaceWithDefaultParameters()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(200, 100);
             surface.Width.Should().Be(200);
             surface.Height.Should().Be(100);
@@ -27,7 +28,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCreateSurfaceWhenMaskIsSpecified()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(200, 100, depth: 32,
                 Rmask: 0x000000FF,
                 Gmask: 0x0000FF00,
@@ -43,7 +44,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCreateSurfaceWithTheSpecifiedFormat()
         {
-            PrintTestName();
+            
             var targetFormat = PixelFormat.Format_ARGB8888;
             var surface = Surface.Create(200, 100, targetFormat);
             surface.Width.Should().Be(200);
@@ -56,7 +57,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldFailWhenInvalidSurfaceParametersArePassed()
         {
-            PrintTestName();
+            
             Assert.Throws<ImaginiException>(() =>
             {
                 var invalidSurface = Surface.Create(0, 0, depth: 0);
@@ -66,7 +67,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldConvertToSpecifiedFormat()
         {
-            PrintTestName();
+            
             var width = 10;
             var height = 10;
             var source = Surface.Create(width, height, PixelFormat.Format_RGBA8888);
@@ -90,7 +91,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldOptimizeForSpecifiedFormat()
         {
-            PrintTestName();
+            
             var targetFormat = PixelFormat.Format_BGRA8888;
             var source = Surface.Create(200, 100);
             source.PixelInfo.Format.Should().NotBe(targetFormat);
@@ -104,7 +105,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldToggleRLEAndSupportLocking()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(200, 100);
             surface.RLEEnabled.Should().BeFalse();
             surface.SetRLEAcceleration(enable: true);
@@ -125,7 +126,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldAllowModifyingThePixelData()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(10, 10, PixelFormat.Format_ARGB8888);
             surface.Stride.Should().Be(4 * surface.Width);
             surface.SizeInBytes.Should().Be(surface.Stride * surface.Height);
@@ -149,7 +150,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCreateSurfaceFromExistingData()
         {
-            PrintTestName();
+            
             var format = PixelFormat.Format_ABGR8888;
             var width = 10;
             var height = 10;
@@ -169,7 +170,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldNotConvertPixelDataIfTheFormatIsSame()
         {
-            PrintTestName();
+            
             var width = 10;
             var height = 10;
             var surface = Surface.Create(width, height, PixelFormat.Format_RGBA8888);
@@ -192,7 +193,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldConvertPixelDataIfFormatsAreDifferent()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(10, 10, PixelFormat.Format_RGBA8888);
             var pixels = Enumerable.Repeat<ColorARGB8888>(
                 new ColorARGB8888(TestColor), surface.PixelCount).ToArray();
@@ -213,7 +214,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldFillWholeSurfaceWhenNoRectangleIsSpecified()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(10, 10);
             AllPixelsShouldBeEqualTo(surface, new Color());
             surface.Fill(TestColor);
@@ -225,7 +226,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldFillSpecifiedRectangle()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(10, 10);
             var expected = new[] {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -252,7 +253,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldFillSpecifiedRectangles()
         {
-            PrintTestName();
+            
             var surface = Surface.Create(10, 10);
             var expected = new[] {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -282,7 +283,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldBlitToWholeSurface()
         {
-            PrintTestName();
+            
             var color = Color.Red;
             var source = Surface.Create(5, 5);
             var destination = Surface.Create(5, 5);
@@ -298,7 +299,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldBlitInSpecifiedRectangles()
         {
-            PrintTestName();
+            
             var color = Color.Red;
             var source = Surface.Create(2, 2);
             var destination = Surface.Create(10, 10);

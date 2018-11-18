@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Tests.Drawing
 {
+    [DisplayTestMethodName]
     public class ColorTypesTest
     {
         [Theory]

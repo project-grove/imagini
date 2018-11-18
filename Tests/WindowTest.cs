@@ -7,12 +7,13 @@ using Xunit;
 namespace Tests
 {
 #if !HEADLESS
-    public class WindowTest : TestBase
+    [DisplayTestMethodName]
+    public class WindowTest 
     {
         [Fact]
         public void ShouldCreateWindow()
         {
-            PrintTestName();
+            
             var expectedSize = new Size(200, 100);
             var settings = new WindowSettings()
             {
@@ -33,7 +34,7 @@ namespace Tests
         [Fact]
         public void ShouldSetMinimumAndMaximumSize()
         {
-            PrintTestName();
+            
             var minSize = new Size(100, 50);
             var expectedSize = minSize * 2;
             var maxSize = minSize * 3;
@@ -54,7 +55,7 @@ namespace Tests
         [Fact]
         public void ShouldSetWindowSize()
         {
-            PrintTestName();
+            
             var startSize = new Size(100, 50);
             var newSize = startSize * 2;
             var settings = new WindowSettings()
@@ -73,7 +74,7 @@ namespace Tests
         [Fact(Timeout = 5000)]
         public void ShouldMaximizeMinimizeAndRestoreIfResizable()
         {
-            PrintTestName();
+            
             var size = new Size(100, 50);
             var settings = new WindowSettings()
             {
@@ -110,7 +111,7 @@ namespace Tests
         [Fact]
         public void ShouldToggleVSync()
         {
-            PrintTestName();
+            
             var settings = new WindowSettings()
             {
                 VSync = false
@@ -130,7 +131,7 @@ namespace Tests
         [Fact]
         public void ShouldReportWindowCount()
         {
-            PrintTestName();
+            
             var settings = new WindowSettings()
             {
                 WindowWidth = 100,

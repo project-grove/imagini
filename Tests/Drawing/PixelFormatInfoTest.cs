@@ -9,7 +9,8 @@ using Xunit;
 
 namespace Tests.Drawing
 {
-    public class PixelFormatInfoTest : TestBase
+    [DisplayTestMethodName]
+    public class PixelFormatInfoTest 
     {
         Func<EquivalencyAssertionOptions<PixelFormatInfo>, EquivalencyAssertionOptions<PixelFormatInfo>> options =
             o => o
@@ -19,7 +20,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCreateFormatsWithoutPalette()
         {
-            PrintTestName();
+            
             var format = new PixelFormatInfo(PixelFormat.Format_RGBA8888);
             format.Format.Should().Be(PixelFormat.Format_RGBA8888);
             Assert.Null(format.Palette);
@@ -41,7 +42,7 @@ namespace Tests.Drawing
         [Fact]
         public void ShouldCreateFormatsWithPalette()
         {
-            PrintTestName();
+            
             var colors = Enumerable.Repeat(Color.Red.WithoutName(), 256);
             var format = new PixelFormatInfo(PixelFormat.Format_INDEX8);
             var palette = new Palette(colors);
