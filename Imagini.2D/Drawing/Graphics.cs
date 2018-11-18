@@ -152,6 +152,7 @@ namespace Imagini.Drawing
                 rectHandle.Free();
             }
         }
+
         /// <summary>
         /// Calculates the buffer size needed for pixel writing and reading
         /// operations.

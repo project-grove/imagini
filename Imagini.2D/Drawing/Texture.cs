@@ -196,7 +196,7 @@ namespace Imagini.Drawing
             return result;
         }
 
-          /// <summary>
+        /// <summary>
         /// Use this function to update the given texture rectangle with new
         /// pixel data.
         /// </summary>
@@ -214,15 +214,41 @@ namespace Imagini.Drawing
             var r = rect?.ToSDL();
             var rectHandle = GCHandle.Alloc(r, GCHandleType.Pinned);
             var pixelHandle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
+            var bpp = Format.GetBytesPerPixel();
             try
             {
-                // TODO FIXME Copy row by row, see SetPixels<T>
-                Try(() => SDL_UpdateTexture(Handle,
-                    rectHandle.AddrOfPinnedObject(),
-                    pixelHandle.AddrOfPinnedObject(),
-                    Width * Format.GetBytesPerPixel()),
-                    "SDL_UpdateTexture");
-            } finally {
+                var width = rect?.Width ?? Width;
+                var height = rect?.Height ?? Height;
+                if (width == Width)
+                {
+                    // fast path for full-width copy
+                    SetPixelsInternal(
+                        rectHandle.AddrOfPinnedObject(),
+                        pixelHandle.AddrOfPinnedObject());
+                } else {
+                    // update each row part
+                    var p = pixelHandle.AddrOfPinnedObject();
+                    unsafe
+                    {
+                        SDL_Rect rows = r.Value;
+                        var row = stackalloc int[4];
+                        *row = rows.x;
+                        *(row + 1) = rows.y;
+                        *(row + 2) = rows.w;
+                        *(row + 3) = 1;
+                        var index = 0;
+                        for (int y = rows.y; y < rows.y + rows.h; y++)
+                        {
+                            *(row + 1) = y;
+                            SetPixelsInternal((IntPtr)row,
+                                (IntPtr)((byte*)p + index * rows.w * bpp));
+                            index++;
+                        }
+                    }
+                }
+            }
+            finally
+            {
                 rectHandle.Free();
                 pixelHandle.Free();
             }

@@ -158,7 +158,12 @@ namespace Tests.Drawing
             graphics.ReadPixels(ref readBuffer, rectangle);
             readBuffer.Distinct().Should().BeEquivalentTo(new ColorRGB888());
 
-            graphics.Clear(color);
+            var texture = graphics.CreateTexture(rectangle.Width, rectangle.Height);
+            var textureData = Enumerable.Repeat(new ColorRGB888(color),
+                texture.PixelCount).ToArray();
+            texture.SetPixels(ref textureData);
+            graphics.Draw(texture, dstRect: rectangle);
+
             graphics.ReadPixels(ref readBuffer, rectangle);
             readBuffer.Distinct().Should().BeEquivalentTo(new ColorRGB888(color));
         }
@@ -179,12 +184,15 @@ namespace Tests.Drawing
             actual.Should().BeEquivalentTo(pixels);
         }
 
-        [Fact]
-        public void ShouldSetTexturePixelsInRectangle()
+        [Theory]
+        [InlineData(PixelFormat.Format_ARGB8888)]
+        [InlineData(PixelFormat.Format_RGB888)]
+        public void ShouldSetTexturePixelsInRectangle(PixelFormat format)
         {
             var screenSize = graphics.OutputSize;
             var portion = new Rectangle(5, 10, 15, 20);
-            var texture = graphics.CreateTexture(screenSize.Width, screenSize.Height);
+            var texture = graphics.CreateTexture(screenSize.Width, screenSize.Height,
+                format: format);
             var pixelCount = texture.GetPixelBufferSize<ColorRGB888>(portion);
             var pixels = new ColorRGB888[pixelCount];
             for (int i = 0; i < pixelCount; i++)
@@ -196,6 +204,52 @@ namespace Tests.Drawing
             var actual = new ColorRGB888[pixelCount];
             graphics.ReadPixels(ref actual, portion);
             actual.Should().BeEquivalentTo(pixels);
+        }
+
+        [Fact]
+        public void ShouldSetAllBytes()
+        {
+            var width = 10;
+            var height = 10;
+            var format = PixelFormat.Format_RGB888;
+            var texture = graphics.CreateTexture(width, height, 
+                format: format);
+            var pixels = new byte[width * height * format.GetBytesPerPixel()];
+            for (int i = 0; i < pixels.Length; i++)
+                pixels[i] = 255;
+            texture.SetPixels(ref pixels);
+            graphics.Draw(texture);
+
+            var actual = new ColorRGB888[texture.PixelCount];
+            graphics.ReadPixels(ref actual, new Rectangle(0, 0, width, height));
+            actual.Distinct().Should().BeEquivalentTo(
+                new ColorRGB888(Color.White)
+            );
+        }
+
+        [Fact]
+        public void ShouldSetBytesInRectangle()
+        {
+            var width = 10;
+            var height = 10;
+            var rectangle = new Rectangle(5, 5, width, height);
+            var format = PixelFormat.Format_RGB888;
+            var texture = graphics.CreateTexture(
+                graphics.OutputSize.Width,
+                graphics.OutputSize.Height, 
+                format: format);
+            var pixels = new byte[width * height * format.GetBytesPerPixel()];
+
+            for (int i = 0; i < pixels.Length; i++)
+                pixels[i] = 255;
+            texture.SetPixels(ref pixels, rectangle);
+            graphics.Draw(texture);
+
+            var actual = new ColorRGB888[width * height];
+            graphics.ReadPixels(ref actual, rectangle);
+            actual.Distinct().Should().BeEquivalentTo(
+                new ColorRGB888(Color.White)
+            );
         }
     }
 }
