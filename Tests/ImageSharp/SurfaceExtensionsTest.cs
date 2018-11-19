@@ -29,8 +29,8 @@ namespace Tests.ImageSharp
 
             var pixels = new ColorRGBA8888[surface.PixelCount];
             var samePixels = new ColorRGBA8888[surface.PixelCount];
-            surface.GetPixelData(ref pixels);
-            sameSurface.GetPixelData(ref samePixels);
+            surface.ReadPixels(ref pixels);
+            sameSurface.ReadPixels(ref samePixels);
             samePixels.Should().BeEquivalentTo(pixels);
         }
     }

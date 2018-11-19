@@ -1,6 +1,8 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static Imagini.ErrorHandler;
 using static SDL2.SDL_error;
@@ -40,6 +42,7 @@ namespace Imagini.Drawing
             }
         }
 
+        [ExcludeFromCodeCoverage]
         internal Graphics(Window owner, RendererInfo rendererInfo)
         {
             var fallbackRenderer =
@@ -130,8 +133,8 @@ namespace Imagini.Drawing
             if (pixelData.Length < GetPixelBufferSize(rectangle))
                 throw new ArgumentOutOfRangeException("Pixel array is too small");
             SDL_Rect? rect = rectangle?.ToSDL();
-            var rectHandle = GCHandle.Alloc(rect, GCHandleType.Pinned);
-            var pixelHandle = GCHandle.Alloc(pixelData, GCHandleType.Pinned);
+            var rectHandle = Pin(rect);
+            var pixelHandle = Pin(pixelData);
             var width = rect?.w ?? OutputSize.Width;
             try
             {
@@ -213,8 +216,8 @@ namespace Imagini.Drawing
         {
             var srcR = srcRect?.ToSDL();
             var dstR = dstRect?.ToSDL();
-            var src = GCHandle.Alloc(srcR, GCHandleType.Pinned);
-            var dst = GCHandle.Alloc(dstR, GCHandleType.Pinned);
+            var src = Pin(srcR);
+            var dst = Pin(dstR);
             try
             {
                 unsafe
@@ -232,6 +235,51 @@ namespace Imagini.Drawing
             }
         }
 
+        /// <summary>
+        /// Copies a portion of the texture to the current rendering target.
+        /// </summary>
+        /// <param name="texture">Texture to copy</param>
+        /// <param name="srcRect">Source rectangle (null for copying whole texture)</param>
+        /// <param name="dstRect">Destination rectangle (null to fill the entire render target)</param>
+        /// <param name="angle">
+        /// Angle in degrees that indicates the rotation that will be applied
+        /// to dstRect, rotating it in a clockwise direction
+        /// </param>
+        /// <param name="center">
+        /// Point around which dstRect will be rotated (if null, rotation will be
+        /// done around dstRect's center)
+        /// </param>
+        /// <param name="flip">
+        /// Flipping actions that should be performed on the texture
+        /// </param>
+        public void Draw(Texture texture, Rectangle? srcRect,
+            Rectangle? dstRect, double angle = 0.0,
+            Point? center = null, TextureFlip flip = TextureFlip.None)
+        {
+            var srcR = Pin(srcRect?.ToSDL());
+            var dstR = Pin(dstRect?.ToSDL());
+            var cntr = Pin(center?.ToSDL());
+            try
+            {
+                unsafe
+                {
+                    Try(() => SDL_RenderCopyEx(Handle, texture.Handle,
+                        (SDL_Rect*)srcR.AddrOfPinnedObject(),
+                        (SDL_Rect*)dstR.AddrOfPinnedObject(),
+                        angle,
+                        (SDL_Point*)cntr.AddrOfPinnedObject(),
+                        (SDL_RendererFlip)flip),
+                        "SDL_RenderCopyEx");
+                }
+            }
+            finally
+            {
+                srcR.Free();
+                dstR.Free();
+                cntr.Free();
+            }
+        }
+
         internal override void Destroy()
         {
             if (IsDisposed) return;
@@ -240,5 +288,10 @@ namespace Imagini.Drawing
         }
 
         static Graphics() => Lifecycle.TryInitialize();
+
+        // TODO Explore possibility of using stackalloc instead of pinning
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static GCHandle Pin(object obj) => GCHandle.Alloc(obj, GCHandleType.Pinned);
     }
 }

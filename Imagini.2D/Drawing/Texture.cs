@@ -48,6 +48,19 @@ namespace Imagini.Drawing
         }
     }
 
+    [Flags]
+    /// <summary>
+    /// Enumeration of flags that can be used as flip parameter in rendering
+    /// operations.
+    /// </summary>
+    public enum TextureFlip
+    {
+        None = SDL_RendererFlip.SDL_FLIP_NONE,
+        Horizontal = SDL_RendererFlip.SDL_FLIP_HORIZONTAL,
+        Vertical = SDL_RendererFlip.SDL_FLIP_VERTICAL,
+        Both = Horizontal | Vertical
+    }
+
     /// <summary>
     /// Defines a texture which stores it's data on GPU.
     /// </summary>
@@ -66,6 +79,10 @@ namespace Imagini.Drawing
         /// Gets the height of this texture in pixels.
         /// </summary>
         public int Height { get; private set; }
+        /// <summary>
+        /// Returns the size of this texture in pixels.
+        /// </summary>
+        public Size Size => new Size(Width, Height);
         /// <summary>
         /// Returns the pixel count of this texture (width * height).
         /// </summary>

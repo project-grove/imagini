@@ -15,8 +15,13 @@ namespace Tests.Drawing
         public void ShouldConvertToColorAndBack(dynamic color)
         {
             var convertedToColor = (Color)color;
+            var inversedColor = Activator.CreateInstance(color.GetType(),
+                Color.FromArgb(~convertedToColor.ToArgb())
+            );
             var sameColor = Activator.CreateInstance(color.GetType(), convertedToColor);
+            
             Assert.Equal(color, sameColor);
+            Assert.NotEqual(color, inversedColor);
         }
     }
 

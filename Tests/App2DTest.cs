@@ -23,7 +23,7 @@ namespace Tests
             WindowWidth = 100,
             WindowHeight = 50,
             IsResizable = true
-        }, driver: RendererInfo.All.First(r => r.IsSoftware),
+        }, /* driver: RendererInfo.All.First(r => r.IsSoftware), */
         useSurfaceApi: useSurfaceApi)
         {
             IsFixedTimeStep = false;

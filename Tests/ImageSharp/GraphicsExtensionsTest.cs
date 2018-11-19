@@ -31,7 +31,7 @@ namespace Tests.ImageSharp
             var surface = SurfaceFactory.FromStream(ms, new PngDecoder());
             
             var pixels = new ColorRGB888[surface.PixelCount];
-            surface.GetPixelData(ref pixels);
+            surface.ReadPixels(ref pixels);
             pixels.Distinct().Select(c => c.AsColor())
                 .Should().BeEquivalentTo(color);
         }

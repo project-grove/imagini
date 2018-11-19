@@ -77,11 +77,11 @@ namespace Tests.Drawing
             // Set the pixel data and check it
             source.SetPixelData(ref pixels);
             var currentPixels = new ColorRGBA8888[source.PixelCount];
-            source.GetPixelData(ref currentPixels);
+            source.ReadPixels(ref currentPixels);
             currentPixels.Should().BeEquivalentTo(pixels);
             // Convert the surface and check it again
             var converted = source.ConvertTo(PixelFormat.Format_ARGB8888);
-            source.GetPixelData(ref currentPixels);
+            source.ReadPixels(ref currentPixels);
             currentPixels.Should().BeEquivalentTo(pixels);
 
             source.Dispose();
@@ -133,7 +133,7 @@ namespace Tests.Drawing
 
             var data = new byte[surface.SizeInBytes];
             // Read the surface data
-            surface.GetPixelData(ref data);
+            surface.ReadPixels(ref data);
             Assert.All(data, b => b.Should().Be(0));
             // Set all pixels to white
             for (int i = 0; i < data.Length; i++)
@@ -141,7 +141,7 @@ namespace Tests.Drawing
             surface.SetPixelData(ref data);
             // Read the data again and compare
             var sameData = new byte[surface.SizeInBytes];
-            surface.GetPixelData(ref sameData);
+            surface.ReadPixels(ref sameData);
             data.Should().BeEquivalentTo(sameData);
 
             surface.Dispose();
@@ -161,7 +161,7 @@ namespace Tests.Drawing
             var surface = Surface.CreateFrom(data, width, height, format);
             // Read the pixel data and compare
             var sameData = new byte[data.Length];
-            surface.GetPixelData(ref sameData);
+            surface.ReadPixels(ref sameData);
             data.Should().BeEquivalentTo(sameData);
 
             surface.Dispose();
@@ -179,12 +179,12 @@ namespace Tests.Drawing
 
             // Read and convert the current pixel data
             var currentPixels = new ColorRGBA8888[surface.PixelCount];
-            surface.GetPixelData(ref currentPixels);
+            surface.ReadPixels(ref currentPixels);
             AllPixelsShouldBeEqualTo(currentPixels, new Color());
 
             // Convert and set the pixel data
             surface.SetPixelData(ref pixels);
-            surface.GetPixelData(ref currentPixels);
+            surface.ReadPixels(ref currentPixels);
             currentPixels.Should().BeEquivalentTo(pixels);
 
             surface.Dispose();
@@ -200,12 +200,12 @@ namespace Tests.Drawing
 
             // Read and convert the current pixel data
             var currentPixels = new ColorARGB8888[surface.PixelCount];
-            surface.GetPixelData(ref currentPixels);
+            surface.ReadPixels(ref currentPixels);
             AllPixelsShouldBeEqualTo(currentPixels, new Color());
 
             // Convert and set the pixel data
             surface.SetPixelData(ref pixels);
-            surface.GetPixelData(ref currentPixels);
+            surface.ReadPixels(ref currentPixels);
             currentPixels.Should().BeEquivalentTo(pixels);
 
             surface.Dispose();
@@ -244,7 +244,7 @@ namespace Tests.Drawing
 
             surface.Fill(TestColor, new Rectangle(2, 1, 5, 4));
             var actual = new ColorARGB8888[expected.Count()];
-            surface.GetPixelData(ref actual);
+            surface.ReadPixels(ref actual);
             actual.Should().BeEquivalentTo(expected);
 
             surface.Dispose();
@@ -274,7 +274,7 @@ namespace Tests.Drawing
                 new Rectangle(3, 4, 5, 3));
 
             var actual = new ColorARGB8888[expected.Count()];
-            surface.GetPixelData(ref actual);
+            surface.ReadPixels(ref actual);
             actual.Should().BeEquivalentTo(expected);
 
             surface.Dispose();
@@ -323,7 +323,7 @@ namespace Tests.Drawing
                 dstRect: new Rectangle(2, 1, 5, 4));
 
             var actual = new ColorARGB8888[destination.PixelCount];
-            destination.GetPixelData(ref actual);
+            destination.ReadPixels(ref actual);
             actual.Should().BeEquivalentTo(expected);
 
             source.Dispose();
@@ -391,7 +391,7 @@ namespace Tests.Drawing
         private void AllPixelsShouldBeEqualTo(Surface surface, Color color)
         {
             var pixels = new ColorARGB8888[surface.PixelCount];
-            surface.GetPixelData(ref pixels);
+            surface.ReadPixels(ref pixels);
             AllPixelsShouldBeEqualTo(pixels, color);
         }
 

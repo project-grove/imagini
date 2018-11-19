@@ -124,5 +124,12 @@ namespace Imagini
                 Width = rect.w,
                 Height = rect.h
             };
+        
+        public static SDL_Point ToSDL(this Point point) =>
+            new SDL_Point()
+            {
+                x = point.X,
+                y = point.Y
+            };
     }
 }

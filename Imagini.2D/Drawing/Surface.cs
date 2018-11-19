@@ -394,7 +394,7 @@ namespace Imagini.Drawing
         /// Reads the pixel data to the specified pixel buffer, making automatic
         /// conversion if necessary.
         /// </summary>
-        public void GetPixelData<T>(ref T[] target)
+        public void ReadPixels<T>(ref T[] target)
             where T : struct, IColor
         {
             if (MustBeLocked && !Locked)
@@ -422,7 +422,7 @@ namespace Imagini.Drawing
         /// <summary>
         /// Copies the pixel data in the specified byte array.
         /// </summary>
-        public void GetPixelData(ref byte[] target)
+        public void ReadPixels(ref byte[] target)
         {
             if (MustBeLocked && !Locked)
                 throw new ImaginiException("Surface must be locked before accessing");
