@@ -317,6 +317,272 @@ namespace Tests.Drawing
             actual.Should().Equal(pixels);
         }
 
+        [Theory]
+        [InlineData(BlendMode.Add)]
+        [InlineData(BlendMode.AlphaBlend)]
+        [InlineData(BlendMode.Modulate)]
+        public void ShouldGetAndSetGlobalBlendMode(BlendMode mode)
+        {
+            graphics.SetBlendMode(BlendMode.None);
+            graphics.GetBlendMode().Should().Be(BlendMode.None);
+            graphics.SetBlendMode(mode);
+            graphics.GetBlendMode().Should().Be(mode);
+        }
+
+        [Fact]
+        public void ShouldGetAndSetClipRectangle()
+        {
+            graphics.GetClipRectangle().Should().BeNull();
+            var rectangle = new Rectangle(5, 10, 15, 20);
+            graphics.SetClipRectangle(rectangle);
+            graphics.GetClipRectangle().Should().Be(rectangle);
+            graphics.SetClipRectangle(null);
+            graphics.GetClipRectangle().Should().BeNull();
+        }
+
+        [Fact]
+        public void ShouldGetAndSetViewport()
+        {
+            var wholeTarget = new Rectangle(Point.Empty, graphics.OutputSize);
+            graphics.GetViewport().Should().Be(wholeTarget);
+            var rectangle = new Rectangle(5, 10, 15, 20);
+            graphics.SetViewport(rectangle);
+            graphics.GetViewport().Should().Be(rectangle);
+            graphics.SetViewport(null);
+            graphics.GetViewport().Should().Be(wholeTarget);
+        }
+
+        [Fact]
+        public void ShouldGetAndSetScale()
+        {
+            graphics.GetScale().Should().Be(new SizeF(1.0f, 1.0f));
+            var expected = new SizeF(2.0f, 2.0f);
+            graphics.SetScale(expected);
+            graphics.GetScale().Should().Be(expected);
+        }
+
+        [Fact]
+        public void ShouldGetAndSetLogicalSize()
+        {
+            graphics.GetLogicalSize().Should().Be(Size.Empty);
+            var expected = graphics.OutputSize / 2;
+            graphics.SetLogicalSize(expected);
+            graphics.GetLogicalSize().Should().Be(expected);
+        }
+
+        [Fact]
+        public void ShouldDrawLine()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 5, 3);
+            var expected = new []
+            {
+                0, 0, 0, 0, 0,
+                0, 1, 1, 1, 0,
+                0, 0, 0, 0, 0,
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.DrawLine(new Point(1, 1), new Point(3, 1));
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+        [Fact]
+        public void ShouldDrawLines()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 5, 5);
+            var expected = new []
+            {
+                1, 1, 1, 1, 1,
+                0, 0, 0, 0, 1,
+                0, 0, 0, 0, 1,
+                0, 0, 0, 0, 1,
+                0, 0, 0, 0, 1,
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.DrawLines(
+                new Point(0, 0),
+                new Point(4, 0),
+                new Point(4, 4)
+            );
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void ShouldDrawPoint()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 5, 5);
+            var expected = new []
+            {
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 1, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.DrawPoint(new Point(1, 2));
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void ShouldDrawPoints()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 5, 5);
+            var expected = new []
+            {
+                0, 0, 0, 0, 0,
+                0, 0, 1, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 1, 0, 1, 0,
+                0, 0, 0, 0, 0,
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.DrawPoints(
+                new Point(1, 3),
+                new Point(2, 1),
+                new Point(3, 3)
+            );
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void ShouldDrawRect()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 5, 4);
+            // Ignoring the bottom line due to rendering inconsistency bug
+            // https://bugzilla.libsdl.org/show_bug.cgi?id=3182
+            var expected = new []
+            {
+                1, 1, 1, 1, 1,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.DrawRect(new Rectangle(0, 0, 5, 5));
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void ShouldDrawRects()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 6, 4);
+            // Ignoring the bottom line due to rendering inconsistency bug
+            // https://bugzilla.libsdl.org/show_bug.cgi?id=3182
+            var expected = new []
+            {
+                1, 1, 1, 1, 1, 1,
+                1, 0, 1, 1, 0, 1,
+                1, 0, 1, 1, 0, 1,
+                1, 0, 1, 1, 0, 1,
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.DrawRects(
+                new Rectangle(0, 0, 3, 5),
+                new Rectangle(3, 0, 3, 5)
+            );
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void ShouldFillRect()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 5, 5);
+            var expected = new []
+            {
+                0, 0, 0, 0, 0,
+                0, 1, 1, 1, 0,
+                0, 1, 1, 1, 0,
+                0, 1, 1, 1, 0,
+                0, 0, 0, 0, 0,
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.FillRect(new Rectangle(1, 1, 3, 3));
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void ShouldFillRects()
+        {
+            var color = Color.CornflowerBlue;
+            var rect = new Rectangle(0, 0, 5, 5);
+            var expected = new []
+            {
+                1, 1, 1, 0, 0,
+                1, 1, 1, 0, 0,
+                1, 1, 1, 0, 0,
+                0, 0, 0, 1, 1,
+                0, 0, 0, 1, 1
+            }.Select(v => v > 0 ? color : Color.Black)
+                .Select(c => new ColorRGB888(c))
+                .ToArray();
+
+            graphics.Clear(Color.Black);
+            graphics.SetDrawingColor(color);
+            graphics.FillRects(
+                new Rectangle(0, 0, 3, 3),
+                new Rectangle(3, 3, 2, 2)
+            );
+
+            var pixels = new ColorRGB888[graphics.GetPixelBufferSize(rect)];
+            graphics.ReadPixels(ref pixels, rect);
+            pixels.Should().Equal(expected);
+        }
+
         private Rectangle? Project(Texture texture, Rectangle? src, Rectangle? dst)
         {
             if (src == null && dst == null) return null;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static Imagini.ErrorHandler;
+using static SDL2.SDL_blendmode;
 using static SDL2.SDL_error;
 using static SDL2.SDL_hints;
 using static SDL2.SDL_rect;
@@ -189,6 +190,175 @@ namespace Imagini.Drawing
         }
 
         /// <summary>
+        /// Sets the blend mode.
+        /// </summary>
+        public void SetBlendMode(BlendMode mode) =>
+            Try(() => SDL_SetRenderDrawBlendMode(Handle, (SDL_BlendMode)mode),
+                "SDL_SetRenderDrawBlendMode");
+
+        /// <summary>
+        /// Gets the blend mode.
+        /// </summary>
+        public BlendMode GetBlendMode()
+        {
+            SDL_BlendMode val = SDL_BlendMode.SDL_BLENDMODE_NONE;
+            Try(() => SDL_GetRenderDrawBlendMode(Handle, ref val),
+                "SDL_GetRenderDrawBlendMode");
+            return (BlendMode)val;
+        }
+
+        /// <summary>
+        /// Sets the clipping rectangle.
+        /// </summary>
+        /// <param name="rect">Clipping rectangle. If null, disables clipping</param>
+        public void SetClipRectangle(Rectangle? rect)
+        {
+            var rectHandle = Pin(rect?.ToSDL());
+            try
+            {
+                unsafe
+                {
+                    Try(() => SDL_RenderSetClipRect(Handle,
+                        (SDL_Rect*)rectHandle.AddrOfPinnedObject()),
+                        "SDL_RenderSetClipRect");
+                }
+            }
+            finally
+            {
+                rectHandle.Free();
+            }
+        }
+
+        /// <summary>
+        /// Gets the clip rectangle, or null if clipping is disabled.
+        /// </summary>
+        public Rectangle? GetClipRectangle()
+        {
+            unsafe
+            {
+                var p = stackalloc int[4];
+                SDL_RenderGetClipRect(Handle, (SDL_Rect*)p);
+                var value = new Rectangle(
+                    *p,
+                    *(p + 1),
+                    *(p + 2),
+                    *(p + 3)
+                );
+                if (value.Size == Size.Empty)
+                    return null;
+                return value;
+            }
+        }
+
+        /// <summary>
+        /// Sets the viewport.
+        /// </summary>
+        /// <param name="rect">Viewport rectangle. If null, whole target is used</param>
+        public void SetViewport(Rectangle? rect)
+        {
+            var rectHandle = Pin(rect?.ToSDL());
+            try
+            {
+                unsafe
+                {
+                    Try(() => SDL_RenderSetViewport(Handle,
+                        (SDL_Rect*)rectHandle.AddrOfPinnedObject()),
+                        "SDL_RenderSetViewport");
+                }
+            }
+            finally
+            {
+                rectHandle.Free();
+            }
+        }
+
+        /// <summary>
+        /// Gets the current viewport bounds.
+        /// </summary>
+        public Rectangle GetViewport()
+        {
+            unsafe
+            {
+                var p = stackalloc int[4];
+                SDL_RenderGetViewport(Handle, (SDL_Rect*)p);
+                var value = new Rectangle(
+                    *p,
+                    *(p + 1),
+                    *(p + 2),
+                    *(p + 3)
+                );
+                return value;
+            }
+        }
+
+        /// <summary>
+        /// Sets the drawing scale factor for the current target.
+        /// </summary>
+        public void SetScale(float scaleX, float scaleY) =>
+            Try(() => SDL_RenderSetScale(Handle, scaleX, scaleY),
+                "SDL_RenderSetScale");
+
+        /// <summary>
+        /// Sets the drawing scale factor for the current target.
+        /// </summary>
+        public void SetScale(SizeF scale) =>
+            SetScale(scale.Width, scale.Height);
+
+        /// <summary>
+        /// Gets the drawing scale factor for the current target.
+        /// </summary>
+        public void GetScale(out float scaleX, out float scaleY)
+        {
+            var sX = 0.0f;
+            var sY = 0.0f;
+            SDL_RenderGetScale(Handle, ref sX, ref sY);
+            scaleX = sX; scaleY = sY;
+        }
+
+        /// <summary>
+        /// Gets the drawing scale factor for the current target.
+        /// </summary>
+        public SizeF GetScale()
+        {
+            GetScale(out float scaleX, out float scaleY);
+            return new SizeF(scaleX, scaleY);
+        }
+
+        /// <summary>
+        /// Sets a device independent resolution for rendering.
+        /// </summary>
+        public void SetLogicalSize(int width, int height) =>
+            Try(() => SDL_RenderSetLogicalSize(Handle, width, height),
+                "SDL_RenderSetLogicalSize");
+
+        /// <summary>
+        /// Sets a device independent resolution for rendering.
+        /// </summary>
+        public void SetLogicalSize(Size size) =>
+            SetLogicalSize(size.Width, size.Height);
+
+        /// <summary>
+        /// Gets a device independent resolution for rendering. If it was never
+        /// set, returns zeros.
+        /// </summary>
+        public void GetLogicalSize(out int width, out int height)
+        {
+            var w = 0; var h = 0;
+            SDL_RenderGetLogicalSize(Handle, ref w, ref h);
+            width = w; height = h;
+        }
+
+        /// <summary>
+        /// Gets a device independent resolution for rendering. If it was never
+        /// set, returns zeros.
+        /// </summary>
+        public Size GetLogicalSize()
+        {
+            GetLogicalSize(out int w, out int h);
+            return new Size(w, h);
+        }
+
+        /// <summary>
         /// Clears the current render target with the drawing color.
         /// </summary>
         public void Clear() =>
@@ -277,6 +447,168 @@ namespace Imagini.Drawing
                 srcR.Free();
                 dstR.Free();
                 cntr.Free();
+            }
+        }
+
+        /// <summary>
+        /// Draws a line between two points with the current color.
+        /// </summary>
+        public void DrawLine(int x1, int y1, int x2, int y2) =>
+            Try(() =>
+                SDL_RenderDrawLine(Handle, x1, y1, x2, y2),
+                "SDL_RenderDrawLine");
+
+        /// <summary>
+        /// Draws a line between two points with the current color.
+        /// </summary>
+        public void DrawLine(Point from, Point to) =>
+            DrawLine(from.X, from.Y, to.X, to.Y);
+
+        /// <summary>
+        /// Draws a series of connected lines between the specified points with
+        /// the current color.
+        /// </summary>
+        public void DrawLines(params Point[] points)
+        {
+            unsafe
+            {
+                var p = Pin(points);
+                try
+                {
+                    Try(() => SDL_RenderDrawLines(Handle,
+                        (SDL_Point*)p.AddrOfPinnedObject(), points.Length),
+                        "SDL_RenderDrawLines");
+                }
+                finally
+                {
+                    p.Free();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws a point at the specified coordinates using current color.
+        /// </summary>
+        public void DrawPoint(int x, int y) =>
+            Try(() => SDL_RenderDrawPoint(Handle, x, y),
+                "SDL_RenderDrawPoint");
+
+        /// <summary>
+        /// Draws a point at the specified coordinates using current color.
+        /// </summary>
+        public void DrawPoint(Point point) =>
+            DrawPoint(point.X, point.Y);
+
+        /// <summary>
+        /// Draws points at the specified coordinates using current color.
+        /// </summary>
+        public void DrawPoints(params Point[] points)
+        {
+            unsafe
+            {
+                var p = Pin(points);
+                try
+                {
+                    Try(() => SDL_RenderDrawPoints(Handle,
+                        (SDL_Point*)p.AddrOfPinnedObject(), points.Length),
+                        "SDL_RenderDrawPoints");
+                }
+                finally
+                {
+                    p.Free();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws a rectangle outline with the current color.
+        /// </summary>
+        /// <param name="rectangle">Rectangle to draw outline for. If null,
+        /// outlines a whole target.</param>
+        public void DrawRect(Rectangle? rectangle)
+        {
+            unsafe
+            {
+                var p = Pin(rectangle);
+                try
+                {
+                    Try(() => 
+                        SDL_RenderDrawRect(Handle, (SDL_Rect*)p.AddrOfPinnedObject()),
+                        "SDL_RenderDrawRect");
+                }
+                finally
+                {
+                    p.Free();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws a rectangle outline with the current color.
+        /// </summary>
+        /// <param name="rectangles">Rectangles to draw outline for</param>
+        public void DrawRects(params Rectangle[] rectangles)
+        {
+            unsafe
+            {
+                var p = Pin(rectangles);
+                try
+                {
+                    Try(() => 
+                        SDL_RenderDrawRects(Handle, 
+                            (SDL_Rect*)p.AddrOfPinnedObject(), rectangles.Length),
+                        "SDL_RenderDrawRects");
+                }
+                finally
+                {
+                    p.Free();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fills a rectangle outline with the current color.
+        /// </summary>
+        /// <param name="rectangle">Rectangle to fill. If null,
+        /// fills a whole target.</param>
+        public void FillRect(Rectangle? rectangle)
+        {
+            unsafe
+            {
+                var p = Pin(rectangle);
+                try
+                {
+                    Try(() => 
+                        SDL_RenderFillRect(Handle, (SDL_Rect*)p.AddrOfPinnedObject()),
+                        "SDL_RenderFillRect");
+                }
+                finally
+                {
+                    p.Free();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fills rectangles with the current color.
+        /// </summary>
+        /// <param name="rectangles">Rectangles to fill</param>
+        public void FillRects(params Rectangle[] rectangles)
+        {
+            unsafe
+            {
+                var p = Pin(rectangles);
+                try
+                {
+                    Try(() => 
+                        SDL_RenderFillRects(Handle, 
+                            (SDL_Rect*)p.AddrOfPinnedObject(), rectangles.Length),
+                        "SDL_RenderFillRects");
+                }
+                finally
+                {
+                    p.Free();
+                }
             }
         }
 
