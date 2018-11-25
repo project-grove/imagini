@@ -4,14 +4,19 @@ using static Imagini.Logger;
 
 namespace Imagini
 {
-    internal static class Lifecycle 
+    internal static class Lifecycle
     {
         private static bool s_initialized = false;
         internal static void TryInitialize()
         {
             if (!s_initialized)
             {
-                SDL_Init(SDL_INIT_EVERYTHING);
+                SDL_Init(
+                    SDL_INIT_VIDEO |
+                    SDL_INIT_JOYSTICK |
+                    SDL_INIT_GAMECONTROLLER |
+                    SDL_INIT_EVENTS
+                );
                 s_initialized = true;
                 PrintVersion();
             }

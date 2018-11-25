@@ -21,6 +21,9 @@ namespace Imagini
     /// </summary>
     public sealed class Window : Resource
     {
+        /// <summary>
+        /// Gets the handle of this window.
+        /// </summary>
         public IntPtr Handle { get; private set; }
         internal uint ID;
 
