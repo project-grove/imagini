@@ -7,7 +7,7 @@ using Xunit;
 namespace Tests.Audio
 {
     [DisplayTestMethodName]
-    public class AudioDriverTest
+    public class AudioSystemTest
     {
 
         [Fact]

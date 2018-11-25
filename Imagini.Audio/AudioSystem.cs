@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using static SDL2.SDL;
 using static SDL2.SDL_audio;
 using static SDL2.SDL_mixer;
+using static SDL2.SDL_version;
 using static Imagini.ErrorHandler;
 using static Imagini.Logger;
 using System.Collections.Generic;
@@ -84,8 +85,16 @@ namespace Imagini
                 SDL_AudioQuit();
             else
                 SDL_QuitSubSystem(SDL_INIT_AUDIO);
+            Mix_Quit();
             IsInitialized = false;
             Log.Information("Audio subsystem shutted down");
+        }
+
+        static AudioSystem()
+        {
+            var version = Marshal.PtrToStructure<SDL_Version>(Mix_Linked_Version());
+            Log.Information("Using SDL_mixer version {major}.{minor}.{patch}",
+                version.major, version.minor, version.patch);
         }
 
         [ExcludeFromCodeCoverage]
@@ -116,12 +125,16 @@ namespace Imagini
                          .Where(m => mask.HasFlag(m))
                          .Cast<T>();
 
-        private static string JoinFlagNames<T>(Enum mask) =>
-            string.Join(", ", GetFlags<T>(mask).Select(m => m.ToString()));
+        private static string JoinFlagNames<T>(Enum mask)
+        {
+            var flags = GetFlags<T>(mask).Select(m => m.ToString());
+            if (!flags.Any()) return "(none)";
+            return string.Join(", ", flags);
+        }
 
         [ExcludeFromCodeCoverage]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void CheckIfInitialized()
+        internal static void EnsureInitialization()
         {
             if (!IsInitialized) Init();
         }
