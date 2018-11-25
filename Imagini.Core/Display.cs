@@ -95,7 +95,7 @@ namespace Imagini
         /// <summary>
         /// Returns all available display devices.
         /// </summary>
-        public static List<Display> All => s_displays;
+        public static IReadOnlyList<Display> All => s_displays;
 
         private int _index;
         /// <summary>
@@ -139,10 +139,14 @@ namespace Imagini
 
         internal static int GetCurrentDisplayIndexForWindow(IntPtr window) =>
             TryGet(() => SDL_GetWindowDisplayIndex(window), "SDL_GetWindowDisplayIndex");
-        
+
         internal static Display GetCurrentDisplayForWindow(IntPtr window) =>
             s_displays[GetCurrentDisplayIndexForWindow(window)];
-        
-        static Display() => Lifecycle.TryInitialize();
+
+        static Display()
+        {
+            Lifecycle.TryInitialize();
+            UpdateDisplayInfo();
+        }
     }
 }

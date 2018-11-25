@@ -14,7 +14,6 @@ namespace Imagini
                 SDL_Init(SDL_INIT_EVERYTHING);
                 s_initialized = true;
                 PrintVersion();
-                InitSubsystems();
             }
         }
 
@@ -23,11 +22,6 @@ namespace Imagini
             SDL_GetVersion(out SDL_Version version);
             Log.Information("Using SDL version {major}.{minor}.{patch}",
                 version.major, version.minor, version.patch);
-        }
-
-        private static void InitSubsystems()
-        {
-            Display.UpdateDisplayInfo();
         }
     }
 }

@@ -23,6 +23,7 @@
     <ProjectReference Include="..\Imagini.Core\Imagini.Core.csproj" />
     <ProjectReference Include="..\Imagini.2D\Imagini.2D.csproj" />
     <ProjectReference Include="..\Imagini.ImageSharp\Imagini.ImageSharp.csproj" />
+    <ProjectReference Include="..\Imagini.Audio\Imagini.Audio.csproj" />
   </ItemGroup>
 
   <ItemGroup>

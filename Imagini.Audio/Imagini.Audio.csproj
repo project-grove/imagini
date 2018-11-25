@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\External\SDL2.NETCore\SDL2\SDL2.NETCore.csproj" />
+    <ProjectReference Include="..\Imagini.Core\Imagini.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <RootNamespace>Imagini</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>       
+    <AssemblyName>Imagini.Audio</AssemblyName>
+  </PropertyGroup>
+
+</Project>
