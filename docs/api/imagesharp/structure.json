@@ -1,0 +1,132 @@
+{
+  "name": "",
+  "fullName": "",
+  "type": "Root",
+  "link": "",
+  "children": [
+    {
+      "name": "Imagini.ImageSharp",
+      "fullName": "Imagini.ImageSharp",
+      "type": "Namespace",
+      "link": "Imagini.ImageSharp",
+      "children": [
+        {
+          "name": "GraphicsExtensions",
+          "fullName": "Imagini.ImageSharp.GraphicsExtensions",
+          "type": "Class",
+          "link": "Imagini.ImageSharp.GraphicsExtensions",
+          "children": [
+            {
+              "name": "Save(Graphics, Action<Image<Rgba32>>)",
+              "fullName": "Imagini.ImageSharp.GraphicsExtensions.Save(Graphics, Action<Image<Rgba32>>)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.GraphicsExtensions.Save(Graphics,Action{Image{Rgba32}})"
+            },
+            {
+              "name": "SaveAsPng(Graphics, Stream)",
+              "fullName": "Imagini.ImageSharp.GraphicsExtensions.SaveAsPng(Graphics, Stream)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.GraphicsExtensions.SaveAsPng(Graphics,Stream)"
+            },
+            {
+              "name": "SaveAsPng(Graphics, string)",
+              "fullName": "Imagini.ImageSharp.GraphicsExtensions.SaveAsPng(Graphics, string)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.GraphicsExtensions.SaveAsPng(Graphics,string)"
+            }
+          ]
+        },
+        {
+          "name": "SurfaceExtensions",
+          "fullName": "Imagini.ImageSharp.SurfaceExtensions",
+          "type": "Class",
+          "link": "Imagini.ImageSharp.SurfaceExtensions",
+          "children": [
+            {
+              "name": "Save(Surface, Action<Image<Rgba32>>)",
+              "fullName": "Imagini.ImageSharp.SurfaceExtensions.Save(Surface, Action<Image<Rgba32>>)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.SurfaceExtensions.Save(Surface,Action{Image{Rgba32}})"
+            },
+            {
+              "name": "SaveAsPng(Surface, Stream)",
+              "fullName": "Imagini.ImageSharp.SurfaceExtensions.SaveAsPng(Surface, Stream)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.SurfaceExtensions.SaveAsPng(Surface,Stream)"
+            },
+            {
+              "name": "SaveAsPng(Surface, string)",
+              "fullName": "Imagini.ImageSharp.SurfaceExtensions.SaveAsPng(Surface, string)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.SurfaceExtensions.SaveAsPng(Surface,string)"
+            }
+          ]
+        },
+        {
+          "name": "SurfaceFactory",
+          "fullName": "Imagini.ImageSharp.SurfaceFactory",
+          "type": "Class",
+          "link": "Imagini.ImageSharp.SurfaceFactory",
+          "children": [
+            {
+              "name": "ArrayPool",
+              "fullName": "Imagini.ImageSharp.SurfaceFactory.ArrayPool",
+              "type": "Property",
+              "link": "Imagini.ImageSharp.SurfaceFactory.ArrayPool"
+            },
+            {
+              "name": "FromFile(string)",
+              "fullName": "Imagini.ImageSharp.SurfaceFactory.FromFile(string)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.SurfaceFactory.FromFile(string)"
+            },
+            {
+              "name": "FromImage<TPixel>(Image<TPixel>)",
+              "fullName": "Imagini.ImageSharp.SurfaceFactory.FromImage<TPixel>(Image<TPixel>)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.SurfaceFactory.FromImage{TPixel}(Image{TPixel})"
+            },
+            {
+              "name": "FromStream(Stream, IImageDecoder)",
+              "fullName": "Imagini.ImageSharp.SurfaceFactory.FromStream(Stream, IImageDecoder)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.SurfaceFactory.FromStream(Stream,IImageDecoder)"
+            }
+          ]
+        },
+        {
+          "name": "TextureFactory",
+          "fullName": "Imagini.ImageSharp.TextureFactory",
+          "type": "Class",
+          "link": "Imagini.ImageSharp.TextureFactory",
+          "children": [
+            {
+              "name": "ArrayPool",
+              "fullName": "Imagini.ImageSharp.TextureFactory.ArrayPool",
+              "type": "Property",
+              "link": "Imagini.ImageSharp.TextureFactory.ArrayPool"
+            },
+            {
+              "name": "FromFile(Graphics, TextureScalingQuality, string)",
+              "fullName": "Imagini.ImageSharp.TextureFactory.FromFile(Graphics, TextureScalingQuality, string)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.TextureFactory.FromFile(Graphics,TextureScalingQuality,string)"
+            },
+            {
+              "name": "FromImage<TPixel>(Graphics, TextureScalingQuality, Image<TPixel>)",
+              "fullName": "Imagini.ImageSharp.TextureFactory.FromImage<TPixel>(Graphics, TextureScalingQuality, Image<TPixel>)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.TextureFactory.FromImage{TPixel}(Graphics,TextureScalingQuality,Image{TPixel})"
+            },
+            {
+              "name": "FromStream(Graphics, Stream, TextureScalingQuality, IImageDecoder)",
+              "fullName": "Imagini.ImageSharp.TextureFactory.FromStream(Graphics, Stream, TextureScalingQuality, IImageDecoder)",
+              "type": "Method",
+              "link": "Imagini.ImageSharp.TextureFactory.FromStream(Graphics,Stream,TextureScalingQuality,IImageDecoder)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

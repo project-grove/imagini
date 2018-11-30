@@ -1,0 +1,1391 @@
+{
+  "name": "",
+  "fullName": "",
+  "type": "Root",
+  "link": "",
+  "children": [
+    {
+      "name": "Imagini",
+      "fullName": "Imagini",
+      "type": "Namespace",
+      "link": "Imagini",
+      "children": [
+        {
+          "name": "AppBase",
+          "fullName": "Imagini.AppBase",
+          "type": "Class",
+          "link": "Imagini.AppBase",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.AppBase.Window",
+              "type": "Property",
+              "link": "Imagini.AppBase.Window"
+            },
+            {
+              "name": "Events",
+              "fullName": "Imagini.AppBase.Events",
+              "type": "Property",
+              "link": "Imagini.AppBase.Events"
+            },
+            {
+              "name": "TotalTime",
+              "fullName": "Imagini.AppBase.TotalTime",
+              "type": "Property",
+              "link": "Imagini.AppBase.TotalTime"
+            },
+            {
+              "name": "ElapsedAppTime",
+              "fullName": "Imagini.AppBase.ElapsedAppTime",
+              "type": "Property",
+              "link": "Imagini.AppBase.ElapsedAppTime"
+            },
+            {
+              "name": "IsMouseVisible",
+              "fullName": "Imagini.AppBase.IsMouseVisible",
+              "type": "Property",
+              "link": "Imagini.AppBase.IsMouseVisible"
+            },
+            {
+              "name": "IsActive",
+              "fullName": "Imagini.AppBase.IsActive",
+              "type": "Property",
+              "link": "Imagini.AppBase.IsActive"
+            },
+            {
+              "name": "TargetElapsedTime",
+              "fullName": "Imagini.AppBase.TargetElapsedTime",
+              "type": "Property",
+              "link": "Imagini.AppBase.TargetElapsedTime"
+            },
+            {
+              "name": "InactiveSleepTime",
+              "fullName": "Imagini.AppBase.InactiveSleepTime",
+              "type": "Property",
+              "link": "Imagini.AppBase.InactiveSleepTime"
+            },
+            {
+              "name": "MaxElapsedTime",
+              "fullName": "Imagini.AppBase.MaxElapsedTime",
+              "type": "Property",
+              "link": "Imagini.AppBase.MaxElapsedTime"
+            },
+            {
+              "name": "IsFixedTimeStep",
+              "fullName": "Imagini.AppBase.IsFixedTimeStep",
+              "type": "Property",
+              "link": "Imagini.AppBase.IsFixedTimeStep"
+            },
+            {
+              "name": "IsRunningSlowly",
+              "fullName": "Imagini.AppBase.IsRunningSlowly",
+              "type": "Property",
+              "link": "Imagini.AppBase.IsRunningSlowly"
+            },
+            {
+              "name": "IsDisposed",
+              "fullName": "Imagini.AppBase.IsDisposed",
+              "type": "Property",
+              "link": "Imagini.AppBase.IsDisposed"
+            },
+            {
+              "name": "AppBase(WindowSettings)",
+              "fullName": "Imagini.AppBase.AppBase(WindowSettings)",
+              "type": "Constructor",
+              "link": "Imagini.AppBase.AppBase(WindowSettings)"
+            },
+            {
+              "name": "CancelExitRequest()",
+              "fullName": "Imagini.AppBase.CancelExitRequest()",
+              "type": "Method",
+              "link": "Imagini.AppBase.CancelExitRequest()"
+            },
+            {
+              "name": "Dispose()",
+              "fullName": "Imagini.AppBase.Dispose()",
+              "type": "Method",
+              "link": "Imagini.AppBase.Dispose()"
+            },
+            {
+              "name": "RequestExit()",
+              "fullName": "Imagini.AppBase.RequestExit()",
+              "type": "Method",
+              "link": "Imagini.AppBase.RequestExit()"
+            },
+            {
+              "name": "ResetElapsedTime()",
+              "fullName": "Imagini.AppBase.ResetElapsedTime()",
+              "type": "Method",
+              "link": "Imagini.AppBase.ResetElapsedTime()"
+            },
+            {
+              "name": "Run()",
+              "fullName": "Imagini.AppBase.Run()",
+              "type": "Method",
+              "link": "Imagini.AppBase.Run()"
+            },
+            {
+              "name": "SuppressDraw()",
+              "fullName": "Imagini.AppBase.SuppressDraw()",
+              "type": "Method",
+              "link": "Imagini.AppBase.SuppressDraw()"
+            },
+            {
+              "name": "Terminate()",
+              "fullName": "Imagini.AppBase.Terminate()",
+              "type": "Method",
+              "link": "Imagini.AppBase.Terminate()"
+            },
+            {
+              "name": "Tick()",
+              "fullName": "Imagini.AppBase.Tick()",
+              "type": "Method",
+              "link": "Imagini.AppBase.Tick()"
+            }
+          ]
+        },
+        {
+          "name": "AppExitEventArgs",
+          "fullName": "Imagini.AppExitEventArgs",
+          "type": "Class",
+          "link": "Imagini.AppExitEventArgs",
+          "children": [
+            {
+              "name": "Cancel",
+              "fullName": "Imagini.AppExitEventArgs.Cancel",
+              "type": "Property",
+              "link": "Imagini.AppExitEventArgs.Cancel"
+            }
+          ]
+        },
+        {
+          "name": "CommonEventArgs",
+          "fullName": "Imagini.CommonEventArgs",
+          "type": "Class",
+          "link": "Imagini.CommonEventArgs",
+          "children": [
+            {
+              "name": "Timestamp",
+              "fullName": "Imagini.CommonEventArgs.Timestamp",
+              "type": "Property",
+              "link": "Imagini.CommonEventArgs.Timestamp"
+            }
+          ]
+        },
+        {
+          "name": "ControllerAxisEventArgs",
+          "fullName": "Imagini.ControllerAxisEventArgs",
+          "type": "Class",
+          "link": "Imagini.ControllerAxisEventArgs",
+          "children": [
+            {
+              "name": "ControllerID",
+              "fullName": "Imagini.ControllerAxisEventArgs.ControllerID",
+              "type": "Property",
+              "link": "Imagini.ControllerAxisEventArgs.ControllerID"
+            },
+            {
+              "name": "Axis",
+              "fullName": "Imagini.ControllerAxisEventArgs.Axis",
+              "type": "Property",
+              "link": "Imagini.ControllerAxisEventArgs.Axis"
+            },
+            {
+              "name": "Value",
+              "fullName": "Imagini.ControllerAxisEventArgs.Value",
+              "type": "Property",
+              "link": "Imagini.ControllerAxisEventArgs.Value"
+            },
+            {
+              "name": "ControllerAxisEventArgs(int, ControllerAxis, short)",
+              "fullName": "Imagini.ControllerAxisEventArgs.ControllerAxisEventArgs(int, ControllerAxis, short)",
+              "type": "Constructor",
+              "link": "Imagini.ControllerAxisEventArgs.ControllerAxisEventArgs(int,ControllerAxis,short)"
+            }
+          ]
+        },
+        {
+          "name": "ControllerButtonEventArgs",
+          "fullName": "Imagini.ControllerButtonEventArgs",
+          "type": "Class",
+          "link": "Imagini.ControllerButtonEventArgs",
+          "children": [
+            {
+              "name": "ControllerID",
+              "fullName": "Imagini.ControllerButtonEventArgs.ControllerID",
+              "type": "Property",
+              "link": "Imagini.ControllerButtonEventArgs.ControllerID"
+            },
+            {
+              "name": "Button",
+              "fullName": "Imagini.ControllerButtonEventArgs.Button",
+              "type": "Property",
+              "link": "Imagini.ControllerButtonEventArgs.Button"
+            },
+            {
+              "name": "IsPressed",
+              "fullName": "Imagini.ControllerButtonEventArgs.IsPressed",
+              "type": "Property",
+              "link": "Imagini.ControllerButtonEventArgs.IsPressed"
+            },
+            {
+              "name": "ControllerButtonEventArgs(int, ControllerButton, bool)",
+              "fullName": "Imagini.ControllerButtonEventArgs.ControllerButtonEventArgs(int, ControllerButton, bool)",
+              "type": "Constructor",
+              "link": "Imagini.ControllerButtonEventArgs.ControllerButtonEventArgs(int,ControllerButton,bool)"
+            }
+          ]
+        },
+        {
+          "name": "ControllerDeviceStateEventArgs",
+          "fullName": "Imagini.ControllerDeviceStateEventArgs",
+          "type": "Class",
+          "link": "Imagini.ControllerDeviceStateEventArgs",
+          "children": [
+            {
+              "name": "ControllerID",
+              "fullName": "Imagini.ControllerDeviceStateEventArgs.ControllerID",
+              "type": "Property",
+              "link": "Imagini.ControllerDeviceStateEventArgs.ControllerID"
+            },
+            {
+              "name": "Connected",
+              "fullName": "Imagini.ControllerDeviceStateEventArgs.Connected",
+              "type": "Property",
+              "link": "Imagini.ControllerDeviceStateEventArgs.Connected"
+            },
+            {
+              "name": "ControllerDeviceStateEventArgs(int, bool)",
+              "fullName": "Imagini.ControllerDeviceStateEventArgs.ControllerDeviceStateEventArgs(int, bool)",
+              "type": "Constructor",
+              "link": "Imagini.ControllerDeviceStateEventArgs.ControllerDeviceStateEventArgs(int,bool)"
+            }
+          ]
+        },
+        {
+          "name": "ControllerEvents",
+          "fullName": "Imagini.ControllerEvents",
+          "type": "Class",
+          "link": "Imagini.ControllerEvents",
+          "children": []
+        },
+        {
+          "name": "Display",
+          "fullName": "Imagini.Display",
+          "type": "Class",
+          "link": "Imagini.Display",
+          "children": [
+            {
+              "name": "All",
+              "fullName": "Imagini.Display.All",
+              "type": "Property",
+              "link": "Imagini.Display.All"
+            },
+            {
+              "name": "Modes",
+              "fullName": "Imagini.Display.Modes",
+              "type": "Property",
+              "link": "Imagini.Display.Modes"
+            },
+            {
+              "name": "CurrentMode",
+              "fullName": "Imagini.Display.CurrentMode",
+              "type": "Property",
+              "link": "Imagini.Display.CurrentMode"
+            },
+            {
+              "name": "DesktopMode",
+              "fullName": "Imagini.Display.DesktopMode",
+              "type": "Property",
+              "link": "Imagini.Display.DesktopMode"
+            },
+            {
+              "name": "Name",
+              "fullName": "Imagini.Display.Name",
+              "type": "Property",
+              "link": "Imagini.Display.Name"
+            }
+          ]
+        },
+        {
+          "name": "EventManager",
+          "fullName": "Imagini.EventManager",
+          "type": "Class",
+          "link": "Imagini.EventManager",
+          "children": [
+            {
+              "name": "Poll(bool)",
+              "fullName": "Imagini.EventManager.Poll(bool)",
+              "type": "Method",
+              "link": "Imagini.EventManager.Poll(bool)"
+            },
+            {
+              "name": "Pump()",
+              "fullName": "Imagini.EventManager.Pump()",
+              "type": "Method",
+              "link": "Imagini.EventManager.Pump()"
+            },
+            {
+              "name": "Push(CommonEventArgs)",
+              "fullName": "Imagini.EventManager.Push(CommonEventArgs)",
+              "type": "Method",
+              "link": "Imagini.EventManager.Push(CommonEventArgs)"
+            }
+          ]
+        },
+        {
+          "name": "Events",
+          "fullName": "Imagini.Events",
+          "type": "Class",
+          "link": "Imagini.Events",
+          "children": [
+            {
+              "name": "InputEvents",
+              "fullName": "Imagini.Events.InputEvents",
+              "type": "Class",
+              "link": "Imagini.Events.InputEvents",
+              "children": [
+                {
+                  "name": "OnTextEdit",
+                  "fullName": "Imagini.Events.InputEvents.OnTextEdit",
+                  "type": "Field",
+                  "link": "Imagini.Events.InputEvents.OnTextEdit"
+                },
+                {
+                  "name": "OnTextInput",
+                  "fullName": "Imagini.Events.InputEvents.OnTextInput",
+                  "type": "Field",
+                  "link": "Imagini.Events.InputEvents.OnTextInput"
+                }
+              ]
+            },
+            {
+              "name": "JoystickEvents",
+              "fullName": "Imagini.Events.JoystickEvents",
+              "type": "Class",
+              "link": "Imagini.Events.JoystickEvents",
+              "children": []
+            },
+            {
+              "name": "KeyboardEvents",
+              "fullName": "Imagini.Events.KeyboardEvents",
+              "type": "Class",
+              "link": "Imagini.Events.KeyboardEvents",
+              "children": []
+            },
+            {
+              "name": "MouseEvents",
+              "fullName": "Imagini.Events.MouseEvents",
+              "type": "Class",
+              "link": "Imagini.Events.MouseEvents",
+              "children": []
+            },
+            {
+              "name": "WindowEvents",
+              "fullName": "Imagini.Events.WindowEvents",
+              "type": "Class",
+              "link": "Imagini.Events.WindowEvents",
+              "children": []
+            },
+            {
+              "name": "Window",
+              "fullName": "Imagini.Events.Window",
+              "type": "Field",
+              "link": "Imagini.Events.Window"
+            },
+            {
+              "name": "Input",
+              "fullName": "Imagini.Events.Input",
+              "type": "Field",
+              "link": "Imagini.Events.Input"
+            },
+            {
+              "name": "Keyboard",
+              "fullName": "Imagini.Events.Keyboard",
+              "type": "Field",
+              "link": "Imagini.Events.Keyboard"
+            },
+            {
+              "name": "Mouse",
+              "fullName": "Imagini.Events.Mouse",
+              "type": "Field",
+              "link": "Imagini.Events.Mouse"
+            },
+            {
+              "name": "Joystick",
+              "fullName": "Imagini.Events.Joystick",
+              "type": "Field",
+              "link": "Imagini.Events.Joystick"
+            },
+            {
+              "name": "Controller",
+              "fullName": "Imagini.Events.Controller",
+              "type": "Field",
+              "link": "Imagini.Events.Controller"
+            },
+            {
+              "name": "Touch",
+              "fullName": "Imagini.Events.Touch",
+              "type": "Field",
+              "link": "Imagini.Events.Touch"
+            },
+            {
+              "name": "Global",
+              "fullName": "Imagini.Events.Global",
+              "type": "Property",
+              "link": "Imagini.Events.Global"
+            },
+            {
+              "name": "Owner",
+              "fullName": "Imagini.Events.Owner",
+              "type": "Property",
+              "link": "Imagini.Events.Owner"
+            }
+          ]
+        },
+        {
+          "name": "ImaginiException",
+          "fullName": "Imagini.ImaginiException",
+          "type": "Class",
+          "link": "Imagini.ImaginiException",
+          "children": [
+            {
+              "name": "ImaginiException()",
+              "fullName": "Imagini.ImaginiException.ImaginiException()",
+              "type": "Constructor",
+              "link": "Imagini.ImaginiException.ImaginiException()"
+            },
+            {
+              "name": "ImaginiException(string)",
+              "fullName": "Imagini.ImaginiException.ImaginiException(string)",
+              "type": "Constructor",
+              "link": "Imagini.ImaginiException.ImaginiException(string)"
+            },
+            {
+              "name": "ImaginiException(string, Exception)",
+              "fullName": "Imagini.ImaginiException.ImaginiException(string, Exception)",
+              "type": "Constructor",
+              "link": "Imagini.ImaginiException.ImaginiException(string,Exception)"
+            }
+          ]
+        },
+        {
+          "name": "JoyAxisMotionEventArgs",
+          "fullName": "Imagini.JoyAxisMotionEventArgs",
+          "type": "Class",
+          "link": "Imagini.JoyAxisMotionEventArgs",
+          "children": [
+            {
+              "name": "JoystickID",
+              "fullName": "Imagini.JoyAxisMotionEventArgs.JoystickID",
+              "type": "Property",
+              "link": "Imagini.JoyAxisMotionEventArgs.JoystickID"
+            },
+            {
+              "name": "Axis",
+              "fullName": "Imagini.JoyAxisMotionEventArgs.Axis",
+              "type": "Property",
+              "link": "Imagini.JoyAxisMotionEventArgs.Axis"
+            },
+            {
+              "name": "Value",
+              "fullName": "Imagini.JoyAxisMotionEventArgs.Value",
+              "type": "Property",
+              "link": "Imagini.JoyAxisMotionEventArgs.Value"
+            },
+            {
+              "name": "JoyAxisMotionEventArgs(int, byte, short)",
+              "fullName": "Imagini.JoyAxisMotionEventArgs.JoyAxisMotionEventArgs(int, byte, short)",
+              "type": "Constructor",
+              "link": "Imagini.JoyAxisMotionEventArgs.JoyAxisMotionEventArgs(int,byte,short)"
+            }
+          ]
+        },
+        {
+          "name": "JoyBallMotionEventArgs",
+          "fullName": "Imagini.JoyBallMotionEventArgs",
+          "type": "Class",
+          "link": "Imagini.JoyBallMotionEventArgs",
+          "children": [
+            {
+              "name": "JoystickID",
+              "fullName": "Imagini.JoyBallMotionEventArgs.JoystickID",
+              "type": "Property",
+              "link": "Imagini.JoyBallMotionEventArgs.JoystickID"
+            },
+            {
+              "name": "Ball",
+              "fullName": "Imagini.JoyBallMotionEventArgs.Ball",
+              "type": "Property",
+              "link": "Imagini.JoyBallMotionEventArgs.Ball"
+            },
+            {
+              "name": "RelativeX",
+              "fullName": "Imagini.JoyBallMotionEventArgs.RelativeX",
+              "type": "Property",
+              "link": "Imagini.JoyBallMotionEventArgs.RelativeX"
+            },
+            {
+              "name": "RelativeY",
+              "fullName": "Imagini.JoyBallMotionEventArgs.RelativeY",
+              "type": "Property",
+              "link": "Imagini.JoyBallMotionEventArgs.RelativeY"
+            },
+            {
+              "name": "JoyBallMotionEventArgs(int, byte, short, short)",
+              "fullName": "Imagini.JoyBallMotionEventArgs.JoyBallMotionEventArgs(int, byte, short, short)",
+              "type": "Constructor",
+              "link": "Imagini.JoyBallMotionEventArgs.JoyBallMotionEventArgs(int,byte,short,short)"
+            }
+          ]
+        },
+        {
+          "name": "JoyButtonEventArgs",
+          "fullName": "Imagini.JoyButtonEventArgs",
+          "type": "Class",
+          "link": "Imagini.JoyButtonEventArgs",
+          "children": [
+            {
+              "name": "JoystickID",
+              "fullName": "Imagini.JoyButtonEventArgs.JoystickID",
+              "type": "Property",
+              "link": "Imagini.JoyButtonEventArgs.JoystickID"
+            },
+            {
+              "name": "Button",
+              "fullName": "Imagini.JoyButtonEventArgs.Button",
+              "type": "Property",
+              "link": "Imagini.JoyButtonEventArgs.Button"
+            },
+            {
+              "name": "IsPressed",
+              "fullName": "Imagini.JoyButtonEventArgs.IsPressed",
+              "type": "Property",
+              "link": "Imagini.JoyButtonEventArgs.IsPressed"
+            },
+            {
+              "name": "JoyButtonEventArgs(int, byte, bool)",
+              "fullName": "Imagini.JoyButtonEventArgs.JoyButtonEventArgs(int, byte, bool)",
+              "type": "Constructor",
+              "link": "Imagini.JoyButtonEventArgs.JoyButtonEventArgs(int,byte,bool)"
+            }
+          ]
+        },
+        {
+          "name": "JoyDeviceStateEventArgs",
+          "fullName": "Imagini.JoyDeviceStateEventArgs",
+          "type": "Class",
+          "link": "Imagini.JoyDeviceStateEventArgs",
+          "children": [
+            {
+              "name": "JoystickID",
+              "fullName": "Imagini.JoyDeviceStateEventArgs.JoystickID",
+              "type": "Property",
+              "link": "Imagini.JoyDeviceStateEventArgs.JoystickID"
+            },
+            {
+              "name": "Connected",
+              "fullName": "Imagini.JoyDeviceStateEventArgs.Connected",
+              "type": "Property",
+              "link": "Imagini.JoyDeviceStateEventArgs.Connected"
+            },
+            {
+              "name": "JoyDeviceStateEventArgs(int, bool)",
+              "fullName": "Imagini.JoyDeviceStateEventArgs.JoyDeviceStateEventArgs(int, bool)",
+              "type": "Constructor",
+              "link": "Imagini.JoyDeviceStateEventArgs.JoyDeviceStateEventArgs(int,bool)"
+            }
+          ]
+        },
+        {
+          "name": "JoyHatMotionEventArgs",
+          "fullName": "Imagini.JoyHatMotionEventArgs",
+          "type": "Class",
+          "link": "Imagini.JoyHatMotionEventArgs",
+          "children": [
+            {
+              "name": "JoystickID",
+              "fullName": "Imagini.JoyHatMotionEventArgs.JoystickID",
+              "type": "Property",
+              "link": "Imagini.JoyHatMotionEventArgs.JoystickID"
+            },
+            {
+              "name": "Hat",
+              "fullName": "Imagini.JoyHatMotionEventArgs.Hat",
+              "type": "Property",
+              "link": "Imagini.JoyHatMotionEventArgs.Hat"
+            },
+            {
+              "name": "Position",
+              "fullName": "Imagini.JoyHatMotionEventArgs.Position",
+              "type": "Property",
+              "link": "Imagini.JoyHatMotionEventArgs.Position"
+            },
+            {
+              "name": "JoyHatMotionEventArgs(int, byte, HatPosition)",
+              "fullName": "Imagini.JoyHatMotionEventArgs.JoyHatMotionEventArgs(int, byte, HatPosition)",
+              "type": "Constructor",
+              "link": "Imagini.JoyHatMotionEventArgs.JoyHatMotionEventArgs(int,byte,HatPosition)"
+            }
+          ]
+        },
+        {
+          "name": "KeyboardEventArgs",
+          "fullName": "Imagini.KeyboardEventArgs",
+          "type": "Class",
+          "link": "Imagini.KeyboardEventArgs",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.KeyboardEventArgs.Window",
+              "type": "Property",
+              "link": "Imagini.KeyboardEventArgs.Window"
+            },
+            {
+              "name": "Key",
+              "fullName": "Imagini.KeyboardEventArgs.Key",
+              "type": "Property",
+              "link": "Imagini.KeyboardEventArgs.Key"
+            },
+            {
+              "name": "IsPressed",
+              "fullName": "Imagini.KeyboardEventArgs.IsPressed",
+              "type": "Property",
+              "link": "Imagini.KeyboardEventArgs.IsPressed"
+            },
+            {
+              "name": "IsRepeat",
+              "fullName": "Imagini.KeyboardEventArgs.IsRepeat",
+              "type": "Property",
+              "link": "Imagini.KeyboardEventArgs.IsRepeat"
+            },
+            {
+              "name": "KeyboardEventArgs(KeyboardKey, bool, Window, bool)",
+              "fullName": "Imagini.KeyboardEventArgs.KeyboardEventArgs(KeyboardKey, bool, Window, bool)",
+              "type": "Constructor",
+              "link": "Imagini.KeyboardEventArgs.KeyboardEventArgs(KeyboardKey,bool,Window,bool)"
+            }
+          ]
+        },
+        {
+          "name": "Logger",
+          "fullName": "Imagini.Logger",
+          "type": "Class",
+          "link": "Imagini.Logger",
+          "children": [
+            {
+              "name": "Log",
+              "fullName": "Imagini.Logger.Log",
+              "type": "Property",
+              "link": "Imagini.Logger.Log"
+            },
+            {
+              "name": "Set(LoggerConfiguration)",
+              "fullName": "Imagini.Logger.Set(LoggerConfiguration)",
+              "type": "Method",
+              "link": "Imagini.Logger.Set(LoggerConfiguration)"
+            }
+          ]
+        },
+        {
+          "name": "MouseButtonEventArgs",
+          "fullName": "Imagini.MouseButtonEventArgs",
+          "type": "Class",
+          "link": "Imagini.MouseButtonEventArgs",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.MouseButtonEventArgs.Window",
+              "type": "Property",
+              "link": "Imagini.MouseButtonEventArgs.Window"
+            },
+            {
+              "name": "Button",
+              "fullName": "Imagini.MouseButtonEventArgs.Button",
+              "type": "Property",
+              "link": "Imagini.MouseButtonEventArgs.Button"
+            },
+            {
+              "name": "IsPressed",
+              "fullName": "Imagini.MouseButtonEventArgs.IsPressed",
+              "type": "Property",
+              "link": "Imagini.MouseButtonEventArgs.IsPressed"
+            },
+            {
+              "name": "Clicks",
+              "fullName": "Imagini.MouseButtonEventArgs.Clicks",
+              "type": "Property",
+              "link": "Imagini.MouseButtonEventArgs.Clicks"
+            },
+            {
+              "name": "X",
+              "fullName": "Imagini.MouseButtonEventArgs.X",
+              "type": "Property",
+              "link": "Imagini.MouseButtonEventArgs.X"
+            },
+            {
+              "name": "Y",
+              "fullName": "Imagini.MouseButtonEventArgs.Y",
+              "type": "Property",
+              "link": "Imagini.MouseButtonEventArgs.Y"
+            },
+            {
+              "name": "MouseButtonEventArgs(MouseButton, int, int, bool, Window, byte)",
+              "fullName": "Imagini.MouseButtonEventArgs.MouseButtonEventArgs(MouseButton, int, int, bool, Window, byte)",
+              "type": "Constructor",
+              "link": "Imagini.MouseButtonEventArgs.MouseButtonEventArgs(MouseButton,int,int,bool,Window,byte)"
+            }
+          ]
+        },
+        {
+          "name": "MouseMoveEventArgs",
+          "fullName": "Imagini.MouseMoveEventArgs",
+          "type": "Class",
+          "link": "Imagini.MouseMoveEventArgs",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.MouseMoveEventArgs.Window",
+              "type": "Property",
+              "link": "Imagini.MouseMoveEventArgs.Window"
+            },
+            {
+              "name": "Buttons",
+              "fullName": "Imagini.MouseMoveEventArgs.Buttons",
+              "type": "Property",
+              "link": "Imagini.MouseMoveEventArgs.Buttons"
+            },
+            {
+              "name": "X",
+              "fullName": "Imagini.MouseMoveEventArgs.X",
+              "type": "Property",
+              "link": "Imagini.MouseMoveEventArgs.X"
+            },
+            {
+              "name": "Y",
+              "fullName": "Imagini.MouseMoveEventArgs.Y",
+              "type": "Property",
+              "link": "Imagini.MouseMoveEventArgs.Y"
+            },
+            {
+              "name": "RelativeX",
+              "fullName": "Imagini.MouseMoveEventArgs.RelativeX",
+              "type": "Property",
+              "link": "Imagini.MouseMoveEventArgs.RelativeX"
+            },
+            {
+              "name": "RelativeY",
+              "fullName": "Imagini.MouseMoveEventArgs.RelativeY",
+              "type": "Property",
+              "link": "Imagini.MouseMoveEventArgs.RelativeY"
+            },
+            {
+              "name": "MouseMoveEventArgs(int, int, int, int, MouseButtons, Window)",
+              "fullName": "Imagini.MouseMoveEventArgs.MouseMoveEventArgs(int, int, int, int, MouseButtons, Window)",
+              "type": "Constructor",
+              "link": "Imagini.MouseMoveEventArgs.MouseMoveEventArgs(int,int,int,int,MouseButtons,Window)"
+            },
+            {
+              "name": "IsPressed(MouseButtons)",
+              "fullName": "Imagini.MouseMoveEventArgs.IsPressed(MouseButtons)",
+              "type": "Method",
+              "link": "Imagini.MouseMoveEventArgs.IsPressed(MouseButtons)"
+            }
+          ]
+        },
+        {
+          "name": "MouseWheelEventArgs",
+          "fullName": "Imagini.MouseWheelEventArgs",
+          "type": "Class",
+          "link": "Imagini.MouseWheelEventArgs",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.MouseWheelEventArgs.Window",
+              "type": "Property",
+              "link": "Imagini.MouseWheelEventArgs.Window"
+            },
+            {
+              "name": "X",
+              "fullName": "Imagini.MouseWheelEventArgs.X",
+              "type": "Property",
+              "link": "Imagini.MouseWheelEventArgs.X"
+            },
+            {
+              "name": "Y",
+              "fullName": "Imagini.MouseWheelEventArgs.Y",
+              "type": "Property",
+              "link": "Imagini.MouseWheelEventArgs.Y"
+            },
+            {
+              "name": "MouseWheelEventArgs(int, int, Window)",
+              "fullName": "Imagini.MouseWheelEventArgs.MouseWheelEventArgs(int, int, Window)",
+              "type": "Constructor",
+              "link": "Imagini.MouseWheelEventArgs.MouseWheelEventArgs(int,int,Window)"
+            }
+          ]
+        },
+        {
+          "name": "Resource",
+          "fullName": "Imagini.Resource",
+          "type": "Class",
+          "link": "Imagini.Resource",
+          "children": [
+            {
+              "name": "IsDisposed",
+              "fullName": "Imagini.Resource.IsDisposed",
+              "type": "Property",
+              "link": "Imagini.Resource.IsDisposed"
+            }
+          ]
+        },
+        {
+          "name": "TextEditingEventArgs",
+          "fullName": "Imagini.TextEditingEventArgs",
+          "type": "Class",
+          "link": "Imagini.TextEditingEventArgs",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.TextEditingEventArgs.Window",
+              "type": "Property",
+              "link": "Imagini.TextEditingEventArgs.Window"
+            },
+            {
+              "name": "Text",
+              "fullName": "Imagini.TextEditingEventArgs.Text",
+              "type": "Property",
+              "link": "Imagini.TextEditingEventArgs.Text"
+            },
+            {
+              "name": "Start",
+              "fullName": "Imagini.TextEditingEventArgs.Start",
+              "type": "Property",
+              "link": "Imagini.TextEditingEventArgs.Start"
+            },
+            {
+              "name": "Length",
+              "fullName": "Imagini.TextEditingEventArgs.Length",
+              "type": "Property",
+              "link": "Imagini.TextEditingEventArgs.Length"
+            },
+            {
+              "name": "TextEditingEventArgs(string, int, int, Window)",
+              "fullName": "Imagini.TextEditingEventArgs.TextEditingEventArgs(string, int, int, Window)",
+              "type": "Constructor",
+              "link": "Imagini.TextEditingEventArgs.TextEditingEventArgs(string,int,int,Window)"
+            }
+          ]
+        },
+        {
+          "name": "TextInputEventArgs",
+          "fullName": "Imagini.TextInputEventArgs",
+          "type": "Class",
+          "link": "Imagini.TextInputEventArgs",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.TextInputEventArgs.Window",
+              "type": "Property",
+              "link": "Imagini.TextInputEventArgs.Window"
+            },
+            {
+              "name": "Text",
+              "fullName": "Imagini.TextInputEventArgs.Text",
+              "type": "Property",
+              "link": "Imagini.TextInputEventArgs.Text"
+            },
+            {
+              "name": "TextInputEventArgs(string, Window)",
+              "fullName": "Imagini.TextInputEventArgs.TextInputEventArgs(string, Window)",
+              "type": "Constructor",
+              "link": "Imagini.TextInputEventArgs.TextInputEventArgs(string,Window)"
+            }
+          ]
+        },
+        {
+          "name": "TouchEvents",
+          "fullName": "Imagini.TouchEvents",
+          "type": "Class",
+          "link": "Imagini.TouchEvents",
+          "children": []
+        },
+        {
+          "name": "TouchFingerEventArgs",
+          "fullName": "Imagini.TouchFingerEventArgs",
+          "type": "Class",
+          "link": "Imagini.TouchFingerEventArgs",
+          "children": [
+            {
+              "name": "Type",
+              "fullName": "Imagini.TouchFingerEventArgs.Type",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.Type"
+            },
+            {
+              "name": "DeviceID",
+              "fullName": "Imagini.TouchFingerEventArgs.DeviceID",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.DeviceID"
+            },
+            {
+              "name": "FingerID",
+              "fullName": "Imagini.TouchFingerEventArgs.FingerID",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.FingerID"
+            },
+            {
+              "name": "X",
+              "fullName": "Imagini.TouchFingerEventArgs.X",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.X"
+            },
+            {
+              "name": "Y",
+              "fullName": "Imagini.TouchFingerEventArgs.Y",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.Y"
+            },
+            {
+              "name": "DX",
+              "fullName": "Imagini.TouchFingerEventArgs.DX",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.DX"
+            },
+            {
+              "name": "DY",
+              "fullName": "Imagini.TouchFingerEventArgs.DY",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.DY"
+            },
+            {
+              "name": "Pressure",
+              "fullName": "Imagini.TouchFingerEventArgs.Pressure",
+              "type": "Property",
+              "link": "Imagini.TouchFingerEventArgs.Pressure"
+            },
+            {
+              "name": "TouchFingerEventArgs(TouchEventType, long, long, float, float, float, float, float)",
+              "fullName": "Imagini.TouchFingerEventArgs.TouchFingerEventArgs(TouchEventType, long, long, float, float, float, float, float)",
+              "type": "Constructor",
+              "link": "Imagini.TouchFingerEventArgs.TouchFingerEventArgs(TouchEventType,long,long,float,float,float,float,float)"
+            }
+          ]
+        },
+        {
+          "name": "Window",
+          "fullName": "Imagini.Window",
+          "type": "Class",
+          "link": "Imagini.Window",
+          "children": [
+            {
+              "name": "Handle",
+              "fullName": "Imagini.Window.Handle",
+              "type": "Property",
+              "link": "Imagini.Window.Handle"
+            },
+            {
+              "name": "Windows",
+              "fullName": "Imagini.Window.Windows",
+              "type": "Property",
+              "link": "Imagini.Window.Windows"
+            },
+            {
+              "name": "Size",
+              "fullName": "Imagini.Window.Size",
+              "type": "Property",
+              "link": "Imagini.Window.Size"
+            },
+            {
+              "name": "SizeInPixels",
+              "fullName": "Imagini.Window.SizeInPixels",
+              "type": "Property",
+              "link": "Imagini.Window.SizeInPixels"
+            },
+            {
+              "name": "MinimumSize",
+              "fullName": "Imagini.Window.MinimumSize",
+              "type": "Property",
+              "link": "Imagini.Window.MinimumSize"
+            },
+            {
+              "name": "MaximumSize",
+              "fullName": "Imagini.Window.MaximumSize",
+              "type": "Property",
+              "link": "Imagini.Window.MaximumSize"
+            },
+            {
+              "name": "Settings",
+              "fullName": "Imagini.Window.Settings",
+              "type": "Property",
+              "link": "Imagini.Window.Settings"
+            },
+            {
+              "name": "Mode",
+              "fullName": "Imagini.Window.Mode",
+              "type": "Property",
+              "link": "Imagini.Window.Mode"
+            },
+            {
+              "name": "IsVisible",
+              "fullName": "Imagini.Window.IsVisible",
+              "type": "Property",
+              "link": "Imagini.Window.IsVisible"
+            },
+            {
+              "name": "IsFocused",
+              "fullName": "Imagini.Window.IsFocused",
+              "type": "Property",
+              "link": "Imagini.Window.IsFocused"
+            },
+            {
+              "name": "IsMinimized",
+              "fullName": "Imagini.Window.IsMinimized",
+              "type": "Property",
+              "link": "Imagini.Window.IsMinimized"
+            },
+            {
+              "name": "IsMaximized",
+              "fullName": "Imagini.Window.IsMaximized",
+              "type": "Property",
+              "link": "Imagini.Window.IsMaximized"
+            },
+            {
+              "name": "Title",
+              "fullName": "Imagini.Window.Title",
+              "type": "Property",
+              "link": "Imagini.Window.Title"
+            },
+            {
+              "name": "DisplayIndex",
+              "fullName": "Imagini.Window.DisplayIndex",
+              "type": "Property",
+              "link": "Imagini.Window.DisplayIndex"
+            },
+            {
+              "name": "Display",
+              "fullName": "Imagini.Window.Display",
+              "type": "Property",
+              "link": "Imagini.Window.Display"
+            },
+            {
+              "name": "Subsystem",
+              "fullName": "Imagini.Window.Subsystem",
+              "type": "Property",
+              "link": "Imagini.Window.Subsystem"
+            },
+            {
+              "name": "Apply(WindowSettings)",
+              "fullName": "Imagini.Window.Apply(WindowSettings)",
+              "type": "Method",
+              "link": "Imagini.Window.Apply(WindowSettings)"
+            },
+            {
+              "name": "Hide()",
+              "fullName": "Imagini.Window.Hide()",
+              "type": "Method",
+              "link": "Imagini.Window.Hide()"
+            },
+            {
+              "name": "Maximize()",
+              "fullName": "Imagini.Window.Maximize()",
+              "type": "Method",
+              "link": "Imagini.Window.Maximize()"
+            },
+            {
+              "name": "Minimize()",
+              "fullName": "Imagini.Window.Minimize()",
+              "type": "Method",
+              "link": "Imagini.Window.Minimize()"
+            },
+            {
+              "name": "OverrideCurrentWith(Window)",
+              "fullName": "Imagini.Window.OverrideCurrentWith(Window)",
+              "type": "Method",
+              "link": "Imagini.Window.OverrideCurrentWith(Window)"
+            },
+            {
+              "name": "Raise()",
+              "fullName": "Imagini.Window.Raise()",
+              "type": "Method",
+              "link": "Imagini.Window.Raise()"
+            },
+            {
+              "name": "Restore()",
+              "fullName": "Imagini.Window.Restore()",
+              "type": "Method",
+              "link": "Imagini.Window.Restore()"
+            },
+            {
+              "name": "Show()",
+              "fullName": "Imagini.Window.Show()",
+              "type": "Method",
+              "link": "Imagini.Window.Show()"
+            }
+          ]
+        },
+        {
+          "name": "WindowSettings",
+          "fullName": "Imagini.WindowSettings",
+          "type": "Class",
+          "link": "Imagini.WindowSettings",
+          "children": [
+            {
+              "name": "WindowWidth",
+              "fullName": "Imagini.WindowSettings.WindowWidth",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.WindowWidth"
+            },
+            {
+              "name": "WindowHeight",
+              "fullName": "Imagini.WindowSettings.WindowHeight",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.WindowHeight"
+            },
+            {
+              "name": "IsFullscreen",
+              "fullName": "Imagini.WindowSettings.IsFullscreen",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.IsFullscreen"
+            },
+            {
+              "name": "VSync",
+              "fullName": "Imagini.WindowSettings.VSync",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.VSync"
+            },
+            {
+              "name": "IsVisible",
+              "fullName": "Imagini.WindowSettings.IsVisible",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.IsVisible"
+            },
+            {
+              "name": "IsBorderless",
+              "fullName": "Imagini.WindowSettings.IsBorderless",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.IsBorderless"
+            },
+            {
+              "name": "IsResizable",
+              "fullName": "Imagini.WindowSettings.IsResizable",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.IsResizable"
+            },
+            {
+              "name": "AllowHighDpi",
+              "fullName": "Imagini.WindowSettings.AllowHighDpi",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.AllowHighDpi"
+            },
+            {
+              "name": "DisplayIndex",
+              "fullName": "Imagini.WindowSettings.DisplayIndex",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.DisplayIndex"
+            },
+            {
+              "name": "Title",
+              "fullName": "Imagini.WindowSettings.Title",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.Title"
+            },
+            {
+              "name": "WindowMode",
+              "fullName": "Imagini.WindowSettings.WindowMode",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.WindowMode"
+            },
+            {
+              "name": "FullscreenDisplayMode",
+              "fullName": "Imagini.WindowSettings.FullscreenDisplayMode",
+              "type": "Property",
+              "link": "Imagini.WindowSettings.FullscreenDisplayMode"
+            },
+            {
+              "name": "Clone()",
+              "fullName": "Imagini.WindowSettings.Clone()",
+              "type": "Method",
+              "link": "Imagini.WindowSettings.Clone()"
+            }
+          ]
+        },
+        {
+          "name": "WindowStateChangeEventArgs",
+          "fullName": "Imagini.WindowStateChangeEventArgs",
+          "type": "Class",
+          "link": "Imagini.WindowStateChangeEventArgs",
+          "children": [
+            {
+              "name": "Window",
+              "fullName": "Imagini.WindowStateChangeEventArgs.Window",
+              "type": "Property",
+              "link": "Imagini.WindowStateChangeEventArgs.Window"
+            },
+            {
+              "name": "State",
+              "fullName": "Imagini.WindowStateChangeEventArgs.State",
+              "type": "Property",
+              "link": "Imagini.WindowStateChangeEventArgs.State"
+            },
+            {
+              "name": "X",
+              "fullName": "Imagini.WindowStateChangeEventArgs.X",
+              "type": "Property",
+              "link": "Imagini.WindowStateChangeEventArgs.X"
+            },
+            {
+              "name": "Y",
+              "fullName": "Imagini.WindowStateChangeEventArgs.Y",
+              "type": "Property",
+              "link": "Imagini.WindowStateChangeEventArgs.Y"
+            },
+            {
+              "name": "WindowStateChangeEventArgs(WindowStateChange, Window, int?, int?)",
+              "fullName": "Imagini.WindowStateChangeEventArgs.WindowStateChangeEventArgs(WindowStateChange, Window, int?, int?)",
+              "type": "Constructor",
+              "link": "Imagini.WindowStateChangeEventArgs.WindowStateChangeEventArgs(WindowStateChange,Window,int?,int?)"
+            }
+          ]
+        },
+        {
+          "name": "DisplayMode",
+          "fullName": "Imagini.DisplayMode",
+          "type": "Struct",
+          "link": "Imagini.DisplayMode",
+          "children": [
+            {
+              "name": "Width",
+              "fullName": "Imagini.DisplayMode.Width",
+              "type": "Property",
+              "link": "Imagini.DisplayMode.Width"
+            },
+            {
+              "name": "Height",
+              "fullName": "Imagini.DisplayMode.Height",
+              "type": "Property",
+              "link": "Imagini.DisplayMode.Height"
+            },
+            {
+              "name": "RefreshRate",
+              "fullName": "Imagini.DisplayMode.RefreshRate",
+              "type": "Property",
+              "link": "Imagini.DisplayMode.RefreshRate"
+            },
+            {
+              "name": "ToString()",
+              "fullName": "Imagini.DisplayMode.ToString()",
+              "type": "Method",
+              "link": "Imagini.DisplayMode.ToString()"
+            }
+          ]
+        },
+        {
+          "name": "KeyboardKey",
+          "fullName": "Imagini.KeyboardKey",
+          "type": "Struct",
+          "link": "Imagini.KeyboardKey",
+          "children": [
+            {
+              "name": "Scancode",
+              "fullName": "Imagini.KeyboardKey.Scancode",
+              "type": "Field",
+              "link": "Imagini.KeyboardKey.Scancode"
+            },
+            {
+              "name": "Keycode",
+              "fullName": "Imagini.KeyboardKey.Keycode",
+              "type": "Field",
+              "link": "Imagini.KeyboardKey.Keycode"
+            },
+            {
+              "name": "Modifiers",
+              "fullName": "Imagini.KeyboardKey.Modifiers",
+              "type": "Field",
+              "link": "Imagini.KeyboardKey.Modifiers"
+            }
+          ]
+        },
+        {
+          "name": "ControllerAxis",
+          "fullName": "Imagini.ControllerAxis",
+          "type": "Enum",
+          "link": "Imagini.ControllerAxis"
+        },
+        {
+          "name": "ControllerButton",
+          "fullName": "Imagini.ControllerButton",
+          "type": "Enum",
+          "link": "Imagini.ControllerButton"
+        },
+        {
+          "name": "HatPosition",
+          "fullName": "Imagini.HatPosition",
+          "type": "Enum",
+          "link": "Imagini.HatPosition"
+        },
+        {
+          "name": "Keycode",
+          "fullName": "Imagini.Keycode",
+          "type": "Enum",
+          "link": "Imagini.Keycode"
+        },
+        {
+          "name": "KeyModifier",
+          "fullName": "Imagini.KeyModifier",
+          "type": "Enum",
+          "link": "Imagini.KeyModifier"
+        },
+        {
+          "name": "MouseButton",
+          "fullName": "Imagini.MouseButton",
+          "type": "Enum",
+          "link": "Imagini.MouseButton"
+        },
+        {
+          "name": "MouseButtons",
+          "fullName": "Imagini.MouseButtons",
+          "type": "Enum",
+          "link": "Imagini.MouseButtons"
+        },
+        {
+          "name": "Scancode",
+          "fullName": "Imagini.Scancode",
+          "type": "Enum",
+          "link": "Imagini.Scancode"
+        },
+        {
+          "name": "TouchEventType",
+          "fullName": "Imagini.TouchEventType",
+          "type": "Enum",
+          "link": "Imagini.TouchEventType"
+        },
+        {
+          "name": "WindowMode",
+          "fullName": "Imagini.WindowMode",
+          "type": "Enum",
+          "link": "Imagini.WindowMode"
+        },
+        {
+          "name": "WindowStateChange",
+          "fullName": "Imagini.WindowStateChange",
+          "type": "Enum",
+          "link": "Imagini.WindowStateChange"
+        },
+        {
+          "name": "WindowSubsystem",
+          "fullName": "Imagini.WindowSubsystem",
+          "type": "Enum",
+          "link": "Imagini.WindowSubsystem"
+        }
+      ]
+    },
+    {
+      "name": "Imagini.Core.Internal",
+      "fullName": "Imagini.Core.Internal",
+      "type": "Namespace",
+      "link": "Imagini.Core.Internal",
+      "children": []
+    }
+  ]
+}

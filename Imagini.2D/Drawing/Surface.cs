@@ -330,7 +330,7 @@ namespace Imagini.Drawing
         /// <param name="data">The pixel data to create surface from</param>
         /// <param name="width">Surface width</param>
         /// <param name="height">Surface height</param>
-        /// <param name="stride">Length of pixel row in bytes. RGBA = 4 * width</params>
+        /// <param name="stride">Length of pixel row in bytes. RGBA = 4 * width</param>
         /// <param name="depth">Surface depth in bits (defaults to 32)</param>
         /// <remarks>
         /// The mask parameters are the bitmasks used to extract that

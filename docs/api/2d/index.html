@@ -1,0 +1,574 @@
+<!DOCTYPE HTML>
+<html><head><title></title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="index.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<style>
+        pre code.hljs {
+            display: block;
+        }
+
+        code.hljs {
+            display: inline;
+        }</style>
+</head><body>
+<h1>API Documentation</h1>
+<ul>
+<li><a href="Imagini.html">Imagini</a></li>
+<ul>
+<li><a href="Imagini.App2D.html">App2D</a></li>
+<ul>
+<li><a href="Imagini.App2D.Graphics.html">Graphics</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.App2D.Surface.html">Surface</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.App2D.IsHardwareAccelerated.html">IsHardwareAccelerated</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.App2D.App2D(WindowSettings,RendererInfo,bool).html">App2D(WindowSettings, RendererInfo, bool)</a></li>
+</ul>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.html">Imagini.Drawing</a></li>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.html">Graphics</a></li>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.Renderer.html">Renderer</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.OutputSize.html">OutputSize</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.PixelCount.html">PixelCount</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.Clear().html">Clear()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.Clear(Color).html">Clear(Color)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.CreateTexture(int,int,TextureScalingQuality,PixelFormat,TextureAccess).html">CreateTexture(int, int, TextureScalingQuality, PixelFormat, TextureAccess)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.CreateTextureFromSurface(Surface,TextureScalingQuality).html">CreateTextureFromSurface(Surface, TextureScalingQuality)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?,double,Point?,TextureFlip).html">Draw(Texture, Rectangle?, Rectangle?, double, Point?, TextureFlip)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?).html">Draw(Texture, Rectangle?, Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawLine(int,int,int,int).html">DrawLine(int, int, int, int)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawLine(Point,Point).html">DrawLine(Point, Point)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawLines(Point[]).html">DrawLines(Point[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawPoint(int,int).html">DrawPoint(int, int)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawPoint(Point).html">DrawPoint(Point)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawPoints(Point[]).html">DrawPoints(Point[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawRect(Rectangle?).html">DrawRect(Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.DrawRects(Rectangle[]).html">DrawRects(Rectangle[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.FillRect(Rectangle?).html">FillRect(Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.FillRects(Rectangle[]).html">FillRects(Rectangle[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetBlendMode().html">GetBlendMode()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetClipRectangle().html">GetClipRectangle()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetDrawingColor().html">GetDrawingColor()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetLogicalSize().html">GetLogicalSize()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetLogicalSize(int,int).html">GetLogicalSize(int, int)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetPixelBufferSize(Rectangle?).html">GetPixelBufferSize(Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetRenderTarget().html">GetRenderTarget()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetScale().html">GetScale()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetScale(float,float).html">GetScale(float, float)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.GetViewport().html">GetViewport()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.ReadPixels(ColorRGB888[],Rectangle?).html">ReadPixels(ColorRGB888[], Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetBlendMode(BlendMode).html">SetBlendMode(BlendMode)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetClipRectangle(Rectangle?).html">SetClipRectangle(Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetDrawingColor(Color).html">SetDrawingColor(Color)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetLogicalSize(int,int).html">SetLogicalSize(int, int)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetLogicalSize(Size).html">SetLogicalSize(Size)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetRenderTarget(Texture).html">SetRenderTarget(Texture)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetScale(float,float).html">SetScale(float, float)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetScale(SizeF).html">SetScale(SizeF)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Graphics.SetViewport(Rectangle?).html">SetViewport(Rectangle?)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Palette.html">Palette</a></li>
+<ul>
+<li><a href="Imagini.Drawing.Palette.MaximumColors.html">MaximumColors</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Palette.Colors.html">Colors</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Palette.Palette(Color[]).html">Palette(Color[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Palette.Palette(IEnumerable{Color}).html">Palette(IEnumerable&lt;Color&gt;)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Palette.Dispose().html">Dispose()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.html">PixelFormatExtensions</a></li>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.GetBitsPerPixel(PixelFormat).html">GetBitsPerPixel(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.GetBytesPerPixel(PixelFormat).html">GetBytesPerPixel(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.GetComponentType(PixelFormat).html">GetComponentType(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.GetLayout(PixelFormat).html">GetLayout(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.GetPixelType(PixelFormat).html">GetPixelType(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.HasAlpha(PixelFormat).html">HasAlpha(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.IsArray(PixelFormat).html">IsArray(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.IsFourCC(PixelFormat).html">IsFourCC(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.IsIndexed(PixelFormat).html">IsIndexed(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatExtensions.IsPacked(PixelFormat).html">IsPacked(PixelFormat)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.html">PixelFormatInfo</a></li>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.Format.html">Format</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.BitsPerPixel.html">BitsPerPixel</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.BytesPerPixel.html">BytesPerPixel</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.MaskR.html">MaskR</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.MaskG.html">MaskG</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.MaskB.html">MaskB</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.MaskA.html">MaskA</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.Palette.html">Palette</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.PixelFormatInfo(PixelFormat).html">PixelFormatInfo(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormatInfo.Dispose().html">Dispose()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Pixels.html">Pixels</a></li>
+<ul>
+<li><a href="Imagini.Drawing.Pixels.Convert(int,int,int,int,PixelFormat,PixelFormat,IntPtr,IntPtr).html">Convert(int, int, int, int, PixelFormat, PixelFormat, IntPtr, IntPtr)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Pixels.Convert{T1,T2}(int,int,int,int,T1[],T2[]).html">Convert&lt;T1, T2&gt;(int, int, int, int, T1[], T2[])</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.html">RendererInfo</a></li>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.Name.html">Name</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.PixelFormats.html">PixelFormats</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.IsHardwareAccelerated.html">IsHardwareAccelerated</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.IsSoftware.html">IsSoftware</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.SupportsRenderingToTexture.html">SupportsRenderingToTexture</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.SupportsVSync.html">SupportsVSync</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.MaxTextureWidth.html">MaxTextureWidth</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.MaxTextureHeight.html">MaxTextureHeight</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.RendererInfo.All.html">All</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.html">Surface</a></li>
+<ul>
+<li><a href="Imagini.Drawing.Surface.PixelInfo.html">PixelInfo</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Width.html">Width</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Height.html">Height</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.PixelCount.html">PixelCount</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Stride.html">Stride</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.SizeInBytes.html">SizeInBytes</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.MustBeLocked.html">MustBeLocked</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Locked.html">Locked</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.RLEEnabled.html">RLEEnabled</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.ClipRect.html">ClipRect</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.ColorMod.html">ColorMod</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.AlphaMod.html">AlphaMod</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.BlendMode.html">BlendMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.ColorKey.html">ColorKey</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.BlitTo(Surface,Rectangle?,Rectangle?).html">BlitTo(Surface, Rectangle?, Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.ConvertTo(PixelFormat).html">ConvertTo(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.ConvertTo(PixelFormatInfo).html">ConvertTo(PixelFormatInfo)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Create(int,int,int,int,int,int,int).html">Create(int, int, int, int, int, int, int)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Create(int,int,PixelFormat).html">Create(int, int, PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.CreateFrom(byte[],int,int,int,int,int,int,int,int).html">CreateFrom(byte[], int, int, int, int, int, int, int, int)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.CreateFrom(byte[],int,int,PixelFormat).html">CreateFrom(byte[], int, int, PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Dispose().html">Dispose()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Fill(Color,Rectangle?).html">Fill(Color, Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Fill(Color,Rectangle[]).html">Fill(Color, Rectangle[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Lock().html">Lock()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.OptimizeFor(PixelFormat).html">OptimizeFor(PixelFormat)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.OptimizeFor(PixelFormatInfo).html">OptimizeFor(PixelFormatInfo)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.ReadPixels(byte[]).html">ReadPixels(byte[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.ReadPixels{T}(T[]).html">ReadPixels&lt;T&gt;(T[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.SetPixelData(byte[]).html">SetPixelData(byte[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.SetPixelData{T}(T[]).html">SetPixelData&lt;T&gt;(T[])</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.SetRLEAcceleration(bool).html">SetRLEAcceleration(bool)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Surface.Unlock().html">Unlock()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.html">Texture</a></li>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Owner.html">Owner</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Width.html">Width</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Height.html">Height</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Size.html">Size</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.PixelCount.html">PixelCount</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Format.html">Format</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Access.html">Access</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Locked.html">Locked</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.ColorMod.html">ColorMod</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.AlphaMod.html">AlphaMod</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.BlendMode.html">BlendMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Dispose().html">Dispose()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.GetPixelBufferSize{T}(Rectangle?).html">GetPixelBufferSize&lt;T&gt;(Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.GetPixelBufferSizeInBytes(Rectangle?).html">GetPixelBufferSizeInBytes(Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Lock(int,int,Rectangle?).html">Lock(int, int, Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.SetPixels(byte[],Rectangle?).html">SetPixels(byte[], Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.SetPixels{T}(T[],Rectangle?).html">SetPixels&lt;T&gt;(T[], Rectangle?)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.Texture.Unlock().html">Unlock()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.html">ColorARGB8888</a></li>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.B.html">B</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.G.html">G</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.R.html">R</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.A.html">A</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.Format.html">Format</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.ColorARGB8888(Color).html">ColorARGB8888(Color)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.AsColor().html">AsColor()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.Equals(object).html">Equals(object)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorARGB8888.GetHashCode().html">GetHashCode()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.html">ColorRGB888</a></li>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.B.html">B</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.G.html">G</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.R.html">R</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.Format.html">Format</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.ColorRGB888(Color).html">ColorRGB888(Color)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.AsColor().html">AsColor()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.Equals(object).html">Equals(object)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGB888.GetHashCode().html">GetHashCode()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.html">ColorRGBA8888</a></li>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.A.html">A</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.B.html">B</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.G.html">G</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.R.html">R</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.Format.html">Format</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.ColorRGBA8888(Color).html">ColorRGBA8888(Color)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.AsColor().html">AsColor()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.Equals(object).html">Equals(object)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.ColorRGBA8888.GetHashCode().html">GetHashCode()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.BlendMode.html">BlendMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelArrayOrder.html">PixelArrayOrder</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelBitmapOrder.html">PixelBitmapOrder</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelComponentType.html">PixelComponentType</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelFormat.html">PixelFormat</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelLayout.html">PixelLayout</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelPackedOrder.html">PixelPackedOrder</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.PixelType.html">PixelType</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.TextureAccess.html">TextureAccess</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.TextureFlip.html">TextureFlip</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.TextureScalingQuality.html">TextureScalingQuality</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.IColor.html">IColor</a></li>
+<ul>
+<li><a href="Imagini.Drawing.IColor.Format.html">Format</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Drawing.IColor.AsColor().html">AsColor()</a></li>
+</ul>
+</ul>
+</ul>
+<hr>
+<a href="https://github.com/RaZeR-RBI/dotbook">Generated with DotBook</a>
+
+<script>
+            var code = document.getElementsByTagName('code');
+            for (i = 0; i < code.length; i++) hljs.highlightBlock(code[i]);
+        </script>
+</body></html>

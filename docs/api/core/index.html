@@ -1,0 +1,676 @@
+<!DOCTYPE HTML>
+<html><head><title></title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="index.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<style>
+        pre code.hljs {
+            display: block;
+        }
+
+        code.hljs {
+            display: inline;
+        }</style>
+</head><body>
+<h1>API Documentation</h1>
+<ul>
+<li><a href="Imagini.html">Imagini</a></li>
+<ul>
+<li><a href="Imagini.AppBase.html">AppBase</a></li>
+<ul>
+<li><a href="Imagini.AppBase.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.Events.html">Events</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.TotalTime.html">TotalTime</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.ElapsedAppTime.html">ElapsedAppTime</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.IsMouseVisible.html">IsMouseVisible</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.IsActive.html">IsActive</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.TargetElapsedTime.html">TargetElapsedTime</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.InactiveSleepTime.html">InactiveSleepTime</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.MaxElapsedTime.html">MaxElapsedTime</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.IsFixedTimeStep.html">IsFixedTimeStep</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.IsRunningSlowly.html">IsRunningSlowly</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.IsDisposed.html">IsDisposed</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.AppBase(WindowSettings).html">AppBase(WindowSettings)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.CancelExitRequest().html">CancelExitRequest()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.Dispose().html">Dispose()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.RequestExit().html">RequestExit()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.ResetElapsedTime().html">ResetElapsedTime()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.Run().html">Run()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.SuppressDraw().html">SuppressDraw()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.Terminate().html">Terminate()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.AppBase.Tick().html">Tick()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.AppExitEventArgs.html">AppExitEventArgs</a></li>
+<ul>
+<li><a href="Imagini.AppExitEventArgs.Cancel.html">Cancel</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.CommonEventArgs.html">CommonEventArgs</a></li>
+<ul>
+<li><a href="Imagini.CommonEventArgs.Timestamp.html">Timestamp</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerAxisEventArgs.html">ControllerAxisEventArgs</a></li>
+<ul>
+<li><a href="Imagini.ControllerAxisEventArgs.ControllerID.html">ControllerID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerAxisEventArgs.Axis.html">Axis</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerAxisEventArgs.Value.html">Value</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerAxisEventArgs.ControllerAxisEventArgs(int,ControllerAxis,short).html">ControllerAxisEventArgs(int, ControllerAxis, short)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerButtonEventArgs.html">ControllerButtonEventArgs</a></li>
+<ul>
+<li><a href="Imagini.ControllerButtonEventArgs.ControllerID.html">ControllerID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerButtonEventArgs.Button.html">Button</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerButtonEventArgs.IsPressed.html">IsPressed</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerButtonEventArgs.ControllerButtonEventArgs(int,ControllerButton,bool).html">ControllerButtonEventArgs(int, ControllerButton, bool)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerDeviceStateEventArgs.html">ControllerDeviceStateEventArgs</a></li>
+<ul>
+<li><a href="Imagini.ControllerDeviceStateEventArgs.ControllerID.html">ControllerID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerDeviceStateEventArgs.Connected.html">Connected</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerDeviceStateEventArgs.ControllerDeviceStateEventArgs(int,bool).html">ControllerDeviceStateEventArgs(int, bool)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerEvents.html">ControllerEvents</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Display.html">Display</a></li>
+<ul>
+<li><a href="Imagini.Display.All.html">All</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Display.Modes.html">Modes</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Display.CurrentMode.html">CurrentMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Display.DesktopMode.html">DesktopMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Display.Name.html">Name</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.EventManager.html">EventManager</a></li>
+<ul>
+<li><a href="Imagini.EventManager.Poll(bool).html">Poll(bool)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.EventManager.Pump().html">Pump()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.EventManager.Push(CommonEventArgs).html">Push(CommonEventArgs)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Events.html">Events</a></li>
+<ul>
+<li><a href="Imagini.Events.InputEvents.html">InputEvents</a></li>
+<ul>
+<li><a href="Imagini.Events.InputEvents.OnTextEdit.html">OnTextEdit</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.InputEvents.OnTextInput.html">OnTextInput</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Events.JoystickEvents.html">JoystickEvents</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.KeyboardEvents.html">KeyboardEvents</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.MouseEvents.html">MouseEvents</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.WindowEvents.html">WindowEvents</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Input.html">Input</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Keyboard.html">Keyboard</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Mouse.html">Mouse</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Joystick.html">Joystick</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Controller.html">Controller</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Touch.html">Touch</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Global.html">Global</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Events.Owner.html">Owner</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.ImaginiException.html">ImaginiException</a></li>
+<ul>
+<li><a href="Imagini.ImaginiException.ImaginiException().html">ImaginiException()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ImaginiException.ImaginiException(string).html">ImaginiException(string)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ImaginiException.ImaginiException(string,Exception).html">ImaginiException(string, Exception)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.JoyAxisMotionEventArgs.html">JoyAxisMotionEventArgs</a></li>
+<ul>
+<li><a href="Imagini.JoyAxisMotionEventArgs.JoystickID.html">JoystickID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyAxisMotionEventArgs.Axis.html">Axis</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyAxisMotionEventArgs.Value.html">Value</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyAxisMotionEventArgs.JoyAxisMotionEventArgs(int,byte,short).html">JoyAxisMotionEventArgs(int, byte, short)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.JoyBallMotionEventArgs.html">JoyBallMotionEventArgs</a></li>
+<ul>
+<li><a href="Imagini.JoyBallMotionEventArgs.JoystickID.html">JoystickID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyBallMotionEventArgs.Ball.html">Ball</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyBallMotionEventArgs.RelativeX.html">RelativeX</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyBallMotionEventArgs.RelativeY.html">RelativeY</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyBallMotionEventArgs.JoyBallMotionEventArgs(int,byte,short,short).html">JoyBallMotionEventArgs(int, byte, short, short)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.JoyButtonEventArgs.html">JoyButtonEventArgs</a></li>
+<ul>
+<li><a href="Imagini.JoyButtonEventArgs.JoystickID.html">JoystickID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyButtonEventArgs.Button.html">Button</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyButtonEventArgs.IsPressed.html">IsPressed</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyButtonEventArgs.JoyButtonEventArgs(int,byte,bool).html">JoyButtonEventArgs(int, byte, bool)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.JoyDeviceStateEventArgs.html">JoyDeviceStateEventArgs</a></li>
+<ul>
+<li><a href="Imagini.JoyDeviceStateEventArgs.JoystickID.html">JoystickID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyDeviceStateEventArgs.Connected.html">Connected</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyDeviceStateEventArgs.JoyDeviceStateEventArgs(int,bool).html">JoyDeviceStateEventArgs(int, bool)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.JoyHatMotionEventArgs.html">JoyHatMotionEventArgs</a></li>
+<ul>
+<li><a href="Imagini.JoyHatMotionEventArgs.JoystickID.html">JoystickID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyHatMotionEventArgs.Hat.html">Hat</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyHatMotionEventArgs.Position.html">Position</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.JoyHatMotionEventArgs.JoyHatMotionEventArgs(int,byte,HatPosition).html">JoyHatMotionEventArgs(int, byte, HatPosition)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardEventArgs.html">KeyboardEventArgs</a></li>
+<ul>
+<li><a href="Imagini.KeyboardEventArgs.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardEventArgs.Key.html">Key</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardEventArgs.IsPressed.html">IsPressed</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardEventArgs.IsRepeat.html">IsRepeat</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardEventArgs.KeyboardEventArgs(KeyboardKey,bool,Window,bool).html">KeyboardEventArgs(KeyboardKey, bool, Window, bool)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Logger.html">Logger</a></li>
+<ul>
+<li><a href="Imagini.Logger.Log.html">Log</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Logger.Set(LoggerConfiguration).html">Set(LoggerConfiguration)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.html">MouseButtonEventArgs</a></li>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.Button.html">Button</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.IsPressed.html">IsPressed</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.Clicks.html">Clicks</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.X.html">X</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.Y.html">Y</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtonEventArgs.MouseButtonEventArgs(MouseButton,int,int,bool,Window,byte).html">MouseButtonEventArgs(MouseButton, int, int, bool, Window, byte)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.html">MouseMoveEventArgs</a></li>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.Buttons.html">Buttons</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.X.html">X</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.Y.html">Y</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.RelativeX.html">RelativeX</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.RelativeY.html">RelativeY</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.MouseMoveEventArgs(int,int,int,int,MouseButtons,Window).html">MouseMoveEventArgs(int, int, int, int, MouseButtons, Window)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseMoveEventArgs.IsPressed(MouseButtons).html">IsPressed(MouseButtons)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.MouseWheelEventArgs.html">MouseWheelEventArgs</a></li>
+<ul>
+<li><a href="Imagini.MouseWheelEventArgs.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseWheelEventArgs.X.html">X</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseWheelEventArgs.Y.html">Y</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseWheelEventArgs.MouseWheelEventArgs(int,int,Window).html">MouseWheelEventArgs(int, int, Window)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Resource.html">Resource</a></li>
+<ul>
+<li><a href="Imagini.Resource.IsDisposed.html">IsDisposed</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.TextEditingEventArgs.html">TextEditingEventArgs</a></li>
+<ul>
+<li><a href="Imagini.TextEditingEventArgs.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TextEditingEventArgs.Text.html">Text</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TextEditingEventArgs.Start.html">Start</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TextEditingEventArgs.Length.html">Length</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TextEditingEventArgs.TextEditingEventArgs(string,int,int,Window).html">TextEditingEventArgs(string, int, int, Window)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.TextInputEventArgs.html">TextInputEventArgs</a></li>
+<ul>
+<li><a href="Imagini.TextInputEventArgs.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TextInputEventArgs.Text.html">Text</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TextInputEventArgs.TextInputEventArgs(string,Window).html">TextInputEventArgs(string, Window)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.TouchEvents.html">TouchEvents</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.html">TouchFingerEventArgs</a></li>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.Type.html">Type</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.DeviceID.html">DeviceID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.FingerID.html">FingerID</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.X.html">X</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.Y.html">Y</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.DX.html">DX</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.DY.html">DY</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.Pressure.html">Pressure</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchFingerEventArgs.TouchFingerEventArgs(TouchEventType,long,long,float,float,float,float,float).html">TouchFingerEventArgs(TouchEventType, long, long, float, float, float, float, float)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.Window.html">Window</a></li>
+<ul>
+<li><a href="Imagini.Window.Handle.html">Handle</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Windows.html">Windows</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Size.html">Size</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.SizeInPixels.html">SizeInPixels</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.MinimumSize.html">MinimumSize</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.MaximumSize.html">MaximumSize</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Settings.html">Settings</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Mode.html">Mode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.IsVisible.html">IsVisible</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.IsFocused.html">IsFocused</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.IsMinimized.html">IsMinimized</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.IsMaximized.html">IsMaximized</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Title.html">Title</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.DisplayIndex.html">DisplayIndex</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Display.html">Display</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Subsystem.html">Subsystem</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Apply(WindowSettings).html">Apply(WindowSettings)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Hide().html">Hide()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Maximize().html">Maximize()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Minimize().html">Minimize()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.OverrideCurrentWith(Window).html">OverrideCurrentWith(Window)</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Raise().html">Raise()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Restore().html">Restore()</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Window.Show().html">Show()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.html">WindowSettings</a></li>
+<ul>
+<li><a href="Imagini.WindowSettings.WindowWidth.html">WindowWidth</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.WindowHeight.html">WindowHeight</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.IsFullscreen.html">IsFullscreen</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.VSync.html">VSync</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.IsVisible.html">IsVisible</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.IsBorderless.html">IsBorderless</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.IsResizable.html">IsResizable</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.AllowHighDpi.html">AllowHighDpi</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.DisplayIndex.html">DisplayIndex</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.Title.html">Title</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.WindowMode.html">WindowMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.FullscreenDisplayMode.html">FullscreenDisplayMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSettings.Clone().html">Clone()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.WindowStateChangeEventArgs.html">WindowStateChangeEventArgs</a></li>
+<ul>
+<li><a href="Imagini.WindowStateChangeEventArgs.Window.html">Window</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowStateChangeEventArgs.State.html">State</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowStateChangeEventArgs.X.html">X</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowStateChangeEventArgs.Y.html">Y</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowStateChangeEventArgs.WindowStateChangeEventArgs(WindowStateChange,Window,int?,int?).html">WindowStateChangeEventArgs(WindowStateChange, Window, int?, int?)</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.DisplayMode.html">DisplayMode</a></li>
+<ul>
+<li><a href="Imagini.DisplayMode.Width.html">Width</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.DisplayMode.Height.html">Height</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.DisplayMode.RefreshRate.html">RefreshRate</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.DisplayMode.ToString().html">ToString()</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardKey.html">KeyboardKey</a></li>
+<ul>
+<li><a href="Imagini.KeyboardKey.Scancode.html">Scancode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardKey.Keycode.html">Keycode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.KeyboardKey.Modifiers.html">Modifiers</a></li>
+</ul>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerAxis.html">ControllerAxis</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.ControllerButton.html">ControllerButton</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.HatPosition.html">HatPosition</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Keycode.html">Keycode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.KeyModifier.html">KeyModifier</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButton.html">MouseButton</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.MouseButtons.html">MouseButtons</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.Scancode.html">Scancode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.TouchEventType.html">TouchEventType</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowMode.html">WindowMode</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowStateChange.html">WindowStateChange</a></li>
+</ul>
+<ul>
+<li><a href="Imagini.WindowSubsystem.html">WindowSubsystem</a></li>
+</ul>
+</ul>
+<hr>
+<a href="https://github.com/RaZeR-RBI/dotbook">Generated with DotBook</a>
+
+<script>
+            var code = document.getElementsByTagName('code');
+            for (i = 0; i < code.length; i++) hljs.highlightBlock(code[i]);
+        </script>
+</body></html>

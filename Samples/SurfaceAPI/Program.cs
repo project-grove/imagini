@@ -4,7 +4,7 @@ using System.Linq;
 using Imagini;
 using Imagini.Drawing;
 
-namespace SoftwareRendering
+namespace SurfaceAPI 
 {
     class Program
     {

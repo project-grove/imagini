@@ -10,6 +10,7 @@ Task("Restore").Does(() => {
 Task("Clean").Does(() => {
     DotNetCoreClean(solution);
     CleanDirectory("./docs/coverage/");
+    CleanDirectory("./docs/api/");
 });
 
 Task("Build").Does(() => {
@@ -33,6 +34,15 @@ Task("Test").Does(() => {
     });
 });
 
+Task("ApiDoc").Does(() => {
+    DotNetCoreTool(solution, "doc", "-f Html -s ./Imagini.Core/ -o ./docs/api/core/");
+    DotNetCoreTool(solution, "doc", "-f Html -s ./Imagini.2D/ -o ./docs/api/2d/");
+    DotNetCoreTool(solution, "doc", "-f Html -s ./Imagini.ImageSharp/ -o ./docs/api/imagesharp/");
+    CopyFile("docs/index.css", "docs/api/core/index.css");
+    CopyFile("docs/index.css", "docs/api/2d/index.css");
+    CopyFile("docs/index.css", "docs/api/imagesharp/index.css");
+});
+
 Task("ReportCoverage").Does(() => {
     var param = "\"-reports:./Tests/coverage.xml\" " +
         "\"-targetdir:./docs/coverage/\" " +
@@ -49,22 +59,24 @@ Task("InstallTools").Does(() => {
     StartProcess("dotnet", new ProcessSettings {
         Arguments = "tool install --global dotnet-reportgenerator-globaltool"
     });
+    StartProcess("dotnet", new ProcessSettings {
+        Arguments = "tool install --global dotbook"
+    });
 });
 
 Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
-    .IsDependentOn("ReportCoverage");
+    .IsDependentOn("ReportCoverage")
+    .IsDependentOn("ApiDoc");
 
 
-Task("Full")
+Task("CleanBuild")
     .IsDependentOn("Clean")
-    .IsDependentOn("Build")
-    .IsDependentOn("Test")
-    .IsDependentOn("ReportCoverage");
+    .IsDependentOn("Default");
 
 Task("CI")
     .IsDependentOn("InstallTools")
-    .IsDependentOn("Full");
+    .IsDependentOn("CleanBuild");
 
 RunTarget(target);

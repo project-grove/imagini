@@ -1,0 +1,1142 @@
+{
+  "name": "",
+  "fullName": "",
+  "type": "Root",
+  "link": "",
+  "children": [
+    {
+      "name": "Imagini",
+      "fullName": "Imagini",
+      "type": "Namespace",
+      "link": "Imagini",
+      "children": [
+        {
+          "name": "App2D",
+          "fullName": "Imagini.App2D",
+          "type": "Class",
+          "link": "Imagini.App2D",
+          "children": [
+            {
+              "name": "Graphics",
+              "fullName": "Imagini.App2D.Graphics",
+              "type": "Property",
+              "link": "Imagini.App2D.Graphics"
+            },
+            {
+              "name": "Surface",
+              "fullName": "Imagini.App2D.Surface",
+              "type": "Property",
+              "link": "Imagini.App2D.Surface"
+            },
+            {
+              "name": "IsHardwareAccelerated",
+              "fullName": "Imagini.App2D.IsHardwareAccelerated",
+              "type": "Property",
+              "link": "Imagini.App2D.IsHardwareAccelerated"
+            },
+            {
+              "name": "App2D(WindowSettings, RendererInfo, bool)",
+              "fullName": "Imagini.App2D.App2D(WindowSettings, RendererInfo, bool)",
+              "type": "Constructor",
+              "link": "Imagini.App2D.App2D(WindowSettings,RendererInfo,bool)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Imagini.Drawing",
+      "fullName": "Imagini.Drawing",
+      "type": "Namespace",
+      "link": "Imagini.Drawing",
+      "children": [
+        {
+          "name": "Graphics",
+          "fullName": "Imagini.Drawing.Graphics",
+          "type": "Class",
+          "link": "Imagini.Drawing.Graphics",
+          "children": [
+            {
+              "name": "Renderer",
+              "fullName": "Imagini.Drawing.Graphics.Renderer",
+              "type": "Property",
+              "link": "Imagini.Drawing.Graphics.Renderer"
+            },
+            {
+              "name": "OutputSize",
+              "fullName": "Imagini.Drawing.Graphics.OutputSize",
+              "type": "Property",
+              "link": "Imagini.Drawing.Graphics.OutputSize"
+            },
+            {
+              "name": "PixelCount",
+              "fullName": "Imagini.Drawing.Graphics.PixelCount",
+              "type": "Property",
+              "link": "Imagini.Drawing.Graphics.PixelCount"
+            },
+            {
+              "name": "Clear()",
+              "fullName": "Imagini.Drawing.Graphics.Clear()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Clear()"
+            },
+            {
+              "name": "Clear(Color)",
+              "fullName": "Imagini.Drawing.Graphics.Clear(Color)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Clear(Color)"
+            },
+            {
+              "name": "CreateTexture(int, int, TextureScalingQuality, PixelFormat, TextureAccess)",
+              "fullName": "Imagini.Drawing.Graphics.CreateTexture(int, int, TextureScalingQuality, PixelFormat, TextureAccess)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.CreateTexture(int,int,TextureScalingQuality,PixelFormat,TextureAccess)"
+            },
+            {
+              "name": "CreateTextureFromSurface(Surface, TextureScalingQuality)",
+              "fullName": "Imagini.Drawing.Graphics.CreateTextureFromSurface(Surface, TextureScalingQuality)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.CreateTextureFromSurface(Surface,TextureScalingQuality)"
+            },
+            {
+              "name": "Draw(Texture, Rectangle?, Rectangle?, double, Point?, TextureFlip)",
+              "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle?, Rectangle?, double, Point?, TextureFlip)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?,double,Point?,TextureFlip)"
+            },
+            {
+              "name": "Draw(Texture, Rectangle?, Rectangle?)",
+              "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle?, Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?)"
+            },
+            {
+              "name": "DrawLine(int, int, int, int)",
+              "fullName": "Imagini.Drawing.Graphics.DrawLine(int, int, int, int)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawLine(int,int,int,int)"
+            },
+            {
+              "name": "DrawLine(Point, Point)",
+              "fullName": "Imagini.Drawing.Graphics.DrawLine(Point, Point)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawLine(Point,Point)"
+            },
+            {
+              "name": "DrawLines(Point[])",
+              "fullName": "Imagini.Drawing.Graphics.DrawLines(Point[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawLines(Point[])"
+            },
+            {
+              "name": "DrawPoint(int, int)",
+              "fullName": "Imagini.Drawing.Graphics.DrawPoint(int, int)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawPoint(int,int)"
+            },
+            {
+              "name": "DrawPoint(Point)",
+              "fullName": "Imagini.Drawing.Graphics.DrawPoint(Point)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawPoint(Point)"
+            },
+            {
+              "name": "DrawPoints(Point[])",
+              "fullName": "Imagini.Drawing.Graphics.DrawPoints(Point[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawPoints(Point[])"
+            },
+            {
+              "name": "DrawRect(Rectangle?)",
+              "fullName": "Imagini.Drawing.Graphics.DrawRect(Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawRect(Rectangle?)"
+            },
+            {
+              "name": "DrawRects(Rectangle[])",
+              "fullName": "Imagini.Drawing.Graphics.DrawRects(Rectangle[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.DrawRects(Rectangle[])"
+            },
+            {
+              "name": "FillRect(Rectangle?)",
+              "fullName": "Imagini.Drawing.Graphics.FillRect(Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.FillRect(Rectangle?)"
+            },
+            {
+              "name": "FillRects(Rectangle[])",
+              "fullName": "Imagini.Drawing.Graphics.FillRects(Rectangle[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.FillRects(Rectangle[])"
+            },
+            {
+              "name": "GetBlendMode()",
+              "fullName": "Imagini.Drawing.Graphics.GetBlendMode()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetBlendMode()"
+            },
+            {
+              "name": "GetClipRectangle()",
+              "fullName": "Imagini.Drawing.Graphics.GetClipRectangle()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetClipRectangle()"
+            },
+            {
+              "name": "GetDrawingColor()",
+              "fullName": "Imagini.Drawing.Graphics.GetDrawingColor()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetDrawingColor()"
+            },
+            {
+              "name": "GetLogicalSize()",
+              "fullName": "Imagini.Drawing.Graphics.GetLogicalSize()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetLogicalSize()"
+            },
+            {
+              "name": "GetLogicalSize(int, int)",
+              "fullName": "Imagini.Drawing.Graphics.GetLogicalSize(int, int)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetLogicalSize(int,int)"
+            },
+            {
+              "name": "GetPixelBufferSize(Rectangle?)",
+              "fullName": "Imagini.Drawing.Graphics.GetPixelBufferSize(Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetPixelBufferSize(Rectangle?)"
+            },
+            {
+              "name": "GetRenderTarget()",
+              "fullName": "Imagini.Drawing.Graphics.GetRenderTarget()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetRenderTarget()"
+            },
+            {
+              "name": "GetScale()",
+              "fullName": "Imagini.Drawing.Graphics.GetScale()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetScale()"
+            },
+            {
+              "name": "GetScale(float, float)",
+              "fullName": "Imagini.Drawing.Graphics.GetScale(float, float)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetScale(float,float)"
+            },
+            {
+              "name": "GetViewport()",
+              "fullName": "Imagini.Drawing.Graphics.GetViewport()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.GetViewport()"
+            },
+            {
+              "name": "ReadPixels(ColorRGB888[], Rectangle?)",
+              "fullName": "Imagini.Drawing.Graphics.ReadPixels(ColorRGB888[], Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.ReadPixels(ColorRGB888[],Rectangle?)"
+            },
+            {
+              "name": "SetBlendMode(BlendMode)",
+              "fullName": "Imagini.Drawing.Graphics.SetBlendMode(BlendMode)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetBlendMode(BlendMode)"
+            },
+            {
+              "name": "SetClipRectangle(Rectangle?)",
+              "fullName": "Imagini.Drawing.Graphics.SetClipRectangle(Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetClipRectangle(Rectangle?)"
+            },
+            {
+              "name": "SetDrawingColor(Color)",
+              "fullName": "Imagini.Drawing.Graphics.SetDrawingColor(Color)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetDrawingColor(Color)"
+            },
+            {
+              "name": "SetLogicalSize(int, int)",
+              "fullName": "Imagini.Drawing.Graphics.SetLogicalSize(int, int)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetLogicalSize(int,int)"
+            },
+            {
+              "name": "SetLogicalSize(Size)",
+              "fullName": "Imagini.Drawing.Graphics.SetLogicalSize(Size)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetLogicalSize(Size)"
+            },
+            {
+              "name": "SetRenderTarget(Texture)",
+              "fullName": "Imagini.Drawing.Graphics.SetRenderTarget(Texture)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetRenderTarget(Texture)"
+            },
+            {
+              "name": "SetScale(float, float)",
+              "fullName": "Imagini.Drawing.Graphics.SetScale(float, float)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetScale(float,float)"
+            },
+            {
+              "name": "SetScale(SizeF)",
+              "fullName": "Imagini.Drawing.Graphics.SetScale(SizeF)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetScale(SizeF)"
+            },
+            {
+              "name": "SetViewport(Rectangle?)",
+              "fullName": "Imagini.Drawing.Graphics.SetViewport(Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.SetViewport(Rectangle?)"
+            }
+          ]
+        },
+        {
+          "name": "Palette",
+          "fullName": "Imagini.Drawing.Palette",
+          "type": "Class",
+          "link": "Imagini.Drawing.Palette",
+          "children": [
+            {
+              "name": "MaximumColors",
+              "fullName": "Imagini.Drawing.Palette.MaximumColors",
+              "type": "Field",
+              "link": "Imagini.Drawing.Palette.MaximumColors"
+            },
+            {
+              "name": "Colors",
+              "fullName": "Imagini.Drawing.Palette.Colors",
+              "type": "Property",
+              "link": "Imagini.Drawing.Palette.Colors"
+            },
+            {
+              "name": "Palette(Color[])",
+              "fullName": "Imagini.Drawing.Palette.Palette(Color[])",
+              "type": "Constructor",
+              "link": "Imagini.Drawing.Palette.Palette(Color[])"
+            },
+            {
+              "name": "Palette(IEnumerable<Color>)",
+              "fullName": "Imagini.Drawing.Palette.Palette(IEnumerable<Color>)",
+              "type": "Constructor",
+              "link": "Imagini.Drawing.Palette.Palette(IEnumerable{Color})"
+            },
+            {
+              "name": "Dispose()",
+              "fullName": "Imagini.Drawing.Palette.Dispose()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Palette.Dispose()"
+            }
+          ]
+        },
+        {
+          "name": "PixelFormatExtensions",
+          "fullName": "Imagini.Drawing.PixelFormatExtensions",
+          "type": "Class",
+          "link": "Imagini.Drawing.PixelFormatExtensions",
+          "children": [
+            {
+              "name": "GetBitsPerPixel(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.GetBitsPerPixel(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.GetBitsPerPixel(PixelFormat)"
+            },
+            {
+              "name": "GetBytesPerPixel(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.GetBytesPerPixel(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.GetBytesPerPixel(PixelFormat)"
+            },
+            {
+              "name": "GetComponentType(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.GetComponentType(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.GetComponentType(PixelFormat)"
+            },
+            {
+              "name": "GetLayout(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.GetLayout(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.GetLayout(PixelFormat)"
+            },
+            {
+              "name": "GetPixelType(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.GetPixelType(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.GetPixelType(PixelFormat)"
+            },
+            {
+              "name": "HasAlpha(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.HasAlpha(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.HasAlpha(PixelFormat)"
+            },
+            {
+              "name": "IsArray(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.IsArray(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.IsArray(PixelFormat)"
+            },
+            {
+              "name": "IsFourCC(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.IsFourCC(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.IsFourCC(PixelFormat)"
+            },
+            {
+              "name": "IsIndexed(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.IsIndexed(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.IsIndexed(PixelFormat)"
+            },
+            {
+              "name": "IsPacked(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatExtensions.IsPacked(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatExtensions.IsPacked(PixelFormat)"
+            }
+          ]
+        },
+        {
+          "name": "PixelFormatInfo",
+          "fullName": "Imagini.Drawing.PixelFormatInfo",
+          "type": "Class",
+          "link": "Imagini.Drawing.PixelFormatInfo",
+          "children": [
+            {
+              "name": "Format",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.Format",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.Format"
+            },
+            {
+              "name": "BitsPerPixel",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.BitsPerPixel",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.BitsPerPixel"
+            },
+            {
+              "name": "BytesPerPixel",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.BytesPerPixel",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.BytesPerPixel"
+            },
+            {
+              "name": "MaskR",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.MaskR",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.MaskR"
+            },
+            {
+              "name": "MaskG",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.MaskG",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.MaskG"
+            },
+            {
+              "name": "MaskB",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.MaskB",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.MaskB"
+            },
+            {
+              "name": "MaskA",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.MaskA",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.MaskA"
+            },
+            {
+              "name": "Palette",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.Palette",
+              "type": "Property",
+              "link": "Imagini.Drawing.PixelFormatInfo.Palette"
+            },
+            {
+              "name": "PixelFormatInfo(PixelFormat)",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.PixelFormatInfo(PixelFormat)",
+              "type": "Constructor",
+              "link": "Imagini.Drawing.PixelFormatInfo.PixelFormatInfo(PixelFormat)"
+            },
+            {
+              "name": "Dispose()",
+              "fullName": "Imagini.Drawing.PixelFormatInfo.Dispose()",
+              "type": "Method",
+              "link": "Imagini.Drawing.PixelFormatInfo.Dispose()"
+            }
+          ]
+        },
+        {
+          "name": "Pixels",
+          "fullName": "Imagini.Drawing.Pixels",
+          "type": "Class",
+          "link": "Imagini.Drawing.Pixels",
+          "children": [
+            {
+              "name": "Convert(int, int, int, int, PixelFormat, PixelFormat, IntPtr, IntPtr)",
+              "fullName": "Imagini.Drawing.Pixels.Convert(int, int, int, int, PixelFormat, PixelFormat, IntPtr, IntPtr)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Pixels.Convert(int,int,int,int,PixelFormat,PixelFormat,IntPtr,IntPtr)"
+            },
+            {
+              "name": "Convert<T1, T2>(int, int, int, int, T1[], T2[])",
+              "fullName": "Imagini.Drawing.Pixels.Convert<T1, T2>(int, int, int, int, T1[], T2[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Pixels.Convert{T1,T2}(int,int,int,int,T1[],T2[])"
+            }
+          ]
+        },
+        {
+          "name": "RendererInfo",
+          "fullName": "Imagini.Drawing.RendererInfo",
+          "type": "Class",
+          "link": "Imagini.Drawing.RendererInfo",
+          "children": [
+            {
+              "name": "Name",
+              "fullName": "Imagini.Drawing.RendererInfo.Name",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.Name"
+            },
+            {
+              "name": "PixelFormats",
+              "fullName": "Imagini.Drawing.RendererInfo.PixelFormats",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.PixelFormats"
+            },
+            {
+              "name": "IsHardwareAccelerated",
+              "fullName": "Imagini.Drawing.RendererInfo.IsHardwareAccelerated",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.IsHardwareAccelerated"
+            },
+            {
+              "name": "IsSoftware",
+              "fullName": "Imagini.Drawing.RendererInfo.IsSoftware",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.IsSoftware"
+            },
+            {
+              "name": "SupportsRenderingToTexture",
+              "fullName": "Imagini.Drawing.RendererInfo.SupportsRenderingToTexture",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.SupportsRenderingToTexture"
+            },
+            {
+              "name": "SupportsVSync",
+              "fullName": "Imagini.Drawing.RendererInfo.SupportsVSync",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.SupportsVSync"
+            },
+            {
+              "name": "MaxTextureWidth",
+              "fullName": "Imagini.Drawing.RendererInfo.MaxTextureWidth",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.MaxTextureWidth"
+            },
+            {
+              "name": "MaxTextureHeight",
+              "fullName": "Imagini.Drawing.RendererInfo.MaxTextureHeight",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.MaxTextureHeight"
+            },
+            {
+              "name": "All",
+              "fullName": "Imagini.Drawing.RendererInfo.All",
+              "type": "Property",
+              "link": "Imagini.Drawing.RendererInfo.All"
+            }
+          ]
+        },
+        {
+          "name": "Surface",
+          "fullName": "Imagini.Drawing.Surface",
+          "type": "Class",
+          "link": "Imagini.Drawing.Surface",
+          "children": [
+            {
+              "name": "PixelInfo",
+              "fullName": "Imagini.Drawing.Surface.PixelInfo",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.PixelInfo"
+            },
+            {
+              "name": "Width",
+              "fullName": "Imagini.Drawing.Surface.Width",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.Width"
+            },
+            {
+              "name": "Height",
+              "fullName": "Imagini.Drawing.Surface.Height",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.Height"
+            },
+            {
+              "name": "PixelCount",
+              "fullName": "Imagini.Drawing.Surface.PixelCount",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.PixelCount"
+            },
+            {
+              "name": "Stride",
+              "fullName": "Imagini.Drawing.Surface.Stride",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.Stride"
+            },
+            {
+              "name": "SizeInBytes",
+              "fullName": "Imagini.Drawing.Surface.SizeInBytes",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.SizeInBytes"
+            },
+            {
+              "name": "MustBeLocked",
+              "fullName": "Imagini.Drawing.Surface.MustBeLocked",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.MustBeLocked"
+            },
+            {
+              "name": "Locked",
+              "fullName": "Imagini.Drawing.Surface.Locked",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.Locked"
+            },
+            {
+              "name": "RLEEnabled",
+              "fullName": "Imagini.Drawing.Surface.RLEEnabled",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.RLEEnabled"
+            },
+            {
+              "name": "ClipRect",
+              "fullName": "Imagini.Drawing.Surface.ClipRect",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.ClipRect"
+            },
+            {
+              "name": "ColorMod",
+              "fullName": "Imagini.Drawing.Surface.ColorMod",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.ColorMod"
+            },
+            {
+              "name": "AlphaMod",
+              "fullName": "Imagini.Drawing.Surface.AlphaMod",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.AlphaMod"
+            },
+            {
+              "name": "BlendMode",
+              "fullName": "Imagini.Drawing.Surface.BlendMode",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.BlendMode"
+            },
+            {
+              "name": "ColorKey",
+              "fullName": "Imagini.Drawing.Surface.ColorKey",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.ColorKey"
+            },
+            {
+              "name": "BlitTo(Surface, Rectangle?, Rectangle?)",
+              "fullName": "Imagini.Drawing.Surface.BlitTo(Surface, Rectangle?, Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.BlitTo(Surface,Rectangle?,Rectangle?)"
+            },
+            {
+              "name": "ConvertTo(PixelFormat)",
+              "fullName": "Imagini.Drawing.Surface.ConvertTo(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.ConvertTo(PixelFormat)"
+            },
+            {
+              "name": "ConvertTo(PixelFormatInfo)",
+              "fullName": "Imagini.Drawing.Surface.ConvertTo(PixelFormatInfo)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.ConvertTo(PixelFormatInfo)"
+            },
+            {
+              "name": "Create(int, int, int, int, int, int, int)",
+              "fullName": "Imagini.Drawing.Surface.Create(int, int, int, int, int, int, int)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.Create(int,int,int,int,int,int,int)"
+            },
+            {
+              "name": "Create(int, int, PixelFormat)",
+              "fullName": "Imagini.Drawing.Surface.Create(int, int, PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.Create(int,int,PixelFormat)"
+            },
+            {
+              "name": "CreateFrom(byte[], int, int, int, int, int, int, int, int)",
+              "fullName": "Imagini.Drawing.Surface.CreateFrom(byte[], int, int, int, int, int, int, int, int)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.CreateFrom(byte[],int,int,int,int,int,int,int,int)"
+            },
+            {
+              "name": "CreateFrom(byte[], int, int, PixelFormat)",
+              "fullName": "Imagini.Drawing.Surface.CreateFrom(byte[], int, int, PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.CreateFrom(byte[],int,int,PixelFormat)"
+            },
+            {
+              "name": "Dispose()",
+              "fullName": "Imagini.Drawing.Surface.Dispose()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.Dispose()"
+            },
+            {
+              "name": "Fill(Color, Rectangle?)",
+              "fullName": "Imagini.Drawing.Surface.Fill(Color, Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.Fill(Color,Rectangle?)"
+            },
+            {
+              "name": "Fill(Color, Rectangle[])",
+              "fullName": "Imagini.Drawing.Surface.Fill(Color, Rectangle[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.Fill(Color,Rectangle[])"
+            },
+            {
+              "name": "Lock()",
+              "fullName": "Imagini.Drawing.Surface.Lock()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.Lock()"
+            },
+            {
+              "name": "OptimizeFor(PixelFormat)",
+              "fullName": "Imagini.Drawing.Surface.OptimizeFor(PixelFormat)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.OptimizeFor(PixelFormat)"
+            },
+            {
+              "name": "OptimizeFor(PixelFormatInfo)",
+              "fullName": "Imagini.Drawing.Surface.OptimizeFor(PixelFormatInfo)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.OptimizeFor(PixelFormatInfo)"
+            },
+            {
+              "name": "ReadPixels(byte[])",
+              "fullName": "Imagini.Drawing.Surface.ReadPixels(byte[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.ReadPixels(byte[])"
+            },
+            {
+              "name": "ReadPixels<T>(T[])",
+              "fullName": "Imagini.Drawing.Surface.ReadPixels<T>(T[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.ReadPixels{T}(T[])"
+            },
+            {
+              "name": "SetPixelData(byte[])",
+              "fullName": "Imagini.Drawing.Surface.SetPixelData(byte[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.SetPixelData(byte[])"
+            },
+            {
+              "name": "SetPixelData<T>(T[])",
+              "fullName": "Imagini.Drawing.Surface.SetPixelData<T>(T[])",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.SetPixelData{T}(T[])"
+            },
+            {
+              "name": "SetRLEAcceleration(bool)",
+              "fullName": "Imagini.Drawing.Surface.SetRLEAcceleration(bool)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.SetRLEAcceleration(bool)"
+            },
+            {
+              "name": "Unlock()",
+              "fullName": "Imagini.Drawing.Surface.Unlock()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Surface.Unlock()"
+            }
+          ]
+        },
+        {
+          "name": "Texture",
+          "fullName": "Imagini.Drawing.Texture",
+          "type": "Class",
+          "link": "Imagini.Drawing.Texture",
+          "children": [
+            {
+              "name": "Owner",
+              "fullName": "Imagini.Drawing.Texture.Owner",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Owner"
+            },
+            {
+              "name": "Width",
+              "fullName": "Imagini.Drawing.Texture.Width",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Width"
+            },
+            {
+              "name": "Height",
+              "fullName": "Imagini.Drawing.Texture.Height",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Height"
+            },
+            {
+              "name": "Size",
+              "fullName": "Imagini.Drawing.Texture.Size",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Size"
+            },
+            {
+              "name": "PixelCount",
+              "fullName": "Imagini.Drawing.Texture.PixelCount",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.PixelCount"
+            },
+            {
+              "name": "Format",
+              "fullName": "Imagini.Drawing.Texture.Format",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Format"
+            },
+            {
+              "name": "Access",
+              "fullName": "Imagini.Drawing.Texture.Access",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Access"
+            },
+            {
+              "name": "Locked",
+              "fullName": "Imagini.Drawing.Texture.Locked",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Locked"
+            },
+            {
+              "name": "ColorMod",
+              "fullName": "Imagini.Drawing.Texture.ColorMod",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.ColorMod"
+            },
+            {
+              "name": "AlphaMod",
+              "fullName": "Imagini.Drawing.Texture.AlphaMod",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.AlphaMod"
+            },
+            {
+              "name": "BlendMode",
+              "fullName": "Imagini.Drawing.Texture.BlendMode",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.BlendMode"
+            },
+            {
+              "name": "Dispose()",
+              "fullName": "Imagini.Drawing.Texture.Dispose()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Texture.Dispose()"
+            },
+            {
+              "name": "GetPixelBufferSize<T>(Rectangle?)",
+              "fullName": "Imagini.Drawing.Texture.GetPixelBufferSize<T>(Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Texture.GetPixelBufferSize{T}(Rectangle?)"
+            },
+            {
+              "name": "GetPixelBufferSizeInBytes(Rectangle?)",
+              "fullName": "Imagini.Drawing.Texture.GetPixelBufferSizeInBytes(Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Texture.GetPixelBufferSizeInBytes(Rectangle?)"
+            },
+            {
+              "name": "Lock(int, int, Rectangle?)",
+              "fullName": "Imagini.Drawing.Texture.Lock(int, int, Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Texture.Lock(int,int,Rectangle?)"
+            },
+            {
+              "name": "SetPixels(byte[], Rectangle?)",
+              "fullName": "Imagini.Drawing.Texture.SetPixels(byte[], Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Texture.SetPixels(byte[],Rectangle?)"
+            },
+            {
+              "name": "SetPixels<T>(T[], Rectangle?)",
+              "fullName": "Imagini.Drawing.Texture.SetPixels<T>(T[], Rectangle?)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Texture.SetPixels{T}(T[],Rectangle?)"
+            },
+            {
+              "name": "Unlock()",
+              "fullName": "Imagini.Drawing.Texture.Unlock()",
+              "type": "Method",
+              "link": "Imagini.Drawing.Texture.Unlock()"
+            }
+          ]
+        },
+        {
+          "name": "ColorARGB8888",
+          "fullName": "Imagini.Drawing.ColorARGB8888",
+          "type": "Struct",
+          "link": "Imagini.Drawing.ColorARGB8888",
+          "children": [
+            {
+              "name": "B",
+              "fullName": "Imagini.Drawing.ColorARGB8888.B",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorARGB8888.B"
+            },
+            {
+              "name": "G",
+              "fullName": "Imagini.Drawing.ColorARGB8888.G",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorARGB8888.G"
+            },
+            {
+              "name": "R",
+              "fullName": "Imagini.Drawing.ColorARGB8888.R",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorARGB8888.R"
+            },
+            {
+              "name": "A",
+              "fullName": "Imagini.Drawing.ColorARGB8888.A",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorARGB8888.A"
+            },
+            {
+              "name": "Format",
+              "fullName": "Imagini.Drawing.ColorARGB8888.Format",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorARGB8888.Format"
+            },
+            {
+              "name": "ColorARGB8888(Color)",
+              "fullName": "Imagini.Drawing.ColorARGB8888.ColorARGB8888(Color)",
+              "type": "Constructor",
+              "link": "Imagini.Drawing.ColorARGB8888.ColorARGB8888(Color)"
+            },
+            {
+              "name": "AsColor()",
+              "fullName": "Imagini.Drawing.ColorARGB8888.AsColor()",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorARGB8888.AsColor()"
+            },
+            {
+              "name": "Equals(object)",
+              "fullName": "Imagini.Drawing.ColorARGB8888.Equals(object)",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorARGB8888.Equals(object)"
+            },
+            {
+              "name": "GetHashCode()",
+              "fullName": "Imagini.Drawing.ColorARGB8888.GetHashCode()",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorARGB8888.GetHashCode()"
+            }
+          ]
+        },
+        {
+          "name": "ColorRGB888",
+          "fullName": "Imagini.Drawing.ColorRGB888",
+          "type": "Struct",
+          "link": "Imagini.Drawing.ColorRGB888",
+          "children": [
+            {
+              "name": "B",
+              "fullName": "Imagini.Drawing.ColorRGB888.B",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGB888.B"
+            },
+            {
+              "name": "G",
+              "fullName": "Imagini.Drawing.ColorRGB888.G",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGB888.G"
+            },
+            {
+              "name": "R",
+              "fullName": "Imagini.Drawing.ColorRGB888.R",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGB888.R"
+            },
+            {
+              "name": "Format",
+              "fullName": "Imagini.Drawing.ColorRGB888.Format",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGB888.Format"
+            },
+            {
+              "name": "ColorRGB888(Color)",
+              "fullName": "Imagini.Drawing.ColorRGB888.ColorRGB888(Color)",
+              "type": "Constructor",
+              "link": "Imagini.Drawing.ColorRGB888.ColorRGB888(Color)"
+            },
+            {
+              "name": "AsColor()",
+              "fullName": "Imagini.Drawing.ColorRGB888.AsColor()",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorRGB888.AsColor()"
+            },
+            {
+              "name": "Equals(object)",
+              "fullName": "Imagini.Drawing.ColorRGB888.Equals(object)",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorRGB888.Equals(object)"
+            },
+            {
+              "name": "GetHashCode()",
+              "fullName": "Imagini.Drawing.ColorRGB888.GetHashCode()",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorRGB888.GetHashCode()"
+            }
+          ]
+        },
+        {
+          "name": "ColorRGBA8888",
+          "fullName": "Imagini.Drawing.ColorRGBA8888",
+          "type": "Struct",
+          "link": "Imagini.Drawing.ColorRGBA8888",
+          "children": [
+            {
+              "name": "A",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.A",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGBA8888.A"
+            },
+            {
+              "name": "B",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.B",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGBA8888.B"
+            },
+            {
+              "name": "G",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.G",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGBA8888.G"
+            },
+            {
+              "name": "R",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.R",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGBA8888.R"
+            },
+            {
+              "name": "Format",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.Format",
+              "type": "Property",
+              "link": "Imagini.Drawing.ColorRGBA8888.Format"
+            },
+            {
+              "name": "ColorRGBA8888(Color)",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.ColorRGBA8888(Color)",
+              "type": "Constructor",
+              "link": "Imagini.Drawing.ColorRGBA8888.ColorRGBA8888(Color)"
+            },
+            {
+              "name": "AsColor()",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.AsColor()",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorRGBA8888.AsColor()"
+            },
+            {
+              "name": "Equals(object)",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.Equals(object)",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorRGBA8888.Equals(object)"
+            },
+            {
+              "name": "GetHashCode()",
+              "fullName": "Imagini.Drawing.ColorRGBA8888.GetHashCode()",
+              "type": "Method",
+              "link": "Imagini.Drawing.ColorRGBA8888.GetHashCode()"
+            }
+          ]
+        },
+        {
+          "name": "BlendMode",
+          "fullName": "Imagini.Drawing.BlendMode",
+          "type": "Enum",
+          "link": "Imagini.Drawing.BlendMode"
+        },
+        {
+          "name": "PixelArrayOrder",
+          "fullName": "Imagini.Drawing.PixelArrayOrder",
+          "type": "Enum",
+          "link": "Imagini.Drawing.PixelArrayOrder"
+        },
+        {
+          "name": "PixelBitmapOrder",
+          "fullName": "Imagini.Drawing.PixelBitmapOrder",
+          "type": "Enum",
+          "link": "Imagini.Drawing.PixelBitmapOrder"
+        },
+        {
+          "name": "PixelComponentType",
+          "fullName": "Imagini.Drawing.PixelComponentType",
+          "type": "Enum",
+          "link": "Imagini.Drawing.PixelComponentType"
+        },
+        {
+          "name": "PixelFormat",
+          "fullName": "Imagini.Drawing.PixelFormat",
+          "type": "Enum",
+          "link": "Imagini.Drawing.PixelFormat"
+        },
+        {
+          "name": "PixelLayout",
+          "fullName": "Imagini.Drawing.PixelLayout",
+          "type": "Enum",
+          "link": "Imagini.Drawing.PixelLayout"
+        },
+        {
+          "name": "PixelPackedOrder",
+          "fullName": "Imagini.Drawing.PixelPackedOrder",
+          "type": "Enum",
+          "link": "Imagini.Drawing.PixelPackedOrder"
+        },
+        {
+          "name": "PixelType",
+          "fullName": "Imagini.Drawing.PixelType",
+          "type": "Enum",
+          "link": "Imagini.Drawing.PixelType"
+        },
+        {
+          "name": "TextureAccess",
+          "fullName": "Imagini.Drawing.TextureAccess",
+          "type": "Enum",
+          "link": "Imagini.Drawing.TextureAccess"
+        },
+        {
+          "name": "TextureFlip",
+          "fullName": "Imagini.Drawing.TextureFlip",
+          "type": "Enum",
+          "link": "Imagini.Drawing.TextureFlip"
+        },
+        {
+          "name": "TextureScalingQuality",
+          "fullName": "Imagini.Drawing.TextureScalingQuality",
+          "type": "Enum",
+          "link": "Imagini.Drawing.TextureScalingQuality"
+        },
+        {
+          "name": "IColor",
+          "fullName": "Imagini.Drawing.IColor",
+          "type": "Interface",
+          "link": "Imagini.Drawing.IColor",
+          "children": [
+            {
+              "name": "Format",
+              "fullName": "Imagini.Drawing.IColor.Format",
+              "type": "Property",
+              "link": "Imagini.Drawing.IColor.Format"
+            },
+            {
+              "name": "AsColor()",
+              "fullName": "Imagini.Drawing.IColor.AsColor()",
+              "type": "Method",
+              "link": "Imagini.Drawing.IColor.AsColor()"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

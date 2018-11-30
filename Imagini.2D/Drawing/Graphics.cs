@@ -89,7 +89,7 @@ namespace Imagini.Drawing
         /// <param name="quality">Filtering quality when texture is scaled</param>
         /// <remarks>
         /// The surface is not modified or disposed by this function.
-        /// <see cref="TextureAccess"> is static.
+        /// <see cref="TextureAccess" /> is static.
         /// The pixel format of the created texture may be different from the
         /// pixel format of the surface.
         /// </remarks>
