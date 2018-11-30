@@ -36,7 +36,7 @@ Task("Test").Does(() => {
 Task("ReportCoverage").Does(() => {
     var param = "\"-reports:./Tests/coverage.xml\" " +
         "\"-targetdir:./docs/coverage/\" " +
-        "\"-sourcedirs:./Imagini.Core/;./Imagini.2D/;./Imagini.Audio/\" " +
+        "\"-sourcedirs:./Imagini.Core/;./Imagini.2D/\" " +
         "\"-reporttypes:HTML;Badges\"";
     Information("Running 'reportgenerator " + param + "'");
     StartProcess("reportgenerator", new ProcessSettings {

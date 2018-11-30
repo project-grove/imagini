@@ -23,7 +23,6 @@
     <ProjectReference Include="..\Imagini.Core\Imagini.Core.csproj" />
     <ProjectReference Include="..\Imagini.2D\Imagini.2D.csproj" />
     <ProjectReference Include="..\Imagini.ImageSharp\Imagini.ImageSharp.csproj" />
-    <ProjectReference Include="..\Imagini.Audio\Imagini.Audio.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,9 +30,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <Target Name="CopyAudioFiles" AfterTargets="AfterBuild">
-    <Copy SourceFiles="Audio\files\2test.ogg" DestinationFolder="$(OutDir)" />
-  </Target>
 
 </Project>
