@@ -1,8 +1,11 @@
 using static SDL2.SDL_mixer;
 using static Imagini.ErrorHandler;
 using static Imagini.AudioSystem;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
-namespace Imagini.Audio.Audio
+namespace Imagini.Audio
 {
     /// <summary>
     /// Represents a sound output device.
@@ -49,6 +52,8 @@ namespace Imagini.Audio.Audio
         public static bool Query(out int frequency, out AudioSampleFormat sampleFormat,
             out int channels)
         {
+            EnsureInitialization();
+            RequireOpened();
             var freq = 0; ushort fmt = 0; var ch = 0;
             var result = Mix_QuerySpec(ref freq, ref fmt, ref ch);
             if (result == 0)
@@ -62,6 +67,36 @@ namespace Imagini.Audio.Audio
             sampleFormat = (AudioSampleFormat)fmt;
             channels = ch;
             return true;
+        }
+
+        /// <summary>
+        /// Loads a sound file.
+        /// </summary>
+        public static AudioChunk Load(string path)
+        {
+            EnsureInitialization();
+            RequireOpened();
+            return new AudioChunk(path);
+        }
+
+        /// <summary>
+        /// Returns available chunk decoders.
+        /// </summary>
+        public static IReadOnlyList<string> GetChunkDecoders()
+        {
+            EnsureInitialization();
+            RequireOpened();
+
+            var count = Mix_GetNumChunkDecoders();
+            var result = new List<string>(count);
+            for (int i = 0; i < count; i++)
+            {
+                var value = Marshal.PtrToStringAnsi(
+                    Mix_GetChunkDecoder(i)
+                );
+                result.Add(value);
+            }
+            return result;
         }
     }
 }

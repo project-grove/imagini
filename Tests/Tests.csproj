@@ -32,4 +32,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="CopyAudioFiles" AfterTargets="AfterBuild">
+    <Copy SourceFiles="Audio\files\2test.ogg" DestinationFolder="$(OutDir)" />
+  </Target>
+
 </Project>

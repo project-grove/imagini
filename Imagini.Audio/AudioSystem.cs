@@ -138,5 +138,13 @@ namespace Imagini
         {
             if (!IsInitialized) Init();
         }
+
+        [ExcludeFromCodeCoverage]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static void RequireOpened()
+        {
+            if (!AudioDevice.IsOpened)
+                throw new ImaginiException("Audio device must be opened before query");
+        }
     }
 }

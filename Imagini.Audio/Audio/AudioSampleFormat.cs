@@ -1,4 +1,4 @@
-namespace Imagini.Audio.Audio
+namespace Imagini.Audio
 {
     /// <summary>
     /// Defines audio sample formats.
