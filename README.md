@@ -5,8 +5,8 @@ Imagini is a modular solution for building games and multimedia apps using .NET 
 
 [![Line coverage](docs/coverage/badge_linecoverage.png) ![Branch coverage](docs/coverage/badge_branchcoverage.png)](https://project-grove.github.io/imagini/coverage/)
 
-
-### Packages 
+---
+### Packages
 #### Imagini.Core
 Base module. It implements the following functionality:
 * **Window creation** with ability to choose backend
@@ -45,7 +45,22 @@ The following image file formats are supported:
 ### Planned packages
 * Imagini.Fonts - sprite font generation and drawing
 * Imagini.Veldrid - [Veldrid](https://github.com/mellinoe/veldrid) integration
-
+---
 ### Unimplemented features
 #### Sound API
 Check out the [vox](https://github.com/project-grove/vox) project. It provides a full 3D sound solution based on OpenAL.
+
+---
+### Samples
+* [Pong](https://github.com/project-grove/imagini/blob/master/Samples/Pong/Game.cs)
+
+---
+### Building
+This project uses [Cake](https://cakebuild.net/) building system. To build the project, use:
+```
+./build.sh
+# OR
+./build.ps1
+```
+
+Refer to the [build script](https://github.com/project-grove/imagini/blob/master/build.cake) for command line options.
