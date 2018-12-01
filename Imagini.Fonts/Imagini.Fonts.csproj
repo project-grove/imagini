@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Imagini.Core\Imagini.Core.csproj" />
+    <ProjectReference Include="..\Imagini.ImageSharp\Imagini.ImageSharp.csproj" />
+    <ProjectReference Include="..\Imagini.2D\Imagini.2D.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.Fonts" Version="1.0.0-beta0007" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0005" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <RootNamespace>Imagini</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>       
+    <AssemblyName>Imagini.Fonts</AssemblyName>
+  </PropertyGroup>
+
+</Project>
