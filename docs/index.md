@@ -1,7 +1,8 @@
 ![Stability: alpha](https://img.shields.io/badge/stability-alpha-orange.svg)
-
 ### Imagini - cross-platform .NET game/app framework
 Imagini is a modular solution for building games and multimedia apps using .NET Core/Standard. It's based on SDL2 library and should run pretty much everywhere where the .NET runtime ands SDL2 library is present.
+
+[![Line coverage](coverage/badge_linecoverage.png) ![Branch coverage](coverage/badge_branchcoverage.png)](https://project-grove.github.io/imagini/coverage/)
 
 ### Packages 
 #### Imagini.Core
