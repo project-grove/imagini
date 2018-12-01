@@ -378,7 +378,7 @@ var assemblies = [
     "name": "Imagini.Fonts",
     "classes": [
       { "name": "Imagini.Fonts.FontDrawingOptions", "reportPath": "Imagini.Fonts_FontDrawingOptions.htm", "coveredLines": 0, "uncoveredLines": 1, "coverableLines": 1, "totalLines": 7, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 0, "totalBranches": 0, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
-      { "name": "Imagini.Fonts.SpriteFont", "reportPath": "Imagini.Fonts_SpriteFont.htm", "coveredLines": 0, "uncoveredLines": 1, "coverableLines": 1, "totalLines": 19, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 0, "totalBranches": 0, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
+      { "name": "Imagini.Fonts.SpriteFont", "reportPath": "Imagini.Fonts_SpriteFont.htm", "coveredLines": 19, "uncoveredLines": 0, "coverableLines": 19, "totalLines": 51, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 4, "totalBranches": 4, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
       { "name": "Imagini.Fonts.SpriteFontPage", "reportPath": "Imagini.Fonts_SpriteFontPage.htm", "coveredLines": 38, "uncoveredLines": 0, "coverableLines": 38, "totalLines": 105, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 12, "totalBranches": 12, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
     ]},
   {

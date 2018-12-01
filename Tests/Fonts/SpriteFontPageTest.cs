@@ -34,7 +34,6 @@ namespace Tests.Fonts
             ISet<char> charsToProcess = new HashSet<char>(chars);
 
             var page = new SpriteFontPage(font, ref charsToProcess, 64, 1);
-            SaveImage(page.Texture, "ShouldHaveSpecifiedSymbols.png");
             page.Start.Should().Be('a');
             page.End.Should().Be('d');
             foreach (var character in chars)
@@ -54,7 +53,6 @@ namespace Tests.Fonts
             ISet<char> charsToProcess = new HashSet<char>(chars);
 
             var page = new SpriteFontPage(font, ref charsToProcess, 35, 1);
-            SaveImage(page.Texture, "ShouldStopIfNotFitting.png");
             page.Start.Should().Be('a');
             page.End.Should().Be('c');
             charsToProcess.Should().BeEquivalentTo('d', 'e');
