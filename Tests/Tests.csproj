@@ -32,4 +32,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="CopyFont" AfterTargets="AfterBuild">
+    <Copy SourceFiles="Fonts\files\actor\Actor-Regular.ttf" DestinationFolder="$(OutDir)" />
+  </Target>
+
 </Project>

@@ -375,6 +375,13 @@ var assemblies = [
       { "name": "Imagini.WindowStateChangeEventArgs", "reportPath": "Imagini.Core_WindowStateChangeEventArgs.htm", "coveredLines": 20, "uncoveredLines": 0, "coverableLines": 20, "totalLines": 1452, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 6, "totalBranches": 8, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
     ]},
   {
+    "name": "Imagini.Fonts",
+    "classes": [
+      { "name": "Imagini.Fonts.FontDrawingOptions", "reportPath": "Imagini.Fonts_FontDrawingOptions.htm", "coveredLines": 0, "uncoveredLines": 1, "coverableLines": 1, "totalLines": 7, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 0, "totalBranches": 0, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
+      { "name": "Imagini.Fonts.SpriteFont", "reportPath": "Imagini.Fonts_SpriteFont.htm", "coveredLines": 0, "uncoveredLines": 1, "coverableLines": 1, "totalLines": 19, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 0, "totalBranches": 0, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
+      { "name": "Imagini.Fonts.SpriteFontPage", "reportPath": "Imagini.Fonts_SpriteFontPage.htm", "coveredLines": 38, "uncoveredLines": 0, "coverableLines": 38, "totalLines": 105, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 12, "totalBranches": 12, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
+    ]},
+  {
     "name": "Imagini.ImageSharp",
     "classes": [
       { "name": "Imagini.ImageSharp.GraphicsExtensions", "reportPath": "Imagini.ImageSharp_GraphicsExtensions.htm", "coveredLines": 21, "uncoveredLines": 3, "coverableLines": 24, "totalLines": 69, "coverageType": "LineCoverage", "methodCoverage": "-", "coveredBranches": 0, "totalBranches": 0, "lineCoverageHistory": [], "branchCoverageHistory": [], "historicCoverages": [] },
