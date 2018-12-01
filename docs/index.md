@@ -1,8 +1,12 @@
 ![Stability: alpha](https://img.shields.io/badge/stability-alpha-orange.svg)
 ### Imagini - cross-platform .NET game/app framework
-Imagini is a modular solution for building games and multimedia apps using .NET Core/Standard. It's based on SDL2 library and should run pretty much everywhere where the .NET runtime ands SDL2 library is present.
+Imagini is a modular solution for building games and multimedia apps using .NET Core/Standard. It's based on SDL2 library and should run pretty much everywhere where the .NET runtime and SDL2 library is present.
 
 [![Line coverage](coverage/badge_linecoverage.png) ![Branch coverage](coverage/badge_branchcoverage.png)](https://project-grove.github.io/imagini/coverage/)
+
+NuGet packages will be published when this project reaches RC or stable state (whatever will come first). For now it can be tinkered with, but the API may change (hopefully not much).
+
+Note: SDL2 native binary should be present on the system. This project doesn't bundle it, so you may need to provide it by yourself.
 
 ---
 ### Packages 
@@ -53,6 +57,7 @@ Check out the [vox](https://github.com/project-grove/vox) project. It provides a
 ---
 ### Samples
 * [Pong](https://github.com/project-grove/imagini/blob/master/Samples/Pong/Game.cs)
+![Screenshot](pong.jpg)
 
 ---
 ### Building
@@ -64,3 +69,5 @@ This project uses [Cake](https://cakebuild.net/) building system. To build the p
 ```
 
 Refer to the [build script](https://github.com/project-grove/imagini/blob/master/build.cake) for command line options.
+
+Don't forget to init and pull Git submodules!
