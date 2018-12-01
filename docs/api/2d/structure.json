@@ -573,6 +573,12 @@
               "link": "Imagini.Drawing.Surface.Height"
             },
             {
+              "name": "Size",
+              "fullName": "Imagini.Drawing.Surface.Size",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.Size"
+            },
+            {
               "name": "PixelCount",
               "fullName": "Imagini.Drawing.Surface.PixelCount",
               "type": "Property",

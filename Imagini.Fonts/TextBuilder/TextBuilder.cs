@@ -8,7 +8,7 @@ namespace SixLabors.Shapes.Temp
     /// Text drawing extensions for a PathBuilder
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public static class TextBuilder
+    internal static class TextBuilder
     {
         /// <summary>
         /// Generates the shapes corresponding the glyphs described by the font and with the setting ing withing the FontSpan

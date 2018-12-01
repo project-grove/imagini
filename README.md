@@ -36,7 +36,7 @@ It does not contain image file loaders.
 
 
 #### Imagini.ImageSharp
-Texture and surface loader module. Allows for texture and surface creations from image files and streams. Powered by [ImageSharp](https://github.com/SixLabors/ImageSharp).
+Texture and surface loader module. Allows for texture and surface creations from image files and streams. Powered by [SixLabors/ImageSharp](https://github.com/SixLabors/ImageSharp).
 
 The following image file formats are supported:
 * PNG
@@ -46,8 +46,18 @@ The following image file formats are supported:
 
 [API Documentation](https://project-grove.github.io/imagini/api/imagesharp/)
 
+
+#### Imagini.Fonts
+Sprite font generator and renderer module. Powered by [SixLabors/Fonts](https://github.com/SixLabors/Fonts) and [SixLabors/ImageSharp](https://github.com/SixLabors/ImageSharp).
+
+Features include:
+* **TTF** and **WOFF** font loading
+* **Font bitmap generation** based on font size and style specified
+* ``ITextRenderer`` interface and it's implementation for  **Imagini.2D Graphics** API
+
+[API Documentation](https://project-grove.github.io/imagini/api/fonts/)
+
 ### Planned packages
-* Imagini.Fonts - sprite font generation and drawing
 * Imagini.Veldrid - [Veldrid](https://github.com/mellinoe/veldrid) integration
 ---
 ### Unimplemented features

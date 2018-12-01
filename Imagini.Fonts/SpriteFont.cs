@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SixLabors.Fonts;
 using System.Linq;
+using System;
 
 /// <summary>
 /// Sprite font generation and drawing module.
@@ -10,19 +11,24 @@ namespace Imagini.Fonts
     /// <summary>
     /// Represents a sprite font.
     /// </summary>
-    public class SpriteFont
+    public class SpriteFont : IDisposable
     {
         /// <summary>
         /// Returns the pages of this sprite font.
         /// </summary>
         public IReadOnlyList<SpriteFontPage> Pages { get; private set; }
 
+        /// <summary>
+        /// Gets the font for which this sprite font was generated.
+        /// </summary>
+        public Font Font { get; private set; }
+
         private List<(char start, char end)> _rangeLookup = new List<(char start, char end)>();
 
         public SpriteFont(Font font, IEnumerable<char> symbols,
             int textureSize = 512, int padding = 1)
         {
-            ISet<char> chars = new HashSet<char>(symbols);
+            ISet<char> chars = Symbols.GetPrintable(symbols);
             var pages = new List<SpriteFontPage>();
             do
             {
@@ -35,6 +41,7 @@ namespace Imagini.Fonts
                 _rangeLookup.Add((page.Start, page.End));
             } while (chars.Any());
             Pages = pages;
+            Font = font;
         }
 
         /// <summary>
@@ -46,6 +53,22 @@ namespace Imagini.Fonts
             return _rangeLookup.FindIndex(pair => 
                 glyph >= pair.start &&
                 glyph <= pair.end);
+        }
+
+        /// <summary>
+        /// Indicates if this object is disposed.
+        /// </summary>
+        public bool IsDisposed { get; private set; }
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
+        public void Dispose()
+        {
+            if (IsDisposed) return;
+            foreach(var page in Pages)
+                page.Texture.Dispose();
+            Pages = null;
+            IsDisposed = true;
         }
     }
 }

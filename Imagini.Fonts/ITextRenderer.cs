@@ -1,10 +1,11 @@
+using System;
 using System.Drawing;
 
 namespace Imagini.Fonts
 {
-    public interface ITextRenderer
+    public interface ITextRenderer : IDisposable
     {
-        SpriteFont Font { get; set; }
+        SpriteFont Font { get; }
         void Draw(string text, PointF position, 
             FontDrawingOptions options = new FontDrawingOptions());
         void Draw(string text, PointF position, Color color,

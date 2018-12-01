@@ -1,0 +1,255 @@
+{
+  "name": "",
+  "fullName": "",
+  "type": "Root",
+  "link": "",
+  "children": [
+    {
+      "name": "Imagini.Fonts",
+      "fullName": "Imagini.Fonts",
+      "type": "Namespace",
+      "link": "Imagini.Fonts",
+      "children": [
+        {
+          "name": "GraphicsExtensions",
+          "fullName": "Imagini.Fonts.GraphicsExtensions",
+          "type": "Class",
+          "link": "Imagini.Fonts.GraphicsExtensions",
+          "children": [
+            {
+              "name": "CreateTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
+              "fullName": "Imagini.Fonts.GraphicsExtensions.CreateTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
+              "type": "Method",
+              "link": "Imagini.Fonts.GraphicsExtensions.CreateTextRenderer(Graphics,SpriteFont,TextureScalingQuality)"
+            }
+          ]
+        },
+        {
+          "name": "SpriteFont",
+          "fullName": "Imagini.Fonts.SpriteFont",
+          "type": "Class",
+          "link": "Imagini.Fonts.SpriteFont",
+          "children": [
+            {
+              "name": "Pages",
+              "fullName": "Imagini.Fonts.SpriteFont.Pages",
+              "type": "Property",
+              "link": "Imagini.Fonts.SpriteFont.Pages"
+            },
+            {
+              "name": "Font",
+              "fullName": "Imagini.Fonts.SpriteFont.Font",
+              "type": "Property",
+              "link": "Imagini.Fonts.SpriteFont.Font"
+            },
+            {
+              "name": "IsDisposed",
+              "fullName": "Imagini.Fonts.SpriteFont.IsDisposed",
+              "type": "Property",
+              "link": "Imagini.Fonts.SpriteFont.IsDisposed"
+            },
+            {
+              "name": "SpriteFont(Font, IEnumerable<char>, int, int)",
+              "fullName": "Imagini.Fonts.SpriteFont.SpriteFont(Font, IEnumerable<char>, int, int)",
+              "type": "Constructor",
+              "link": "Imagini.Fonts.SpriteFont.SpriteFont(Font,IEnumerable{char},int,int)"
+            },
+            {
+              "name": "Dispose()",
+              "fullName": "Imagini.Fonts.SpriteFont.Dispose()",
+              "type": "Method",
+              "link": "Imagini.Fonts.SpriteFont.Dispose()"
+            },
+            {
+              "name": "GetPageIndex(char)",
+              "fullName": "Imagini.Fonts.SpriteFont.GetPageIndex(char)",
+              "type": "Method",
+              "link": "Imagini.Fonts.SpriteFont.GetPageIndex(char)"
+            }
+          ]
+        },
+        {
+          "name": "SpriteFontPage",
+          "fullName": "Imagini.Fonts.SpriteFontPage",
+          "type": "Class",
+          "link": "Imagini.Fonts.SpriteFontPage",
+          "children": [
+            {
+              "name": "Start",
+              "fullName": "Imagini.Fonts.SpriteFontPage.Start",
+              "type": "Property",
+              "link": "Imagini.Fonts.SpriteFontPage.Start"
+            },
+            {
+              "name": "End",
+              "fullName": "Imagini.Fonts.SpriteFontPage.End",
+              "type": "Property",
+              "link": "Imagini.Fonts.SpriteFontPage.End"
+            },
+            {
+              "name": "Texture",
+              "fullName": "Imagini.Fonts.SpriteFontPage.Texture",
+              "type": "Property",
+              "link": "Imagini.Fonts.SpriteFontPage.Texture"
+            },
+            {
+              "name": "GetGlyph(char)",
+              "fullName": "Imagini.Fonts.SpriteFontPage.GetGlyph(char)",
+              "type": "Method",
+              "link": "Imagini.Fonts.SpriteFontPage.GetGlyph(char)"
+            },
+            {
+              "name": "HasGlyph(char)",
+              "fullName": "Imagini.Fonts.SpriteFontPage.HasGlyph(char)",
+              "type": "Method",
+              "link": "Imagini.Fonts.SpriteFontPage.HasGlyph(char)"
+            }
+          ]
+        },
+        {
+          "name": "Symbols",
+          "fullName": "Imagini.Fonts.Symbols",
+          "type": "Class",
+          "link": "Imagini.Fonts.Symbols",
+          "children": [
+            {
+              "name": "ASCII",
+              "fullName": "Imagini.Fonts.Symbols.ASCII",
+              "type": "Field",
+              "link": "Imagini.Fonts.Symbols.ASCII"
+            },
+            {
+              "name": "Latin1Supplement",
+              "fullName": "Imagini.Fonts.Symbols.Latin1Supplement",
+              "type": "Field",
+              "link": "Imagini.Fonts.Symbols.Latin1Supplement"
+            },
+            {
+              "name": "LatinExtendedA",
+              "fullName": "Imagini.Fonts.Symbols.LatinExtendedA",
+              "type": "Field",
+              "link": "Imagini.Fonts.Symbols.LatinExtendedA"
+            },
+            {
+              "name": "LatinExtendedB",
+              "fullName": "Imagini.Fonts.Symbols.LatinExtendedB",
+              "type": "Field",
+              "link": "Imagini.Fonts.Symbols.LatinExtendedB"
+            },
+            {
+              "name": "Cyrillic",
+              "fullName": "Imagini.Fonts.Symbols.Cyrillic",
+              "type": "Field",
+              "link": "Imagini.Fonts.Symbols.Cyrillic"
+            },
+            {
+              "name": "GetPrintable(IEnumerable<char>)",
+              "fullName": "Imagini.Fonts.Symbols.GetPrintable(IEnumerable<char>)",
+              "type": "Method",
+              "link": "Imagini.Fonts.Symbols.GetPrintable(IEnumerable{char})"
+            },
+            {
+              "name": "PrintablesInRange(int, int)",
+              "fullName": "Imagini.Fonts.Symbols.PrintablesInRange(int, int)",
+              "type": "Method",
+              "link": "Imagini.Fonts.Symbols.PrintablesInRange(int,int)"
+            }
+          ]
+        },
+        {
+          "name": "FontDrawingOptions",
+          "fullName": "Imagini.Fonts.FontDrawingOptions",
+          "type": "Struct",
+          "link": "Imagini.Fonts.FontDrawingOptions",
+          "children": [
+            {
+              "name": "LetterSpacing",
+              "fullName": "Imagini.Fonts.FontDrawingOptions.LetterSpacing",
+              "type": "Property",
+              "link": "Imagini.Fonts.FontDrawingOptions.LetterSpacing"
+            }
+          ]
+        },
+        {
+          "name": "ITextRenderer",
+          "fullName": "Imagini.Fonts.ITextRenderer",
+          "type": "Interface",
+          "link": "Imagini.Fonts.ITextRenderer",
+          "children": [
+            {
+              "name": "Font",
+              "fullName": "Imagini.Fonts.ITextRenderer.Font",
+              "type": "Property",
+              "link": "Imagini.Fonts.ITextRenderer.Font"
+            },
+            {
+              "name": "Draw(string, PointF, Color, FontDrawingOptions)",
+              "fullName": "Imagini.Fonts.ITextRenderer.Draw(string, PointF, Color, FontDrawingOptions)",
+              "type": "Method",
+              "link": "Imagini.Fonts.ITextRenderer.Draw(string,PointF,Color,FontDrawingOptions)"
+            },
+            {
+              "name": "Draw(string, PointF, FontDrawingOptions)",
+              "fullName": "Imagini.Fonts.ITextRenderer.Draw(string, PointF, FontDrawingOptions)",
+              "type": "Method",
+              "link": "Imagini.Fonts.ITextRenderer.Draw(string,PointF,FontDrawingOptions)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Imagini.Fonts.Renderers",
+      "fullName": "Imagini.Fonts.Renderers",
+      "type": "Namespace",
+      "link": "Imagini.Fonts.Renderers",
+      "children": [
+        {
+          "name": "GraphicsTextRenderer",
+          "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer",
+          "type": "Class",
+          "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer",
+          "children": [
+            {
+              "name": "Font",
+              "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Font",
+              "type": "Property",
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Font"
+            },
+            {
+              "name": "GraphicsTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
+              "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.GraphicsTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
+              "type": "Constructor",
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.GraphicsTextRenderer(Graphics,SpriteFont,TextureScalingQuality)"
+            },
+            {
+              "name": "Dispose()",
+              "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Dispose()",
+              "type": "Method",
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Dispose()"
+            },
+            {
+              "name": "Draw(string, PointF, Color, FontDrawingOptions)",
+              "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string, PointF, Color, FontDrawingOptions)",
+              "type": "Method",
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string,PointF,Color,FontDrawingOptions)"
+            },
+            {
+              "name": "Draw(string, PointF, FontDrawingOptions)",
+              "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string, PointF, FontDrawingOptions)",
+              "type": "Method",
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string,PointF,FontDrawingOptions)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SixLabors.Shapes.Temp",
+      "fullName": "SixLabors.Shapes.Temp",
+      "type": "Namespace",
+      "link": "SixLabors.Shapes.Temp",
+      "children": []
+    }
+  ]
+}

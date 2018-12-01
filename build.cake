@@ -38,9 +38,11 @@ Task("ApiDoc").Does(() => {
     DotNetCoreTool(solution, "doc", "-f Html -s ./Imagini.Core/ -o ./docs/api/core/");
     DotNetCoreTool(solution, "doc", "-f Html -s ./Imagini.2D/ -o ./docs/api/2d/");
     DotNetCoreTool(solution, "doc", "-f Html -s ./Imagini.ImageSharp/ -o ./docs/api/imagesharp/");
+    DotNetCoreTool(solution, "doc", "-f Html -s ./Imagini.Fonts/ -o ./docs/api/fonts/");
     CopyFile("docs/index.css", "docs/api/core/index.css");
     CopyFile("docs/index.css", "docs/api/2d/index.css");
     CopyFile("docs/index.css", "docs/api/imagesharp/index.css");
+    CopyFile("docs/index.css", "docs/api/fonts/index.css");
 });
 
 Task("ReportCoverage").Does(() => {

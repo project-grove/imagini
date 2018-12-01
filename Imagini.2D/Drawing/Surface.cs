@@ -70,6 +70,10 @@ namespace Imagini.Drawing
         /// </summary>
         public int Height { get; private set; }
         /// <summary>
+        /// Returns the size of this surface in pixels.
+        /// </summary>
+        public Size Size => new Size(Width, Height);
+        /// <summary>
         /// Returns the pixel count of the surface (width * height).
         /// </summary>
         public int PixelCount => Width * Height;

@@ -33,7 +33,16 @@
   </ItemGroup>
 
   <Target Name="CopyFont" AfterTargets="AfterBuild">
-    <Copy SourceFiles="Fonts\files\actor\Actor-Regular.ttf" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="Fonts\fonts\actor\Actor-Regular.ttf" DestinationFolder="$(OutDir)" />
   </Target>
 
+  <ItemGroup>
+    <ReferenceImageFiles Include="Fonts\references\*.png" />
+  </ItemGroup>
+  <Target Name="CopyReferenceImages" AfterTargets="AfterBuild">
+    <Copy
+      SourceFiles="@(ReferenceImageFiles)"
+      DestinationFolder="$(OutDir)"
+    />
+  </Target>
 </Project>

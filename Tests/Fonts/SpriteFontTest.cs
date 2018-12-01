@@ -5,27 +5,19 @@ using SixLabors.Fonts;
 using Xunit;
 
 using static Tests.Util;
+using static Tests.Fonts.TestFont;
 
 namespace Tests.Fonts
 {
+    [DisplayTestMethodName]
     public class SpriteFontTest
     {
-        const string FontName = "Actor-Regular.ttf";
-
-        private FontCollection fonts = new FontCollection();
-        private FontFamily FontFamily;
-
-        public SpriteFontTest()
-        {
-            FontFamily = fonts.Install(NearAssembly(FontName));
-        }
 
         [Fact]
         public void ShouldProduceOnePageIfFits()
         {
-            var font = new Font(FontFamily, 16, FontStyle.Regular);
             var chars = "abcd";
-            var spriteFont = new SpriteFont(font, chars, textureSize: 128);
+            var spriteFont = CreateFont(size: 16, characters: chars, textureSize: 128);
 
             spriteFont.Pages.Should().ContainSingle();
             foreach (var character in chars)
@@ -34,22 +26,25 @@ namespace Tests.Fonts
                 pageIndex.Should().Be(0);
                 spriteFont.Pages[pageIndex].HasGlyph(character).Should().BeTrue();
             }
+
+            spriteFont.Font.Size.Should().Be(16);
+            spriteFont.Font.Family.Should().Be(TestFont.FontFamily);
+            spriteFont.Dispose();
         }
 
         [Fact]
         public void ShouldProduceSeveralPagesIfTooManyPerOne()
         {
-            var font = new Font(FontFamily, 16, FontStyle.Regular);
             var chars = "abcdefghABCDEFGH";
-            var spriteFont = new SpriteFont(font, chars, textureSize: 48);
-
+            var spriteFont = CreateFont(size: 16, characters: chars, textureSize: 48);
             spriteFont.Pages.Count.Should().BeGreaterThan(1);
+            spriteFont.Dispose();
         }
 
         [Fact]
         public void ShouldThrowExceptionIfTextureIsTooSmall()
         {
-            var font = new Font(FontFamily, 16, FontStyle.Regular);
+            var font = new Font(TestFont.FontFamily, 16, FontStyle.Regular);
             var chars = "abcd";
             Assert.ThrowsAny<ImaginiException>(() =>
                 new SpriteFont(font, chars, textureSize: 10));
