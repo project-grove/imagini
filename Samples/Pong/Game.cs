@@ -21,8 +21,8 @@ namespace Pong
         const int BallSpeed = 2;
         const int BallSize = 10;
         const int PadStartPosition = (ScreenHeight - PadHeight) / 2;
-        const int BallStartX = (ScreenWidth - BallSize) / 2;
-        const int BallStartY = (ScreenHeight - BallSize) / 2;
+        const int BallStartX = ScreenWidth / 2;
+        const int BallStartY = ScreenHeight / 2;
 
         /* Game state */
         bool Paused = true;
