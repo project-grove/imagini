@@ -68,5 +68,17 @@ namespace Tests.Fonts.Renderers
 
             textRenderer.Dispose();
         }
+
+        [Fact]
+        public void ShouldMeasureText()
+        {
+            var textRenderer = graphics.CreateTextRenderer(
+                CreateFont(12, Symbols.ASCII)
+            );
+
+            var size = textRenderer.Measure("Hello, world!");
+            size.Should().BeEquivalentTo(new Size(69, 12));
+            textRenderer.Dispose();
+        }
     }
 }

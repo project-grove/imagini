@@ -10,5 +10,6 @@ namespace Imagini.Fonts
             FontDrawingOptions options = new FontDrawingOptions());
         void Draw(string text, PointF position, Color color,
             FontDrawingOptions options = new FontDrawingOptions());
+        Size Measure(string text, FontDrawingOptions options = new FontDrawingOptions());
     }
 }

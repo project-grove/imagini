@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Imagini.Drawing;
@@ -78,6 +79,41 @@ namespace Imagini.Fonts.Renderers
         {
             if (IsDisposed) return;
             base.Destroy();
+        }
+
+        public Size Measure(string text, FontDrawingOptions options = new FontDrawingOptions())
+        {
+            var pageIndex = 0;
+            var page = Font.Pages[0];
+            int x = 0, y = 0;
+            var fontSize = (int)Font.Font.Size;
+            foreach(var symbol in text)
+            {
+                if (_pages.Count > 1)
+                {
+                    if (symbol < page.Start || symbol > page.End)
+                    {
+                        pageIndex = Font.GetPageIndex(symbol);
+                        page = Font.Pages[pageIndex];
+                    }
+                }
+                var srcRect = page.GetGlyph(symbol);
+                if (char.IsWhiteSpace(symbol))
+                {
+                    x += srcRect.IsEmpty ? fontSize : srcRect.Width;
+                    x += options.LetterSpacing;
+                    continue;
+                }
+                if (srcRect.IsEmpty)
+                {
+                    // symbol not found, replace with a rectangle
+                    _graphics.DrawRect(new Rectangle(x, y, fontSize, fontSize));
+                    x += fontSize + 1 + options.LetterSpacing;
+                    continue;
+                }
+                x += srcRect.Width + options.LetterSpacing;
+            }
+            return new Size(x, fontSize);
         }
     }
 }

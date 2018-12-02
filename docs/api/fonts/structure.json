@@ -193,6 +193,12 @@
               "fullName": "Imagini.Fonts.ITextRenderer.Draw(string, PointF, FontDrawingOptions)",
               "type": "Method",
               "link": "Imagini.Fonts.ITextRenderer.Draw(string,PointF,FontDrawingOptions)"
+            },
+            {
+              "name": "Measure(string, FontDrawingOptions)",
+              "fullName": "Imagini.Fonts.ITextRenderer.Measure(string, FontDrawingOptions)",
+              "type": "Method",
+              "link": "Imagini.Fonts.ITextRenderer.Measure(string,FontDrawingOptions)"
             }
           ]
         }
@@ -239,6 +245,12 @@
               "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string, PointF, FontDrawingOptions)",
               "type": "Method",
               "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string,PointF,FontDrawingOptions)"
+            },
+            {
+              "name": "Measure(string, FontDrawingOptions)",
+              "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Measure(string, FontDrawingOptions)",
+              "type": "Method",
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Measure(string,FontDrawingOptions)"
             }
           ]
         }
