@@ -163,10 +163,28 @@
           "link": "Imagini.Fonts.FontDrawingOptions",
           "children": [
             {
+              "name": "Default",
+              "fullName": "Imagini.Fonts.FontDrawingOptions.Default",
+              "type": "Field",
+              "link": "Imagini.Fonts.FontDrawingOptions.Default"
+            },
+            {
+              "name": "Scale",
+              "fullName": "Imagini.Fonts.FontDrawingOptions.Scale",
+              "type": "Property",
+              "link": "Imagini.Fonts.FontDrawingOptions.Scale"
+            },
+            {
               "name": "LetterSpacing",
               "fullName": "Imagini.Fonts.FontDrawingOptions.LetterSpacing",
               "type": "Property",
               "link": "Imagini.Fonts.FontDrawingOptions.LetterSpacing"
+            },
+            {
+              "name": "FontDrawingOptions(float, int)",
+              "fullName": "Imagini.Fonts.FontDrawingOptions.FontDrawingOptions(float, int)",
+              "type": "Constructor",
+              "link": "Imagini.Fonts.FontDrawingOptions.FontDrawingOptions(float,int)"
             }
           ]
         },

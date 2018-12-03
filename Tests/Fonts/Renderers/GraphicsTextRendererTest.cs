@@ -14,6 +14,7 @@ namespace Tests.Fonts.Renderers
     {
         App2D app = new SampleApp();
         Graphics graphics => app.Graphics;
+        FontDrawingOptions scale75Percent = new FontDrawingOptions(scale: 0.75f);
 
         public void Dispose() => app.Dispose();
 
@@ -26,6 +27,8 @@ namespace Tests.Fonts.Renderers
             graphics.Clear(Color.DarkGray);
             textRenderer.Draw("Hello, world!", new PointF(10.0f, 10.0f),
                 Color.AntiqueWhite);
+            textRenderer.Draw("Hello, world!", new PointF(10.0f, 30.0f),
+                Color.AntiqueWhite, scale75Percent);
 
             graphics.OutputIsCloseTo(
                 NearAssembly("ShouldDrawTextWithSpaces.png")
@@ -44,6 +47,7 @@ namespace Tests.Fonts.Renderers
             graphics.Clear(Color.DarkGray);
             graphics.SetDrawingColor(Color.AntiqueWhite);
             textRenderer.Draw("Hello, world!", new PointF(10.0f, 10.0f));
+            textRenderer.Draw("Hello, world!", new PointF(10.0f, 30.0f), scale75Percent);
 
             graphics.OutputIsCloseTo(
                 NearAssembly("ShouldDrawMultiPagedSpriteFonts.png")
@@ -52,15 +56,18 @@ namespace Tests.Fonts.Renderers
             textRenderer.Dispose();
         }
 
-        [Fact]
-        public void ShouldReplaceMissingCharsWithSquares()
+        [Theory]
+        [InlineData(128)]
+        [InlineData(64)]
+        public void ShouldReplaceMissingCharsWithSquares(int textureSize)
         {
             var textRenderer = graphics.CreateTextRenderer(
-                CreateFont(12, Symbols.ASCII)
+                CreateFont(12, Symbols.ASCII, textureSize)
             );
             graphics.Clear(Color.DarkGray);
             graphics.SetDrawingColor(Color.AntiqueWhite);
             textRenderer.Draw("Hello, мир!", new PointF(10.0f, 10.0f));
+            textRenderer.Draw("Hello, мир!", new PointF(10.0f, 30.0f), scale75Percent);
 
             graphics.OutputIsCloseTo(
                 NearAssembly("ShouldReplaceMissingCharsWithSquares.png")
@@ -69,15 +76,21 @@ namespace Tests.Fonts.Renderers
             textRenderer.Dispose();
         }
 
-        [Fact]
-        public void ShouldMeasureText()
+        [Theory]
+        [InlineData(128, "Hello, world!", 69, 47)]
+        [InlineData(64, "Hello, мир!", 77, 56)]
+        public void ShouldMeasureText(int textureSize, string text,
+            int expectedWidth, int expectedScaledWidth)
         {
             var textRenderer = graphics.CreateTextRenderer(
-                CreateFont(12, Symbols.ASCII)
+                CreateFont(12, Symbols.ASCII, textureSize)
             );
 
-            var size = textRenderer.Measure("Hello, world!");
-            size.Should().BeEquivalentTo(new Size(69, 12));
+            var size = textRenderer.Measure(text);
+            size.Should().BeEquivalentTo(new Size(expectedWidth, 12));
+
+            var scaledSize = textRenderer.Measure(text, scale75Percent);
+            scaledSize.Should().BeEquivalentTo(new Size(expectedScaledWidth, 9));
             textRenderer.Dispose();
         }
     }
