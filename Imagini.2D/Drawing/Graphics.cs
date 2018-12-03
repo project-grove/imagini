@@ -382,7 +382,7 @@ namespace Imagini.Drawing
         public void Draw(Texture texture, Point position)
         {
             var dstRect = new Rectangle(position, texture.Size);
-            Draw(texture, texture.Bounds, dstRect);
+            Draw(texture, null, dstRect);
         }
 
         [ExcludeFromCodeCoverage]
@@ -390,7 +390,7 @@ namespace Imagini.Drawing
         /// Draws a texture at the specified position with applied tint color.
         /// </summary>
         public void Draw(Texture texture, Point position, Color tint) =>
-            Draw(texture, texture.Bounds, new Rectangle(position, texture.Size), tint, 0);
+            Draw(texture, null, new Rectangle(position, texture.Size), tint, 0);
 
         [ExcludeFromCodeCoverage]
         /// <summary>
