@@ -375,6 +375,37 @@ namespace Imagini.Drawing
             SetDrawingColor(oldColor);
         }
 
+        [ExcludeFromCodeCoverage]
+        /// <summary>
+        /// Draws a texture at the specified position.
+        /// </summary>
+        public void Draw(Texture texture, Point position)
+        {
+            var dstRect = new Rectangle(position, texture.Size);
+            Draw(texture, texture.Bounds, dstRect);
+        }
+
+        [ExcludeFromCodeCoverage]
+        /// <summary>
+        /// Draws a texture at the specified position with applied tint color.
+        /// </summary>
+        public void Draw(Texture texture, Point position, Color tint) =>
+            Draw(texture, texture.Bounds, new Rectangle(position, texture.Size), tint, 0);
+
+        [ExcludeFromCodeCoverage]
+        /// <summary>
+        /// Draws a texture part at the specified position.
+        /// </summary>
+        public void Draw(Texture texture, Point position, Rectangle srcRect) =>
+            Draw(texture, srcRect, new Rectangle(position, texture.Size));
+        
+        [ExcludeFromCodeCoverage]
+        /// <summary>
+        /// Draws a texture part at the specified position with applied tint color.
+        /// </summary>
+        public void Draw(Texture texture, Point position, Rectangle srcRect, Color tint) =>
+            Draw(texture, srcRect, new Rectangle(position, texture.Size), tint);
+
         /// <summary>
         /// Copies a portion of the texture to the current rendering target.
         /// </summary>
@@ -448,6 +479,34 @@ namespace Imagini.Drawing
                 dstR.Free();
                 cntr.Free();
             }
+        }
+
+        /// <summary>
+        /// Copies a portion of the texture to the current rendering target.
+        /// </summary>
+        /// <param name="texture">Texture to copy</param>
+        /// <param name="srcRect">Source rectangle (null for copying whole texture)</param>
+        /// <param name="dstRect">Destination rectangle (null to fill the entire render target)</param>
+        /// <param name="angle">
+        /// Angle in degrees that indicates the rotation that will be applied
+        /// to dstRect, rotating it in a clockwise direction
+        /// </param>
+        /// <param name="center">
+        /// Point around which dstRect will be rotated (if null, rotation will be
+        /// done around dstRect's center)
+        /// </param>
+        /// <param name="flip">
+        /// Flipping actions that should be performed on the texture
+        /// </param>
+        /// <param name="tint">Tint color to be applied on the texture</param>
+        public void Draw(Texture texture, Rectangle? srcRect,
+            Rectangle? dstRect, Color tint, double angle = 0.0,
+            Point? center = null, TextureFlip flip = TextureFlip.None)
+        {
+            var oldTint = texture.Tint;
+            texture.Tint = tint;
+            Draw(texture, srcRect, dstRect, angle, center, flip);
+            texture.Tint = oldTint;
         }
 
         /// <summary>

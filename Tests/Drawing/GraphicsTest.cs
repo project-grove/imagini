@@ -72,6 +72,12 @@ namespace Tests.Drawing
             texture.ColorMod.Should().Be(colorMod);
             texture.AlphaMod.Should().Be(alphaMod);
             texture.BlendMode.Should().Be(blendMode);
+
+            var expectedTint = Color.FromArgb(alphaMod, Color.FromArgb(colorModValue));
+            texture.Tint = Color.White.WithoutName();
+            texture.Tint.Should().Be(Color.White.WithoutName());
+            texture.Tint = expectedTint;
+            texture.Tint.Should().Be(expectedTint);
         }
 
         [Fact]

@@ -180,6 +180,23 @@ namespace Imagini.Drawing
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="ColorMod" /> and <see cref="AlphaMod" /> values.
+        /// </summary>
+        public Color Tint
+        {
+            get {
+                var color = ColorMod;
+                var alpha = AlphaMod;
+                return Color.FromArgb(alpha, color);
+            }
+            set {
+                ColorMod = value;
+                AlphaMod = value.A;
+            }
+        }
+
+
+        /// <summary>
         /// Gets or sets the blend mode used for blit operations.
         /// </summary>
         public BlendMode BlendMode

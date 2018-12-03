@@ -102,7 +102,13 @@ namespace Imagini.Drawing
         public bool Locked { get; private set; }
 
         /// <summary>
-        /// Gets or sets the additional color value multiplied into render operations.
+        /// Returns a rectangle positioned at (0, 0) with texture's width and height.
+        /// </summary>
+        /// <returns></returns>
+        public Rectangle Bounds { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the additional RGB color value multiplied into render operations.
         /// </summary>
         public Color ColorMod
         {
@@ -142,6 +148,22 @@ namespace Imagini.Drawing
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="ColorMod" /> and <see cref="AlphaMod" /> values.
+        /// </summary>
+        public Color Tint
+        {
+            get {
+                var color = ColorMod;
+                var alpha = AlphaMod;
+                return Color.FromArgb(alpha, color);
+            }
+            set {
+                ColorMod = value;
+                AlphaMod = value.A;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the blend mode used for render operations.
         /// </summary>
         public BlendMode BlendMode
@@ -177,6 +199,7 @@ namespace Imagini.Drawing
             Access = (TextureAccess)access;
             Width = w;
             Height = h;
+            Bounds = new Rectangle(0, 0, w, h);
         }
 
         /// <summary>
@@ -242,7 +265,9 @@ namespace Imagini.Drawing
                     SetPixelsInternal(
                         rectHandle.AddrOfPinnedObject(),
                         pixelHandle.AddrOfPinnedObject());
-                } else {
+                }
+                else
+                {
                     // update each row part
                     var p = pixelHandle.AddrOfPinnedObject();
                     unsafe

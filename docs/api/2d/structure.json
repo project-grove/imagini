@@ -99,6 +99,36 @@
               "link": "Imagini.Drawing.Graphics.CreateTextureFromSurface(Surface,TextureScalingQuality)"
             },
             {
+              "name": "Draw(Texture, Point, Color)",
+              "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point, Color)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point,Color)"
+            },
+            {
+              "name": "Draw(Texture, Point, Rectangle, Color)",
+              "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point, Rectangle, Color)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point,Rectangle,Color)"
+            },
+            {
+              "name": "Draw(Texture, Point, Rectangle)",
+              "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point, Rectangle)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point,Rectangle)"
+            },
+            {
+              "name": "Draw(Texture, Point)",
+              "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point)"
+            },
+            {
+              "name": "Draw(Texture, Rectangle?, Rectangle?, Color, double, Point?, TextureFlip)",
+              "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle?, Rectangle?, Color, double, Point?, TextureFlip)",
+              "type": "Method",
+              "link": "Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?,Color,double,Point?,TextureFlip)"
+            },
+            {
               "name": "Draw(Texture, Rectangle?, Rectangle?, double, Point?, TextureFlip)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle?, Rectangle?, double, Point?, TextureFlip)",
               "type": "Method",
@@ -633,6 +663,12 @@
               "link": "Imagini.Drawing.Surface.AlphaMod"
             },
             {
+              "name": "Tint",
+              "fullName": "Imagini.Drawing.Surface.Tint",
+              "type": "Property",
+              "link": "Imagini.Drawing.Surface.Tint"
+            },
+            {
               "name": "BlendMode",
               "fullName": "Imagini.Drawing.Surface.BlendMode",
               "type": "Property",
@@ -815,6 +851,12 @@
               "link": "Imagini.Drawing.Texture.Locked"
             },
             {
+              "name": "Bounds",
+              "fullName": "Imagini.Drawing.Texture.Bounds",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Bounds"
+            },
+            {
               "name": "ColorMod",
               "fullName": "Imagini.Drawing.Texture.ColorMod",
               "type": "Property",
@@ -825,6 +867,12 @@
               "fullName": "Imagini.Drawing.Texture.AlphaMod",
               "type": "Property",
               "link": "Imagini.Drawing.Texture.AlphaMod"
+            },
+            {
+              "name": "Tint",
+              "fullName": "Imagini.Drawing.Texture.Tint",
+              "type": "Property",
+              "link": "Imagini.Drawing.Texture.Tint"
             },
             {
               "name": "BlendMode",
