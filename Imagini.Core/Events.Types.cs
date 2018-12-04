@@ -933,12 +933,13 @@ namespace Imagini
         public MouseButtonEventArgs(MouseButton button, int x, int y, bool isPressed,
             Window window = null, byte clicks = 1) : base()
             =>
-            (this.Window, this.X, this.Y, this.IsPressed, this.Clicks) =
-            (window ?? Window.Current, x, y, isPressed, Math.Max((byte)1, clicks));
+            (this.Button, this.Window, this.X, this.Y, this.IsPressed, this.Clicks) =
+            (button, window ?? Window.Current, x, y, isPressed, Math.Max((byte)1, clicks));
 
         internal MouseButtonEventArgs(SDL_MouseButtonEvent e)
             : base(e)
         {
+            Button = (MouseButton)e.button;
             Window = Window.GetByID(e.windowID);
             X = e.x; Y = e.y; Clicks = Math.Max((byte)1, e.clicks);
             IsPressed = e.state > 0;
