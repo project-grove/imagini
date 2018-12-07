@@ -38,7 +38,7 @@
               "name": "App2D(WindowSettings, RendererInfo, bool)",
               "fullName": "Imagini.App2D.App2D(WindowSettings, RendererInfo, bool)",
               "type": "Constructor",
-              "link": "Imagini.App2D.App2D(WindowSettings,RendererInfo,bool)"
+              "link": "Imagini.App2D.App2D(WindowSettings, RendererInfo, bool)"
             }
           ]
         }
@@ -90,67 +90,67 @@
               "name": "CreateTexture(int, int, TextureScalingQuality, PixelFormat, TextureAccess)",
               "fullName": "Imagini.Drawing.Graphics.CreateTexture(int, int, TextureScalingQuality, PixelFormat, TextureAccess)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.CreateTexture(int,int,TextureScalingQuality,PixelFormat,TextureAccess)"
+              "link": "Imagini.Drawing.Graphics.CreateTexture(int, int, TextureScalingQuality, PixelFormat, TextureAccess)"
             },
             {
               "name": "CreateTextureFromSurface(Surface, TextureScalingQuality)",
               "fullName": "Imagini.Drawing.Graphics.CreateTextureFromSurface(Surface, TextureScalingQuality)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.CreateTextureFromSurface(Surface,TextureScalingQuality)"
+              "link": "Imagini.Drawing.Graphics.CreateTextureFromSurface(Surface, TextureScalingQuality)"
             },
             {
               "name": "Draw(Texture, Point, Color)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point, Color)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point,Color)"
+              "link": "Imagini.Drawing.Graphics.Draw(Texture, Point, Color)"
             },
             {
               "name": "Draw(Texture, Point, Rectangle, Color)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point, Rectangle, Color)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point,Rectangle,Color)"
+              "link": "Imagini.Drawing.Graphics.Draw(Texture, Point, Rectangle, Color)"
             },
             {
               "name": "Draw(Texture, Point, Rectangle)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point, Rectangle)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point,Rectangle)"
+              "link": "Imagini.Drawing.Graphics.Draw(Texture, Point, Rectangle)"
             },
             {
               "name": "Draw(Texture, Point)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Point)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.Draw(Texture,Point)"
+              "link": "Imagini.Drawing.Graphics.Draw(Texture, Point)"
             },
             {
               "name": "Draw(Texture, Rectangle?, Rectangle?, Color, double, Point?, TextureFlip)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle?, Rectangle?, Color, double, Point?, TextureFlip)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?,Color,double,Point?,TextureFlip)"
+              "link": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle_, Rectangle_, Color, double, Point_, TextureFlip)"
             },
             {
               "name": "Draw(Texture, Rectangle?, Rectangle?, double, Point?, TextureFlip)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle?, Rectangle?, double, Point?, TextureFlip)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?,double,Point?,TextureFlip)"
+              "link": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle_, Rectangle_, double, Point_, TextureFlip)"
             },
             {
               "name": "Draw(Texture, Rectangle?, Rectangle?)",
               "fullName": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle?, Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.Draw(Texture,Rectangle?,Rectangle?)"
+              "link": "Imagini.Drawing.Graphics.Draw(Texture, Rectangle_, Rectangle_)"
             },
             {
               "name": "DrawLine(int, int, int, int)",
               "fullName": "Imagini.Drawing.Graphics.DrawLine(int, int, int, int)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.DrawLine(int,int,int,int)"
+              "link": "Imagini.Drawing.Graphics.DrawLine(int, int, int, int)"
             },
             {
               "name": "DrawLine(Point, Point)",
               "fullName": "Imagini.Drawing.Graphics.DrawLine(Point, Point)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.DrawLine(Point,Point)"
+              "link": "Imagini.Drawing.Graphics.DrawLine(Point, Point)"
             },
             {
               "name": "DrawLines(Point[])",
@@ -162,7 +162,7 @@
               "name": "DrawPoint(int, int)",
               "fullName": "Imagini.Drawing.Graphics.DrawPoint(int, int)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.DrawPoint(int,int)"
+              "link": "Imagini.Drawing.Graphics.DrawPoint(int, int)"
             },
             {
               "name": "DrawPoint(Point)",
@@ -180,7 +180,7 @@
               "name": "DrawRect(Rectangle?)",
               "fullName": "Imagini.Drawing.Graphics.DrawRect(Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.DrawRect(Rectangle?)"
+              "link": "Imagini.Drawing.Graphics.DrawRect(Rectangle_)"
             },
             {
               "name": "DrawRects(Rectangle[])",
@@ -192,7 +192,7 @@
               "name": "FillRect(Rectangle?)",
               "fullName": "Imagini.Drawing.Graphics.FillRect(Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.FillRect(Rectangle?)"
+              "link": "Imagini.Drawing.Graphics.FillRect(Rectangle_)"
             },
             {
               "name": "FillRects(Rectangle[])",
@@ -228,13 +228,13 @@
               "name": "GetLogicalSize(int, int)",
               "fullName": "Imagini.Drawing.Graphics.GetLogicalSize(int, int)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.GetLogicalSize(int,int)"
+              "link": "Imagini.Drawing.Graphics.GetLogicalSize(int, int)"
             },
             {
               "name": "GetPixelBufferSize(Rectangle?)",
               "fullName": "Imagini.Drawing.Graphics.GetPixelBufferSize(Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.GetPixelBufferSize(Rectangle?)"
+              "link": "Imagini.Drawing.Graphics.GetPixelBufferSize(Rectangle_)"
             },
             {
               "name": "GetRenderTarget()",
@@ -252,7 +252,7 @@
               "name": "GetScale(float, float)",
               "fullName": "Imagini.Drawing.Graphics.GetScale(float, float)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.GetScale(float,float)"
+              "link": "Imagini.Drawing.Graphics.GetScale(float, float)"
             },
             {
               "name": "GetViewport()",
@@ -264,7 +264,7 @@
               "name": "ReadPixels(ColorRGB888[], Rectangle?)",
               "fullName": "Imagini.Drawing.Graphics.ReadPixels(ColorRGB888[], Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.ReadPixels(ColorRGB888[],Rectangle?)"
+              "link": "Imagini.Drawing.Graphics.ReadPixels(ColorRGB888[], Rectangle_)"
             },
             {
               "name": "SetBlendMode(BlendMode)",
@@ -276,7 +276,7 @@
               "name": "SetClipRectangle(Rectangle?)",
               "fullName": "Imagini.Drawing.Graphics.SetClipRectangle(Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.SetClipRectangle(Rectangle?)"
+              "link": "Imagini.Drawing.Graphics.SetClipRectangle(Rectangle_)"
             },
             {
               "name": "SetDrawingColor(Color)",
@@ -288,7 +288,7 @@
               "name": "SetLogicalSize(int, int)",
               "fullName": "Imagini.Drawing.Graphics.SetLogicalSize(int, int)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.SetLogicalSize(int,int)"
+              "link": "Imagini.Drawing.Graphics.SetLogicalSize(int, int)"
             },
             {
               "name": "SetLogicalSize(Size)",
@@ -306,7 +306,7 @@
               "name": "SetScale(float, float)",
               "fullName": "Imagini.Drawing.Graphics.SetScale(float, float)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.SetScale(float,float)"
+              "link": "Imagini.Drawing.Graphics.SetScale(float, float)"
             },
             {
               "name": "SetScale(SizeF)",
@@ -318,7 +318,7 @@
               "name": "SetViewport(Rectangle?)",
               "fullName": "Imagini.Drawing.Graphics.SetViewport(Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Graphics.SetViewport(Rectangle?)"
+              "link": "Imagini.Drawing.Graphics.SetViewport(Rectangle_)"
             }
           ]
         },
@@ -350,7 +350,7 @@
               "name": "Palette(IEnumerable<Color>)",
               "fullName": "Imagini.Drawing.Palette.Palette(IEnumerable<Color>)",
               "type": "Constructor",
-              "link": "Imagini.Drawing.Palette.Palette(IEnumerable{Color})"
+              "link": "Imagini.Drawing.Palette.Palette(IEnumerable_Color_)"
             },
             {
               "name": "Dispose()",
@@ -506,13 +506,13 @@
               "name": "Convert(int, int, int, int, PixelFormat, PixelFormat, IntPtr, IntPtr)",
               "fullName": "Imagini.Drawing.Pixels.Convert(int, int, int, int, PixelFormat, PixelFormat, IntPtr, IntPtr)",
               "type": "Method",
-              "link": "Imagini.Drawing.Pixels.Convert(int,int,int,int,PixelFormat,PixelFormat,IntPtr,IntPtr)"
+              "link": "Imagini.Drawing.Pixels.Convert(int, int, int, int, PixelFormat, PixelFormat, IntPtr, IntPtr)"
             },
             {
               "name": "Convert<T1, T2>(int, int, int, int, T1[], T2[])",
               "fullName": "Imagini.Drawing.Pixels.Convert<T1, T2>(int, int, int, int, T1[], T2[])",
               "type": "Method",
-              "link": "Imagini.Drawing.Pixels.Convert{T1,T2}(int,int,int,int,T1[],T2[])"
+              "link": "Imagini.Drawing.Pixels.Convert_T1, T2_(int, int, int, int, T1[], T2[])"
             }
           ]
         },
@@ -684,7 +684,7 @@
               "name": "BlitTo(Surface, Rectangle?, Rectangle?)",
               "fullName": "Imagini.Drawing.Surface.BlitTo(Surface, Rectangle?, Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.BlitTo(Surface,Rectangle?,Rectangle?)"
+              "link": "Imagini.Drawing.Surface.BlitTo(Surface, Rectangle_, Rectangle_)"
             },
             {
               "name": "ConvertTo(PixelFormat)",
@@ -702,25 +702,25 @@
               "name": "Create(int, int, int, int, int, int, int)",
               "fullName": "Imagini.Drawing.Surface.Create(int, int, int, int, int, int, int)",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.Create(int,int,int,int,int,int,int)"
+              "link": "Imagini.Drawing.Surface.Create(int, int, int, int, int, int, int)"
             },
             {
               "name": "Create(int, int, PixelFormat)",
               "fullName": "Imagini.Drawing.Surface.Create(int, int, PixelFormat)",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.Create(int,int,PixelFormat)"
+              "link": "Imagini.Drawing.Surface.Create(int, int, PixelFormat)"
             },
             {
               "name": "CreateFrom(byte[], int, int, int, int, int, int, int, int)",
               "fullName": "Imagini.Drawing.Surface.CreateFrom(byte[], int, int, int, int, int, int, int, int)",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.CreateFrom(byte[],int,int,int,int,int,int,int,int)"
+              "link": "Imagini.Drawing.Surface.CreateFrom(byte[], int, int, int, int, int, int, int, int)"
             },
             {
               "name": "CreateFrom(byte[], int, int, PixelFormat)",
               "fullName": "Imagini.Drawing.Surface.CreateFrom(byte[], int, int, PixelFormat)",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.CreateFrom(byte[],int,int,PixelFormat)"
+              "link": "Imagini.Drawing.Surface.CreateFrom(byte[], int, int, PixelFormat)"
             },
             {
               "name": "Dispose()",
@@ -732,13 +732,13 @@
               "name": "Fill(Color, Rectangle?)",
               "fullName": "Imagini.Drawing.Surface.Fill(Color, Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.Fill(Color,Rectangle?)"
+              "link": "Imagini.Drawing.Surface.Fill(Color, Rectangle_)"
             },
             {
               "name": "Fill(Color, Rectangle[])",
               "fullName": "Imagini.Drawing.Surface.Fill(Color, Rectangle[])",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.Fill(Color,Rectangle[])"
+              "link": "Imagini.Drawing.Surface.Fill(Color, Rectangle[])"
             },
             {
               "name": "Lock()",
@@ -768,7 +768,7 @@
               "name": "ReadPixels<T>(T[])",
               "fullName": "Imagini.Drawing.Surface.ReadPixels<T>(T[])",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.ReadPixels{T}(T[])"
+              "link": "Imagini.Drawing.Surface.ReadPixels_T_(T[])"
             },
             {
               "name": "SetPixelData(byte[])",
@@ -780,7 +780,7 @@
               "name": "SetPixelData<T>(T[])",
               "fullName": "Imagini.Drawing.Surface.SetPixelData<T>(T[])",
               "type": "Method",
-              "link": "Imagini.Drawing.Surface.SetPixelData{T}(T[])"
+              "link": "Imagini.Drawing.Surface.SetPixelData_T_(T[])"
             },
             {
               "name": "SetRLEAcceleration(bool)",
@@ -890,31 +890,31 @@
               "name": "GetPixelBufferSize<T>(Rectangle?)",
               "fullName": "Imagini.Drawing.Texture.GetPixelBufferSize<T>(Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Texture.GetPixelBufferSize{T}(Rectangle?)"
+              "link": "Imagini.Drawing.Texture.GetPixelBufferSize_T_(Rectangle_)"
             },
             {
               "name": "GetPixelBufferSizeInBytes(Rectangle?)",
               "fullName": "Imagini.Drawing.Texture.GetPixelBufferSizeInBytes(Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Texture.GetPixelBufferSizeInBytes(Rectangle?)"
+              "link": "Imagini.Drawing.Texture.GetPixelBufferSizeInBytes(Rectangle_)"
             },
             {
               "name": "Lock(int, int, Rectangle?)",
               "fullName": "Imagini.Drawing.Texture.Lock(int, int, Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Texture.Lock(int,int,Rectangle?)"
+              "link": "Imagini.Drawing.Texture.Lock(int, int, Rectangle_)"
             },
             {
               "name": "SetPixels(byte[], Rectangle?)",
               "fullName": "Imagini.Drawing.Texture.SetPixels(byte[], Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Texture.SetPixels(byte[],Rectangle?)"
+              "link": "Imagini.Drawing.Texture.SetPixels(byte[], Rectangle_)"
             },
             {
               "name": "SetPixels<T>(T[], Rectangle?)",
               "fullName": "Imagini.Drawing.Texture.SetPixels<T>(T[], Rectangle?)",
               "type": "Method",
-              "link": "Imagini.Drawing.Texture.SetPixels{T}(T[],Rectangle?)"
+              "link": "Imagini.Drawing.Texture.SetPixels_T_(T[], Rectangle_)"
             },
             {
               "name": "Unlock()",

@@ -20,7 +20,7 @@
               "name": "CreateTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
               "fullName": "Imagini.Fonts.GraphicsExtensions.CreateTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
               "type": "Method",
-              "link": "Imagini.Fonts.GraphicsExtensions.CreateTextRenderer(Graphics,SpriteFont,TextureScalingQuality)"
+              "link": "Imagini.Fonts.GraphicsExtensions.CreateTextRenderer(Graphics, SpriteFont, TextureScalingQuality)"
             }
           ]
         },
@@ -52,7 +52,7 @@
               "name": "SpriteFont(Font, IEnumerable<char>, int, int)",
               "fullName": "Imagini.Fonts.SpriteFont.SpriteFont(Font, IEnumerable<char>, int, int)",
               "type": "Constructor",
-              "link": "Imagini.Fonts.SpriteFont.SpriteFont(Font,IEnumerable{char},int,int)"
+              "link": "Imagini.Fonts.SpriteFont.SpriteFont(Font, IEnumerable_char_, int, int)"
             },
             {
               "name": "Dispose()",
@@ -146,13 +146,13 @@
               "name": "GetPrintable(IEnumerable<char>)",
               "fullName": "Imagini.Fonts.Symbols.GetPrintable(IEnumerable<char>)",
               "type": "Method",
-              "link": "Imagini.Fonts.Symbols.GetPrintable(IEnumerable{char})"
+              "link": "Imagini.Fonts.Symbols.GetPrintable(IEnumerable_char_)"
             },
             {
               "name": "PrintablesInRange(int, int)",
               "fullName": "Imagini.Fonts.Symbols.PrintablesInRange(int, int)",
               "type": "Method",
-              "link": "Imagini.Fonts.Symbols.PrintablesInRange(int,int)"
+              "link": "Imagini.Fonts.Symbols.PrintablesInRange(int, int)"
             }
           ]
         },
@@ -184,7 +184,7 @@
               "name": "FontDrawingOptions(float, int)",
               "fullName": "Imagini.Fonts.FontDrawingOptions.FontDrawingOptions(float, int)",
               "type": "Constructor",
-              "link": "Imagini.Fonts.FontDrawingOptions.FontDrawingOptions(float,int)"
+              "link": "Imagini.Fonts.FontDrawingOptions.FontDrawingOptions(float, int)"
             }
           ]
         },
@@ -204,19 +204,19 @@
               "name": "Draw(string, PointF, Color, FontDrawingOptions)",
               "fullName": "Imagini.Fonts.ITextRenderer.Draw(string, PointF, Color, FontDrawingOptions)",
               "type": "Method",
-              "link": "Imagini.Fonts.ITextRenderer.Draw(string,PointF,Color,FontDrawingOptions)"
+              "link": "Imagini.Fonts.ITextRenderer.Draw(string, PointF, Color, FontDrawingOptions)"
             },
             {
               "name": "Draw(string, PointF, FontDrawingOptions)",
               "fullName": "Imagini.Fonts.ITextRenderer.Draw(string, PointF, FontDrawingOptions)",
               "type": "Method",
-              "link": "Imagini.Fonts.ITextRenderer.Draw(string,PointF,FontDrawingOptions)"
+              "link": "Imagini.Fonts.ITextRenderer.Draw(string, PointF, FontDrawingOptions)"
             },
             {
               "name": "Measure(string, FontDrawingOptions)",
               "fullName": "Imagini.Fonts.ITextRenderer.Measure(string, FontDrawingOptions)",
               "type": "Method",
-              "link": "Imagini.Fonts.ITextRenderer.Measure(string,FontDrawingOptions)"
+              "link": "Imagini.Fonts.ITextRenderer.Measure(string, FontDrawingOptions)"
             }
           ]
         }
@@ -244,7 +244,7 @@
               "name": "GraphicsTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
               "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.GraphicsTextRenderer(Graphics, SpriteFont, TextureScalingQuality)",
               "type": "Constructor",
-              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.GraphicsTextRenderer(Graphics,SpriteFont,TextureScalingQuality)"
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.GraphicsTextRenderer(Graphics, SpriteFont, TextureScalingQuality)"
             },
             {
               "name": "Dispose()",
@@ -256,19 +256,19 @@
               "name": "Draw(string, PointF, Color, FontDrawingOptions)",
               "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string, PointF, Color, FontDrawingOptions)",
               "type": "Method",
-              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string,PointF,Color,FontDrawingOptions)"
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string, PointF, Color, FontDrawingOptions)"
             },
             {
               "name": "Draw(string, PointF, FontDrawingOptions)",
               "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string, PointF, FontDrawingOptions)",
               "type": "Method",
-              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string,PointF,FontDrawingOptions)"
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Draw(string, PointF, FontDrawingOptions)"
             },
             {
               "name": "Measure(string, FontDrawingOptions)",
               "fullName": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Measure(string, FontDrawingOptions)",
               "type": "Method",
-              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Measure(string,FontDrawingOptions)"
+              "link": "Imagini.Fonts.Renderers.GraphicsTextRenderer.Measure(string, FontDrawingOptions)"
             }
           ]
         }

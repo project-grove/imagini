@@ -200,7 +200,7 @@
               "name": "ControllerAxisEventArgs(int, ControllerAxis, short)",
               "fullName": "Imagini.ControllerAxisEventArgs.ControllerAxisEventArgs(int, ControllerAxis, short)",
               "type": "Constructor",
-              "link": "Imagini.ControllerAxisEventArgs.ControllerAxisEventArgs(int,ControllerAxis,short)"
+              "link": "Imagini.ControllerAxisEventArgs.ControllerAxisEventArgs(int, ControllerAxis, short)"
             }
           ]
         },
@@ -232,7 +232,7 @@
               "name": "ControllerButtonEventArgs(int, ControllerButton, bool)",
               "fullName": "Imagini.ControllerButtonEventArgs.ControllerButtonEventArgs(int, ControllerButton, bool)",
               "type": "Constructor",
-              "link": "Imagini.ControllerButtonEventArgs.ControllerButtonEventArgs(int,ControllerButton,bool)"
+              "link": "Imagini.ControllerButtonEventArgs.ControllerButtonEventArgs(int, ControllerButton, bool)"
             }
           ]
         },
@@ -258,7 +258,7 @@
               "name": "ControllerDeviceStateEventArgs(int, bool)",
               "fullName": "Imagini.ControllerDeviceStateEventArgs.ControllerDeviceStateEventArgs(int, bool)",
               "type": "Constructor",
-              "link": "Imagini.ControllerDeviceStateEventArgs.ControllerDeviceStateEventArgs(int,bool)"
+              "link": "Imagini.ControllerDeviceStateEventArgs.ControllerDeviceStateEventArgs(int, bool)"
             }
           ]
         },
@@ -465,7 +465,7 @@
               "name": "ImaginiException(string, Exception)",
               "fullName": "Imagini.ImaginiException.ImaginiException(string, Exception)",
               "type": "Constructor",
-              "link": "Imagini.ImaginiException.ImaginiException(string,Exception)"
+              "link": "Imagini.ImaginiException.ImaginiException(string, Exception)"
             }
           ]
         },
@@ -497,7 +497,7 @@
               "name": "JoyAxisMotionEventArgs(int, byte, short)",
               "fullName": "Imagini.JoyAxisMotionEventArgs.JoyAxisMotionEventArgs(int, byte, short)",
               "type": "Constructor",
-              "link": "Imagini.JoyAxisMotionEventArgs.JoyAxisMotionEventArgs(int,byte,short)"
+              "link": "Imagini.JoyAxisMotionEventArgs.JoyAxisMotionEventArgs(int, byte, short)"
             }
           ]
         },
@@ -535,7 +535,7 @@
               "name": "JoyBallMotionEventArgs(int, byte, short, short)",
               "fullName": "Imagini.JoyBallMotionEventArgs.JoyBallMotionEventArgs(int, byte, short, short)",
               "type": "Constructor",
-              "link": "Imagini.JoyBallMotionEventArgs.JoyBallMotionEventArgs(int,byte,short,short)"
+              "link": "Imagini.JoyBallMotionEventArgs.JoyBallMotionEventArgs(int, byte, short, short)"
             }
           ]
         },
@@ -567,7 +567,7 @@
               "name": "JoyButtonEventArgs(int, byte, bool)",
               "fullName": "Imagini.JoyButtonEventArgs.JoyButtonEventArgs(int, byte, bool)",
               "type": "Constructor",
-              "link": "Imagini.JoyButtonEventArgs.JoyButtonEventArgs(int,byte,bool)"
+              "link": "Imagini.JoyButtonEventArgs.JoyButtonEventArgs(int, byte, bool)"
             }
           ]
         },
@@ -593,7 +593,7 @@
               "name": "JoyDeviceStateEventArgs(int, bool)",
               "fullName": "Imagini.JoyDeviceStateEventArgs.JoyDeviceStateEventArgs(int, bool)",
               "type": "Constructor",
-              "link": "Imagini.JoyDeviceStateEventArgs.JoyDeviceStateEventArgs(int,bool)"
+              "link": "Imagini.JoyDeviceStateEventArgs.JoyDeviceStateEventArgs(int, bool)"
             }
           ]
         },
@@ -625,7 +625,7 @@
               "name": "JoyHatMotionEventArgs(int, byte, HatPosition)",
               "fullName": "Imagini.JoyHatMotionEventArgs.JoyHatMotionEventArgs(int, byte, HatPosition)",
               "type": "Constructor",
-              "link": "Imagini.JoyHatMotionEventArgs.JoyHatMotionEventArgs(int,byte,HatPosition)"
+              "link": "Imagini.JoyHatMotionEventArgs.JoyHatMotionEventArgs(int, byte, HatPosition)"
             }
           ]
         },
@@ -663,7 +663,7 @@
               "name": "KeyboardEventArgs(KeyboardKey, bool, Window, bool)",
               "fullName": "Imagini.KeyboardEventArgs.KeyboardEventArgs(KeyboardKey, bool, Window, bool)",
               "type": "Constructor",
-              "link": "Imagini.KeyboardEventArgs.KeyboardEventArgs(KeyboardKey,bool,Window,bool)"
+              "link": "Imagini.KeyboardEventArgs.KeyboardEventArgs(KeyboardKey, bool, Window, bool)"
             }
           ]
         },
@@ -733,7 +733,7 @@
               "name": "MouseButtonEventArgs(MouseButton, int, int, bool, Window, byte)",
               "fullName": "Imagini.MouseButtonEventArgs.MouseButtonEventArgs(MouseButton, int, int, bool, Window, byte)",
               "type": "Constructor",
-              "link": "Imagini.MouseButtonEventArgs.MouseButtonEventArgs(MouseButton,int,int,bool,Window,byte)"
+              "link": "Imagini.MouseButtonEventArgs.MouseButtonEventArgs(MouseButton, int, int, bool, Window, byte)"
             }
           ]
         },
@@ -783,7 +783,7 @@
               "name": "MouseMoveEventArgs(int, int, int, int, MouseButtons, Window)",
               "fullName": "Imagini.MouseMoveEventArgs.MouseMoveEventArgs(int, int, int, int, MouseButtons, Window)",
               "type": "Constructor",
-              "link": "Imagini.MouseMoveEventArgs.MouseMoveEventArgs(int,int,int,int,MouseButtons,Window)"
+              "link": "Imagini.MouseMoveEventArgs.MouseMoveEventArgs(int, int, int, int, MouseButtons, Window)"
             },
             {
               "name": "IsPressed(MouseButtons)",
@@ -821,7 +821,7 @@
               "name": "MouseWheelEventArgs(int, int, Window)",
               "fullName": "Imagini.MouseWheelEventArgs.MouseWheelEventArgs(int, int, Window)",
               "type": "Constructor",
-              "link": "Imagini.MouseWheelEventArgs.MouseWheelEventArgs(int,int,Window)"
+              "link": "Imagini.MouseWheelEventArgs.MouseWheelEventArgs(int, int, Window)"
             }
           ]
         },
@@ -873,7 +873,7 @@
               "name": "TextEditingEventArgs(string, int, int, Window)",
               "fullName": "Imagini.TextEditingEventArgs.TextEditingEventArgs(string, int, int, Window)",
               "type": "Constructor",
-              "link": "Imagini.TextEditingEventArgs.TextEditingEventArgs(string,int,int,Window)"
+              "link": "Imagini.TextEditingEventArgs.TextEditingEventArgs(string, int, int, Window)"
             }
           ]
         },
@@ -899,7 +899,7 @@
               "name": "TextInputEventArgs(string, Window)",
               "fullName": "Imagini.TextInputEventArgs.TextInputEventArgs(string, Window)",
               "type": "Constructor",
-              "link": "Imagini.TextInputEventArgs.TextInputEventArgs(string,Window)"
+              "link": "Imagini.TextInputEventArgs.TextInputEventArgs(string, Window)"
             }
           ]
         },
@@ -968,7 +968,7 @@
               "name": "TouchFingerEventArgs(TouchEventType, long, long, float, float, float, float, float)",
               "fullName": "Imagini.TouchFingerEventArgs.TouchFingerEventArgs(TouchEventType, long, long, float, float, float, float, float)",
               "type": "Constructor",
-              "link": "Imagini.TouchFingerEventArgs.TouchFingerEventArgs(TouchEventType,long,long,float,float,float,float,float)"
+              "link": "Imagini.TouchFingerEventArgs.TouchFingerEventArgs(TouchEventType, long, long, float, float, float, float, float)"
             }
           ]
         },
@@ -1244,7 +1244,7 @@
               "name": "WindowStateChangeEventArgs(WindowStateChange, Window, int?, int?)",
               "fullName": "Imagini.WindowStateChangeEventArgs.WindowStateChangeEventArgs(WindowStateChange, Window, int?, int?)",
               "type": "Constructor",
-              "link": "Imagini.WindowStateChangeEventArgs.WindowStateChangeEventArgs(WindowStateChange,Window,int?,int?)"
+              "link": "Imagini.WindowStateChangeEventArgs.WindowStateChangeEventArgs(WindowStateChange, Window, int_, int_)"
             }
           ]
         },
