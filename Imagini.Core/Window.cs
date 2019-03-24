@@ -148,12 +148,12 @@ namespace Imagini
         /// </summary>
         public WindowMode Mode => Settings.WindowMode;
 
-        internal Window(WindowSettings settings)
+        internal Window(WindowSettings settings, uint additionalFlags = 0)
         {
             Handle = SDL_CreateWindow(settings.Title,
                 SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
                 SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
-                settings.WindowWidth, settings.WindowHeight, settings.GetFlags());
+                settings.WindowWidth, settings.WindowHeight, settings.GetFlags() | additionalFlags);
             if (Handle == IntPtr.Zero)
                 throw new ImaginiException($"Could not create window: {SDL_GetError()}");
             ID = SDL_GetWindowID(Handle);
