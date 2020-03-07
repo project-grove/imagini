@@ -9,6 +9,14 @@ namespace HelloVeldrid
 	{
 		private CommandList _cmdList;
 
+		public Game() : base(new WindowSettings()
+		{
+			WindowWidth = 800,
+			WindowHeight = 600,
+			Title = "Hello Veldrid",
+		})
+		{ }
+
 		protected override void Initialize()
 		{
 			var factory = Graphics.ResourceFactory;

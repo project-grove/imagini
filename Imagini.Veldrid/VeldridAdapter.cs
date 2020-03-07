@@ -2,6 +2,7 @@
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
+using static SDL2.SDL_video;
 
 namespace Imagini.Veldrid
 {
@@ -15,8 +16,8 @@ namespace Imagini.Veldrid
 		public static WindowCreateInfo GetWindowCreateInfo(WindowSettings settings)
 		{
 			return new WindowCreateInfo(
-				0,
-				0,
+				SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
+				SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
 				settings.WindowWidth,
 				settings.WindowHeight,
 				GetWindowState(settings.WindowMode),
