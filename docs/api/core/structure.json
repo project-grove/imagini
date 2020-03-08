@@ -95,6 +95,12 @@
               "link": "Imagini.AppBase.AppBase(WindowSettings)"
             },
             {
+              "name": "AppBase(Window)",
+              "fullName": "Imagini.AppBase.AppBase(Window)",
+              "type": "Constructor",
+              "link": "Imagini.AppBase.AppBase(Window)"
+            },
+            {
               "name": "CancelExitRequest()",
               "fullName": "Imagini.AppBase.CancelExitRequest()",
               "type": "Method",
@@ -123,6 +129,12 @@
               "fullName": "Imagini.AppBase.Run()",
               "type": "Method",
               "link": "Imagini.AppBase.Run()"
+            },
+            {
+              "name": "SetupEvents()",
+              "fullName": "Imagini.AppBase.SetupEvents()",
+              "type": "Method",
+              "link": "Imagini.AppBase.SetupEvents()"
             },
             {
               "name": "SuppressDraw()",
@@ -1105,6 +1117,18 @@
               "link": "Imagini.Window.OverrideCurrentWith(Window)"
             },
             {
+              "name": "Window(WindowSettings, uint)",
+              "fullName": "Imagini.Window.Window(WindowSettings, uint)",
+              "type": "Constructor",
+              "link": "Imagini.Window.Window(WindowSettings, uint)"
+            },
+            {
+              "name": "Window(IntPtr)",
+              "fullName": "Imagini.Window.Window(IntPtr)",
+              "type": "Constructor",
+              "link": "Imagini.Window.Window(IntPtr)"
+            },
+            {
               "name": "Raise()",
               "fullName": "Imagini.Window.Raise()",
               "type": "Method",
@@ -1207,6 +1231,12 @@
               "fullName": "Imagini.WindowSettings.Clone()",
               "type": "Method",
               "link": "Imagini.WindowSettings.Clone()"
+            },
+            {
+              "name": "GetFlags()",
+              "fullName": "Imagini.WindowSettings.GetFlags()",
+              "type": "Method",
+              "link": "Imagini.WindowSettings.GetFlags()"
             }
           ]
         },
