@@ -57,8 +57,14 @@ Features include:
 
 [API Documentation](https://project-grove.github.io/imagini/api/fonts/)
 
-### Planned packages
-* Imagini.Veldrid - [Veldrid](https://github.com/mellinoe/veldrid) integration
+#### Imagini.Veldrid
+[Veldrid](https://github.com/mellinoe/veldrid) integration - the only difference in the usage between this and Imagini.2D is that app's Graphics field exposes the Veldrid GraphicsDevice.
+You can see it in action in the following samples:
+```
+Samples\HelloVeldrid
+Samples\VeldridGettingStarted
+```
+
 ---
 ### Unimplemented features
 #### Sound API
