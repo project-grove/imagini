@@ -119,7 +119,10 @@ namespace Imagini
             else return WindowMode.BorderlessFullscreen;
         }
 
-        internal uint GetFlags()
+        /// <summary>
+        /// Returns SDL window creation flags.
+        /// </summary>
+        public uint GetFlags()
         {
             var result = 0u;
             // result |= SDL_WINDOWPOS_CENTERED_DISPLAY(DisplayIndex);

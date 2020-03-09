@@ -29,7 +29,7 @@ namespace Imagini
         internal int displayIndex;
         internal int modeIndex;
 
-        public override string ToString() => $"{Width}x{Height} {RefreshRate}Hz";
+        public override string ToString() => $"{Width}x{Height} {RefreshRate}Hz (display {displayIndex}, mode {modeIndex})";
 
         internal static List<DisplayMode> GetAvailable(int displayIndex)
         {

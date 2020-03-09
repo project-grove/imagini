@@ -71,7 +71,6 @@ namespace Imagini
         /// <remarks>
         /// The window size in screen coordinates may differ from the size in
         /// pixels, if the window was created with <see cref="WindowSettings.AllowHighDpi" />.
-        /// Use 
         /// </remarks>
         public Size Size
         {
@@ -148,26 +147,43 @@ namespace Imagini
         /// </summary>
         public WindowMode Mode => Settings.WindowMode;
 
-        internal Window(WindowSettings settings, uint additionalFlags = 0)
+        public Window(WindowSettings settings, uint additionalFlags = 0)
         {
             Handle = SDL_CreateWindow(settings.Title,
                 SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
                 SDL_WINDOWPOS_CENTERED_DISPLAY(settings.DisplayIndex),
                 settings.WindowWidth, settings.WindowHeight, settings.GetFlags() | additionalFlags);
+            CheckWindowHandle();
+            Title = settings.Title;
+            Apply(settings);
+            Register();
+            Raise();
+        }
+
+        public Window(IntPtr handle)
+        {
+            Handle = handle;
+            CheckWindowHandle();
+            Register();
+        }
+
+        private void CheckWindowHandle()
+        {
             if (Handle == IntPtr.Zero)
                 throw new ImaginiException($"Could not create window: {SDL_GetError()}");
             ID = SDL_GetWindowID(Handle);
             if (ID == 0)
                 throw new ImaginiException($"Could not get the window ID: {SDL_GetError()}");
-            Title = settings.Title;
-            Apply(settings);
+        }
+
+        private void Register()
+        {
             // Generally should not happen, but it's better to check anyways
             if (_windows.ContainsKey(ID))
                 throw new ImaginiException("Window with the specified ID already exists");
             else
                 _windows.Add(ID, this);
             GetSubsystem();
-            Raise();
         }
 
         /// <summary>
@@ -182,7 +198,14 @@ namespace Imagini
                 settings.FullscreenDisplayMode = this.Display.CurrentMode;
             var h = SDL_GetHint(SDL_HINT_RENDER_VSYNC);
             Settings.VSync = SDL_GetHint(SDL_HINT_RENDER_VSYNC) == "1";
+            Title = settings.Title;
+            OnSettingsChanged?.Invoke(this, settings);
         }
+
+        /// <summary>
+        /// Fires after <see cref="Apply()">.
+        /// </summary>
+        public event EventHandler<WindowSettings> OnSettingsChanged;
 
         /// <summary>
         /// Shows this window.

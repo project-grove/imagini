@@ -66,6 +66,7 @@ namespace Pong
             WindowWidth = WindowWidth,
             WindowHeight = WindowHeight,
             Title = "SPACE to pause, W/S - left pad, Up/Down - right pad",
+            IsResizable = true
         })
         {
             Graphics.SetLogicalSize(ScreenWidth, ScreenHeight);
@@ -123,6 +124,12 @@ namespace Pong
                     RightPadDirection = -1; break;
                 case Scancode.DOWN:
                     RightPadDirection = 1; break;
+                case Scancode.F:
+                    Window.Maximize(); break;
+                case Scancode.M:
+                    Window.Minimize(); break;
+                case Scancode.R:
+                    Window.Restore(); break;
             }
         }
 
