@@ -48,7 +48,7 @@ namespace Imagini.Veldrid
 			);
 			Graphics = gd;
 			Graphics.SyncToVerticalBlank = windowSettings.VSync;
-			Window = new Window(sdl2window.Handle);
+			Window = new Window(sdl2window.SdlWindowHandle);
 			SetupEvents();
 			Window.OnSettingsChanged += (s, e) =>
 			{
