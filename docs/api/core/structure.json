@@ -53,6 +53,12 @@
               "link": "Imagini.AppBase.CaptureMouse"
             },
             {
+              "name": "MousePosition",
+              "fullName": "Imagini.AppBase.MousePosition",
+              "type": "Property",
+              "link": "Imagini.AppBase.MousePosition"
+            },
+            {
               "name": "IsActive",
               "fullName": "Imagini.AppBase.IsActive",
               "type": "Property",
