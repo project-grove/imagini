@@ -55,6 +55,17 @@ namespace Imagini
 		}
 
 		/// <summary>
+		/// Gets or sets whether the mouse should be captured by the window.
+		/// If enabled, mouse events will report only relative movement and
+		/// the cursor should stay fixed (useful for 3D cameras).
+		/// </summary>
+		public bool CaptureMouse
+		{
+			get => TryGet(() => SDL_GetRelativeMouseMode(), "SDL_GetRelativeMouseMode") > 0;
+			set => Try(() => SDL_SetRelativeMouseMode(value ? 1 : 0), "SDL_SetRelativeMouseMode");
+		}
+
+		/// <summary>
 		/// Indicates if this app is visible and have input focus.
 		/// </summary>
 		public bool IsActive
