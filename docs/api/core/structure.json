@@ -47,6 +47,12 @@
               "link": "Imagini.AppBase.IsMouseVisible"
             },
             {
+              "name": "CaptureMouse",
+              "fullName": "Imagini.AppBase.CaptureMouse",
+              "type": "Property",
+              "link": "Imagini.AppBase.CaptureMouse"
+            },
+            {
               "name": "IsActive",
               "fullName": "Imagini.AppBase.IsActive",
               "type": "Property",
