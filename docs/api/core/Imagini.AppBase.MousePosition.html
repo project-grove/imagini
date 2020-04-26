@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><title>Imagini.AppBase.CaptureMouse</title>
+<html><head><title>Imagini.AppBase.MousePosition</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="index.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <style>
@@ -11,7 +11,7 @@
             display: inline;
         }</style>
 </head><body>
-<h1>CaptureMouse</h1>
+<h1>MousePosition</h1>
 <p>
 <b>Property</b></p>
 <p>
@@ -23,14 +23,14 @@
 <hr>
 <p>
 
-Gets or sets whether the mouse should be captured by the window.
-If enabled, mouse events will report only relative movement and
-the cursor should stay fixed (useful for 3D cameras).
+Returns the last recorded mouse position.
+Can be used with <a href="Imagini.AppBase.CaptureMouse.html">CaptureMouse</a>
+ to query relative mouse movement.
 </p>
 <h2>Syntax</h2>
-<pre><code>public bool CaptureMouse { public get; public set; }</code></pre>
+<pre><code>public Point MousePosition { public get; }</code></pre>
 <h2>See also</h2>
-<li><a href="Imagini.AppBase.MousePosition.html">MousePosition</a></li>
+<li><a href="Imagini.AppBase.CaptureMouse.html">CaptureMouse</a></li>
 <hr>
 <a href="index.html">Back to index</a>
 <script>

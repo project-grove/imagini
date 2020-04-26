@@ -241,8 +241,8 @@ var assemblies = [
   {
     "name": "Imagini.Core",
     "classes": [
-      { "name": "Imagini.AppBase", "rp": "Imagini.Core_AppBase.htm", "cl": 143, "ucl": 9, "cal": 152, "tl": 457, "ct": "LineCoverage", "mc": "-", "cb": 81, "tb": 89, "lch": [], "bch": [], "hc": [] },
-      { "name": "Imagini.AppExitEventArgs", "rp": "Imagini.Core_AppExitEventArgs.htm", "cl": 1, "ucl": 0, "cal": 1, "tl": 457, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Imagini.AppBase", "rp": "Imagini.Core_AppBase.htm", "cl": 142, "ucl": 13, "cal": 155, "tl": 474, "ct": "LineCoverage", "mc": "-", "cb": 77, "tb": 89, "lch": [], "bch": [], "hc": [] },
+      { "name": "Imagini.AppExitEventArgs", "rp": "Imagini.Core_AppExitEventArgs.htm", "cl": 1, "ucl": 0, "cal": 1, "tl": 474, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.CommonEventArgs", "rp": "Imagini.Core_CommonEventArgs.htm", "cl": 3, "ucl": 0, "cal": 3, "tl": 1453, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.ControllerAxisEventArgs", "rp": "Imagini.Core_ControllerAxisEventArgs.htm", "cl": 15, "ucl": 0, "cal": 15, "tl": 1453, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.ControllerButtonEventArgs", "rp": "Imagini.Core_ControllerButtonEventArgs.htm", "cl": 16, "ucl": 0, "cal": 16, "tl": 1453, "ct": "LineCoverage", "mc": "-", "cb": 4, "tb": 4, "lch": [], "bch": [], "hc": [] },
@@ -251,7 +251,7 @@ var assemblies = [
       { "name": "Imagini.Display", "rp": "Imagini.Core_Display.htm", "cl": 28, "ucl": 0, "cal": 28, "tl": 152, "ct": "LineCoverage", "mc": "-", "cb": 4, "tb": 6, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.DisplayMode", "rp": "Imagini.Core_DisplayMode.htm", "cl": 42, "ucl": 2, "cal": 44, "tl": 152, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.EventManager", "rp": "Imagini.Core_EventManager.htm", "cl": 44, "ucl": 4, "cal": 48, "tl": 146, "ct": "LineCoverage", "mc": "-", "cb": 31, "tb": 38, "lch": [], "bch": [], "hc": [] },
-      { "name": "Imagini.Events", "rp": "Imagini.Core_Events.htm", "cl": 66, "ucl": 2, "cal": 68, "tl": 340, "ct": "LineCoverage", "mc": "-", "cb": 48, "tb": 66, "lch": [], "bch": [], "hc": [] },
+      { "name": "Imagini.Events", "rp": "Imagini.Core_Events.htm", "cl": 66, "ucl": 2, "cal": 68, "tl": 340, "ct": "LineCoverage", "mc": "-", "cb": 47, "tb": 66, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.JoyAxisMotionEventArgs", "rp": "Imagini.Core_JoyAxisMotionEventArgs.htm", "cl": 15, "ucl": 0, "cal": 15, "tl": 1453, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.JoyBallMotionEventArgs", "rp": "Imagini.Core_JoyBallMotionEventArgs.htm", "cl": 18, "ucl": 0, "cal": 18, "tl": 1453, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Imagini.JoyButtonEventArgs", "rp": "Imagini.Core_JoyButtonEventArgs.htm", "cl": 16, "ucl": 0, "cal": 16, "tl": 1453, "ct": "LineCoverage", "mc": "-", "cb": 4, "tb": 4, "lch": [], "bch": [], "hc": [] },

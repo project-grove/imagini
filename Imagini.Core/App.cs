@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 /// <summary>
 /// The core namespace.
@@ -59,10 +60,26 @@ namespace Imagini
 		/// If enabled, mouse events will report only relative movement and
 		/// the cursor should stay fixed (useful for 3D cameras).
 		/// </summary>
+		/// <seealso cref="MousePosition" />
 		public bool CaptureMouse
 		{
 			get => TryGet(() => SDL_GetRelativeMouseMode(), "SDL_GetRelativeMouseMode") > 0;
 			set => Try(() => SDL_SetRelativeMouseMode(value ? 1 : 0), "SDL_SetRelativeMouseMode");
+		}
+
+		/// <summary>
+		/// Returns the last recorded mouse position.
+		/// Can be used with <see cref="CaptureMouse" /> to query relative mouse movement.
+		/// </summary>
+		/// <seealso cref="CaptureMouse" />
+		public Point MousePosition
+		{
+			get
+			{
+				int x = 0, y = 0;
+				SDL_GetRelativeMouseState(ref x, ref y);
+				return new Point(x, y);
+			}
 		}
 
 		/// <summary>
