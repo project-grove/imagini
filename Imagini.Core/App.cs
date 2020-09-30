@@ -10,6 +10,9 @@ using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Runtime.InteropServices;
+using static System.Runtime.InteropServices.RuntimeInformation;
+using Imagini.Core.Internal;
 
 /// <summary>
 /// The core namespace.
@@ -334,8 +337,15 @@ namespace Imagini
 			// remaining time and try again
 			if (IsFixedTimeStep && _accumulatedTicks < TargetElapsedTime.Ticks)
 			{
-				var sleepTime = TimeSpan.FromTicks(TargetElapsedTime.Ticks - _accumulatedTicks);
-				Thread.Sleep(sleepTime);
+				var sleepTime = TimeSpan.FromTicks(TargetElapsedTime.Ticks - _accumulatedTicks).TotalMilliseconds;
+				if (!IsOSPlatform(OSPlatform.Windows))
+				{
+					if (sleepTime >= 2.0) Thread.Sleep(1);
+				}
+				else
+				{
+					Native.Windows.SleepAtMost(sleepTime);
+				}
 				goto RetryTick;
 			}
 			// Limit the maximum frameskip time
