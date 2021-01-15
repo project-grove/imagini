@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>       
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="2.3.1" />
+    <PackageReference Include="coverlet.msbuild" Version="3.0.0" />
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
     <PackageReference Include="Moq" Version="4.10.0" />
@@ -40,9 +40,6 @@
     <ReferenceImageFiles Include="Fonts\references\*.png" />
   </ItemGroup>
   <Target Name="CopyReferenceImages" AfterTargets="AfterBuild">
-    <Copy
-      SourceFiles="@(ReferenceImageFiles)"
-      DestinationFolder="$(OutDir)"
-    />
+    <Copy SourceFiles="@(ReferenceImageFiles)" DestinationFolder="$(OutDir)" />
   </Target>
 </Project>

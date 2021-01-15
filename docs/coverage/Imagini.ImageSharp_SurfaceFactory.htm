@@ -17,11 +17,11 @@
 <tr><th>Class:</th><td>Imagini.ImageSharp.SurfaceFactory</td></tr>
 <tr><th>Assembly:</th><td>Imagini.ImageSharp</td></tr>
 <tr><th>File(s):</th><td><a href="#homerazervscodeprojectsprojectgroveimaginiImaginiImageSharpSurfaceFactorycs" class="navigatetohash">/home/razer/vscode-projects/project-grove/imagini/Imagini.ImageSharp/SurfaceFactory.cs</a></td></tr>
-<tr><th>Covered lines:</th><td>18</td></tr>
-<tr><th>Uncovered lines:</th><td>0</td></tr>
+<tr><th>Covered lines:</th><td>14</td></tr>
+<tr><th>Uncovered lines:</th><td>4</td></tr>
 <tr><th>Coverable lines:</th><td>18</td></tr>
 <tr><th>Total lines:</th><td>61</td></tr>
-<tr><th>Line coverage:</th><td>100% (18 of 18)</td></tr>
+<tr><th>Line coverage:</th><td>77.7% (14 of 18)</td></tr>
 <tr><th>Covered branches:</th><td>2</td></tr>
 <tr><th>Total branches:</th><td>2</td></tr>
 <tr><th>Branch coverage:</th><td>100% (2 of 2)</td></tr>
@@ -31,9 +31,9 @@
 <table class="overview table-fixed">
 <thead><tr><th>Method</th><th>Cyclomatic complexity <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon-info-circled"></i></a></th><th>NPath complexity <a href="https://modess.io/npath-complexity-cyclomatic-complexity-explained"><i class="icon-info-circled"></i></a></th><th>Sequence coverage <a href="https://en.wikipedia.org/wiki/Code_coverage"><i class="icon-info-circled"></i></a></th><th>Branch coverage <a href="https://en.wikipedia.org/wiki/Code_coverage"><i class="icon-info-circled"></i></a></th></tr></thead>
 <tbody>
-<tr><td title="Imagini.Drawing.Surface Imagini.ImageSharp.SurfaceFactory::FromFile(System.String)"><a href="#file0_line28" class="navigatetohash">FromFile(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
-<tr><td title="Imagini.Drawing.Surface Imagini.ImageSharp.SurfaceFactory::FromStream(System.IO.Stream,SixLabors.ImageSharp.Formats.IImageDecoder)"><a href="#file0_line34" class="navigatetohash">FromStream(...)</a></td><td>0</td><td>0</td><td>1%</td><td>0%</td></tr>
-<tr><td title="Imagini.Drawing.Surface Imagini.ImageSharp.SurfaceFactory::FromImage(SixLabors.ImageSharp.Image`1&lt;TPixel&gt;)"><a href="#file0_line42" class="navigatetohash">FromImage(...)</a></td><td>0</td><td>0</td><td>1%</td><td>1%</td></tr>
+<tr><td title="Imagini.Drawing.Surface Imagini.ImageSharp.SurfaceFactory::FromFile(System.String)"><a href="#file0_line28" class="navigatetohash">FromFile(...)</a></td><td>1</td><td>0</td><td>100%</td><td>100%</td></tr>
+<tr><td title="Imagini.Drawing.Surface Imagini.ImageSharp.SurfaceFactory::FromStream(System.IO.Stream,SixLabors.ImageSharp.Formats.IImageDecoder)"><a href="#file0_line34" class="navigatetohash">FromStream(...)</a></td><td>1</td><td>0</td><td>100%</td><td>100%</td></tr>
+<tr><td title="Imagini.Drawing.Surface Imagini.ImageSharp.SurfaceFactory::FromImage(SixLabors.ImageSharp.Image`1&lt;TPixel&gt;)"><a href="#file0_line42" class="navigatetohash">FromImage(...)</a></td><td>2</td><td>0</td><td>73.33%</td><td>100%</td></tr>
 </tbody>
 </table>
 <h1>File(s)</h1>
@@ -93,10 +93,10 @@
 <tr class="coverableline" title="Covered (45100 visits)" data-coverage="{'AllTestMethods': {'VC': '45100', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">45100</td><td class="rightmargin right"><a id="file0_line50"></a><code>50</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bytes[i&nbsp;*&nbsp;4&nbsp;+&nbsp;2]&nbsp;=&nbsp;pixel.G;</code></td></tr>
 <tr class="coverableline" title="Covered (45100 visits)" data-coverage="{'AllTestMethods': {'VC': '45100', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">45100</td><td class="rightmargin right"><a id="file0_line51"></a><code>51</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bytes[i&nbsp;*&nbsp;4&nbsp;+&nbsp;3]&nbsp;=&nbsp;pixel.R;</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line52"></a><code>52</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
-<tr class="coverableline" title="Covered (10 visits)" data-coverage="{'AllTestMethods': {'VC': '10', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">10</td><td class="rightmargin right"><a id="file0_line53"></a><code>53</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;surface&nbsp;=&nbsp;Surface.CreateFrom(bytes,</code></td></tr>
-<tr class="coverableline" title="Covered (10 visits)" data-coverage="{'AllTestMethods': {'VC': '10', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">10</td><td class="rightmargin right"><a id="file0_line54"></a><code>54</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cloned.Width,</code></td></tr>
-<tr class="coverableline" title="Covered (10 visits)" data-coverage="{'AllTestMethods': {'VC': '10', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">10</td><td class="rightmargin right"><a id="file0_line55"></a><code>55</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cloned.Height,</code></td></tr>
-<tr class="coverableline" title="Covered (10 visits)" data-coverage="{'AllTestMethods': {'VC': '10', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">10</td><td class="rightmargin right"><a id="file0_line56"></a><code>56</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PixelFormat.Format_RGBA8888);</code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line53"></a><code>53</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;surface&nbsp;=&nbsp;Surface.CreateFrom(bytes,</code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line54"></a><code>54</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cloned.Width,</code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line55"></a><code>55</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cloned.Height,</code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line56"></a><code>56</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PixelFormat.Format_RGBA8888);</code></td></tr>
 <tr class="coverableline" title="Covered (10 visits)" data-coverage="{'AllTestMethods': {'VC': '10', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">10</td><td class="rightmargin right"><a id="file0_line57"></a><code>57</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayPool.Return(bytes);</code></td></tr>
 <tr class="coverableline" title="Covered (10 visits)" data-coverage="{'AllTestMethods': {'VC': '10', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">10</td><td class="rightmargin right"><a id="file0_line58"></a><code>58</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;surface;</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line59"></a><code>59</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
@@ -104,7 +104,7 @@
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line61"></a><code>61</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
 </tbody>
 </table>
-<div class="footer">Generated by: ReportGenerator 4.5.6.0<br />26.04.2020 - 19:14:24<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
+<div class="footer">Generated by: ReportGenerator 4.5.6.0<br />15.01.2021 - 16:26:37<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>

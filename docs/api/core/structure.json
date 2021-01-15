@@ -1423,11 +1423,62 @@
       ]
     },
     {
+      "name": "Imagini.Core",
+      "fullName": "Imagini.Core",
+      "type": "Namespace",
+      "link": "Imagini.Core",
+      "children": [
+        {
+          "name": "Extensions",
+          "fullName": "Imagini.Core.Extensions",
+          "type": "Class",
+          "link": "Imagini.Core.Extensions",
+          "children": [
+            {
+              "name": "ToKeycode(Scancode)",
+              "fullName": "Imagini.Core.Extensions.ToKeycode(Scancode)",
+              "type": "Method",
+              "link": "Imagini.Core.Extensions.ToKeycode(Scancode)"
+            },
+            {
+              "name": "ToScancode(Keycode)",
+              "fullName": "Imagini.Core.Extensions.ToScancode(Keycode)",
+              "type": "Method",
+              "link": "Imagini.Core.Extensions.ToScancode(Keycode)"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "Imagini.Core.Internal",
       "fullName": "Imagini.Core.Internal",
       "type": "Namespace",
       "link": "Imagini.Core.Internal",
-      "children": []
+      "children": [
+        {
+          "name": "Native",
+          "fullName": "Imagini.Core.Internal.Native",
+          "type": "Class",
+          "link": "Imagini.Core.Internal.Native",
+          "children": [
+            {
+              "name": "Windows",
+              "fullName": "Imagini.Core.Internal.Native.Windows",
+              "type": "Class",
+              "link": "Imagini.Core.Internal.Native.Windows",
+              "children": [
+                {
+                  "name": "SleepAtMost(double)",
+                  "fullName": "Imagini.Core.Internal.Native.Windows.SleepAtMost(double)",
+                  "type": "Method",
+                  "link": "Imagini.Core.Internal.Native.Windows.SleepAtMost(double)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
