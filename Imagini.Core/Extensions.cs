@@ -2,7 +2,7 @@ using static SDL2.SDL_keyboard;
 using static SDL2.SDL_keycode;
 using static SDL2.SDL_scancode;
 
-namespace Imagini.Core
+namespace Imagini
 {
     public static class Extensions
     {
