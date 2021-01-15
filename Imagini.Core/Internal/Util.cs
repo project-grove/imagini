@@ -105,7 +105,7 @@ namespace Imagini
     }
 
     [ExcludeFromCodeCoverage]
-    internal static class Extensions
+    internal static class InternalExtensions
     {
         public static SDL_Rect ToSDL(this Rectangle src) =>
             new SDL_Rect()
