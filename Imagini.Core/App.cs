@@ -94,13 +94,13 @@ namespace Imagini
 		}
 
 		/// <summary>
-		/// Gets or sets the target time between each frame if 
+		/// Gets or sets the target time between each <see cref="Update(TimeSpan)" /> call if
 		/// <see cref="IsFixedTimeStep" /> is set to true.
 		/// </summary>
 		/// <remarks>Default is ~16 ms (60 FPS).</remarks>
-		public TimeSpan TargetElapsedTime
+		public TimeSpan TargetUpdateTime
 		{
-			get => _targetElapsedTime;
+			get => _targetUpdateTime;
 			set
 			{
 				if (value > MaxElapsedTime)
@@ -109,11 +109,34 @@ namespace Imagini
 					throw new ArgumentOutOfRangeException("Time must be greater than zero");
 				if (value > InactiveSleepTime)
 					throw new ArgumentOutOfRangeException("Time must be less or equal to InactiveSleepTime");
-				_targetElapsedTime = value;
+				_targetUpdateTime = value;
 			}
 		}
-		private TimeSpan _targetElapsedTime = TimeSpan.FromMilliseconds(16.6667);
+		private TimeSpan _targetUpdateTime = TimeSpan.FromMilliseconds(16.6667);
+
+		/// <summary>
+		/// Gets or sets the target time between each <see cref="Draw(TimeSpan)" /> call if
+		/// <see cref="IsFixedTimeStep" /> is set to true.
+		/// </summary>
+		/// <remarks>Default is ~16 ms (60 FPS).</remarks>
+		public TimeSpan TargetDrawTime
+		{
+			get => _targetDrawTime;
+			set
+			{
+				if (value > MaxElapsedTime)
+					throw new ArgumentOutOfRangeException("Time must be less or equal to MaxElapsedTime");
+				if (value <= TimeSpan.Zero)
+					throw new ArgumentOutOfRangeException("Time must be greater than zero");
+				if (value > InactiveSleepTime)
+					throw new ArgumentOutOfRangeException("Time must be less or equal to InactiveSleepTime");
+				_targetDrawTime = value;
+			}
+		}
+		private TimeSpan _targetDrawTime = TimeSpan.FromMilliseconds(16.6667);
+
 		private Stopwatch _appStopwatch = new Stopwatch();
+
 
 		/// <summary>
 		/// Gets or sets the target time between each frame if the window is
@@ -129,7 +152,7 @@ namespace Imagini
 					throw new ArgumentOutOfRangeException("Time should be less or equal to MaxElapsedTime");
 				if (value <= TimeSpan.Zero)
 					throw new ArgumentOutOfRangeException("Time must be greater than zero");
-				if (value < TargetElapsedTime)
+				if (value < TargetUpdateTime)
 					throw new ArgumentOutOfRangeException("Time should be greater or equal to TargetElapsedTime");
 				_inactiveSleepTime = value;
 			}
@@ -147,7 +170,7 @@ namespace Imagini
 			{
 				if (value <= TimeSpan.Zero)
 					throw new ArgumentOutOfRangeException("Time must be greater than zero");
-				if (value < TargetElapsedTime)
+				if (value < TargetUpdateTime)
 					throw new ArgumentOutOfRangeException("Time must be greater or equal to TargetElapsedTime");
 				if (value < InactiveSleepTime)
 					throw new ArgumentOutOfRangeException("Time must be greater or equal to InactiveSleepTime");
@@ -159,13 +182,37 @@ namespace Imagini
 		/// </summary>
 		public bool IsFixedTimeStep { get; set; } = true;
 		/// <summary>
-		/// Indicates if the last app frame took longer than <see cref="TargetElapsedTime" />.
+		/// Indicates if the last app frame took longer than <see cref="TargetUpdateTime" />.
 		/// </summary>
 		public bool IsRunningSlowly { get; private set; }
 		private int _slowFrameCount = 0;
 		private const int c_MaxSlowFrameCount = 5;
 		private long _previousTicks = 0;
 		private long _accumulatedTicks = 0;
+		private bool _useFrameLimit = true;
+
+		/// <summary>
+		/// Enable or disable rendering frame limit by <see cref="TargetDrawTime" />
+		/// when <see cref="IsFixedTimeStep" /> is set true.
+		/// </summary>
+		public bool FrameLimit
+		{
+			get => _useFrameLimit;
+			set => _useFrameLimit = value;
+		}
+
+		/// <summary>
+		/// Returns blending factor between two Update frames for use in decoupled rendering
+		/// when <see cref="TargetUpdateTime" /> does not equal <see cref="TargetDrawTime" />.
+		/// </summary>
+		/// <value>Value between 0 and 1 indicating blend factor between previous and current simulation states</value>
+		public float FrameLerp
+		{
+			get
+			{
+				return (float)_accumulatedTicks / (float)_targetUpdateTime.Ticks;
+			}
+		}
 
 
 		/* -------------------------- Initialization ------------------------ */
@@ -328,16 +375,20 @@ namespace Imagini
 			TimeSpan elapsedFrameTime;
 
 		RetryTick:
+			ProcessEvents();
 			// Advance the current app time
+			var targetUpdate = IsActive ? _targetUpdateTime : _inactiveSleepTime;
+			var targetDraw = IsActive ? _targetDrawTime : _inactiveSleepTime;
+
 			var currentTicks = _appStopwatch.Elapsed.Ticks;
 			_appStopwatch.Start();
 			_accumulatedTicks += (currentTicks - _previousTicks);
 			_previousTicks = currentTicks;
 			// If the frame took less time than specified, sleep for the
 			// remaining time and try again
-			if (IsFixedTimeStep && _accumulatedTicks < TargetElapsedTime.Ticks)
+			if (IsFixedTimeStep && _useFrameLimit && _accumulatedTicks < targetDraw.Ticks)
 			{
-				var sleepTime = TimeSpan.FromTicks(TargetElapsedTime.Ticks - _accumulatedTicks).TotalMilliseconds;
+				var sleepTime = TimeSpan.FromTicks(targetDraw.Ticks - _accumulatedTicks).TotalMilliseconds;
 				if (!IsOSPlatform(OSPlatform.Windows))
 				{
 					if (sleepTime >= 2.0) Thread.Sleep(1);
@@ -354,15 +405,15 @@ namespace Imagini
 
 			if (IsFixedTimeStep)
 			{
-				elapsedFrameTime = TargetElapsedTime;
+				elapsedFrameTime = targetUpdate;
 				var stepCount = 0;
 				// Perform as many fixed timestep updates as we can
-				while (_accumulatedTicks >= TargetElapsedTime.Ticks && !_isExited)
+				while (_accumulatedTicks >= targetUpdate.Ticks && !_isExited)
 				{
-					ElapsedAppTime += TargetElapsedTime;
-					_accumulatedTicks -= TargetElapsedTime.Ticks;
+					ElapsedAppTime += targetUpdate;
+					_accumulatedTicks -= targetUpdate.Ticks;
 					++stepCount;
-					DoUpdate(TargetElapsedTime);
+					DoUpdate(targetUpdate);
 				}
 				// If the frame took more time than specified, then we got
 				// more than one update step
@@ -381,7 +432,7 @@ namespace Imagini
 					_slowFrameCount--;
 
 				// Set the target time for the Draw method
-				elapsedFrameTime = TimeSpan.FromTicks(TargetElapsedTime.Ticks * stepCount);
+				elapsedFrameTime = TimeSpan.FromTicks(targetUpdate.Ticks * stepCount + _accumulatedTicks);
 			}
 			else
 			{
@@ -412,7 +463,6 @@ namespace Imagini
 
 		private void DoUpdate(TimeSpan frameTime)
 		{
-			ProcessEvents();
 			Update(frameTime);
 		}
 

@@ -33,7 +33,7 @@ namespace Tests
         protected override void Update(TimeSpan frameTime)
         {
             if (SimulateSlowRunning)
-                Thread.Sleep(TargetElapsedTime.Milliseconds + 4);
+                Thread.Sleep(TargetUpdateTime.Milliseconds + 4);
             UpdateCalls++;
         }
     }
@@ -126,7 +126,7 @@ namespace Tests
             for (int i = 1; i <= 5; i++)
             {
                 app.Tick();
-                app.ElapsedAppTime.Should().BeCloseTo(app.TargetElapsedTime * i, 1,
+                app.ElapsedAppTime.Should().BeCloseTo(app.TargetUpdateTime * i, 1,
                     "the app has fixed time step by default");
             }
         }
@@ -228,20 +228,20 @@ namespace Tests
         public void ShouldDisallowInvalidTimingValues()
         {
             
-            // TargetElapsedTime
+            // TargetUpdateTime
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
-                app.TargetElapsedTime = TimeSpan.FromMilliseconds(-1));
+                app.TargetUpdateTime = TimeSpan.FromMilliseconds(-1));
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
-                app.TargetElapsedTime = app.InactiveSleepTime
+                app.TargetUpdateTime = app.InactiveSleepTime
                     .Add(TimeSpan.FromMilliseconds(1)));
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
-                app.TargetElapsedTime = app.MaxElapsedTime
+                app.TargetUpdateTime = app.MaxElapsedTime
                     .Add(TimeSpan.FromMilliseconds(1)));
             // InactiveSleepTime
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.InactiveSleepTime = TimeSpan.FromMilliseconds(-1));
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
-                app.InactiveSleepTime = app.TargetElapsedTime
+                app.InactiveSleepTime = app.TargetUpdateTime
                     .Subtract(TimeSpan.FromMilliseconds(1)));
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.InactiveSleepTime = app.MaxElapsedTime
@@ -250,7 +250,7 @@ namespace Tests
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.MaxElapsedTime = TimeSpan.FromMilliseconds(-1));
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
-                app.MaxElapsedTime = app.TargetElapsedTime
+                app.MaxElapsedTime = app.TargetUpdateTime
                     .Subtract(TimeSpan.FromMilliseconds(1)));
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
                 app.MaxElapsedTime = app.InactiveSleepTime
@@ -259,7 +259,7 @@ namespace Tests
             // Check valid values
             app.MaxElapsedTime += TimeSpan.FromMilliseconds(1);
             app.InactiveSleepTime += TimeSpan.FromMilliseconds(1);
-            app.TargetElapsedTime += TimeSpan.FromMilliseconds(1);
+            app.TargetUpdateTime += TimeSpan.FromMilliseconds(1);
         }
 
         [Fact]
@@ -269,7 +269,7 @@ namespace Tests
             app.IsFixedTimeStep = true;
             app.ElapsedAppTime.Should().Be(TimeSpan.Zero);
             app.Tick();
-            app.ElapsedAppTime.Should().BeCloseTo(app.TargetElapsedTime, 1);
+            app.ElapsedAppTime.Should().BeCloseTo(app.TargetUpdateTime, 1);
             app.ResetElapsedTime();
             app.ElapsedAppTime.Should().BeCloseTo(TimeSpan.Zero);
         }
