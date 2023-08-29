@@ -189,6 +189,7 @@ namespace Imagini
 		private const int c_MaxSlowFrameCount = 5;
 		private long _previousTicks = 0;
 		private long _accumulatedTicks = 0;
+		private long _lastDrawTicks = 0;
 		private bool _useFrameLimit = true;
 
 		/// <summary>
@@ -447,7 +448,13 @@ namespace Imagini
 			if (_suppressDraw)
 				_suppressDraw = false;
 			else
-				DoDraw(elapsedFrameTime);
+			{
+				var drawTicks = _lastDrawTicks == 0 ?
+					elapsedFrameTime.Ticks :
+					(currentTicks - _lastDrawTicks);
+				_lastDrawTicks = currentTicks;
+				DoDraw(TimeSpan.FromTicks(drawTicks));
+			}
 
 			// The user requests us to exit
 			if (_isExiting)
